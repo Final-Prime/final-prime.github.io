@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://final-prime.github.io/sitemap.xml
