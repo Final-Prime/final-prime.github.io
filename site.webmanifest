@@ -1,0 +1,17 @@
+{
+  "name": "Final Prime",
+  "short_name": "Final Prime",
+  "description": "Shared systems and technical foundations for independent products and operating teams.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0c0b",
+  "theme_color": "#0b0c0b",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
