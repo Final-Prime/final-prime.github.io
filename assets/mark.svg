@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Final Prime mark</title>
+  <desc id="desc">A field of finite points divided by an open diagonal line.</desc>
+  <rect x="1" y="1" width="62" height="62" fill="#0b0c0b" stroke="#3b3d37" stroke-width="2"/>
+  <circle cx="16" cy="18" r="3" fill="#e8e4dc"/>
+  <circle cx="16" cy="31" r="3" fill="#9f9b92"/>
+  <circle cx="16" cy="44" r="3" fill="#9f9b92"/>
+  <circle cx="28" cy="24" r="3" fill="#9f9b92"/>
+  <circle cx="28" cy="38" r="3" fill="#e8e4dc"/>
+  <path d="M44 10 25 54" fill="none" stroke="#c65d53" stroke-width="4" stroke-linecap="square"/>
+  <circle cx="48" cy="44" r="4" fill="#e8e4dc"/>
+</svg>
