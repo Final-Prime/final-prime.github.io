@@ -31,10 +31,7 @@
   line-height: 1.2;
 }
 
-/* Preserve the locked four-line doctrine at desktop and tablet widths. */
+/* Preserve the two-line doctrine whenever the layout provides a full-width text column. */
 @media (min-width: 761px) {
-  .doctrine span {
-    font-size: clamp(2.5rem, 3.7vw, 3.3rem);
-    white-space: nowrap;
-  }
+  .doctrine > span { white-space: nowrap; }
 }
