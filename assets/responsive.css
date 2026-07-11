@@ -1,8 +1,9 @@
 @media (max-width: 1080px) {
   :root { --shell: min(100% - 44px, 980px); }
   .hero { min-height: auto; }
+  .hero-wordmark { font-size: clamp(5rem, 14.5vw, 9rem); }
   .hero-grid { grid-template-columns: 1fr; gap: 42px; }
-  .prime-matrix { max-width: 720px; }
+  .prime-matrix { max-width: 760px; }
   .domain-grid { grid-template-columns: 1fr 1fr; }
   .domain:nth-child(2) { border-right: 0; }
   .domain:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
@@ -28,12 +29,25 @@
     box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
   }
   .site-nav.is-open { display: flex; }
+  .no-js .menu-toggle { display: none; }
+  .no-js .site-nav {
+    position: static;
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: none;
+  }
+  .no-js .header-inner { flex-wrap: wrap; height: auto; padding: 12px 0; }
+  .no-js .site-header { position: relative; height: auto; }
   .site-nav a { min-height: 52px; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--line-soft); }
   .site-nav a:last-child { border-bottom: 0; }
   .site-nav .nav-access { justify-content: center; margin: 10px; border-bottom: 1px solid rgba(10, 232, 247, 0.36); }
-  .hero { padding: 54px 0 42px; }
-  .hero-grid { gap: 34px; }
-  .doctrine span { font-size: clamp(2.25rem, 11.3vw, 3.8rem); }
+  .hero { padding: 44px 0; }
+  .hero-topline { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .hero-wordmark { font-size: clamp(3.9rem, 16.8vw, 6.5rem); letter-spacing: -0.075em; }
+  .hero-rule { margin-top: 28px; }
+  .hero-grid { gap: 34px; margin-top: 30px; }
+  .doctrine > span { font-size: clamp(1.02rem, 5.1vw, 1.35rem); line-height: 1.28; }
   .hero-actions { display: grid; }
   .button { width: 100%; }
   .hero-meta { grid-template-columns: 1fr; }
@@ -57,10 +71,14 @@
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
 
+@media (max-width: 420px) {
+  .hero-wordmark { display: grid; grid-template-columns: 1fr; gap: 0; font-size: clamp(4.4rem, 23vw, 5.9rem); line-height: 0.74; }
+  .wordmark-slash { display: none; }
+}
+
 @media (max-width: 380px) {
   :root { --shell: calc(100% - 22px); }
   .brand-name { font-size: 0.64rem; }
-  .doctrine span { font-size: 2.1rem; }
   .matrix-topline, .tracking-topline { align-items: flex-start; flex-direction: column; padding: 14px; }
 }
 
