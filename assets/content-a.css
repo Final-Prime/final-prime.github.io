@@ -1,6 +1,6 @@
 .section { padding: 86px 0; border-bottom: 1px solid var(--line); }
 .section-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: end; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
-.section-head h2 { margin: 13px 0 0; font-family: var(--serif); font-size: clamp(1.9rem, 3.4vw, 3.15rem); font-style: italic; font-weight: 600; line-height: 1.05; letter-spacing: -0.04em; }
+.section-head h2 { margin: 13px 0 0; font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.35rem); font-style: normal; font-weight: 720; line-height: 1.04; letter-spacing: -0.055em; }
 .section-note { max-width: 430px; margin: 0; color: var(--muted); font: 700 0.5rem/1.5 var(--mono); letter-spacing: 0.08em; text-align: right; text-transform: uppercase; }
 
 .domain-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 24px; border: 1px solid var(--line); }
@@ -23,7 +23,7 @@
 .stage-caption { position: absolute; left: 18px; bottom: 16px; color: var(--muted); font: 800 0.5rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
 .object-inspector { padding: 18px; }
 .inspector-code { color: var(--muted); font: 800 0.5rem/1 var(--mono); letter-spacing: 0.11em; text-transform: uppercase; }
-.object-inspector h3 { margin: 20px 0 0; font-family: var(--serif); font-size: 1.8rem; font-style: italic; letter-spacing: -0.035em; }
+.object-inspector h3 { margin: 20px 0 0; font-family: var(--display); font-size: 1.9rem; font-style: normal; font-weight: 760; letter-spacing: -0.05em; }
 .inspector-copy { margin: 12px 0 0; color: var(--muted); font-size: 0.78rem; line-height: 1.58; }
 .inspector-list { margin: 20px 0 0; border-top: 1px solid var(--line); }
 .inspector-list > div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; min-height: 50px; align-items: center; border-bottom: 1px solid var(--line-soft); }
