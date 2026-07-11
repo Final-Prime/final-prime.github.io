@@ -12,7 +12,7 @@
   --fuchsia: #f5054d;
   --cyan: #0ae8f7;
   --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Baskerville, Georgia, "Times New Roman", serif;
+  --display: "Aptos Display", "Segoe UI Variable Display", "Helvetica Neue", Arial, sans-serif;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --shell: min(1360px, calc(100% - 72px));
   --header-height: 78px;
