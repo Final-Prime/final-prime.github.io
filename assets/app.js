@@ -1,6 +1,9 @@
 (() => {
   "use strict";
 
+  document.documentElement.classList.remove("no-js");
+  document.documentElement.classList.add("js");
+
   const body = document.body;
   const header = document.querySelector("[data-site-header]");
   const menuToggle = document.querySelector("[data-menu-toggle]");
@@ -12,9 +15,7 @@
   const trackOutcomes = document.querySelector("[data-track-outcomes]");
   const trackCheck = document.querySelector("[data-track-check]");
 
-  if (currentYear) {
-    currentYear.textContent = String(new Date().getFullYear());
-  }
+  if (currentYear) currentYear.textContent = String(new Date().getFullYear());
 
   const closeMenu = ({ restoreFocus = false } = {}) => {
     body.classList.remove("menu-open");
@@ -34,20 +35,11 @@
       menuToggle.setAttribute("aria-expanded", String(willOpen));
       menuToggle.setAttribute("aria-label", willOpen ? "Close primary navigation" : "Open primary navigation");
     });
-
-    siteNav.addEventListener("click", (event) => {
-      if (event.target.closest("a")) closeMenu();
+    siteNav.addEventListener("click", event => { if (event.target.closest("a")) closeMenu(); });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") closeMenu({ restoreFocus: true });
     });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
-        closeMenu({ restoreFocus: true });
-      }
-    });
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 760) closeMenu();
-    });
+    window.addEventListener("resize", () => { if (window.innerWidth > 760) closeMenu(); });
   }
 
   const updateHeader = () => header?.classList.toggle("is-scrolled", window.scrollY > 12);
@@ -61,7 +53,6 @@
     ["Proposal issued", "Buyer", "Accept / counter / decline / expire"]
   ];
   let trackingIndex = 0;
-
   if (demoTrack && trackState && trackOwner && trackOutcomes && trackCheck) {
     demoTrack.addEventListener("click", () => {
       trackingIndex = (trackingIndex + 1) % trackingStates.length;
