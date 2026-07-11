@@ -30,3 +30,11 @@
   font-size: 0.6rem;
   line-height: 1.2;
 }
+
+/* Preserve the locked four-line doctrine at desktop and tablet widths. */
+@media (min-width: 761px) {
+  .doctrine span {
+    font-size: clamp(2.5rem, 3.7vw, 3.3rem);
+    white-space: nowrap;
+  }
+}

@@ -17,7 +17,7 @@ This report covers the locked Final Prime public design merged into the GitHub P
 
 - The wordmark is consistently `FINAL / PRIME` and prose uses `Final Prime`.
 - The superseded “There is no final prime” hero, warm red palette and prime-number console were removed.
-- The locked doctrine is implemented as four forced lines:
+- The locked doctrine is implemented as four forced lines on desktop and tablet widths:
   - Knowing the next move
   - IS SURVIVAL.
   - Understanding the game
@@ -52,10 +52,11 @@ Validated at 320, 390, 768, 1024, 1440 and 1920 CSS pixels.
 - no horizontal document overflow;
 - touch controls meet or exceed approximately 44 CSS pixels;
 - hero, Prime Matrix, domain tree, object inspector, Prime Access and contact sections preserve information order;
+- the doctrine remains exactly four lines at desktop and tablet widths, with natural wrapping allowed on narrow mobile screens;
 - mobile menu remains inside the viewport;
 - long contact address wraps safely;
 - desktop and mobile screenshots render without missing assets;
-- the real first-party CSS import chain was exercised at every target width; all modules loaded without failed requests.
+- all first-party CSS modules load directly and without failed requests.
 
 ## Interaction and resilience review
 
@@ -82,14 +83,15 @@ Validated at 320, 390, 768, 1024, 1440 and 1920 CSS pixels.
 - visual distinction without relying on color alone;
 - focus visibility on all interactive elements;
 - no third-party requests or accidental tracking;
-- ordered CSS module loading at all six target widths.
+- all six direct CSS module requests at all target widths;
+- exact four-line desktop/tablet doctrine geometry.
 
 ## Automated results
 
 - Static audit: **52 / 52 passed**.
 - Chromium responsive and interaction audit: **83 / 83 passed**.
-- Combined baseline: **135 / 135 passed**.
-- Additional first-party CSS import-chain audit: six viewport widths, zero failed requests, zero console errors and zero horizontal overflow.
+- Deployment-style direct-asset and nested-404 audit: **42 / 42 passed**.
+- Combined adversarial baseline: **177 / 177 passed**.
 
 ## Known limitation
 
