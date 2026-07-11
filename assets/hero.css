@@ -2,9 +2,7 @@
   position: relative;
   overflow: hidden;
   min-height: calc(100svh - var(--header-height));
-  display: flex;
-  align-items: center;
-  padding: 72px 0 56px;
+  padding: 54px 0 64px;
   border-bottom: 1px solid var(--line);
 }
 .hero::before {
@@ -15,24 +13,56 @@
   opacity: 0.22;
   background-image: linear-gradient(rgba(45, 57, 65, 0.34) 1px, transparent 1px), linear-gradient(90deg, rgba(45, 57, 65, 0.34) 1px, transparent 1px);
   background-size: 64px 64px;
-  mask-image: linear-gradient(to bottom, #000, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000, transparent 94%);
 }
-.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 0.96fr) minmax(440px, 1.04fr); gap: 70px; align-items: center; }
-.eyebrow { display: flex; align-items: center; gap: 12px; color: var(--muted); font: 800 0.62rem/1 var(--mono); letter-spacing: 0.13em; text-transform: uppercase; }
+.hero-shell { position: relative; }
+.hero-topline { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.eyebrow, .hero-signal { color: var(--muted); font: 800 0.62rem/1 var(--mono); letter-spacing: 0.13em; text-transform: uppercase; }
+.eyebrow { display: flex; align-items: center; gap: 12px; }
 .eyebrow::before { width: 36px; height: 1px; content: ""; background: var(--fuchsia); }
-.doctrine { margin: 30px 0 0; text-transform: uppercase; }
-.doctrine span { display: block; font-size: clamp(2.5rem, 5.3vw, 5rem); font-weight: 780; line-height: 0.93; letter-spacing: -0.058em; }
-.doctrine .doctrine-cyan, .doctrine .doctrine-fuchsia { font-family: var(--serif); font-style: italic; font-weight: 600; text-transform: none; }
-.doctrine .doctrine-cyan { color: var(--cyan); }
-.doctrine .doctrine-fuchsia { color: var(--fuchsia); }
-.hero-intro { max-width: 730px; margin: 30px 0 0; color: var(--muted); font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.65; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-.button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 18px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 800 0.66rem/1 var(--mono); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; }
-.button:hover { border-color: var(--line-strong); }
+.hero-signal { display: flex; align-items: center; gap: 10px; color: var(--cyan); }
+
+.hero-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.04em, 0.65vw, 0.1em);
+  margin: 24px 0 0;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: clamp(6.4rem, 13.25vw, 11.4rem);
+  font-weight: 820;
+  line-height: 0.78;
+  letter-spacing: -0.085em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.wordmark-slash { color: var(--fuchsia); font-weight: 300; transform: translateY(-0.03em); }
+.hero-rule { height: 1px; margin-top: 36px; background: linear-gradient(90deg, var(--fuchsia) 0 19%, var(--line) 19% 83%, var(--cyan) 83% 100%); }
+
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(420px, 0.82fr); gap: 48px; align-items: start; margin-top: 38px; }
+.hero-copy { min-width: 0; padding-top: 2px; }
+.doctrine { margin: 0; }
+.doctrine > span {
+  display: block;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2.05vw, 1.85rem);
+  font-weight: 670;
+  line-height: 1.22;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+.doctrine strong { font-weight: 820; }
+.doctrine-cyan { color: var(--cyan); }
+.doctrine-fuchsia { color: var(--fuchsia); }
+.hero-intro { max-width: 740px; margin: 24px 0 0; color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.18rem); line-height: 1.68; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 18px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 800 0.66rem/1 var(--mono); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, color 150ms ease; }
+.button:hover { transform: translateY(-2px); border-color: var(--line-strong); }
 .button-primary { color: #050708; border-color: var(--fuchsia); background: var(--fuchsia); }
 .button-primary:hover { background: #ff1d5f; border-color: #ff1d5f; }
 .button-secondary { color: var(--cyan); border-color: var(--cyan); }
-.hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin: 42px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin: 34px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .hero-meta > div { padding: 14px; border-right: 1px solid var(--line); }
 .hero-meta > div:first-child { padding-left: 0; }
 .hero-meta > div:last-child { border-right: 0; }
@@ -47,9 +77,9 @@
 .matrix-status i { width: 6px; height: 6px; background: var(--cyan); box-shadow: 0 0 0 4px rgba(10, 232, 247, 0.10); }
 .matrix-heading { padding: 22px; border-bottom: 1px solid var(--line); }
 .section-kicker { margin-bottom: 0; color: var(--fuchsia); font: 800 0.56rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
-.matrix-heading h2 { margin: 14px 0 0; font-family: var(--serif); font-size: clamp(1.65rem, 2.4vw, 2.1rem); font-style: italic; font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; }
+.matrix-heading h2 { margin: 14px 0 0; font-family: var(--display); font-size: clamp(1.55rem, 2.2vw, 2rem); font-style: normal; font-weight: 720; line-height: 1.08; letter-spacing: -0.045em; }
 .matrix-grid { display: grid; grid-template-columns: 1fr 1fr; }
-.matrix-cell { min-height: 150px; padding: 17px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.matrix-cell { min-height: 138px; padding: 17px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .matrix-cell:nth-child(2n) { border-right: 0; }
 .matrix-cell:nth-last-child(-n + 2) { border-bottom: 0; }
 .matrix-cell > span { color: var(--muted); font: 700 0.46rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
