@@ -1,0 +1,40 @@
+/* Final readability hardening: preserve the compact system language without sub-9px text. */
+.hero-meta dt,
+.matrix-topline,
+.matrix-cell > span,
+.access-benefits span,
+.tracking-topline,
+.footer-inner,
+.contact-note,
+.inspector-code,
+.section-note,
+.domain-code,
+.matrix-status,
+.stage-caption,
+.inspector-list dt,
+.tracking-card dt,
+.status-ledger dt {
+  font-size: 0.56rem;
+  line-height: 1.4;
+}
+
+.inspector-list dd,
+.tracking-card dd,
+.status-ledger dd,
+.domain li {
+  font-size: 0.58rem;
+  line-height: 1.4;
+}
+
+.section-kicker {
+  font-size: 0.6rem;
+  line-height: 1.2;
+}
+
+/* Preserve the locked four-line doctrine at desktop and tablet widths. */
+@media (min-width: 761px) {
+  .doctrine span {
+    font-size: clamp(2.5rem, 3.7vw, 3.3rem);
+    white-space: nowrap;
+  }
+}
