@@ -43,6 +43,7 @@ This report covers the locked Final Prime public design merged into the GitHub P
 - Reduced-motion preferences are respected.
 - Status and access meaning is expressed in text, not color alone.
 - Primary text/background combinations meet WCAG AA normal-text contrast targets.
+- Compact interface labels were hardened to an approximately 9 CSS-pixel minimum while preserving the sparse system language.
 
 ## Responsive review
 
@@ -53,18 +54,19 @@ Validated at 320, 390, 768, 1024, 1440 and 1920 CSS pixels.
 - hero, Prime Matrix, domain tree, object inspector, Prime Access and contact sections preserve information order;
 - mobile menu remains inside the viewport;
 - long contact address wraps safely;
-- desktop and mobile screenshots render without missing assets.
+- desktop and mobile screenshots render without missing assets;
+- the real first-party CSS import chain was exercised at every target width; all modules loaded without failed requests.
 
 ## Interaction and resilience review
 
 - Core content works with JavaScript disabled.
 - Mobile menu opens, closes, closes on navigation, closes on Escape and closes when returning to desktop width.
 - Prime Access preview cycles only labelled example states; it cannot be mistaken for live account data.
-- Static 404 page is included.
+- Static 404 page is included and uses root-absolute assets so nested missing paths retain the full design.
 - GitHub Pages/Jekyll processing remains disabled with `.nojekyll`.
 - Local links, IDs, ARIA references and assets were checked.
 - JavaScript syntax was checked with Node.js.
-- HTML, JSON, XML and SVG assets were parsed.
+- HTML, CSS, JSON, XML and SVG assets were parsed.
 - Browser console and failed network requests were checked in Chromium.
 
 ## Adversarial failure cases tested
@@ -74,18 +76,20 @@ Validated at 320, 390, 768, 1024, 1440 and 1920 CSS pixels.
 - rapid mobile-menu toggling;
 - Escape while menu is closed and open;
 - direct hash navigation;
-- missing/nonexistent path through `404.html`;
+- missing and nested nonexistent paths through `404.html`;
 - stale or absent account expectations;
 - false-claim pressure around A/SYNC and Prime Access;
 - visual distinction without relying on color alone;
 - focus visibility on all interactive elements;
-- no third-party requests or accidental tracking.
+- no third-party requests or accidental tracking;
+- ordered CSS module loading at all six target widths.
 
 ## Automated results
 
 - Static audit: **52 / 52 passed**.
-- Chromium interaction and responsive audit: **83 / 83 passed**.
-- Combined adversarial baseline: **135 / 135 passed**.
+- Chromium responsive and interaction audit: **83 / 83 passed**.
+- Combined baseline: **135 / 135 passed**.
+- Additional first-party CSS import-chain audit: six viewport widths, zero failed requests, zero console errors and zero horizontal overflow.
 
 ## Known limitation
 

@@ -32,6 +32,7 @@ This repository contains the public website for **Final Prime**.
 │   ├── content-a.css
 │   ├── content-b.css
 │   ├── responsive.css
+│   ├── hardening.css
 │   ├── mark.svg
 │   ├── favicon.svg
 │   └── og-cover.svg
