@@ -1,57 +1,92 @@
-# Final Prime website — quality report
+# Final Prime website — adversarial quality report
 
 ## Scope
 
-This report covers the first public static release of the Final Prime website.
+This report covers the locked Final Prime public design merged into the GitHub Pages implementation on 2026-07-11.
 
-## Adversarial review
+## Truthfulness and claim audit
 
-### Truthfulness
+- Final Prime is described as an independent, founder-led initiative in formation—not as a registered company.
+- The site does not claim clients, partners, funding, revenue, a launched public product or verified technical results.
+- A/SYNC is explicitly labelled as a concept/prototype product surface.
+- Prime Access is explicitly labelled as in preparation and as an interface preview; no live account or proposal-tracking backend is implied.
+- No public AI, AGI, neural-system or legacy-repository relationship is disclosed.
+- The contact path accurately uses the existing `finalprime.official@gmail.com` address.
 
-- Does not describe Final Prime as a registered company or legal entity.
-- States that the initiative is founder-led, in formation, and under private development.
-- Does not claim a public product, customer base, investment, partnership, or technical result.
-- Avoids AI, AGI, neural-system, and legacy project terminology.
+## Brand integrity
 
-### Brand integrity
+- The wordmark is consistently `FINAL / PRIME` and prose uses `Final Prime`.
+- The superseded “There is no final prime” hero, warm red palette and prime-number console were removed.
+- The locked doctrine is implemented as four forced lines:
+  - Knowing the next move
+  - IS SURVIVAL.
+  - Understanding the game
+  - IS CONTROL.
+- The public domain tree is `Systems / Works / Thought / Index`.
+- Fuchsia `#f5054d` is the primary signal; cyan `#0ae8f7` is the rare verified/access signal.
+- Geometry remains orthogonal with no decorative rounded cards.
 
-- The name is presented consistently as `FINAL / PRIME` in the wordmark and `Final Prime` in prose.
-- The mathematical premise is accurate: there is no greatest prime number.
-- The site avoids science-fiction, military, crypto, and generic AI visual clichés.
-- The primary visual system is based on finite fields, sequence, boundary, and continuation.
+## Privacy and dependency review
 
-### Privacy and dependencies
-
-- No analytics, cookies, forms, trackers, external fonts, CDNs, or third-party JavaScript.
+- No analytics, cookies, forms, trackers, external fonts, CDNs or third-party JavaScript.
 - Contact uses the visitor's local email client through a `mailto:` link.
 - The only network requests are first-party static assets.
+- Protected/private records are described without exposing hidden object names or data.
 
-### Accessibility
+## Accessibility review
 
-- Semantic landmarks, heading order, skip link, focus indicators, and labelled navigation.
-- Mobile menu exposes `aria-expanded` state and supports Escape.
-- Interactive prime sequence has a live region and is usable by keyboard.
+- Semantic landmarks and a single ordered heading hierarchy.
+- Skip link and visible focus indicators.
+- Mobile navigation exposes `aria-expanded`, `aria-controls`, a dynamic accessible label and Escape-key recovery.
+- Focus returns to the menu trigger after Escape.
+- Interactive interface preview is keyboard-usable and uses an `aria-live` container.
 - Reduced-motion preferences are respected.
-- Major text/background color pairs meet WCAG AA contrast targets. The first palette pass was adjusted after the secondary text and accent-on-raised-surface combinations fell below 4.5:1.
+- Status and access meaning is expressed in text, not color alone.
+- Primary text/background combinations meet WCAG AA normal-text contrast targets.
 
-### Resilience
+## Responsive review
 
-- Core page content works without JavaScript.
+Validated at 320, 390, 768, 1024, 1440 and 1920 CSS pixels.
+
+- no horizontal document overflow;
+- touch controls meet or exceed approximately 44 CSS pixels;
+- hero, Prime Matrix, domain tree, object inspector, Prime Access and contact sections preserve information order;
+- mobile menu remains inside the viewport;
+- long contact address wraps safely;
+- desktop and mobile screenshots render without missing assets.
+
+## Interaction and resilience review
+
+- Core content works with JavaScript disabled.
+- Mobile menu opens, closes, closes on navigation, closes on Escape and closes when returning to desktop width.
+- Prime Access preview cycles only labelled example states; it cannot be mistaken for live account data.
 - Static 404 page is included.
-- GitHub Pages/Jekyll processing is disabled with `.nojekyll`.
-- Mobile and desktop layouts are designed without horizontal overflow.
+- GitHub Pages/Jekyll processing remains disabled with `.nojekyll`.
+- Local links, IDs, ARIA references and assets were checked.
+- JavaScript syntax was checked with Node.js.
+- HTML, JSON, XML and SVG assets were parsed.
+- Browser console and failed network requests were checked in Chromium.
 
-## Automated checks performed before publication
+## Adversarial failure cases tested
 
-- HTML parsed and required metadata verified.
-- Duplicate IDs and unresolved in-page anchors checked.
-- Local asset references checked against the repository tree.
-- JavaScript syntax checked with Node.js.
-- JSON, XML, and SVG assets parsed.
-- Chromium desktop and mobile rendering exercised.
-- Prime-sequence interaction and mobile-menu interaction exercised.
-- Browser console checked for page errors.
+- 320 px viewport and long-text wrapping;
+- JavaScript disabled;
+- rapid mobile-menu toggling;
+- Escape while menu is closed and open;
+- direct hash navigation;
+- missing/nonexistent path through `404.html`;
+- stale or absent account expectations;
+- false-claim pressure around A/SYNC and Prime Access;
+- visual distinction without relying on color alone;
+- focus visibility on all interactive elements;
+- no third-party requests or accidental tracking.
+
+## Automated results
+
+- Static audit: **52 / 52 passed**.
+- Chromium interaction and responsive audit: **83 / 83 passed**.
+- Combined adversarial baseline: **135 / 135 passed**.
 
 ## Known limitation
 
-The social preview image is supplied as SVG. Some social platforms prefer PNG; a raster Open Graph image should replace it when a custom domain and final launch asset pipeline are available.
+The social preview remains SVG. Some social platforms prefer a raster PNG; a production PNG should replace it when a final custom-domain asset pipeline is available.

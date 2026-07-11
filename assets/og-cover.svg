@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
-      <path d="M64 0H0V64" fill="none" stroke="#252622" stroke-width="1"/>
+      <path d="M64 0H0V64" fill="none" stroke="#2d3941" stroke-width="1"/>
     </pattern>
-    <radialGradient id="glow" cx="75%" cy="15%" r="55%">
-      <stop offset="0" stop-color="#c65d53" stop-opacity=".18"/>
-      <stop offset="1" stop-color="#0b0c0b" stop-opacity="0"/>
+    <radialGradient id="glow" cx="78%" cy="12%" r="58%">
+      <stop offset="0" stop-color="#f5054d" stop-opacity=".19"/>
+      <stop offset="1" stop-color="#090b0d" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="1200" height="630" fill="#0b0c0b"/>
-  <rect width="1200" height="630" fill="url(#grid)" opacity=".65"/>
+  <rect width="1200" height="630" fill="#090b0d"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity=".70"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
-  <text x="78" y="88" fill="#e8e4dc" font-family="monospace" font-size="24" font-weight="700" letter-spacing="6">FINAL <tspan fill="#c65d53">/</tspan> PRIME</text>
-  <text x="78" y="272" fill="#f4f0e7" font-family="Georgia, serif" font-size="88">There is no</text>
-  <text x="78" y="368" fill="#9f9b92" font-family="Georgia, serif" font-size="88" font-style="italic">final prime.</text>
-  <text x="82" y="454" fill="#9f9b92" font-family="Arial, sans-serif" font-size="27">Shared systems and technical foundations</text>
-  <text x="82" y="492" fill="#9f9b92" font-family="Arial, sans-serif" font-size="27">for independent products and operating teams.</text>
-  <line x1="82" y1="552" x2="1118" y2="552" stroke="#3b3d37"/>
-  <text x="82" y="590" fill="#807d75" font-family="monospace" font-size="17" letter-spacing="3">FUNDAMENTAL, NEVER FINAL.</text>
-  <text x="1054" y="590" fill="#c65d53" font-family="monospace" font-size="17">01—∞</text>
+  <text x="74" y="82" fill="#f2f4f5" font-family="monospace" font-size="24" font-weight="700" letter-spacing="6">FINAL <tspan fill="#f5054d">/</tspan> PRIME</text>
+  <text x="74" y="210" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="59" font-weight="700">KNOWING THE NEXT MOVE</text>
+  <text x="74" y="282" fill="#0ae8f7" font-family="Georgia, serif" font-size="70" font-style="italic">IS SURVIVAL.</text>
+  <text x="74" y="382" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="59" font-weight="700">UNDERSTANDING THE GAME</text>
+  <text x="74" y="454" fill="#f5054d" font-family="Georgia, serif" font-size="70" font-style="italic">IS CONTROL.</text>
+  <line x1="74" y1="536" x2="1126" y2="536" stroke="#43515a"/>
+  <text x="74" y="580" fill="#aab4ba" font-family="monospace" font-size="17" letter-spacing="3">SYSTEMS / WORKS / THOUGHT / INDEX</text>
+  <rect x="1083" y="555" width="22" height="22" fill="#0ae8f7"/>
 </svg>
