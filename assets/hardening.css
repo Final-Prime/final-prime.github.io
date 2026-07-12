@@ -10,6 +10,7 @@
 .section-note,
 .domain-code,
 .matrix-status,
+.matrix-cell::after,
 .stage-caption,
 .inspector-list dt,
 .tracking-card dt,
@@ -78,7 +79,7 @@
 }
 .site-nav .nav-access[aria-current="location"]::after { background: var(--cyan); }
 
-/* Convert the Matrix into a directional ladder instead of an undifferentiated card grid. */
+/* Compact abstraction ladder: keep the index, title, explanation and scope in explicit columns. */
 .matrix-grid {
   display: block;
   counter-reset: matrix;
@@ -86,29 +87,48 @@
 .matrix-cell {
   position: relative;
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
-  gap: 16px;
-  min-height: 90px;
-  padding: 17px 18px;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  grid-template-areas: "index title scope" "index copy scope";
+  gap: 0 14px;
+  align-items: center;
+  min-height: 88px;
+  padding: 13px 16px;
   border-right: 0;
   border-bottom: 1px solid var(--line);
   counter-increment: matrix;
 }
 .matrix-cell:last-child { border-bottom: 0; }
 .matrix-cell::before {
+  grid-area: index;
   align-self: start;
+  padding-top: 2px;
   color: var(--muted);
   content: "0" counter(matrix);
   font: 800 0.625rem/1.4 var(--mono);
   letter-spacing: 0.08em;
 }
+.matrix-cell::after {
+  grid-area: scope;
+  align-self: start;
+  padding-top: 2px;
+  color: var(--muted-dark);
+  content: "";
+  font: 800 0.625rem/1.4 var(--mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.matrix-cell:nth-child(1)::after { content: "Immediate"; }
+.matrix-cell:nth-child(2)::after { content: "Relational"; }
+.matrix-cell:nth-child(3)::after { content: "Structural"; }
+.matrix-cell:nth-child(4)::after { content: "Conditional"; }
 .matrix-cell > span { display: none; }
-.matrix-cell h3 { margin: 0; }
-.matrix-cell p { margin-top: 8px; }
-.matrix-cell-cyan { box-shadow: inset 2px 0 0 var(--cyan); }
-.matrix-cell-fuchsia { box-shadow: inset 2px 0 0 var(--fuchsia); }
-.matrix-cell-cyan::before { color: var(--cyan); }
-.matrix-cell-fuchsia::before { color: var(--fuchsia); }
+.matrix-cell h3 { grid-area: title; margin: 0; }
+.matrix-cell p { grid-area: copy; max-width: 34ch; margin: 6px 0 0; line-height: 1.45; }
+.matrix-cell-cyan { box-shadow: inset 2px 0 0 var(--cyan); background: linear-gradient(90deg, rgba(10, 232, 247, 0.035), transparent 42%); }
+.matrix-cell-fuchsia { box-shadow: inset 2px 0 0 var(--fuchsia); background: linear-gradient(90deg, rgba(245, 5, 77, 0.035), transparent 42%); }
+.matrix-cell-cyan::before, .matrix-cell-cyan h3 { color: var(--cyan); }
+.matrix-cell-fuchsia::before, .matrix-cell-fuchsia h3 { color: var(--fuchsia); }
 
 /* Domain cards expose scope, state and a current operating mode. */
 .domain.is-enhanced {
@@ -295,7 +315,13 @@
 @media (max-width: 760px) {
   .site-progress { bottom: 0; }
   .site-nav a[aria-current="location"]::after { margin-left: auto; }
-  .matrix-cell { grid-template-columns: 36px minmax(0, 1fr); }
+  .matrix-cell {
+    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-areas: "index title" "index copy" ". scope";
+    gap: 0 12px;
+    min-height: 82px;
+  }
+  .matrix-cell::after { justify-self: start; margin-top: 7px; padding-top: 0; }
   .domain-top { align-items: flex-start; }
   .domain-state { white-space: normal; text-align: right; }
   .object-stage.is-enhanced { grid-template-rows: auto minmax(250px, 1fr) auto; min-height: 430px; }
