@@ -16,12 +16,15 @@ Any future transfer to a company requires a separate signed assignment. GitHub o
 ├── works/
 ├── thought/
 ├── reviews/
+│   └── metro-2033-redux/
 ├── index/
 ├── legal/
 └── .well-known/security.txt
 ```
 
 The website uses a conservative, logic-oriented visual language, orthogonal geometry, fuchsia and cyan signal modes, explicit public and private boundaries, and progressive enhancement. Core content remains usable without JavaScript.
+
+The first published review record is `FP-REV-0001`, available at `/reviews/metro-2033-redux/`.
 
 ## Rights and permissions
 
@@ -35,6 +38,7 @@ This repository is proprietary. It is not released under an open source license.
 - `/legal/` publishes the current website-facing legal and IP notice.
 - `docs/ip-policy.md` defines the publication and ownership gate.
 - `docs/ip-register.md` contains the public IP summary.
+- `docs/metro-2033-redux-import-audit.md` records the review migration provenance and third-party boundary.
 
 Copyright © 2026 Daniel Kenessy. All rights reserved.
 
@@ -47,13 +51,15 @@ Automated checks reject:
 - U+2013 and U+2014 long dash punctuation;
 - use of the registered trademark symbol before registration;
 - missing legal files or public legal route;
-- inconsistent owner, license, and mark notices.
+- inconsistent owner, license, and mark notices;
+- inconsistent published-review score math, routes, registry state, or provenance.
 
 Run locally:
 
 ```bash
 python tools/check_editorial_style.py
 python tools/check_ip_notices.py
+python tools/check_review_registry.py
 ```
 
 ## Deployment
