@@ -121,25 +121,6 @@
   text-transform: uppercase;
 }
 
-.release-lane .published-review-line {
-  margin-top: 18px;
-  padding: 14px;
-  border: 1px solid rgba(255, 159, 47, 0.28);
-  background: rgba(255, 159, 47, 0.035);
-}
-.published-review-line strong {
-  display: block;
-  color: #ff9f2f;
-  font: 800 0.72rem/1.4 var(--mono);
-  text-transform: uppercase;
-}
-.published-review-line span {
-  display: block;
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 0.74rem;
-}
-
 /* Dossier text-scaling hardening: grid items may shrink below min-content width. */
 .review-dossier-page .fit-gate,
 .review-dossier-page .taste-card,
@@ -181,6 +162,5 @@
 @media (forced-colors: active) {
   .review-feature-receipt,
   .review-score-receipt,
-  .review-archive-published,
-  .release-lane .published-review-line { border-color: CanvasText; }
+  .review-archive-published { border-color: CanvasText; }
 }
