@@ -163,7 +163,7 @@
 }
 .release-lane footer strong { color: var(--text); }
 .release-protocol { margin-top: 18px; }
-.protocol-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.protocol-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; padding: 0; list-style: none; }
 .protocol-step { min-width: 0; min-height: 150px; padding: 16px; border-right: 1px solid var(--line); }
 .protocol-step:last-child { border-right: 0; }
 .protocol-step span { color: var(--muted-dark); font: 800 0.625rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }

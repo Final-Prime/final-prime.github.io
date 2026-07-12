@@ -580,6 +580,7 @@
 }
 .friction-ledger > header h3 { margin: 7px 0 0; color: var(--text); font-size: 1rem; text-transform: uppercase; }
 .friction-ledger > header > strong { color: var(--cyan); font: 800 0.625rem/1.3 var(--mono); text-transform: uppercase; }
+.friction-list { margin: 0; padding: 0; list-style: none; }
 .friction-row {
   display: grid;
   grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.2fr) auto;
@@ -723,7 +724,7 @@
 }
 .evidence-arc-body article { min-width: 0; padding: 20px; border-right: 1px solid var(--line-soft); }
 .evidence-arc-body article:nth-child(3) { border-right: 0; }
-.evidence-arc-body h4 { margin: 0; color: var(--review-amber); font: 800 0.625rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.evidence-arc-body h3 { margin: 0; color: var(--review-amber); font: 800 0.625rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 .evidence-arc-body p { margin: 12px 0 0; color: var(--muted); font-size: 0.76rem; line-height: 1.6; }
 .evidence-arc-body footer {
   grid-column: 1 / -1;
