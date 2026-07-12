@@ -1,0 +1,32 @@
+name: Metro second-pass source bundle
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/metro-second-pass-source-bundle.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Collect review source
+        run: |
+          mkdir -p metro-source/.github/workflows metro-source/assets metro-source/reviews/metro-2033-redux metro-source/tools
+          cp reviews/metro-2033-redux/index.html metro-source/reviews/metro-2033-redux/index.html
+          cp assets/review-dossier.css metro-source/assets/review-dossier.css
+          cp assets/review-release.css metro-source/assets/review-release.css
+          cp assets/app.js metro-source/assets/app.js
+          cp tools/check_review_registry.py metro-source/tools/check_review_registry.py
+          cp .github/workflows/review-registry.yml metro-source/.github/workflows/review-registry.yml
+      - name: Upload source bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: metro-second-pass-source
+          path: metro-source
+          if-no-files-found: error
