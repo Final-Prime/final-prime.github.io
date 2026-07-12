@@ -57,7 +57,8 @@ html { scroll-padding-top: calc(var(--header-height) + 18px); }
   margin-top: 20px;
 }
 
-.site-footer { padding: 0; }
+.site-footer { padding: 0; border-top: 1px solid var(--line); }
+.footer-brand { transform: scale(0.9); transform-origin: left center; }
 .footer-grid {
   display: grid;
   grid-template-columns: minmax(230px, 0.9fr) minmax(360px, 1.3fr) minmax(220px, 0.8fr);

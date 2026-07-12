@@ -26,8 +26,13 @@ SCRIPT_BUDGETS = {
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
 FORBIDDEN_ROUTE_STYLESHEETS = {
     "index.html": {"/assets/catalog.css", "/assets/review-release.css"},
-    "thought/index.html": {"/assets/reviews.css", "/assets/review-release.css"},
-    "reviews/metro-2033-redux/index.html": {"/assets/reviews.css", "/assets/catalog.css"},
+    "systems/index.html": {"/assets/content-b.css"},
+    "works/index.html": {"/assets/content-b.css"},
+    "thought/index.html": {"/assets/content-b.css", "/assets/reviews.css", "/assets/review-release.css"},
+    "reviews/index.html": {"/assets/content-b.css"},
+    "reviews/metro-2033-redux/index.html": {"/assets/content-b.css", "/assets/reviews.css", "/assets/catalog.css"},
+    "index/index.html": {"/assets/content-b.css"},
+    "legal/index.html": {"/assets/content-b.css"},
 }
 REQUIRED_ICON_LINKS = {
     ("icon", "/assets/favicon.svg", "image/svg+xml", ""),
