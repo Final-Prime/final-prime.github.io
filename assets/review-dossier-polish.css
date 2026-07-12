@@ -306,3 +306,51 @@
     background: Highlight;
   }
 }
+
+/* Score anatomy correction: symbolic equation, single-line axis labels, and aligned receipts. */
+.review-dossier-page #score-title {
+  font-variant-numeric: tabular-nums;
+}
+
+.review-dossier-page #score-title .score-title-result {
+  display: block;
+}
+
+.review-dossier-page .dossier-axis-grid {
+  align-items: stretch;
+}
+
+.review-dossier-page .dossier-axis {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+}
+
+.review-dossier-page .dossier-axis-body {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  height: 100%;
+}
+
+.review-dossier-page .dossier-axis h3 {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.review-dossier-page .dossier-axis p {
+  min-height: 0;
+}
+
+.review-dossier-page .dossier-meter {
+  align-self: end;
+}
+
+@media (min-width: 1181px) {
+  .review-dossier-page .dossier-axis h3 {
+    font-size: clamp(1.4rem, 1.75vw, 2.05rem);
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+  }
+}
+
