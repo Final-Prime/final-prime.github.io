@@ -123,12 +123,15 @@
     const dl = trackingCard.querySelector("dl");
     const primary = document.createElement("div");
     primary.className = "tracking-primary";
+    primary.setAttribute("role", "status");
+    primary.setAttribute("aria-live", "polite");
+    primary.setAttribute("aria-atomic", "true");
     primary.innerHTML = '<span>Current state</span><strong data-track-state-primary>Under review</strong><p data-track-note>Final Prime owns the next move.</p>';
     const branch = document.createElement("div");
     branch.className = "tracking-branch";
     branch.setAttribute("role", "group");
     branch.setAttribute("aria-label", "Potential next states");
-    branch.innerHTML = '<span class="tracking-origin" aria-hidden="true"></span><div class="tracking-outcomes"><span>Clarification required</span><span>Qualified</span><span>Not a fit / closed</span></div>';
+    branch.innerHTML = '<span class="tracking-origin" aria-hidden="true"></span><div class="tracking-outcomes"><span>Clarification required</span><span>Qualified</span><span>Proposal issued</span></div>';
     dl?.before(primary, branch);
     dl?.classList.add("tracking-metrics");
     trackingCard.classList.add("is-enhanced");
