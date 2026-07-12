@@ -5,12 +5,14 @@ from __future__ import annotations
 
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ARIA_CURRENT_VALUES = {"page", "step", "location", "date", "time", "true", "false"}
 NAMEABLE_DIV_ROLES = {"alert", "complementary", "group", "img", "list", "main", "meter", "navigation", "region", "status"}
+DYNAMIC_DIV = re.compile(r'const\s+(\w+)\s*=\s*document\.createElement\("div"\);')
 
 
 class SemanticsParser(HTMLParser):
@@ -190,11 +192,25 @@ def validate_page(path: Path) -> list[str]:
     return errors
 
 
+def validate_dynamic_div_names(content: str, source: str = "assets/home.js") -> list[str]:
+    errors: list[str] = []
+    for variable in DYNAMIC_DIV.findall(content):
+        label_call = f'{variable}.setAttribute("aria-label"'
+        role_call = f'{variable}.setAttribute("role"'
+        if label_call in content and role_call not in content:
+            errors.append(
+                f"{source}: dynamic div {variable} has aria-label without an explicit nameable role"
+            )
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     paths = sorted(ROOT.rglob("*.html"))
     for path in paths:
         errors.extend(validate_page(path))
+    home_runtime = (ROOT / "assets" / "home.js").read_text(encoding="utf-8")
+    errors.extend(validate_dynamic_div_names(home_runtime))
     if errors:
         print("Accessibility contract validation failed:")
         for error in errors:

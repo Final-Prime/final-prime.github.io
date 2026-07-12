@@ -108,6 +108,7 @@
     const actions = inspector.querySelector(".inspector-actions");
     const boundary = document.createElement("div");
     boundary.className = "access-boundary";
+    boundary.setAttribute("role", "group");
     boundary.setAttribute("aria-label", "Access boundary");
     boundary.innerHTML = '<div><span>PUBLIC</span><strong>Capability surface</strong></div><div><span>PRIVATE</span><strong>Implementation + research</strong></div>';
     actions?.before(boundary);
@@ -125,6 +126,7 @@
     primary.innerHTML = '<span>Current state</span><strong data-track-state-primary>Under review</strong><p data-track-note>Final Prime owns the next move.</p>';
     const branch = document.createElement("div");
     branch.className = "tracking-branch";
+    branch.setAttribute("role", "group");
     branch.setAttribute("aria-label", "Potential next states");
     branch.innerHTML = '<span class="tracking-origin" aria-hidden="true"></span><div class="tracking-outcomes"><span>Clarification required</span><span>Qualified</span><span>Not a fit / closed</span></div>';
     dl?.before(primary, branch);
