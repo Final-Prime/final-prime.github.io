@@ -1,0 +1,109 @@
+name: Apply Metro second-pass HTML
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/metro-second-pass-apply.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out review branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Apply dossier HTML polish
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          path = Path("reviews/metro-2033-redux/index.html")
+          text = path.read_text(encoding="utf-8")
+          replacements = [
+              (
+                  '  <link rel="license" href="https://final-prime.github.io/legal/">\n',
+                  '  <link rel="license" href="https://final-prime.github.io/legal/">\n  <link rel="prev" href="https://final-prime.github.io/reviews/">\n',
+              ),
+              (
+                  '  <meta property="og:type" content="article">\n',
+                  '  <meta property="og:type" content="article">\n  <meta property="og:locale" content="en_US">\n',
+              ),
+              (
+                  '  <meta property="article:published_time" content="2026-07-12">\n',
+                  '  <meta property="article:published_time" content="2026-07-12">\n  <meta property="article:modified_time" content="2026-07-12">\n  <meta property="article:section" content="Game Reviews">\n',
+              ),
+              (
+                  '  <meta name="twitter:image" content="https://final-prime.github.io/assets/reviews/metro-2033-redux-og.svg">\n',
+                  '  <meta name="twitter:image" content="https://final-prime.github.io/assets/reviews/metro-2033-redux-og.svg">\n  <meta name="twitter:image:alt" content="Final Prime Metro 2033 Redux review cover with score 86 and grade A">\n',
+              ),
+              (
+                  '  <link rel="stylesheet" href="/assets/review-dossier.css">\n  <script src="/assets/app.js" defer></script>\n',
+                  '  <link rel="stylesheet" href="/assets/review-dossier.css">\n  <link rel="stylesheet" href="/assets/review-dossier-polish.css">\n  <script src="/assets/app.js" defer></script>\n  <script src="/assets/review-dossier.js" defer></script>\n',
+              ),
+              (
+                  '  <main class="dossier-main" id="main-content" data-review-id="FP-REV-0001" data-review-raw="90" data-review-correction="-4" data-review-score="86">\n',
+                  '  <main class="dossier-main" id="main-content" data-review-id="FP-REV-0001" data-review-raw="90" data-review-correction="-4" data-review-score="86" itemscope itemtype="https://schema.org/Review">\n    <meta itemprop="dateModified" content="2026-07-12">\n    <meta itemprop="inLanguage" content="en">\n    <span class="sr-only" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Daniel Kenessy</span></span>\n    <span class="sr-only" itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">Final Prime</span></span>\n    <span class="sr-only" itemprop="itemReviewed" itemscope itemtype="https://schema.org/VideoGame"><span itemprop="name">Metro 2033 Redux</span></span>\n',
+              ),
+              (
+                  '            <h1 id="dossier-title">Metro <span>2033 Redux</span></h1>\n',
+                  '            <h1 id="dossier-title" itemprop="name headline">Metro <span>2033 Redux</span></h1>\n',
+              ),
+              (
+                  '            <p class="dossier-identity">A linear survival-horror FPS about crossing a living underground world, built around resource pressure and authored escalation. Best for atmosphere-first players; limited by bounded agency and old-FPS monster friction.</p>\n',
+                  '            <p class="dossier-identity" itemprop="reviewBody">A linear survival-horror FPS about crossing a living underground world, built around resource pressure and authored escalation. Best for atmosphere-first players; limited by bounded agency and old-FPS monster friction.</p>\n',
+              ),
+              (
+                  '            <div class="dossier-tags" aria-label="Review classification"><span>ALERTED field report</span><span>Full run</span><span>Replay verified</span><span>Layered spoilers</span></div>\n',
+                  '            <div class="dossier-tags" aria-label="Review classification"><span>ALERTED field report</span><span>Full run</span><span>Replay verified</span><span>Layered spoilers</span><span><time itemprop="datePublished" datetime="2026-07-12">Published 12 Jul 2026</time></span></div>\n',
+              ),
+              (
+                  '          <aside class="dossier-score" aria-label="Final review score">\n',
+                  '          <aside class="dossier-score" aria-label="Final review score" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">\n            <meta itemprop="ratingValue" content="86">\n            <meta itemprop="bestRating" content="100">\n            <meta itemprop="worstRating" content="0">\n',
+              ),
+              (
+                  '    <nav class="dossier-nav" aria-label="Review sections"><div class="shell">',
+                  '    <nav class="dossier-nav" aria-label="Review sections" data-dossier-nav><div class="shell">',
+              ),
+              (
+                  '      <div class="evidence-list">\n',
+                  '      <div class="evidence-toolbar" data-evidence-toolbar>\n        <div class="evidence-toolbar-copy"><p class="review-label">Spoiler boundary</p><strong data-evidence-status aria-live="polite">Choose an arc to inspect.</strong><small>6 light / 2 medium / 1 heavy</small></div>\n        <div class="evidence-toolbar-actions"><button type="button" data-evidence-open-light>Open spoiler-light arcs</button><button type="button" data-evidence-collapse>Collapse all</button></div>\n      </div>\n      <div class="evidence-list" data-evidence-list>\n',
+              ),
+              (
+                  '<a class="button button-secondary" href="https://github.com/Kenessy/Kenessy/blob/e8e77e9d628027106bfe741563df2fc9aadf65d2/docs/plater-game-reports/games/metro-2033-redux/index.html">Open source snapshot</a>',
+                  '<a class="button button-secondary" href="https://github.com/Kenessy/Kenessy/blob/e8e77e9d628027106bfe741563df2fc9aadf65d2/docs/plater-game-reports/games/metro-2033-redux/index.html" rel="external">Open source snapshot</a><a class="button button-secondary" href="#dossier-title">Back to dossier top</a>',
+              ),
+          ]
+
+          for old, new in replacements:
+              if old not in text:
+                  raise SystemExit(f"Missing replacement marker: {old[:120]}")
+              text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding="utf-8")
+          PY
+      - name: Remove temporary workflow files
+        run: |
+          rm .github/workflows/metro-second-pass-source-bundle.yml
+          rm .github/workflows/metro-second-pass-apply.yml
+      - name: Validate second-pass changes
+        run: |
+          node --check assets/review-dossier.js
+          python tools/check_editorial_style.py
+          python tools/check_ip_notices.py
+          python tools/check_review_registry.py
+      - name: Commit and push second-pass changes
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Polish Metro dossier navigation and evidence"
+          git push origin "HEAD:${HEAD_BRANCH}"
