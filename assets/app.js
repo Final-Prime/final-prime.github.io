@@ -14,32 +14,128 @@
   const trackOwner = document.querySelector("[data-track-owner]");
   const trackOutcomes = document.querySelector("[data-track-outcomes]");
   const trackCheck = document.querySelector("[data-track-check]");
+  const backgroundRegions = [...document.querySelectorAll("main, .site-footer")];
+  const focusableSelector = [
+    "a[href]",
+    "button:not([disabled])",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    "[tabindex]:not([tabindex='-1'])"
+  ].join(",");
+
+  let menuReturnFocus = null;
+  const fallbackTabState = new Map();
 
   if (currentYear) currentYear.textContent = String(new Date().getFullYear());
+
+  const setBackgroundInert = open => {
+    backgroundRegions.forEach(region => {
+      if ("inert" in region) {
+        region.inert = open;
+        return;
+      }
+
+      if (open) {
+        region.setAttribute("aria-hidden", "true");
+        region.querySelectorAll(focusableSelector).forEach(element => {
+          fallbackTabState.set(element, element.getAttribute("tabindex"));
+          element.setAttribute("tabindex", "-1");
+        });
+      } else {
+        region.removeAttribute("aria-hidden");
+        region.querySelectorAll(focusableSelector).forEach(element => {
+          const previous = fallbackTabState.get(element);
+          if (previous === null || previous === undefined) element.removeAttribute("tabindex");
+          else element.setAttribute("tabindex", previous);
+          fallbackTabState.delete(element);
+        });
+      }
+    });
+  };
+
+  const menuFocusables = () => {
+    if (!menuToggle || !siteNav) return [];
+    return [menuToggle, ...siteNav.querySelectorAll(focusableSelector)].filter(element => {
+      return !element.hasAttribute("disabled") && element.getClientRects().length > 0;
+    });
+  };
 
   const closeMenu = ({ restoreFocus = false } = {}) => {
     body.classList.remove("menu-open");
     siteNav?.classList.remove("is-open");
+    setBackgroundInert(false);
+
     if (menuToggle) {
       menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.setAttribute("aria-label", "Open primary navigation");
-      if (restoreFocus) menuToggle.focus();
     }
+
+    if (restoreFocus) {
+      const target = menuReturnFocus instanceof HTMLElement ? menuReturnFocus : menuToggle;
+      target?.focus();
+    }
+    menuReturnFocus = null;
+  };
+
+  const openMenu = () => {
+    if (!menuToggle || !siteNav) return;
+    menuReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : menuToggle;
+    body.classList.add("menu-open");
+    siteNav.classList.add("is-open");
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Close primary navigation");
+    setBackgroundInert(true);
+    const firstLink = siteNav.querySelector(focusableSelector);
+    requestAnimationFrame(() => firstLink?.focus());
   };
 
   if (menuToggle && siteNav) {
     menuToggle.addEventListener("click", () => {
-      const willOpen = menuToggle.getAttribute("aria-expanded") !== "true";
-      body.classList.toggle("menu-open", willOpen);
-      siteNav.classList.toggle("is-open", willOpen);
-      menuToggle.setAttribute("aria-expanded", String(willOpen));
-      menuToggle.setAttribute("aria-label", willOpen ? "Close primary navigation" : "Open primary navigation");
+      const open = menuToggle.getAttribute("aria-expanded") === "true";
+      if (open) closeMenu({ restoreFocus: true });
+      else openMenu();
     });
-    siteNav.addEventListener("click", event => { if (event.target.closest("a")) closeMenu(); });
+
+    siteNav.addEventListener("click", event => {
+      if (event.target.closest("a")) closeMenu();
+    });
+
+    document.addEventListener("pointerdown", event => {
+      if (menuToggle.getAttribute("aria-expanded") !== "true") return;
+      if (siteNav.contains(event.target) || menuToggle.contains(event.target)) return;
+      closeMenu({ restoreFocus: true });
+    });
+
     document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") closeMenu({ restoreFocus: true });
+      if (menuToggle.getAttribute("aria-expanded") !== "true") return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMenu({ restoreFocus: true });
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const focusables = menuFocusables();
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
-    window.addEventListener("resize", () => { if (window.innerWidth > 760) closeMenu(); });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 760 && menuToggle.getAttribute("aria-expanded") === "true") closeMenu();
+    }, { passive: true });
+
+    window.addEventListener("pagehide", () => closeMenu());
   }
 
   const progress = document.createElement("div");
@@ -56,41 +152,47 @@
     const ratio = Math.min(1, Math.max(0, window.scrollY / scrollable));
     progressFill.style.transform = `scaleX(${ratio})`;
   };
+
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
   window.addEventListener("resize", updateHeader, { passive: true });
 
-  const navLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
-  const observedSections = navLinks
-    .map(link => document.querySelector(link.getAttribute("href")))
-    .filter(Boolean);
-  const systemsFeature = document.querySelector(".system-feature");
-  if (systemsFeature) {
-    systemsFeature.dataset.navKey = "systems";
-    observedSections.push(systemsFeature);
-  }
-
-  const setCurrentNav = id => {
-    navLinks.forEach(link => {
-      const current = link.getAttribute("href") === `#${id}`;
-      if (current) link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
-    });
-  };
-
-  if ("IntersectionObserver" in window && observedSections.length) {
+  const isHomepage = location.pathname === "/" || location.pathname.endsWith("/index.html");
+  if (isHomepage && "IntersectionObserver" in window) {
+    const sectionMap = [
+      [document.querySelector("#systems"), "/systems/"],
+      [document.querySelector("#works"), "/works/"],
+      [document.querySelector("#thought"), "/thought/"],
+      [document.querySelector("#index"), "/index/"],
+      [document.querySelector("#prime-access"), "/#prime-access"]
+    ].filter(([section]) => section);
+    const systemsFeature = document.querySelector(".system-feature");
+    if (systemsFeature) sectionMap.push([systemsFeature, "/systems/"]);
     const visible = new Map();
+
+    const setCurrentNav = route => {
+      document.querySelectorAll(".site-nav a").forEach(link => {
+        const href = link.getAttribute("href");
+        if (href === route) link.setAttribute("aria-current", "location");
+        else if (link.getAttribute("aria-current") === "location") link.removeAttribute("aria-current");
+      });
+    };
+
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => visible.set(entry.target.dataset.navKey || entry.target.id, entry.intersectionRatio));
+      entries.forEach(entry => {
+        const route = sectionMap.find(([section]) => section === entry.target)?.[1];
+        if (route) visible.set(route, entry.intersectionRatio);
+      });
       const active = [...visible.entries()].sort((a, b) => b[1] - a[1])[0];
       if (active && active[1] > 0) setCurrentNav(active[0]);
     }, { rootMargin: "-18% 0px -62% 0px", threshold: [0, 0.08, 0.25, 0.5, 0.75] });
-    observedSections.forEach(section => observer.observe(section));
+
+    sectionMap.forEach(([section]) => observer.observe(section));
   }
 
   const domainData = [
     { state: "Mixed access", specs: [["Surface", "Selected demonstrations"], ["Core", "Private by default"], ["State", "Active / prototype"]], foot: ["Current object", "A/SYNC"] },
-    { state: "Public", specs: [["Surface", "Reviewable releases"], ["Core", "Process selectively shown"], ["State", "Index in preparation"]], foot: ["Primary mode", "Objects"] },
+    { state: "Public", specs: [["Surface", "Reviewable releases"], ["Core", "Process selectively shown"], ["State", "Index prepared"]], foot: ["Primary mode", "Objects"] },
     { state: "Public", specs: [["Surface", "Long-form analysis"], ["Core", "Research trails retained"], ["State", "Editorial pipeline"]], foot: ["Primary mode", "Models"] },
     { state: "Registry", specs: [["Surface", "Object registry"], ["Core", "Canonical state"], ["State", "Continuous"]], foot: ["Primary mode", "Lineage"] }
   ];
@@ -195,7 +297,7 @@
 
   const trackingStates = [
     { state: "Under review", owner: "Final Prime", outcomes: "Clarify / qualify / close", note: "Final Prime owns the next move.", active: -1 },
-    { state: "Clarification required", owner: "Buyer", outcomes: "Answer → review resumes", note: "A targeted buyer response is required.", active: 0 },
+    { state: "Clarification required", owner: "Buyer", outcomes: "Answer, then review resumes", note: "A targeted buyer response is required.", active: 0 },
     { state: "Qualified", owner: "Final Prime", outcomes: "Private scope / clear close", note: "The private-scoping branch is available.", active: 1 },
     { state: "Proposal issued", owner: "Buyer", outcomes: "Accept / counter / decline / expire", note: "A versioned proposal is ready for decision.", active: 2 }
   ];
