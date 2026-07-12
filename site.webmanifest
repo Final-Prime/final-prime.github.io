@@ -3,9 +3,12 @@
   "name": "Final Prime",
   "short_name": "Final Prime",
   "description": "Systems, products, research, art, game reviews and analysis. Public where reviewable, private where necessary.",
+  "lang": "en",
+  "dir": "ltr",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#090b0d",
   "theme_color": "#090b0d",
   "icons": [
@@ -15,5 +18,12 @@
       "type": "image/svg+xml",
       "purpose": "any"
     }
+  ],
+  "shortcuts": [
+    {"name": "Systems Index", "short_name": "Systems", "url": "/systems/"},
+    {"name": "Works Index", "short_name": "Works", "url": "/works/"},
+    {"name": "Thought Index", "short_name": "Thought", "url": "/thought/"},
+    {"name": "Game Reviews", "short_name": "Reviews", "url": "/reviews/"},
+    {"name": "Public Index", "short_name": "Index", "url": "/index/"}
   ]
 }
