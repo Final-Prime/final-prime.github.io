@@ -20,6 +20,7 @@ otherwise:
 - FINAL / PRIME™
 - the Final Prime logo and visual mark
 - A/SYNC™
+- Prime Compression™
 - VRAXION™
 - the VRAXION logo
 - AlphaSync™
