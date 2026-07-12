@@ -34,11 +34,26 @@ jobs:
           }
           api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages" pages-state/pages.json
           api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds/latest" pages-state/latest-build.json
+          api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds?per_page=5" pages-state/recent-builds.json
           api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments?environment=github-pages&per_page=10" pages-state/deployments.json
+
+          deployment_id=$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          text = Path('pages-state/deployments.json').read_text(encoding='utf-8').split('\nHTTP_STATUS:', 1)[0]
+          deployments = json.loads(text)
+          print(deployments[0]['id'] if deployments else '')
+          PY
+          )
+          if [ -n "$deployment_id" ]; then
+            api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments/${deployment_id}/statuses?per_page=20" pages-state/latest-deployment-statuses.json
+          fi
+
           curl -sS -D pages-state/home.headers -o pages-state/home.html "https://final-prime.github.io/?v=${GITHUB_RUN_ID}"
           curl -sS -D pages-state/hero.headers -o pages-state/hero.css "https://final-prime.github.io/assets/hero.css?v=${GITHUB_RUN_ID}"
           {
             printf 'Main merge target: 35df7f2439560d025c65f9390529f396a3db5294\n'
+            printf 'Latest deployment id: %s\n' "$deployment_id"
             printf 'Live hero new marker count: '
             grep -Fc '.doctrine::before' pages-state/hero.css || true
             printf 'Live hero old marker count: '
