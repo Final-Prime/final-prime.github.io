@@ -1,0 +1,196 @@
+/* Final Prime signal lattice and restrained digital fault effects. */
+
+body::after {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.28;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.012) 0,
+    rgba(255, 255, 255, 0.012) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+
+.brand {
+  position: relative;
+  isolation: isolate;
+}
+
+.brand-mark {
+  transform-origin: center;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+
+.brand::after {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 0;
+  width: 38px;
+  height: 1px;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--fuchsia), transparent);
+  transform: translateY(-50%);
+}
+
+.footer-brand::after { width: 32px; }
+
+.hero-wordmark {
+  isolation: isolate;
+  transform-origin: left center;
+  will-change: transform, filter;
+}
+
+.hero-rule {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-rule::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -22%;
+  width: 18%;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--text), transparent);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-wordmark {
+    animation: fp-wordmark-signal-check 15.5s steps(1, end) infinite;
+  }
+
+  .brand-mark {
+    animation: fp-mark-signal-check 18s steps(1, end) infinite;
+  }
+
+  .brand:hover .brand-mark,
+  .brand:focus-visible .brand-mark {
+    animation: fp-mark-hover-fault 260ms steps(2, end) 1;
+  }
+
+  .brand:hover::after,
+  .brand:focus-visible::after {
+    animation: fp-mark-scan 420ms linear 1;
+  }
+
+  .hero-wordmark:hover {
+    animation: fp-wordmark-hover-fault 300ms steps(1, end) 1;
+  }
+
+  .hero-rule::after {
+    animation: fp-rule-scan 10s ease-in-out infinite;
+  }
+}
+
+@keyframes fp-wordmark-signal-check {
+  0%, 94%, 95.2%, 100% {
+    filter: none;
+    text-shadow: none;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+  94.15% {
+    filter: contrast(1.08);
+    text-shadow: 3px 0 var(--fuchsia), -3px 0 var(--cyan);
+    transform: translateX(-1px) skewX(-0.25deg);
+    clip-path: inset(0 0 61% 0);
+  }
+  94.38% {
+    text-shadow: -2px 0 var(--fuchsia), 2px 0 var(--cyan);
+    transform: translateX(2px);
+    clip-path: inset(37% 0 27% 0);
+  }
+  94.62% {
+    text-shadow: 1px 0 var(--fuchsia), -2px 0 var(--cyan);
+    transform: translateX(-1px);
+    clip-path: inset(72% 0 0 0);
+  }
+  94.86% {
+    filter: none;
+    text-shadow: none;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes fp-wordmark-hover-fault {
+  0%, 100% {
+    filter: none;
+    text-shadow: none;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+  20% {
+    text-shadow: 3px 0 var(--fuchsia), -3px 0 var(--cyan);
+    transform: translateX(-2px);
+    clip-path: inset(0 0 58% 0);
+  }
+  45% {
+    text-shadow: -3px 0 var(--fuchsia), 2px 0 var(--cyan);
+    transform: translateX(2px);
+    clip-path: inset(39% 0 24% 0);
+  }
+  70% {
+    text-shadow: 2px 0 var(--fuchsia), -2px 0 var(--cyan);
+    transform: translateX(-1px);
+    clip-path: inset(73% 0 0 0);
+  }
+}
+
+@keyframes fp-mark-signal-check {
+  0%, 96.4%, 97.3%, 100% {
+    filter: none;
+    transform: none;
+  }
+  96.55% {
+    filter: drop-shadow(2px 0 var(--fuchsia)) drop-shadow(-2px 0 var(--cyan));
+    transform: translate(1px, -1px);
+  }
+  96.82% {
+    filter: drop-shadow(-2px 0 var(--fuchsia)) drop-shadow(2px 0 var(--cyan));
+    transform: translate(-1px, 1px);
+  }
+  97.05% {
+    filter: drop-shadow(1px 0 var(--fuchsia)) drop-shadow(-1px 0 var(--cyan));
+    transform: translateX(1px);
+  }
+}
+
+@keyframes fp-mark-hover-fault {
+  0%, 100% { filter: none; transform: none; }
+  25% { filter: drop-shadow(2px 0 var(--fuchsia)) drop-shadow(-2px 0 var(--cyan)); transform: translate(1px, -1px); }
+  50% { filter: drop-shadow(-2px 0 var(--fuchsia)) drop-shadow(2px 0 var(--cyan)); transform: translate(-1px, 1px); }
+  75% { filter: drop-shadow(1px 0 var(--fuchsia)) drop-shadow(-1px 0 var(--cyan)); transform: translateX(1px); }
+}
+
+@keyframes fp-mark-scan {
+  0% { opacity: 0; transform: translateY(-15px); }
+  30% { opacity: 0.9; }
+  70% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(15px); }
+}
+
+@keyframes fp-rule-scan {
+  0%, 73%, 100% { left: -22%; opacity: 0; }
+  77% { opacity: 0.48; }
+  84% { left: 105%; opacity: 0; }
+}
+
+@media (forced-colors: active) {
+  body::after,
+  .brand::after,
+  .hero-rule::after { display: none; }
+
+  .brand-mark,
+  .hero-wordmark { animation: none; filter: none; text-shadow: none; transform: none; clip-path: none; }
+}
