@@ -13,6 +13,14 @@ ROOT = Path(__file__).resolve().parents[1]
 ARIA_CURRENT_VALUES = {"page", "step", "location", "date", "time", "true", "false"}
 NAMEABLE_DIV_ROLES = {"alert", "complementary", "group", "img", "list", "main", "meter", "navigation", "region", "status"}
 DYNAMIC_DIV = re.compile(r'const\s+(\w+)\s*=\s*document\.createElement\("div"\);')
+CSS_HEX_VARIABLE = re.compile(r"--([\w-]+):\s*#([0-9a-fA-F]{6});")
+CONTRAST_REQUIREMENTS = (
+    ("text", "surface-3", 4.5),
+    ("muted", "surface-3", 4.5),
+    ("muted-dark", "surface-3", 4.5),
+    ("fuchsia-text", "surface-3", 4.5),
+    ("cyan", "surface-3", 4.5),
+)
 
 
 class SemanticsParser(HTMLParser):
@@ -204,6 +212,37 @@ def validate_dynamic_div_names(content: str, source: str = "assets/home.js") -> 
     return errors
 
 
+def relative_luminance(value: str) -> float:
+    channels = [int(value[index : index + 2], 16) / 255 for index in (0, 2, 4)]
+    linear = [
+        channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+        for channel in channels
+    ]
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+
+def contrast_ratio(foreground: str, background: str) -> float:
+    lighter, darker = sorted(
+        (relative_luminance(foreground), relative_luminance(background)), reverse=True
+    )
+    return (lighter + 0.05) / (darker + 0.05)
+
+
+def validate_palette(content: str) -> list[str]:
+    variables = {name: value.lower() for name, value in CSS_HEX_VARIABLE.findall(content)}
+    errors: list[str] = []
+    for foreground, background, minimum in CONTRAST_REQUIREMENTS:
+        if foreground not in variables or background not in variables:
+            errors.append(f"missing palette variables --{foreground} or --{background}")
+            continue
+        ratio = contrast_ratio(variables[foreground], variables[background])
+        if ratio < minimum:
+            errors.append(
+                f"--{foreground} on --{background} is {ratio:.2f}:1, below {minimum:.1f}:1"
+            )
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     paths = sorted(ROOT.rglob("*.html"))
@@ -211,12 +250,16 @@ def main() -> int:
         errors.extend(validate_page(path))
     home_runtime = (ROOT / "assets" / "home.js").read_text(encoding="utf-8")
     errors.extend(validate_dynamic_div_names(home_runtime))
+    errors.extend(validate_palette((ROOT / "assets" / "base.css").read_text(encoding="utf-8")))
     if errors:
         print("Accessibility contract validation failed:")
         for error in errors:
             print(f"- {error}")
         return 1
-    print(f"Accessibility contract OK: {len(paths)} documents passed semantic and ARIA invariants.")
+    print(
+        f"Accessibility contract OK: {len(paths)} documents passed semantic, ARIA, "
+        "and palette invariants."
+    )
     return 0
 
 
