@@ -39,6 +39,17 @@ REQUIRED_PNG_DIMENSIONS = {
     "assets/icon-192.png": (192, 192),
     "assets/icon-512.png": (512, 512),
 }
+PRINT_CONTRACT_TOKENS = (
+    "@media print",
+    "--bg: #fff;",
+    ".skip-link,",
+    ".menu-toggle,",
+    ".site-progress,",
+    "animation: none !important;",
+    "orphans: 3; widows: 3;",
+    "break-inside: avoid-page;",
+    ".dossier-hero-grid { grid-template-columns: 1fr !important; }",
+)
 
 
 class DocumentParser(HTMLParser):
@@ -119,6 +130,10 @@ def unreferenced_css_classes(css: str, runtime_sources: str) -> list[str]:
     )
 
 
+def validate_print_contract(content: str) -> list[str]:
+    return [token for token in PRINT_CONTRACT_TOKENS if token not in content]
+
+
 def main() -> int:
     errors: list[str] = []
     documents: dict[Path, DocumentParser] = {}
@@ -189,6 +204,11 @@ def main() -> int:
     if unreachable_classes:
         errors.append(f"CSS classes have no HTML or JavaScript runtime source: {unreachable_classes}")
     css_class_count = len(set(CSS_CLASS_SELECTOR.findall(css_content)))
+    missing_print_tokens = validate_print_contract(
+        (ROOT / "assets" / "surface-polish.css").read_text(encoding="utf-8")
+    )
+    if missing_print_tokens:
+        errors.append(f"print stylesheet contract is missing {missing_print_tokens}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
@@ -244,7 +264,7 @@ def main() -> int:
         "Site integrity OK: "
         f"{len(documents)} HTML documents, {checked_references} local references, "
         f"{checked_css_references} CSS references, {css_class_count} reachable CSS classes, "
-        f"{checked_scripts} budgeted scripts, "
+        f"print rendering and {checked_scripts} budgeted scripts, "
         f"and {len(manifest_urls)} manifest targets verified."
     )
     return 0
