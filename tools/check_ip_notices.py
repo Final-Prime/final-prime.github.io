@@ -23,6 +23,7 @@ PUBLIC_HTML = [
     ROOT / "works" / "index.html",
     ROOT / "thought" / "index.html",
     ROOT / "reviews" / "index.html",
+    ROOT / "reviews" / "metro-2033-redux" / "index.html",
     ROOT / "index" / "index.html",
     ROOT / "legal" / "index.html",
     ROOT / "404.html",
