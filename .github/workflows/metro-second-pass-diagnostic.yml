@@ -1,0 +1,127 @@
+name: Metro second-pass state diagnostic
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/metro-second-pass-diagnostic.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser tooling
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Capture interaction state
+        run: |
+          mkdir -p metro-state-diagnostic
+          python3 -m http.server 8000 --bind 127.0.0.1 > metro-state-diagnostic/server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/reviews/metro-2033-redux/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          node <<'NODE'
+          const fs = require("fs");
+          const { chromium } = require("playwright");
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: "reduce" });
+            const page = await context.newPage();
+            const errors = [];
+            page.on("pageerror", error => errors.push(String(error)));
+            page.on("console", message => {
+              if (message.type() === "error") errors.push(message.text());
+            });
+            const scripts = {};
+            page.on("response", async response => {
+              if (response.url().endsWith("/assets/review-dossier.js")) {
+                scripts.status = response.status();
+                scripts.body = await response.text();
+              }
+            });
+            await page.goto("http://127.0.0.1:8000/reviews/metro-2033-redux/", { waitUntil: "networkidle" });
+
+            const snapshot = label => page.evaluate(label => {
+              const nav = document.querySelector("[data-dossier-nav]");
+              const header = document.querySelector(".site-header");
+              const openLight = document.querySelector("[data-evidence-open-light]");
+              const collapse = document.querySelector("[data-evidence-collapse]");
+              return {
+                label,
+                hash: location.hash,
+                scrollY: window.scrollY,
+                navHeight: nav?.getBoundingClientRect().height,
+                headerHeight: header?.getBoundingClientRect().height,
+                navLinks: [...(nav?.querySelectorAll("a") || [])].map(link => ({ href: link.getAttribute("href"), current: link.getAttribute("aria-current"), focused: link === document.activeElement })),
+                sectionTops: Object.fromEntries(["verdict", "fit", "score", "note", "insight", "audit", "evidence", "protocol"].map(id => [id, Math.round(document.getElementById(id)?.getBoundingClientRect().top || 0)])),
+                navProgress: nav ? getComputedStyle(nav).getPropertyValue("--dossier-progress").trim() : "missing",
+                openCount: document.querySelectorAll("details.evidence-arc[open]").length,
+                lightOpen: document.querySelectorAll('details.evidence-arc[data-spoiler="light"][open]').length,
+                mediumOpen: document.querySelectorAll('details.evidence-arc[data-spoiler="medium"][open]').length,
+                heavyOpen: document.querySelectorAll('details.evidence-arc[data-spoiler="heavy"][open]').length,
+                status: document.querySelector("[data-evidence-status]")?.textContent.trim(),
+                openDisabled: openLight?.disabled,
+                collapseDisabled: collapse?.disabled
+              };
+            }, label);
+
+            const states = [];
+            states.push(await snapshot("initial"));
+            await page.locator('[data-dossier-nav] a[href="#score"]').click();
+            states.push(await snapshot("score-immediate"));
+            await page.waitForTimeout(50);
+            states.push(await snapshot("score-50"));
+            await page.waitForTimeout(250);
+            states.push(await snapshot("score-300"));
+            await page.locator('[data-dossier-nav] a[href="#evidence"]').click();
+            states.push(await snapshot("evidence-immediate"));
+            await page.waitForTimeout(300);
+            states.push(await snapshot("evidence-300"));
+            await page.locator("[data-evidence-open-light]").click();
+            states.push(await snapshot("open-immediate"));
+            await page.waitForTimeout(50);
+            states.push(await snapshot("open-50"));
+            await page.waitForTimeout(250);
+            states.push(await snapshot("open-300"));
+            await page.locator("[data-evidence-collapse]").click();
+            states.push(await snapshot("collapse-immediate"));
+            await page.waitForTimeout(50);
+            states.push(await snapshot("collapse-50"));
+            await page.waitForTimeout(250);
+            states.push(await snapshot("collapse-300"));
+
+            fs.writeFileSync("metro-state-diagnostic/state.json", JSON.stringify({
+              errors,
+              scriptStatus: scripts.status,
+              scriptHasCoalescing: scripts.body?.includes("pendingAnnouncement"),
+              scriptLength: scripts.body?.length,
+              states
+            }, null, 2));
+            await browser.close();
+          })().catch(error => {
+            fs.writeFileSync("metro-state-diagnostic/fatal.txt", `${error.stack || error}\n`);
+            process.exit(1);
+          });
+          NODE
+      - name: Upload diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: metro-second-pass-state
+          path: metro-state-diagnostic
+          if-no-files-found: error
