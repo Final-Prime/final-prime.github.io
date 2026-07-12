@@ -1,0 +1,63 @@
+name: Live hero probe
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/live-hero-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-live-hero:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe deployed GitHub Pages assets
+        id: probe
+        continue-on-error: true
+        run: |
+          mkdir -p live-hero-report
+          success=0
+          for attempt in $(seq 1 24); do
+            cache_key="${GITHUB_RUN_ID}-${attempt}"
+            if curl -fsSL --connect-timeout 10 --max-time 30 -H 'Cache-Control: no-cache' "https://final-prime.github.io/?v=${cache_key}" -o live-hero-report/index.html \
+              && curl -fsSL --connect-timeout 10 --max-time 30 -H 'Cache-Control: no-cache' "https://final-prime.github.io/assets/hero.css?v=${cache_key}" -o live-hero-report/hero.css \
+              && curl -fsSL --connect-timeout 10 --max-time 30 -H 'Cache-Control: no-cache' "https://final-prime.github.io/assets/responsive.css?v=${cache_key}" -o live-hero-report/responsive.css \
+              && curl -fsSL --connect-timeout 10 --max-time 30 -H 'Cache-Control: no-cache' "https://final-prime.github.io/assets/og-cover.svg?v=${cache_key}" -o live-hero-report/og-cover.svg \
+              && grep -Fq '<section class="hero"' live-hero-report/index.html \
+              && grep -Fq '.doctrine::before' live-hero-report/hero.css \
+              && grep -Fq 'box-shadow: 0 28px 80px rgba(0, 0, 0, 0.20)' live-hero-report/hero.css \
+              && grep -Fq 'font-size: min(2.9rem, 9.4vw)' live-hero-report/responsive.css \
+              && grep -Fq '01 / OPERATING DOCTRINE' live-hero-report/og-cover.svg \
+              && grep -Fq 'IS SURVIVAL.' live-hero-report/og-cover.svg \
+              && grep -Fq 'IS CONTROL.' live-hero-report/og-cover.svg; then
+              success=1
+              printf 'PASSED\nAttempt: %s\nHomepage: HTTP 200\nHero CSS: deployed\nResponsive CSS: deployed\nSocial artwork: deployed\n' "$attempt" > live-hero-report/summary.txt
+              break
+            fi
+            printf 'Attempt %s did not yet expose the merged hero assets.\n' "$attempt" >> live-hero-report/attempts.txt
+            sleep 5
+          done
+
+          if [ "$success" -ne 1 ]; then
+            printf 'FAILED\nMerged hero assets were not visible after 24 attempts.\n' > live-hero-report/summary.txt
+            exit 1
+          fi
+
+          {
+            printf '\nSHA256\n'
+            sha256sum live-hero-report/index.html live-hero-report/hero.css live-hero-report/responsive.css live-hero-report/og-cover.svg
+          } >> live-hero-report/summary.txt
+
+      - name: Upload live deployment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-hero-report
+          path: live-hero-report
+          if-no-files-found: error
+
+      - name: Preserve probe result
+        if: steps.probe.outcome == 'failure'
+        run: exit 1
