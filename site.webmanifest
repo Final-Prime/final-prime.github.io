@@ -24,6 +24,7 @@
     {"name": "Works Index", "short_name": "Works", "url": "/works/"},
     {"name": "Thought Index", "short_name": "Thought", "url": "/thought/"},
     {"name": "Game Reviews", "short_name": "Reviews", "url": "/reviews/"},
-    {"name": "Public Index", "short_name": "Index", "url": "/index/"}
+    {"name": "Public Index", "short_name": "Index", "url": "/index/"},
+    {"name": "Legal and IP", "short_name": "Legal", "url": "/legal/"}
   ]
 }
