@@ -2,9 +2,9 @@
 
 ## Scope
 
-This report covers the second public-surface polish pass applied to the Final Prime GitHub Pages homepage on 2026-07-12.
+This report covers the third public-surface polish pass applied to the Final Prime GitHub Pages homepage on 2026-07-12.
 
-The approved brand-first hero remains unchanged. This round hardens the information architecture below it so the entire page carries the same explicit, logic-oriented operating language.
+The approved brand-first hero remains intact. This round corrects the Prime Matrix composition and rebalances the first fold after an adversarial screenshot review exposed a severe grid-placement failure.
 
 ## Implemented polish
 
@@ -18,6 +18,32 @@ The approved brand-first hero remains unchanged. This round hardens the informat
 - Raised compact system labels to an approximately 10 CSS-pixel readability floor.
 - Added forced-colors hardening while preserving the fuchsia/cyan design in normal rendering.
 - Kept all additions as progressive enhancement: the original semantic content remains usable without JavaScript.
+
+## Hero composition correction
+
+The Prime Matrix ladder previously relied on implicit grid placement. Its description paragraphs entered the 44-pixel numeric index column, producing one-word vertical stacks, an extremely tall right panel and a visibly broken hero balance.
+
+Corrections:
+
+- explicit `index / title / scope` and `index / description / scope` grid areas;
+- compact 88-pixel desktop ladder rows;
+- readable description measure instead of single-word vertical wrapping;
+- semantic scope labels: `Immediate / Relational / Structural / Conditional`;
+- restrained cyan and fuchsia directional washes on the first and final states;
+- 560-pixel desktop matrix cap and rebalanced hero columns;
+- desktop hero height clamped between 760 and 940 pixels;
+- dedicated mobile reflow with the scope label placed beneath each explanation.
+
+### Matrix adversarial regression
+
+- Static and geometry assertions: **55 / 55 passed**.
+- Tested viewports: **320, 390, 768, 1024, 1440, 1536 and 1920 CSS pixels**.
+- Horizontal overflow: **0** at every tested width.
+- Desktop matrix height: **under 560 CSS pixels**.
+- Desktop description column: **at least 220 CSS pixels**.
+- Desktop row height: **under 110 CSS pixels**.
+- 200% root text scaling: **passed** at 390 and 1440 CSS pixels.
+- Runtime exceptions: **0**.
 
 ## Truthfulness and disclosure boundary
 
