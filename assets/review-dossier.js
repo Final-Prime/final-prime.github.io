@@ -22,6 +22,11 @@
       return headerHeight + nav.offsetHeight + 18;
     };
 
+    const activationOffset = () => {
+      const sticky = stickyOffset();
+      return Math.max(sticky, Math.min(window.innerHeight * 0.34, sticky + 180));
+    };
+
     const syncRailState = () => {
       if (!rail) return;
       const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
@@ -58,7 +63,7 @@
     const updateDossierNavigation = () => {
       frame = 0;
       if (!entries.length) return;
-      const marker = window.scrollY + stickyOffset();
+      const marker = window.scrollY + activationOffset();
       let active = entries[0];
       entries.forEach(entry => {
         if (entry.section.offsetTop <= marker) active = entry;
@@ -105,7 +110,7 @@
     const openLight = evidenceToolbar.querySelector("[data-evidence-open-light]");
     const collapse = evidenceToolbar.querySelector("[data-evidence-collapse]");
     let statusFrame = 0;
-    let pendingAnnouncement = "";
+    let bulkUpdate = false;
 
     const updateEvidenceStatus = announcement => {
       const openCount = arcs.filter(arc => arc.open).length;
@@ -116,27 +121,38 @@
       if (collapse) collapse.disabled = openCount === 0;
     };
 
-    const scheduleEvidenceStatus = announcement => {
-      if (announcement) pendingAnnouncement = announcement;
+    const scheduleEvidenceStatus = () => {
+      if (bulkUpdate) return;
       if (statusFrame) cancelAnimationFrame(statusFrame);
       statusFrame = requestAnimationFrame(() => {
         statusFrame = 0;
-        const message = pendingAnnouncement;
-        pendingAnnouncement = "";
-        updateEvidenceStatus(message);
+        updateEvidenceStatus();
       });
     };
 
-    arcs.forEach(arc => arc.addEventListener("toggle", () => scheduleEvidenceStatus()));
+    const finishBulkUpdate = announcement => {
+      if (statusFrame) cancelAnimationFrame(statusFrame);
+      statusFrame = requestAnimationFrame(() => {
+        statusFrame = requestAnimationFrame(() => {
+          statusFrame = 0;
+          bulkUpdate = false;
+          updateEvidenceStatus(announcement);
+        });
+      });
+    };
+
+    arcs.forEach(arc => arc.addEventListener("toggle", scheduleEvidenceStatus));
 
     openLight?.addEventListener("click", () => {
+      bulkUpdate = true;
       lightArcs.forEach(arc => { arc.open = true; });
-      scheduleEvidenceStatus(`${lightArcs.length} spoiler-light arcs expanded. Medium and heavy spoilers remain closed.`);
+      finishBulkUpdate(`${lightArcs.length} spoiler-light arcs expanded. Medium and heavy spoilers remain closed.`);
     });
 
     collapse?.addEventListener("click", () => {
+      bulkUpdate = true;
       arcs.forEach(arc => { arc.open = false; });
-      scheduleEvidenceStatus("All evidence arcs collapsed.");
+      finishBulkUpdate("All evidence arcs collapsed.");
     });
 
     evidenceToolbar.classList.add("is-enhanced");
