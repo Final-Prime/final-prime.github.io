@@ -212,6 +212,23 @@ def validate_dynamic_div_names(content: str, source: str = "assets/home.js") -> 
     return errors
 
 
+def validate_tracking_preview(content: str, homepage: str) -> list[str]:
+    errors: list[str] = []
+    required_runtime = (
+        'primary.setAttribute("role", "status")',
+        'primary.setAttribute("aria-live", "polite")',
+        'primary.setAttribute("aria-atomic", "true")',
+        '<span>Clarification required</span><span>Qualified</span><span>Proposal issued</span>',
+        '{ state: "Proposal issued"',
+    )
+    for token in required_runtime:
+        if token not in content:
+            errors.append(f"assets/home.js: tracking preview contract is missing {token}")
+    if 'class="tracking-card" aria-live=' in homepage:
+        errors.append("index.html: tracking card must not announce every metric mutation")
+    return errors
+
+
 def relative_luminance(value: str) -> float:
     channels = [int(value[index : index + 2], 16) / 255 for index in (0, 2, 4)]
     linear = [
@@ -250,6 +267,7 @@ def main() -> int:
         errors.extend(validate_page(path))
     home_runtime = (ROOT / "assets" / "home.js").read_text(encoding="utf-8")
     errors.extend(validate_dynamic_div_names(home_runtime))
+    errors.extend(validate_tracking_preview(home_runtime, (ROOT / "index.html").read_text(encoding="utf-8")))
     errors.extend(validate_palette((ROOT / "assets" / "base.css").read_text(encoding="utf-8")))
     if errors:
         print("Accessibility contract validation failed:")
