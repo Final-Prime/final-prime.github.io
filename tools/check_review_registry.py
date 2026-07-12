@@ -135,7 +135,17 @@ def main() -> int:
             require(polish_css, token, "review polish CSS", errors)
 
     if dossier_js:
-        for token in ("data-evidence-open-light", "data-evidence-collapse", "aria-current", "--dossier-progress"):
+        for token in (
+            "data-evidence-open-light",
+            "data-evidence-collapse",
+            "aria-current",
+            "--dossier-progress",
+            "bulkPending",
+            "bulkAnnouncement",
+            "beginBulkUpdate",
+            "spoiler-light arcs expanded",
+            "All evidence arcs collapsed.",
+        ):
             require(dossier_js, token, "review dossier JavaScript", errors)
 
     if provenance:
