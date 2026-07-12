@@ -60,6 +60,7 @@ Run locally:
 python tools/check_editorial_style.py
 python tools/check_ip_notices.py
 python tools/check_review_registry.py
+python tools/check_social_cards.py
 ```
 
 ## Deployment
