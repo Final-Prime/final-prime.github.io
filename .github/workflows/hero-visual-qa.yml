@@ -1,0 +1,162 @@
+name: Hero visual QA
+
+on:
+  pull_request:
+    paths:
+      - "assets/hero.css"
+      - "assets/responsive.css"
+      - "assets/og-cover.svg"
+      - ".github/workflows/hero-visual-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-hero:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install browser tooling
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Run responsive hero audit
+        id: hero-audit
+        continue-on-error: true
+        run: |
+          mkdir -p hero-qa
+          python3 -m http.server 8000 --bind 127.0.0.1 > hero-qa/server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          node <<'NODE'
+          const fs = require("fs");
+          const { chromium } = require("playwright");
+
+          const expected = [
+            "Knowing the next move is survival.",
+            "Understanding the game is control."
+          ];
+          const cases = [
+            { name: "desktop-1440", width: 1440, height: 1000, scale: 1, javascript: true },
+            { name: "tablet-768", width: 768, height: 1000, scale: 1, javascript: true },
+            { name: "mobile-390", width: 390, height: 844, scale: 1, javascript: true },
+            { name: "mobile-320", width: 320, height: 800, scale: 1, javascript: true },
+            { name: "mobile-390-text-200", width: 390, height: 844, scale: 2, javascript: true },
+            { name: "mobile-390-no-js", width: 390, height: 844, scale: 1, javascript: false }
+          ];
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const results = [];
+            const failures = [];
+
+            for (const item of cases) {
+              const context = await browser.newContext({
+                viewport: { width: item.width, height: item.height },
+                javaScriptEnabled: item.javascript,
+                reducedMotion: "reduce"
+              });
+              const page = await context.newPage();
+              const runtimeErrors = [];
+              page.on("pageerror", error => runtimeErrors.push(String(error)));
+              page.on("console", message => {
+                if (message.type() === "error") runtimeErrors.push(message.text());
+              });
+
+              const response = await page.goto("http://127.0.0.1:8000/", { waitUntil: "networkidle" });
+              if (!response || response.status() !== 200) {
+                failures.push(`${item.name}: homepage did not return HTTP 200`);
+              }
+
+              if (item.scale === 2) {
+                await page.evaluate(() => {
+                  document.documentElement.style.fontSize = "200%";
+                });
+                await page.waitForTimeout(120);
+              }
+
+              const metrics = await page.evaluate(() => {
+                const normalize = value => value.replace(/\s+/g, " ").trim();
+                const doctrine = [...document.querySelectorAll(".doctrine > span")];
+                const hero = document.querySelector(".hero");
+                const wordmark = document.querySelector(".hero-wordmark");
+                const strongs = doctrine.map(node => node.querySelector("strong"));
+                const cardBounds = doctrine.map(node => node.getBoundingClientRect());
+                const strongBounds = strongs.map(node => node?.getBoundingClientRect());
+                const cardOverflow = strongBounds.some((rect, index) => {
+                  if (!rect) return true;
+                  const card = cardBounds[index];
+                  return rect.left < card.left - 1 || rect.right > card.right + 1;
+                });
+
+                return {
+                  documentWidth: document.documentElement.scrollWidth,
+                  viewportWidth: window.innerWidth,
+                  horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+                  doctrineText: doctrine.map(node => normalize(node.textContent || "")),
+                  doctrineCount: doctrine.length,
+                  cardOverflow,
+                  wordmarkOverflow: wordmark ? wordmark.getBoundingClientRect().right > window.innerWidth + 1 : true,
+                  heroHeight: hero ? Math.round(hero.getBoundingClientRect().height) : 0
+                };
+              });
+
+              if (metrics.doctrineCount !== 2) failures.push(`${item.name}: expected two doctrine panels`);
+              if (JSON.stringify(metrics.doctrineText) !== JSON.stringify(expected)) {
+                failures.push(`${item.name}: doctrine text changed or reordered`);
+              }
+              if (metrics.horizontalOverflow) failures.push(`${item.name}: horizontal document overflow`);
+              if (metrics.cardOverflow) failures.push(`${item.name}: doctrine result exceeds its panel`);
+              if (metrics.wordmarkOverflow) failures.push(`${item.name}: wordmark exceeds viewport`);
+              if (runtimeErrors.length) failures.push(`${item.name}: runtime errors: ${runtimeErrors.join(" | ")}`);
+
+              const hero = page.locator(".hero");
+              await hero.screenshot({ path: `hero-qa/${item.name}.png` });
+              results.push({ ...item, ...metrics, runtimeErrors });
+              await context.close();
+            }
+
+            const coverContext = await browser.newContext({ viewport: { width: 1200, height: 630 } });
+            const coverPage = await coverContext.newPage();
+            const coverResponse = await coverPage.goto("http://127.0.0.1:8000/assets/og-cover.svg", { waitUntil: "networkidle" });
+            if (!coverResponse || coverResponse.status() !== 200) failures.push("social cover did not return HTTP 200");
+            await coverPage.screenshot({ path: "hero-qa/og-cover.png" });
+            await coverContext.close();
+            await browser.close();
+
+            fs.writeFileSync("hero-qa/report.json", JSON.stringify({ results, failures }, null, 2));
+            fs.writeFileSync("hero-qa/summary.txt", failures.length ? `FAILED\n${failures.join("\n")}\n` : "PASSED\nAll responsive hero assertions passed.\n");
+            if (failures.length) process.exit(1);
+          })().catch(error => {
+            fs.writeFileSync("hero-qa/fatal.txt", `${error.stack || error}\n`);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Upload hero QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hero-visual-qa
+          path: hero-qa
+          if-no-files-found: error
+
+      - name: Preserve hero audit result
+        if: steps.hero-audit.outcome == 'failure'
+        run: exit 1
