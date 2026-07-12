@@ -1,4 +1,4 @@
-# Final Prime website — adversarial quality report
+# Final Prime website: adversarial quality report
 
 ## Scope
 
