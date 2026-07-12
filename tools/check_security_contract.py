@@ -6,6 +6,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 from urllib.parse import urlsplit
 
 
@@ -26,6 +27,14 @@ COMMON_CSP = {
     "base-uri": ("'self'",),
 }
 UNSUPPORTED_META_DIRECTIVES = {"frame-ancestors", "report-uri", "report-to", "sandbox"}
+ACTION_REFERENCE = re.compile(
+    r"^\s*(?:-\s*)?uses:\s+([^@\s]+)@([0-9a-f]{40})\s+#\s+(v[0-9.]+)\s*$",
+    re.MULTILINE,
+)
+PINNED_ACTIONS = {
+    "actions/checkout": ("9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0", "v7.0.0"),
+    "actions/setup-python": ("ece7cb06caefa5fff74198d8649806c4678c61a1", "v6.3.0"),
+}
 
 
 class SecurityParser(HTMLParser):
@@ -155,18 +164,52 @@ def validate_security_txt(now: datetime) -> list[str]:
     return errors
 
 
+def validate_workflow_content(content: str, relative: str) -> list[str]:
+    errors: list[str] = []
+    uses_lines = [line for line in content.splitlines() if line.strip().lstrip("- ").startswith("uses:")]
+    references = ACTION_REFERENCE.findall(content)
+    if len(references) != len(uses_lines):
+        errors.append(f"{relative}: every external action must use a full SHA with a version comment")
+    for action, revision, version in references:
+        expected = PINNED_ACTIONS.get(action)
+        if expected is None:
+            errors.append(f"{relative}: unapproved external action {action}")
+        elif (revision, version) != expected:
+            errors.append(f"{relative}: {action} does not match the approved immutable revision")
+    checkout_count = sum(action == "actions/checkout" for action, _, _ in references)
+    if content.count("persist-credentials: false") != checkout_count:
+        errors.append(f"{relative}: every checkout must disable persisted credentials")
+    if "permissions:\n  contents: read\n" not in content.replace("\r\n", "\n"):
+        errors.append(f"{relative}: workflow token permissions must be explicitly read-only")
+    if "pull_request_target:" in content or "workflow_run:" in content:
+        errors.append(f"{relative}: privileged fork-capable trigger is forbidden")
+    return errors
+
+
+def validate_workflow(path: Path) -> list[str]:
+    return validate_workflow_content(
+        path.read_text(encoding="utf-8"), path.relative_to(ROOT).as_posix()
+    )
+
+
 def main() -> int:
     errors: list[str] = []
     html_paths = sorted(ROOT.rglob("*.html"))
     for path in html_paths:
         errors.extend(validate_html(path))
     errors.extend(validate_security_txt(datetime.now(timezone.utc)))
+    workflow_paths = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
+    for path in workflow_paths:
+        errors.extend(validate_workflow(path))
     if errors:
         print("Security contract validation failed:")
         for error in errors:
             print(f"- {error}")
         return 1
-    print(f"Security contract OK: {len(html_paths)} CSP documents and RFC 9116 contact verified.")
+    print(
+        f"Security contract OK: {len(html_paths)} CSP documents, RFC 9116 contact, "
+        f"and {len(workflow_paths)} least-privilege workflows verified."
+    )
     return 0
 
 
