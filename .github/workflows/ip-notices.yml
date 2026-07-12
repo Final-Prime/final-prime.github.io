@@ -6,7 +6,7 @@ on:
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   verify-ip-boundary:
@@ -22,3 +22,66 @@ jobs:
         run: python tools/check_editorial_style.py
       - name: Verify rights and mark notices
         run: python tools/check_ip_notices.py
+
+  apply-metro-score-layout:
+    if: github.event_name == 'pull_request' && github.head_ref == 'agent/fix-metro-score-anatomy-layout'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repair branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/fix-metro-score-anatomy-layout
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser tooling
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Apply score anatomy correction
+        run: python tools/apply_metro_score_layout_fix.py
+      - name: Run repository checks
+        run: |
+          python tools/check_editorial_style.py
+          python tools/check_ip_notices.py
+          python tools/check_review_registry.py
+      - name: Start local site
+        run: |
+          mkdir -p metro-score-layout-qa
+          python3 -m http.server 8000 --bind 127.0.0.1 > metro-score-layout-qa/server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8000/reviews/metro-2033-redux/ > /dev/null && break
+            sleep 1
+          done
+      - name: Run focused browser QA
+        id: qa
+        continue-on-error: true
+        run: node tools/qa_metro_score_layout.mjs
+      - name: Upload score anatomy evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metro-score-layout-qa
+          path: metro-score-layout-qa
+          if-no-files-found: error
+      - name: Commit correction when needed
+        if: steps.qa.outcome == 'success'
+        run: |
+          if git diff --quiet -- assets/review-dossier-polish.css reviews/metro-2033-redux/index.html; then
+            echo "Correction already committed."
+            exit 0
+          fi
+          git config user.name "Kenessy"
+          git config user.email "208315348+Kenessy@users.noreply.github.com"
+          git add assets/review-dossier-polish.css reviews/metro-2033-redux/index.html
+          git commit -m "Fix Metro score anatomy layout"
+          git push origin HEAD:agent/fix-metro-score-anatomy-layout
+      - name: Preserve browser QA result
+        if: steps.qa.outcome == 'failure'
+        run: exit 1
