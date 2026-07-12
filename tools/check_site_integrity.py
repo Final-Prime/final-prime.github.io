@@ -50,6 +50,10 @@ PRINT_CONTRACT_TOKENS = (
     "break-inside: avoid-page;",
     ".dossier-hero-grid { grid-template-columns: 1fr !important; }",
 )
+REFLOW_CONTRACT_TOKENS = (
+    ".dossier-section-head h2 {",
+    "overflow-wrap: anywhere;",
+)
 
 
 class DocumentParser(HTMLParser):
@@ -134,6 +138,10 @@ def validate_print_contract(content: str) -> list[str]:
     return [token for token in PRINT_CONTRACT_TOKENS if token not in content]
 
 
+def validate_reflow_contract(content: str) -> list[str]:
+    return [token for token in REFLOW_CONTRACT_TOKENS if token not in content]
+
+
 def main() -> int:
     errors: list[str] = []
     documents: dict[Path, DocumentParser] = {}
@@ -209,6 +217,11 @@ def main() -> int:
     )
     if missing_print_tokens:
         errors.append(f"print stylesheet contract is missing {missing_print_tokens}")
+    missing_reflow_tokens = validate_reflow_contract(
+        (ROOT / "assets" / "review-dossier.css").read_text(encoding="utf-8")
+    )
+    if missing_reflow_tokens:
+        errors.append(f"text-spacing reflow contract is missing {missing_reflow_tokens}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
@@ -264,7 +277,7 @@ def main() -> int:
         "Site integrity OK: "
         f"{len(documents)} HTML documents, {checked_references} local references, "
         f"{checked_css_references} CSS references, {css_class_count} reachable CSS classes, "
-        f"print rendering and {checked_scripts} budgeted scripts, "
+        f"print/reflow rendering and {checked_scripts} budgeted scripts, "
         f"and {len(manifest_urls)} manifest targets verified."
     )
     return 0
