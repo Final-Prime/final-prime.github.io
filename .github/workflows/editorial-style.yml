@@ -19,4 +19,15 @@ jobs:
         with:
           python-version: "3.12"
       - name: Enforce editorial punctuation rules
-        run: python tools/check_editorial_style.py
+        id: editorial
+        continue-on-error: true
+        run: python tools/check_editorial_style.py > editorial-report.txt 2>&1
+      - name: Upload editorial report
+        uses: actions/upload-artifact@v4
+        with:
+          name: editorial-report
+          path: editorial-report.txt
+          if-no-files-found: error
+      - name: Preserve editorial gate result
+        if: steps.editorial.outcome == 'failure'
+        run: exit 1
