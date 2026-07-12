@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Final Prime social cover</title>
+  <desc>Final Prime name, doctrine, and public surface index.</desc>
+  <metadata>Copyright © 2026 Daniel Kenessy. All rights reserved. Final Prime™ and the Final Prime logo are claimed as unregistered marks of Daniel Kenessy.</metadata>
   <defs>
     <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
       <path d="M64 0H0V64" fill="none" stroke="#2d3941" stroke-width="1"/>
