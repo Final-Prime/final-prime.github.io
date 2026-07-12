@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
   <title id="title">Final Prime mark</title>
   <desc id="desc">An orthogonal field of points crossed by a fuchsia diagonal, ending in a cyan node.</desc>
+  <metadata>Copyright © 2026 Daniel Kenessy. All rights reserved. Final Prime™ and the Final Prime logo are claimed as unregistered marks of Daniel Kenessy.</metadata>
   <rect x="1" y="1" width="62" height="62" fill="#090b0d" stroke="#43515a" stroke-width="2"/>
   <circle cx="15" cy="18" r="3" fill="#f2f4f5"/>
   <circle cx="15" cy="31" r="3" fill="#aab4ba"/>
