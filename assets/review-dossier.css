@@ -563,7 +563,7 @@
 .modifier-card p { margin: 16px 0 0; padding: 0 24px; color: var(--muted); font-size: 0.8rem; line-height: 1.62; }
 .modifier-card footer { margin-top: 22px; padding: 15px 24px; border-top: 1px solid var(--line); color: var(--muted-dark); font: 800 0.625rem/1.3 var(--mono); text-transform: uppercase; }
 .modifier-danger { border-color: rgba(245, 5, 77, 0.3); }
-.modifier-danger > header { color: var(--fuchsia); }
+.modifier-danger > header { color: var(--fuchsia-text); }
 
 .friction-ledger {
   margin-top: 18px;
@@ -593,11 +593,11 @@
 }
 .friction-row:last-child { border-bottom: 0; }
 .friction-row > div { display: grid; grid-template-columns: 32px 1fr; gap: 5px 10px; align-items: center; }
-.friction-row > div > span { grid-row: 1 / 3; color: var(--fuchsia); font: 800 0.625rem/1 var(--mono); }
+.friction-row > div > span { grid-row: 1 / 3; color: var(--fuchsia-text); font: 800 0.625rem/1 var(--mono); }
 .friction-row > div > strong { color: var(--text); font-size: 0.76rem; text-transform: uppercase; }
 .friction-row > div > small { color: var(--muted-dark); font: 800 0.625rem/1.3 var(--mono); text-transform: uppercase; }
 .friction-row p { margin: 0; color: var(--muted); font-size: 0.74rem; line-height: 1.55; }
-.friction-row > b { color: var(--fuchsia); font-family: var(--display); font-size: 1.7rem; }
+.friction-row > b { color: var(--fuchsia-text); font-family: var(--display); font-size: 1.7rem; }
 
 .field-note-grid {
   display: grid;
@@ -636,7 +636,7 @@
   font: 800 0.625rem/1.3 var(--mono);
   text-transform: uppercase;
 }
-.fit-tags .negative > strong { color: var(--fuchsia); }
+.fit-tags .negative > strong { color: var(--fuchsia-text); }
 .fit-tags .negative > span { border-color: rgba(245, 5, 77, 0.25); }
 
 .insight-grid,
@@ -673,7 +673,7 @@
   background: rgba(15, 19, 22, 0.56);
 }
 .audit-card header { display: flex; justify-content: space-between; gap: 12px; }
-.audit-card header span { color: var(--fuchsia); font: 800 0.625rem/1 var(--mono); }
+.audit-card header span { color: var(--fuchsia-text); font: 800 0.625rem/1 var(--mono); }
 .audit-card header small { color: var(--review-amber); font: 800 0.625rem/1.3 var(--mono); text-align: right; text-transform: uppercase; }
 .audit-card h3 {
   margin: 22px 0 0;
@@ -716,7 +716,7 @@
   text-transform: uppercase;
 }
 .evidence-arc[data-spoiler="medium"] summary > small { color: var(--review-amber); border-color: var(--review-line); }
-.evidence-arc[data-spoiler="heavy"] summary > small { color: var(--fuchsia); border-color: rgba(245, 5, 77, 0.3); }
+.evidence-arc[data-spoiler="heavy"] summary > small { color: var(--fuchsia-text); border-color: rgba(245, 5, 77, 0.3); }
 .evidence-arc[open] { border-color: var(--review-line); }
 .evidence-arc[open] summary { border-bottom: 1px solid var(--line); }
 .evidence-arc-body {

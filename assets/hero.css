@@ -47,7 +47,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-.wordmark-slash { color: var(--fuchsia); font-weight: 300; transform: translateY(-0.03em); }
+.wordmark-slash { color: var(--fuchsia-text); font-weight: 300; transform: translateY(-0.03em); }
 .hero-rule { height: 1px; margin-top: 38px; background: linear-gradient(90deg, var(--fuchsia) 0 19%, var(--line) 19% 83%, var(--cyan) 83% 100%); }
 
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(470px, 0.92fr); gap: 48px; align-items: start; margin-top: 36px; }
@@ -103,7 +103,7 @@
 }
 .doctrine > span:first-child::before { color: var(--cyan); content: "01"; }
 .doctrine > span:first-child::after { background: var(--cyan); }
-.doctrine > span:last-child::before { color: var(--fuchsia); content: "02"; }
+.doctrine > span:last-child::before { color: var(--fuchsia-text); content: "02"; }
 .doctrine > span:last-child::after { background: var(--fuchsia); }
 .doctrine strong {
   display: block;
@@ -114,7 +114,7 @@
   letter-spacing: -0.065em;
 }
 .doctrine-cyan { color: var(--cyan); }
-.doctrine-fuchsia { color: var(--fuchsia); }
+.doctrine-fuchsia { color: var(--fuchsia-text); }
 .hero-intro { max-width: 680px; margin: 24px 0 0; padding-left: 18px; border-left: 1px solid var(--line-strong); color: var(--muted); font-size: clamp(1rem, 1.18vw, 1.14rem); line-height: 1.68; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 18px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 800 0.66rem/1 var(--mono); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, color 150ms ease; }
@@ -136,7 +136,7 @@
 .matrix-status { display: flex; align-items: center; gap: 8px; color: var(--cyan); }
 .matrix-status i { width: 6px; height: 6px; background: var(--cyan); box-shadow: 0 0 0 4px rgba(10, 232, 247, 0.10); }
 .matrix-heading { padding: 18px 18px 17px; border-bottom: 1px solid var(--line); }
-.section-kicker { margin-bottom: 0; color: var(--fuchsia); font: 800 0.56rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
+.section-kicker { margin-bottom: 0; color: var(--fuchsia-text); font: 800 0.56rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
 .matrix-heading h2 { margin: 12px 0 0; font-family: var(--display); font-size: clamp(1.5rem, 2vw, 1.9rem); font-style: normal; font-weight: 740; line-height: 1.08; letter-spacing: -0.045em; }
 .matrix-grid { display: block; counter-reset: matrix; }
 .matrix-cell {
@@ -182,7 +182,7 @@
 .matrix-cell-cyan { box-shadow: inset 2px 0 0 var(--cyan); background: linear-gradient(90deg, rgba(10, 232, 247, 0.035), transparent 42%); }
 .matrix-cell-fuchsia { box-shadow: inset 2px 0 0 var(--fuchsia); background: linear-gradient(90deg, rgba(245, 5, 77, 0.035), transparent 42%); }
 .matrix-cell-cyan::before, .matrix-cell-cyan h3 { color: var(--cyan); }
-.matrix-cell-fuchsia::before, .matrix-cell-fuchsia h3 { color: var(--fuchsia); }
+.matrix-cell-fuchsia::before, .matrix-cell-fuchsia h3 { color: var(--fuchsia-text); }
 
 @media (forced-colors: active) {
   .hero::after { display: none; }

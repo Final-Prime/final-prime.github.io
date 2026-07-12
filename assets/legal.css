@@ -83,7 +83,7 @@
   background: rgba(9, 11, 13, 0.5);
 }
 
-.legal-callout strong { display: block; color: var(--fuchsia); font: 800 0.7rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.legal-callout strong { display: block; color: var(--fuchsia-text); font: 800 0.7rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 .legal-callout p { margin-top: 9px; }
 
 @media (max-width: 900px) { .legal-grid { grid-template-columns: 1fr; } }

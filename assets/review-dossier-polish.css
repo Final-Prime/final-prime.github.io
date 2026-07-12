@@ -221,7 +221,7 @@
 }
 
 .review-dossier-page .evidence-arc[data-spoiler="heavy"] summary::after {
-  color: var(--fuchsia);
+  color: var(--fuchsia-text);
   border-color: rgba(245, 5, 77, 0.3);
 }
 
