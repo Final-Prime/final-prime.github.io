@@ -19,6 +19,7 @@ notice identifies the assignment.
 | FINAL / PRIME™ | Stylized word mark | In use | Daniel Kenessy | Not claimed as registered |
 | Final Prime logo | Logo / visual mark | In use | Daniel Kenessy | Not claimed as registered |
 | A/SYNC™ | Product / system mark | In use | Daniel Kenessy | Not claimed as registered |
+| Prime Compression™ | Product / system mark | Private use | Daniel Kenessy | Not claimed as registered |
 | VRAXION™ | Project / system mark | In use | Daniel Kenessy | Not claimed as registered |
 | VRAXION logo | Logo / visual mark | In use | Daniel Kenessy | Not claimed as registered |
 | AlphaSync™ | Product / system mark | In use | Daniel Kenessy | Not claimed as registered |
