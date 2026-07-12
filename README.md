@@ -19,12 +19,15 @@ Any future transfer to a company requires a separate signed assignment. GitHub o
 │   └── metro-2033-redux/
 ├── index/
 ├── legal/
+├── llms.txt
 └── .well-known/security.txt
 ```
 
 The website uses a conservative, logic-oriented visual language, orthogonal geometry, fuchsia and cyan signal modes, explicit public and private boundaries, and progressive enhancement. Core content remains usable without JavaScript.
 
 The first published review record is `FP-REV-0001`, available at `/reviews/metro-2033-redux/`.
+
+`/llms.txt` is a machine-readable map of the same eight indexable public routes. It is a navigation aid only and does not grant access, reuse, training, or other rights.
 
 ## Rights and permissions
 

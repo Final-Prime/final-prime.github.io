@@ -6,6 +6,7 @@ from __future__ import annotations
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
@@ -13,6 +14,10 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://final-prime.github.io"
 NS = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+MARKDOWN_LINK = re.compile(r"\[[^\]]+\]\((https://final-prime\.github\.io/[^)]*)\)")
+LLMS_RIGHTS_NOTICE = (
+    "This file is a navigation aid, not a grant of access, reuse, training, or other rights."
+)
 
 
 class PageParser(HTMLParser):
@@ -104,6 +109,17 @@ def main() -> int:
     if f"Sitemap: {ORIGIN}/sitemap.xml" not in robots.splitlines():
         errors.append("robots.txt: missing exact absolute Sitemap directive")
 
+    llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
+    if not llms.startswith("# Final Prime\n\n> "):
+        errors.append("llms.txt: must start with the exact H1 and a blockquote summary")
+    if LLMS_RIGHTS_NOTICE not in llms:
+        errors.append("llms.txt: missing explicit non-permission rights notice")
+    llms_urls = MARKDOWN_LINK.findall(llms)
+    if len(llms_urls) != len(set(llms_urls)):
+        errors.append("llms.txt: duplicate public route links")
+    if set(llms_urls) != canonical_urls:
+        errors.append("llms.txt: route set does not exactly match indexable canonicals")
+
     review = parse_page(ROOT / "reviews" / "metro-2033-redux" / "index.html")
     required_types = {
         "https://schema.org/Review",
@@ -133,7 +149,10 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print(f"Search contract OK: {len(canonical_urls)} canonical routes, sitemap and review schema verified.")
+    print(
+        f"Search contract OK: {len(canonical_urls)} canonical routes, sitemap, agent map, "
+        "and review schema verified."
+    )
     return 0
 
 
