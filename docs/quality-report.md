@@ -2,91 +2,79 @@
 
 ## Scope
 
-This report covers the locked Final Prime public design and the hero/typography polish merged into the GitHub Pages implementation on 2026-07-11.
+This report covers the second public-surface polish pass applied to the Final Prime GitHub Pages homepage on 2026-07-12.
 
-## Truthfulness and claim audit
+The approved brand-first hero remains unchanged. This round hardens the information architecture below it so the entire page carries the same explicit, logic-oriented operating language.
 
-- Final Prime is described as an independent, founder-led initiative in formation—not as a registered company.
-- The site does not claim clients, partners, funding, revenue, a launched public product or verified technical results.
-- A/SYNC is explicitly labelled as a concept/prototype product surface.
-- Prime Access is explicitly labelled as in preparation and as an interface preview; no live account or proposal-tracking backend is implied.
-- No public AI, AGI, neural-system or legacy-repository relationship is disclosed.
-- The contact path accurately uses the existing `finalprime.official@gmail.com` address.
+## Implemented polish
 
-## Brand and hero integrity
+- Added a sticky page-progress signal beneath the primary header.
+- Added section-aware navigation using `aria-current="location"`.
+- Converted the Prime Matrix from an undifferentiated 2 × 2 grid into a directional four-step abstraction ladder.
+- Added explicit `Surface / Core / State` readouts to Systems, Works, Thought and Index.
+- Replaced the generic A/SYNC decoration with a conceptual coordination map, route nodes, state readout and public/private boundary.
+- Added a visible current-state and unresolved-outcomes branch to the Prime Access preview.
+- Added contact routing for general questions, concrete business ideas and the no-phone default.
+- Raised compact system labels to an approximately 10 CSS-pixel readability floor.
+- Added forced-colors hardening while preserving the fuchsia/cyan design in normal rendering.
+- Kept all additions as progressive enhancement: the original semantic content remains usable without JavaScript.
 
-- The primary hero title is now `FINAL / PRIME`.
-- The doctrine sits beneath the brand as two explicit statements at desktop and tablet widths:
-  - Knowing the next move **is survival.**
-  - Understanding the game **is control.**
-- The previous serif/italic display voice was removed from the public site and Open Graph artwork.
-- Display typography now uses a conservative system-sans stack with hard weight, compressed tracking and orthogonal geometry.
-- The wordmark remains one line from tablet through ultrawide widths and becomes a deliberate two-line `FINAL / PRIME` stack on narrow mobile screens.
-- The public domain tree remains `Systems / Works / Thought / Index`.
-- Fuchsia `#f5054d` remains the primary signal; cyan `#0ae8f7` remains the rare verified/access signal.
-- Geometry remains orthogonal with no decorative rounded cards.
+## Truthfulness and disclosure boundary
+
+- Final Prime remains described as an independent initiative in formation, not a registered company.
+- A/SYNC remains a concept/prototype surface; the new map does not claim a published implementation architecture.
+- Prime Access remains explicitly non-live and illustrative.
+- No clients, partners, revenue, funding, product results or savings claims are introduced.
+- No public AI, neural-system or private-repository relationship is disclosed.
+- The only real conversion path remains the existing email line.
+
+## Accessibility and resilience
+
+Verified in the updated enhancement layer:
+
+- visible focus and keyboard-operable controls;
+- Escape closes the mobile menu and restores focus;
+- section navigation exposes current location to assistive technology;
+- status meaning is expressed in text, not color alone;
+- 44 CSS-pixel minimum interactive target in tested layouts;
+- reduced-motion preferences collapse transition duration;
+- forced-colors mode receives explicit structural treatment;
+- mobile map labels are removed below the safe width while the nodes and routes remain visible;
+- 200% root text scaling does not create horizontal overflow;
+- no runtime exception during enhancement.
+
+## Adversarial test result
+
+- Static and behavior assertions: **69 / 69 passed**.
+- JavaScript syntax: **passed** with `node --check`.
+- Tested viewports: **320 × 800, 390 × 844, 768 × 900, 1440 × 1000 and 1920 × 1080**.
+- Horizontal overflow: **0** at every tested width.
+- 200% text reflow: **passed** at 390 and 1440 CSS pixels.
+- Mobile menu open / Escape / focus restoration: **passed**.
+- Prime Access state progression: **passed**.
+- Reduced-motion behavior: **passed**.
+- Runtime exceptions: **0**.
+
+## Adversarial findings corrected
+
+1. **The lower page was flatter than the hero.** Added operating-state readouts and explicit boundaries instead of decorative density.
+2. **The Matrix did not communicate direction.** Rebuilt it as a numbered abstraction ladder.
+3. **The system visual did not explain anything.** Added a conceptual map that communicates inputs, constraint routing and outcome formation without exposing private internals.
+4. **Prime Access looked like a flat ledger.** Added the current state plus still-open outcome branches.
+5. **Navigation did not show current location.** Added observer-driven `aria-current` state.
+6. **Tiny node labels clipped on narrow screens.** Mobile retains the geometry and removes only unsafe micro-labels.
+7. **Root text scaling could inflate display geometry.** Mobile sizing remains viewport-capped and reflow-safe.
+8. **High-contrast mode was implicit.** Added explicit forced-colors borders, focus and signal treatment.
 
 ## Privacy and dependency review
 
-- No analytics, cookies, forms, trackers, external fonts, CDNs or third-party JavaScript.
-- Contact uses the visitor's local email client through a `mailto:` link.
-- The only runtime assets are first-party static files.
-- Protected/private records are described without exposing hidden object names or data.
+- no analytics, cookies, forms or tracking;
+- no external fonts, CDNs or third-party JavaScript;
+- no new network calls;
+- no user-controlled HTML or query-string rendering;
+- authored enhancement markup only;
+- protected object existence is not exposed through access/error language.
 
-## Accessibility review
+## Deployment note
 
-- Semantic landmarks and a single ordered heading hierarchy.
-- The H1 is the `Final Prime` brand, with a clear accessible label independent of the decorative slash.
-- Skip link and visible focus indicators.
-- Mobile navigation exposes `aria-expanded`, `aria-controls`, a dynamic accessible label and Escape-key recovery.
-- Focus returns to the menu trigger after Escape.
-- Mobile navigation remains visible without JavaScript through a progressive-enhancement `no-js` state.
-- Interactive interface preview is keyboard-usable and uses an `aria-live` container.
-- Reduced-motion preferences are respected.
-- Status and access meaning is expressed in text, not color alone.
-- Primary text/background combinations meet WCAG AA normal-text contrast targets.
-
-## Responsive review
-
-Validated at 320, 390, 768, 1024, 1440 and 1920 CSS pixels.
-
-- no horizontal document overflow;
-- touch controls meet or exceed approximately 44 CSS pixels;
-- hero, wordmark, doctrine, Prime Matrix, domain tree, object inspector, Prime Access and contact sections preserve information order;
-- the wordmark remains one line at 768 px and above, with a deliberate mobile stack below 420 px;
-- the doctrine remains two lines at desktop and tablet widths and wraps naturally on narrow mobile screens;
-- mobile menu remains inside the viewport;
-- long contact address wraps safely;
-- 200% root text scaling was exercised at mobile and desktop without horizontal overflow;
-- desktop and mobile screenshots render without missing assets.
-
-## Interaction and resilience review
-
-- Core content and mobile navigation remain usable with JavaScript disabled.
-- Mobile menu opens, closes, closes on navigation, closes on Escape and closes when returning to desktop width.
-- Prime Access preview cycles only labelled example states; it cannot be mistaken for live account data.
-- Static 404 page remains included and inherits the new sans display system.
-- GitHub Pages/Jekyll processing remains disabled with `.nojekyll`.
-- Local links, IDs, ARIA references and assets were checked.
-- JavaScript syntax was checked with Node.js.
-- HTML, CSS, JSON, XML and SVG assets were parsed.
-- The Open Graph SVG was updated to the new hero hierarchy and contains no serif font references.
-
-## Automated results
-
-### Original locked-design deployment
-
-- Static audit: **52 / 52 passed**.
-- Chromium responsive and interaction audit: **83 / 83 passed**.
-- Deployment-style direct-asset and nested-404 audit: **42 / 42 passed**.
-- Combined deployment baseline: **177 / 177 passed**.
-
-### Hero and typography polish regression pass
-
-- Static structure, metadata, dependency, typography, SVG and contrast audit: **53 / 53 passed**.
-- Chromium responsive, interaction, no-JavaScript and 200%-text audit: **79 / 79 passed**.
-- Combined polish regression baseline: **132 / 132 passed**.
-
-## Remaining limitation
-
-The social preview remains SVG. Some social platforms prefer a raster PNG; a production PNG can replace it when a final custom-domain asset pipeline is available.
+The update is intended for direct deployment to `main`; no temporary branch is required. GitHub Pages and social-card caches may briefly show the previous version after the commit.
