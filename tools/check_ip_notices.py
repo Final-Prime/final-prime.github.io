@@ -53,9 +53,9 @@ def main() -> int:
         text = path.read_text(encoding="utf-8")
         if "®" in text:
             errors.append(f"Registered trademark symbol is not allowed before registration: {path.relative_to(ROOT)}")
-        if path.name != "404.html" and path.parent.name != "legal":
-            if "/legal/" not in text and "/assets/app.js" not in text:
-                errors.append(f"Missing legal route or shared legal injector in {path.relative_to(ROOT)}")
+        for required in (OWNER, "All rights reserved.", "/legal/"):
+            if required not in text:
+                errors.append(f"Missing static legal notice {required!r} in {path.relative_to(ROOT)}")
 
     license_path = ROOT / "LICENSE"
     if license_path.is_file():
@@ -89,9 +89,9 @@ def main() -> int:
     app_path = ROOT / "assets" / "app.js"
     if app_path.is_file():
         app = app_path.read_text(encoding="utf-8")
-        for required in (OWNER, "/legal/", "All rights reserved."):
-            if required not in app:
-                errors.append(f"assets/app.js missing site-wide legal notice component: {required}")
+        for forbidden in ("ensureLegalNotice", "data.legalMark", "data.legalLink", 'document.createElement("meta")'):
+            if forbidden in app:
+                errors.append(f"assets/app.js must not repair static legal notices at runtime: {forbidden}")
 
     if errors:
         print("IP notice check failed.")

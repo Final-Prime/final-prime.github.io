@@ -22,63 +22,9 @@
   let menuReturnFocus = null;
   const fallbackTabState = new Map();
 
-  const ensureLegalNotice = () => {
-    if (!document.head.querySelector('meta[name="author"]')) {
-      const author = document.createElement("meta");
-      author.name = "author";
-      author.content = "Daniel Kenessy";
-      document.head.append(author);
-    }
-    if (!document.head.querySelector('meta[name="copyright"]')) {
-      const copyright = document.createElement("meta");
-      copyright.name = "copyright";
-      copyright.content = "© 2026 Daniel Kenessy";
-      document.head.append(copyright);
-    }
-    if (!document.head.querySelector('link[rel="license"]')) {
-      const license = document.createElement("link");
-      license.rel = "license";
-      license.href = "/legal/";
-      document.head.append(license);
-    }
-
-    const footerNav = document.querySelector(".footer-nav");
-    if (footerNav && !footerNav.querySelector('a[href="/legal/"]')) {
-      const link = document.createElement("a");
-      link.href = "/legal/";
-      link.textContent = "Legal / IP";
-      if (location.pathname.startsWith("/legal/")) link.setAttribute("aria-current", "page");
-      footerNav.append(link);
-    }
-
-    const footerMeta = document.querySelector(".footer-meta");
-    if (!footerMeta) return;
-
-    const copyrightLine = [...footerMeta.querySelectorAll("p")].find(item => item.textContent.includes("All rights reserved."));
-    if (copyrightLine) copyrightLine.innerHTML = '© <span data-current-year>2026</span> Daniel Kenessy. All rights reserved.';
-
-    const hasLegalMark = [...footerMeta.querySelectorAll("p")].some(item => {
-      return item.textContent.includes("Final Prime™ is claimed as an unregistered mark of Daniel Kenessy.");
-    });
-    if (!hasLegalMark) {
-      const mark = document.createElement("p");
-      mark.dataset.legalMark = "true";
-      mark.textContent = "Final Prime™ is claimed as an unregistered mark of Daniel Kenessy.";
-      footerMeta.prepend(mark);
-    }
-
-    const footer = footerMeta.closest(".site-footer");
-    if (!footer?.querySelector('a[href="/legal/"]')) {
-      const line = document.createElement("p");
-      line.dataset.legalLink = "true";
-      line.innerHTML = '<a href="/legal/">Legal / IP notice</a>';
-      footerMeta.append(line);
-    }
-  };
-
-  ensureLegalNotice();
+  const currentYear = String(new Date().getFullYear());
   document.querySelectorAll("[data-current-year]").forEach(element => {
-    element.textContent = String(new Date().getFullYear());
+    if (element.textContent !== currentYear) element.textContent = currentYear;
   });
 
   const setBackgroundInert = open => {
@@ -205,7 +151,7 @@
     progressFill.style.transform = `scaleX(${ratio})`;
   };
 
-  updateHeader();
+  requestAnimationFrame(updateHeader);
   window.addEventListener("scroll", updateHeader, { passive: true });
   window.addEventListener("resize", updateHeader, { passive: true });
 
