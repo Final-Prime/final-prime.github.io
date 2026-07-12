@@ -1,0 +1,4 @@
+Contact: mailto:finalprime.official@gmail.com
+Expires: 2027-07-12T23:59:59.000Z
+Preferred-Languages: en, hu
+Canonical: https://final-prime.github.io/.well-known/security.txt
