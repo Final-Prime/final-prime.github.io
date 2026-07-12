@@ -42,12 +42,13 @@
     };
 
     const setActive = id => {
-      if (!id || id === activeId) return;
+      if (!id) return;
+      const changed = id !== activeId;
       activeId = id;
       entries.forEach(({ link, section }) => {
         if (section.id === id) {
           link.setAttribute("aria-current", "location");
-          revealActiveLink(link);
+          if (changed) revealActiveLink(link);
         } else {
           link.removeAttribute("aria-current");
         }
@@ -84,6 +85,7 @@
       link.addEventListener("click", () => {
         const id = link.getAttribute("href")?.slice(1);
         if (id) setActive(id);
+        requestNavigationUpdate();
       });
     });
     rail?.addEventListener("scroll", syncRailState, { passive: true });
@@ -102,6 +104,8 @@
     const status = evidenceToolbar.querySelector("[data-evidence-status]");
     const openLight = evidenceToolbar.querySelector("[data-evidence-open-light]");
     const collapse = evidenceToolbar.querySelector("[data-evidence-collapse]");
+    let statusFrame = 0;
+    let pendingAnnouncement = "";
 
     const updateEvidenceStatus = announcement => {
       const openCount = arcs.filter(arc => arc.open).length;
@@ -112,16 +116,27 @@
       if (collapse) collapse.disabled = openCount === 0;
     };
 
-    arcs.forEach(arc => arc.addEventListener("toggle", () => updateEvidenceStatus()));
+    const scheduleEvidenceStatus = announcement => {
+      if (announcement) pendingAnnouncement = announcement;
+      if (statusFrame) cancelAnimationFrame(statusFrame);
+      statusFrame = requestAnimationFrame(() => {
+        statusFrame = 0;
+        const message = pendingAnnouncement;
+        pendingAnnouncement = "";
+        updateEvidenceStatus(message);
+      });
+    };
+
+    arcs.forEach(arc => arc.addEventListener("toggle", () => scheduleEvidenceStatus()));
 
     openLight?.addEventListener("click", () => {
       lightArcs.forEach(arc => { arc.open = true; });
-      updateEvidenceStatus(`${lightArcs.length} spoiler-light arcs expanded. Medium and heavy spoilers remain closed.`);
+      scheduleEvidenceStatus(`${lightArcs.length} spoiler-light arcs expanded. Medium and heavy spoilers remain closed.`);
     });
 
     collapse?.addEventListener("click", () => {
       arcs.forEach(arc => { arc.open = false; });
-      updateEvidenceStatus("All evidence arcs collapsed.");
+      scheduleEvidenceStatus("All evidence arcs collapsed.");
     });
 
     evidenceToolbar.classList.add("is-enhanced");
