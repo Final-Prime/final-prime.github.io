@@ -14,6 +14,8 @@ SOURCE_COMMIT = "e8e77e9d628027106bfe741563df2fc9aadf65d2"
 REVIEW_PAGE = ROOT / "reviews" / "metro-2033-redux" / "index.html"
 OG_ASSET = ROOT / "assets" / "reviews" / "metro-2033-redux-og.svg"
 DOSSIER_CSS = ROOT / "assets" / "review-dossier.css"
+POLISH_CSS = ROOT / "assets" / "review-dossier-polish.css"
+DOSSIER_JS = ROOT / "assets" / "review-dossier.js"
 RELEASE_CSS = ROOT / "assets" / "review-release.css"
 PROVENANCE = ROOT / "docs" / "metro-2033-redux-import-audit.md"
 
@@ -56,6 +58,8 @@ def main() -> int:
     review = read(REVIEW_PAGE, errors)
     read(OG_ASSET, errors)
     read(DOSSIER_CSS, errors)
+    polish_css = read(POLISH_CSS, errors)
+    dossier_js = read(DOSSIER_JS, errors)
     read(RELEASE_CSS, errors)
     provenance = read(PROVENANCE, errors)
 
@@ -71,10 +75,20 @@ def main() -> int:
         require(review, 'data-review-id="FP-REV-0001"', "review page", errors)
         require(review, "/assets/reviews/metro-2033-redux-og.svg", "review page", errors)
         require(review, "/assets/review-dossier.css", "review page", errors)
+        require(review, "/assets/review-dossier-polish.css", "review page", errors)
+        require(review, "/assets/review-dossier.js", "review page", errors)
         require(review, "/assets/review-release.css", "review page", errors)
         require(review, "/legal/", "review page", errors)
         require(review, "Metro 2033 Redux and related", "review page", errors)
         require(review, "Ending reconstructed", "review page", errors)
+        require(review, 'itemscope itemtype="https://schema.org/Review"', "review page", errors)
+        require(review, 'itemprop="reviewRating"', "review page", errors)
+        require(review, 'data-dossier-nav', "review page", errors)
+        require(review, 'data-evidence-toolbar', "review page", errors)
+        require(review, 'data-evidence-list', "review page", errors)
+        require(review, 'twitter:image:alt', "review page", errors)
+        require(review, 'article:modified_time', "review page", errors)
+        require(review, "Published 12 Jul 2026", "review page", errors)
 
         raw = attribute(review, "data-review-raw")
         correction = attribute(review, "data-review-correction")
@@ -101,6 +115,10 @@ def main() -> int:
             if actual != expected:
                 errors.append(f"Review page has {actual} {label}, expected {expected}")
 
+        spoiler_counts = {level: review.count(f'data-spoiler="{level}"') for level in ("light", "medium", "heavy")}
+        if spoiler_counts != {"light": 6, "medium": 2, "heavy": 1}:
+            errors.append(f"Unexpected spoiler distribution: {spoiler_counts}")
+
         if re.search(r'<(?:img|script|link)[^>]+(?:src|href)="https?://', review, re.IGNORECASE):
             allowed = (
                 'href="https://github.com/Kenessy/Kenessy/blob/',
@@ -110,6 +128,14 @@ def main() -> int:
             for tag in external_tags:
                 if not any(prefix in tag for prefix in allowed):
                     errors.append(f"Unexpected remote dependency in review page: {tag[:140]}")
+
+    if polish_css:
+        for token in ("scroll-margin-top", ".evidence-toolbar", 'a[aria-current="location"]', "--dossier-progress"):
+            require(polish_css, token, "review polish CSS", errors)
+
+    if dossier_js:
+        for token in ("data-evidence-open-light", "data-evidence-collapse", "aria-current", "--dossier-progress"):
+            require(dossier_js, token, "review dossier JavaScript", errors)
 
     if provenance:
         require(provenance, SOURCE_COMMIT, "provenance record", errors)
