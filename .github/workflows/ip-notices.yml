@@ -1,0 +1,24 @@
+name: IP notices
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-ip-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Enforce editorial punctuation
+        run: python tools/check_editorial_style.py
+      - name: Verify rights and mark notices
+        run: python tools/check_ip_notices.py
