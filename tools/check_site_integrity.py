@@ -24,6 +24,9 @@ SCRIPT_BUDGETS = {
     "assets/review-dossier.js": 7000,
 }
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
+FORBIDDEN_ROUTE_STYLESHEETS = {
+    "thought/index.html": {"/assets/reviews.css"},
+}
 REQUIRED_ICON_LINKS = {
     ("icon", "/assets/favicon.svg", "image/svg+xml", ""),
     ("icon", "/assets/icon-192.png", "image/png", "192x192"),
@@ -162,6 +165,10 @@ def main() -> int:
             errors.append(f"{relative}: remote {tag} dependency is not allowed: {value}")
         if document.icon_links != REQUIRED_ICON_LINKS:
             errors.append(f"{relative}: platform icon links do not match the required contract")
+        linked_stylesheets = {value for tag, _, value in document.references if tag == "link"}
+        forbidden_stylesheets = linked_stylesheets.intersection(FORBIDDEN_ROUTE_STYLESHEETS.get(relative, set()))
+        if forbidden_stylesheets:
+            errors.append(f"{relative}: unused route stylesheets restored {sorted(forbidden_stylesheets)}")
 
     checked_references = 0
     for source, document in documents.items():
