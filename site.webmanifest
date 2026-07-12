@@ -1,8 +1,10 @@
 {
+  "id": "/",
   "name": "Final Prime",
   "short_name": "Final Prime",
-  "description": "Systems, products, research, art and analysis—public where reviewable, private where necessary.",
+  "description": "Systems, products, research, art, game reviews and analysis—public where reviewable, private where necessary.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#090b0d",
   "theme_color": "#090b0d",
