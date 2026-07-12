@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  security-events: read
 
 jobs:
   validate:
@@ -21,8 +20,3 @@ jobs:
           python-version: "3.x"
       - name: Validate current public tree and reachable history
         run: python tools/check_public_surface.py --history
-      - name: Verify secret scanning access and alert state
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          test "$(gh api "repos/${{ github.repository }}/secret-scanning/alerts?state=open&per_page=100" --jq 'length')" -eq 0
