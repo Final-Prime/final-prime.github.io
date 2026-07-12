@@ -8,7 +8,6 @@
   const header = document.querySelector("[data-site-header]");
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const siteNav = document.querySelector("[data-site-nav]");
-  const currentYear = document.querySelector("[data-current-year]");
   const demoTrack = document.querySelector("[data-demo-track]");
   const trackState = document.querySelector("[data-track-state]");
   const trackOwner = document.querySelector("[data-track-owner]");
@@ -26,8 +25,6 @@
 
   let menuReturnFocus = null;
   const fallbackTabState = new Map();
-
-  if (currentYear) currentYear.textContent = String(new Date().getFullYear());
 
   const ensureLegalNotice = () => {
     if (!document.head.querySelector('meta[name="author"]')) {
@@ -64,14 +61,18 @@
     const copyrightLine = [...footerMeta.querySelectorAll("p")].find(item => item.textContent.includes("All rights reserved."));
     if (copyrightLine) copyrightLine.innerHTML = '© <span data-current-year>2026</span> Daniel Kenessy. All rights reserved.';
 
-    if (!footerMeta.querySelector("[data-legal-mark]")) {
+    const hasLegalMark = [...footerMeta.querySelectorAll("p")].some(item => {
+      return item.textContent.includes("Final Prime™ is claimed as an unregistered mark of Daniel Kenessy.");
+    });
+    if (!hasLegalMark) {
       const mark = document.createElement("p");
       mark.dataset.legalMark = "true";
       mark.textContent = "Final Prime™ is claimed as an unregistered mark of Daniel Kenessy.";
       footerMeta.prepend(mark);
     }
 
-    if (!footerMeta.querySelector('a[href="/legal/"]')) {
+    const footer = footerMeta.closest(".site-footer");
+    if (!footer?.querySelector('a[href="/legal/"]')) {
       const line = document.createElement("p");
       line.dataset.legalLink = "true";
       line.innerHTML = '<a href="/legal/">Legal / IP notice</a>';
@@ -80,6 +81,9 @@
   };
 
   ensureLegalNotice();
+  document.querySelectorAll("[data-current-year]").forEach(element => {
+    element.textContent = String(new Date().getFullYear());
+  });
 
   const setBackgroundInert = open => {
     backgroundRegions.forEach(region => {

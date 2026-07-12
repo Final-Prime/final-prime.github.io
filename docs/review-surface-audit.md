@@ -1,4 +1,4 @@
-# Final Prime — game review surface adversarial audit
+# Final Prime: game review surface adversarial audit
 
 ## Scope
 
