@@ -229,6 +229,19 @@ def validate_tracking_preview(content: str, homepage: str) -> list[str]:
     return errors
 
 
+def validate_mobile_hash_focus(content: str) -> list[str]:
+    required = (
+        "const samePageHashTarget = anchor =>",
+        "decodeURIComponent(url.hash.slice(1))",
+        'target.setAttribute("tabindex", "-1")',
+        "target.focus({ preventScroll: true })",
+        "target.removeAttribute(\"tabindex\")",
+        "const hashTarget = samePageHashTarget(anchor)",
+        "focusHashTarget(hashTarget)",
+    )
+    return [f"assets/app.js: mobile hash-focus contract is missing {token}" for token in required if token not in content]
+
+
 def relative_luminance(value: str) -> float:
     channels = [int(value[index : index + 2], 16) / 255 for index in (0, 2, 4)]
     linear = [
@@ -266,8 +279,10 @@ def main() -> int:
     for path in paths:
         errors.extend(validate_page(path))
     home_runtime = (ROOT / "assets" / "home.js").read_text(encoding="utf-8")
+    app_runtime = (ROOT / "assets" / "app.js").read_text(encoding="utf-8")
     errors.extend(validate_dynamic_div_names(home_runtime))
     errors.extend(validate_tracking_preview(home_runtime, (ROOT / "index.html").read_text(encoding="utf-8")))
+    errors.extend(validate_mobile_hash_focus(app_runtime))
     errors.extend(validate_palette((ROOT / "assets" / "base.css").read_text(encoding="utf-8")))
     if errors:
         print("Accessibility contract validation failed:")
