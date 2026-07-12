@@ -1,0 +1,64 @@
+name: Live Pages smoke probe
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-live-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe deployed site
+        id: probe
+        continue-on-error: true
+        env:
+          EXPECTED_COMMIT: "192cde4450b880ea2f137cfdf7ed2bdfb9da92fb"
+        run: |
+          set -uo pipefail
+          report="live-pages-report.txt"
+          home_url="https://final-prime.github.io/"
+          app_url="https://final-prime.github.io/assets/app.js"
+          : > "$report"
+          verified=0
+
+          for attempt in $(seq 1 18); do
+            stamp="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            home_code="$(curl -L --silent --show-error --max-time 20 -H 'Cache-Control: no-cache' -o live-home.html -w '%{http_code}' "${home_url}?probe=${EXPECTED_COMMIT}-${attempt}" || true)"
+            app_code="$(curl -L --silent --show-error --max-time 20 -H 'Cache-Control: no-cache' -o live-app.js -w '%{http_code}' "${app_url}?probe=${EXPECTED_COMMIT}-${attempt}" || true)"
+            printf '%s attempt=%s home_http=%s app_http=%s\n' "$stamp" "$attempt" "$home_code" "$app_code" >> "$report"
+
+            if [ "$home_code" = "200" ] \
+              && [ "$app_code" = "200" ] \
+              && grep -Fq '<title>Final Prime | Systems, works, reviews and thought</title>' live-home.html \
+              && grep -Fq 'const hasLegalMark =' live-app.js \
+              && grep -Fq 'const footer = footerMeta.closest(".site-footer");' live-app.js \
+              && grep -Fq 'document.querySelectorAll("[data-current-year]").forEach' live-app.js; then
+              verified=1
+              break
+            fi
+
+            sleep 10
+          done
+
+          if [ "$verified" -eq 1 ]; then
+            printf 'result=verified\nexpected_main_commit=%s\n' "$EXPECTED_COMMIT" >> "$report"
+            sha256sum live-home.html live-app.js >> "$report"
+            exit 0
+          fi
+
+          printf 'result=failed\nexpected_main_commit=%s\n' "$EXPECTED_COMMIT" >> "$report"
+          exit 1
+
+      - name: Upload live Pages report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-pages-report
+          path: live-pages-report.txt
+          if-no-files-found: error
+
+      - name: Preserve probe result
+        if: steps.probe.outcome == 'failure'
+        run: exit 1
