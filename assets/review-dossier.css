@@ -263,6 +263,7 @@
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.065em;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 .dossier-section-head h2 span { color: var(--review-amber); }
