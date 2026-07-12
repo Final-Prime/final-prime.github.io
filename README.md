@@ -65,6 +65,7 @@ python tools/check_search_contract.py
 python tools/check_site_integrity.py
 python tools/check_security_contract.py
 python tools/check_accessibility_contract.py
+python tools/check_public_surface.py --history
 ```
 
 ## Deployment

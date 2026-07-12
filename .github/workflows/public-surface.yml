@@ -1,0 +1,30 @@
+name: Public surface privacy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  security-events: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Validate current public tree and reachable history
+        run: python tools/check_public_surface.py --history
+      - name: Verify repository secret protections and alert state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          state="$(gh api repos/${{ github.repository }} --jq '[.security_and_analysis.secret_scanning.status, .security_and_analysis.secret_scanning_push_protection.status] | join(" ")')"
+          test "$state" = "enabled enabled"
+          test "$(gh api "repos/${{ github.repository }}/secret-scanning/alerts?state=open&per_page=100" --jq 'length')" -eq 0
