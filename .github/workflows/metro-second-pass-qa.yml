@@ -1,0 +1,218 @@
+name: Metro second-pass QA
+
+on:
+  pull_request:
+    paths:
+      - "reviews/metro-2033-redux/**"
+      - "assets/review-dossier*.css"
+      - "assets/review-dossier*.js"
+      - "tools/check_review_registry.py"
+      - ".github/workflows/review-registry.yml"
+      - ".github/workflows/metro-second-pass-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser tooling
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Run Metro dossier interaction audit
+        id: audit
+        continue-on-error: true
+        run: |
+          mkdir -p metro-second-pass-qa
+          python3 -m http.server 8000 --bind 127.0.0.1 > metro-second-pass-qa/server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/reviews/metro-2033-redux/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          node <<'NODE'
+          const fs = require("fs");
+          const { chromium } = require("playwright");
+
+          const route = "http://127.0.0.1:8000/reviews/metro-2033-redux/";
+          const cases = [
+            { name: "desktop-1440", width: 1440, height: 1000, scale: 1, javascript: true },
+            { name: "laptop-1024", width: 1024, height: 900, scale: 1, javascript: true },
+            { name: "tablet-768", width: 768, height: 1000, scale: 1, javascript: true },
+            { name: "mobile-390", width: 390, height: 844, scale: 1, javascript: true },
+            { name: "mobile-320", width: 320, height: 800, scale: 1, javascript: true },
+            { name: "mobile-390-text-200", width: 390, height: 844, scale: 2, javascript: true },
+            { name: "mobile-390-no-js", width: 390, height: 844, scale: 1, javascript: false }
+          ];
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const failures = [];
+            const results = [];
+
+            for (const item of cases) {
+              const context = await browser.newContext({
+                viewport: { width: item.width, height: item.height },
+                javaScriptEnabled: item.javascript,
+                reducedMotion: "reduce"
+              });
+              const page = await context.newPage();
+              const runtimeErrors = [];
+              const failedAssets = [];
+              page.on("pageerror", error => runtimeErrors.push(String(error)));
+              page.on("console", message => {
+                if (message.type() === "error") runtimeErrors.push(message.text());
+              });
+              page.on("response", response => {
+                if (response.url().startsWith("http://127.0.0.1:8000/") && response.status() >= 400) {
+                  failedAssets.push(`${response.status()} ${response.url()}`);
+                }
+              });
+
+              const response = await page.goto(route, { waitUntil: "networkidle" });
+              if (!response || response.status() !== 200) failures.push(`${item.name}: review route did not return HTTP 200`);
+
+              if (item.scale === 2) {
+                await page.evaluate(() => { document.documentElement.style.fontSize = "200%"; });
+                await page.waitForTimeout(120);
+              }
+
+              const baseline = await page.evaluate(() => {
+                const review = document.querySelector("main[data-review-id='FP-REV-0001']");
+                const rating = document.querySelector('[itemprop="reviewRating"]');
+                const actionWrap = document.querySelector(".evidence-toolbar-actions");
+                return {
+                  viewportWidth: window.innerWidth,
+                  documentWidth: document.documentElement.scrollWidth,
+                  horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+                  h1Count: document.querySelectorAll("h1").length,
+                  reviewType: review?.getAttribute("itemtype"),
+                  reviewId: review?.getAttribute("data-review-id"),
+                  score: Number(review?.getAttribute("data-review-score")),
+                  ratingType: rating?.getAttribute("itemtype"),
+                  ratingValue: document.querySelector('[itemprop="ratingValue"]')?.getAttribute("content"),
+                  datePublished: document.querySelector('[itemprop="datePublished"]')?.getAttribute("datetime"),
+                  twitterAlt: document.querySelector('meta[name="twitter:image:alt"]')?.getAttribute("content"),
+                  modifiedTime: document.querySelector('meta[property="article:modified_time"]')?.getAttribute("content"),
+                  axisScores: [...document.querySelectorAll("[data-axis-score]")].map(node => Number(node.dataset.axisScore)),
+                  evidenceCount: document.querySelectorAll("details.evidence-arc").length,
+                  openCount: document.querySelectorAll("details.evidence-arc[open]").length,
+                  actionDisplay: actionWrap ? getComputedStyle(actionWrap).display : "missing"
+                };
+              });
+
+              if (baseline.horizontalOverflow) failures.push(`${item.name}: horizontal overflow ${baseline.documentWidth}/${baseline.viewportWidth}`);
+              if (baseline.h1Count !== 1) failures.push(`${item.name}: expected one H1, got ${baseline.h1Count}`);
+              if (baseline.reviewType !== "https://schema.org/Review" || baseline.ratingType !== "https://schema.org/Rating") failures.push(`${item.name}: schema review or rating type missing`);
+              if (baseline.reviewId !== "FP-REV-0001" || baseline.score !== 86 || baseline.ratingValue !== "86") failures.push(`${item.name}: review identity or rating mismatch`);
+              if (baseline.datePublished !== "2026-07-12" || baseline.modifiedTime !== "2026-07-12" || !baseline.twitterAlt) failures.push(`${item.name}: article metadata incomplete`);
+              if (JSON.stringify(baseline.axisScores) !== JSON.stringify([20, 17, 17, 17, 19])) failures.push(`${item.name}: axis sequence changed`);
+              if (baseline.evidenceCount !== 9 || baseline.openCount !== 0) failures.push(`${item.name}: evidence baseline mismatch`);
+              if (runtimeErrors.length) failures.push(`${item.name}: runtime errors: ${runtimeErrors.join(" | ")}`);
+              if (failedAssets.length) failures.push(`${item.name}: failed assets: ${failedAssets.join(" | ")}`);
+
+              if (item.javascript) {
+                await page.locator('[data-dossier-nav] a[href="#score"]').click();
+                await page.waitForTimeout(160);
+                const scoreState = await page.evaluate(() => {
+                  const header = document.querySelector(".site-header");
+                  const nav = document.querySelector("[data-dossier-nav]");
+                  const score = document.querySelector("#score");
+                  const current = nav?.querySelector('a[aria-current="location"]');
+                  const progress = Number.parseFloat(getComputedStyle(nav).getPropertyValue("--dossier-progress")) || 0;
+                  return {
+                    currentHref: current?.getAttribute("href"),
+                    sectionTop: score?.getBoundingClientRect().top,
+                    requiredTop: (header?.getBoundingClientRect().height || 0) + (nav?.getBoundingClientRect().height || 0) - 3,
+                    progress
+                  };
+                });
+                if (scoreState.currentHref !== "#score") failures.push(`${item.name}: score nav item did not become current`);
+                if (scoreState.sectionTop < scoreState.requiredTop) failures.push(`${item.name}: score anchor hidden by sticky navigation (${scoreState.sectionTop}/${scoreState.requiredTop})`);
+                if (!(scoreState.progress > 0 && scoreState.progress <= 1)) failures.push(`${item.name}: dossier progress did not advance`);
+
+                await page.locator('[data-dossier-nav] a[href="#evidence"]').click();
+                await page.waitForTimeout(160);
+                const evidenceState = await page.evaluate(() => {
+                  const header = document.querySelector(".site-header");
+                  const nav = document.querySelector("[data-dossier-nav]");
+                  const section = document.querySelector("#evidence");
+                  return {
+                    currentHref: nav?.querySelector('a[aria-current="location"]')?.getAttribute("href"),
+                    sectionTop: section?.getBoundingClientRect().top,
+                    requiredTop: (header?.getBoundingClientRect().height || 0) + (nav?.getBoundingClientRect().height || 0) - 3
+                  };
+                });
+                if (evidenceState.currentHref !== "#evidence") failures.push(`${item.name}: evidence nav item did not become current`);
+                if (evidenceState.sectionTop < evidenceState.requiredTop) failures.push(`${item.name}: evidence anchor hidden by sticky navigation (${evidenceState.sectionTop}/${evidenceState.requiredTop})`);
+
+                await page.locator("[data-evidence-open-light]").click();
+                await page.waitForTimeout(80);
+                const expanded = await page.evaluate(() => ({
+                  all: document.querySelectorAll("details.evidence-arc[open]").length,
+                  light: document.querySelectorAll('details.evidence-arc[data-spoiler="light"][open]').length,
+                  medium: document.querySelectorAll('details.evidence-arc[data-spoiler="medium"][open]').length,
+                  heavy: document.querySelectorAll('details.evidence-arc[data-spoiler="heavy"][open]').length,
+                  status: document.querySelector("[data-evidence-status]")?.textContent.trim(),
+                  openDisabled: document.querySelector("[data-evidence-open-light]")?.disabled,
+                  collapseDisabled: document.querySelector("[data-evidence-collapse]")?.disabled
+                }));
+                if (expanded.all !== 6 || expanded.light !== 6 || expanded.medium !== 0 || expanded.heavy !== 0) failures.push(`${item.name}: spoiler-light expansion crossed its boundary`);
+                if (!expanded.status?.includes("6 spoiler-light arcs expanded") || !expanded.openDisabled || expanded.collapseDisabled) failures.push(`${item.name}: evidence toolbar state incorrect after expansion`);
+
+                await page.locator("[data-evidence-collapse]").click();
+                await page.waitForTimeout(80);
+                const collapsed = await page.evaluate(() => ({
+                  open: document.querySelectorAll("details.evidence-arc[open]").length,
+                  status: document.querySelector("[data-evidence-status]")?.textContent.trim(),
+                  collapseDisabled: document.querySelector("[data-evidence-collapse]")?.disabled
+                }));
+                if (collapsed.open !== 0 || collapsed.status !== "All evidence arcs collapsed." || !collapsed.collapseDisabled) failures.push(`${item.name}: collapse-all state incorrect`);
+              } else {
+                if (baseline.actionDisplay !== "none") failures.push(`${item.name}: JavaScript-only evidence controls are visible without JavaScript`);
+                await page.locator("details.evidence-arc").first().locator("summary").click();
+                const individuallyOpen = await page.locator("details.evidence-arc").first().evaluate(node => node.open);
+                if (!individuallyOpen) failures.push(`${item.name}: native evidence disclosure failed without JavaScript`);
+              }
+
+              await page.locator(".dossier-hero").screenshot({ path: `metro-second-pass-qa/${item.name}-hero.png` });
+              if (item.name === "desktop-1440" || item.name === "mobile-390" || item.name === "mobile-390-text-200") {
+                await page.locator("#evidence").screenshot({ path: `metro-second-pass-qa/${item.name}-evidence.png` });
+              }
+
+              results.push({ ...item, baseline, runtimeErrors, failedAssets });
+              await context.close();
+            }
+
+            await browser.close();
+            fs.writeFileSync("metro-second-pass-qa/report.json", JSON.stringify({ results, failures }, null, 2));
+            fs.writeFileSync("metro-second-pass-qa/summary.txt", failures.length ? `FAILED\n${failures.join("\n")}\n` : "PASSED\nAll Metro second-pass assertions passed.\n");
+            if (failures.length) process.exit(1);
+          })().catch(error => {
+            fs.writeFileSync("metro-second-pass-qa/fatal.txt", `${error.stack || error}\n`);
+            process.exit(1);
+          });
+          NODE
+      - name: Upload Metro second-pass QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metro-second-pass-qa
+          path: metro-second-pass-qa
+          if-no-files-found: error
+      - name: Preserve audit result
+        if: steps.audit.outcome == 'failure'
+        run: exit 1
