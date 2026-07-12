@@ -31,6 +31,7 @@ CLAIMED_MARKS = [
     "Final Prime",
     "FINAL / PRIME",
     "A/SYNC",
+    "Prime Compression",
     "VRAXION",
     "AlphaSync",
     "INSTNCT",
