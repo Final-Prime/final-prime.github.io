@@ -1,9 +1,11 @@
 @media (max-width: 1080px) {
   :root { --shell: min(100% - 44px, 980px); }
-  .hero { min-height: auto; }
-  .hero-wordmark { font-size: clamp(5rem, 14.5vw, 9rem); }
-  .hero-grid { grid-template-columns: 1fr; gap: 42px; }
-  .prime-matrix { max-width: 760px; }
+  .hero { min-height: auto; padding-bottom: 72px; }
+  .hero-wordmark { font-size: min(9rem, 14.5vw); }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-copy { max-width: 780px; }
+  .prime-matrix { max-width: 760px; justify-self: start; }
+  .doctrine strong { font-size: min(3.6rem, 6vw); }
   .domain-grid { grid-template-columns: 1fr 1fr; }
   .domain:nth-child(2) { border-right: 0; }
   .domain:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
@@ -42,12 +44,21 @@
   .site-nav a { min-height: 52px; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--line-soft); }
   .site-nav a:last-child { border-bottom: 0; }
   .site-nav .nav-access { justify-content: center; margin: 10px; border-bottom: 1px solid rgba(10, 232, 247, 0.36); }
-  .hero { padding: 44px 0; }
+  .hero { padding: 40px 0 54px; }
   .hero-topline { align-items: flex-start; flex-direction: column; gap: 14px; }
-  .hero-wordmark { font-size: clamp(3.9rem, 16.8vw, 6.5rem); letter-spacing: -0.075em; }
+  .hero-wordmark { font-size: min(6.5rem, 16.8vw); letter-spacing: -0.075em; }
   .hero-rule { margin-top: 28px; }
-  .hero-grid { gap: 34px; margin-top: 30px; }
-  .doctrine > span { font-size: clamp(1.02rem, 5.1vw, 1.35rem); line-height: 1.28; }
+  .hero-grid { gap: 32px; margin-top: 30px; }
+  .hero-copy { max-width: none; }
+  .doctrine > span {
+    padding: 16px 16px 17px 54px;
+    font-size: min(1.08rem, 4.2vw);
+    line-height: 1.16;
+    letter-spacing: -0.018em;
+  }
+  .doctrine > span::before { top: 20px; left: 16px; }
+  .doctrine strong { margin-top: 6px; font-size: min(2.9rem, 9.4vw); line-height: 0.9; }
+  .hero-intro { margin-top: 20px; padding-left: 14px; font-size: 1rem; }
   .hero-actions { display: grid; }
   .button { width: 100%; }
   .hero-meta { grid-template-columns: 1fr; }
@@ -72,14 +83,18 @@
 }
 
 @media (max-width: 420px) {
-  .hero-wordmark { display: grid; grid-template-columns: 1fr; gap: 0; font-size: clamp(4.4rem, 23vw, 5.9rem); line-height: 0.74; }
+  .hero-wordmark { display: grid; grid-template-columns: 1fr; gap: 0; font-size: min(5.9rem, 23vw); line-height: 0.74; }
   .wordmark-slash { display: none; }
+  .doctrine > span { padding-right: 13px; padding-left: 50px; font-size: min(0.94rem, 4vw); }
+  .doctrine > span::before { left: 14px; }
+  .doctrine strong { font-size: min(2.35rem, 9vw); }
 }
 
 @media (max-width: 380px) {
   :root { --shell: calc(100% - 22px); }
   .brand-name { font-size: 0.64rem; }
   .matrix-topline, .tracking-topline { align-items: flex-start; flex-direction: column; padding: 14px; }
+  .doctrine strong { font-size: min(2.1rem, 8.7vw); }
 }
 
 @media (prefers-reduced-motion: reduce) {

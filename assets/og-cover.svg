@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <title>Final Prime social cover</title>
-  <desc>Final Prime signal lattice, name, doctrine, and public surface index.</desc>
+  <desc>Final Prime signal lattice, name, four-line doctrine, and public surface index.</desc>
   <metadata>Copyright © 2026 Daniel Kenessy. All rights reserved. Final Prime™ and the Final Prime logo are claimed as unregistered marks of Daniel Kenessy.</metadata>
   <defs>
     <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
@@ -34,9 +34,24 @@
   <line x1="72" y1="322" x2="270" y2="322" stroke="#f5054d" stroke-width="2"/>
   <line x1="270" y1="322" x2="1048" y2="322" stroke="#43515a"/>
   <line x1="1048" y1="322" x2="1128" y2="322" stroke="#0ae8f7" stroke-width="2"/>
-  <text x="74" y="402" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="42" font-weight="700">KNOWING THE NEXT MOVE <tspan fill="#0ae8f7">IS SURVIVAL.</tspan></text>
-  <text x="74" y="468" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="42" font-weight="700">UNDERSTANDING THE GAME <tspan fill="#f5054d">IS CONTROL.</tspan></text>
-  <line x1="74" y1="536" x2="1126" y2="536" stroke="#43515a"/>
-  <text x="74" y="580" fill="#aab4ba" font-family="monospace" font-size="17" letter-spacing="3">SYSTEMS / WORKS / THOUGHT / INDEX</text>
-  <rect x="1083" y="555" width="22" height="22" fill="#0ae8f7"/>
+
+  <g>
+    <rect x="72" y="350" width="508" height="166" fill="#0f1316" fill-opacity=".94" stroke="#2d3941"/>
+    <rect x="72" y="350" width="4" height="166" fill="#0ae8f7"/>
+    <text x="102" y="384" fill="#0ae8f7" font-family="monospace" font-size="15" font-weight="700" letter-spacing="3">01 / OPERATING DOCTRINE</text>
+    <text x="102" y="427" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="27" font-weight="700" letter-spacing="-1">KNOWING THE NEXT MOVE</text>
+    <text x="102" y="489" fill="#0ae8f7" font-family="Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="-3">IS SURVIVAL.</text>
+  </g>
+
+  <g>
+    <rect x="620" y="350" width="508" height="166" fill="#0f1316" fill-opacity=".94" stroke="#2d3941"/>
+    <rect x="620" y="350" width="4" height="166" fill="#f5054d"/>
+    <text x="650" y="384" fill="#f5054d" font-family="monospace" font-size="15" font-weight="700" letter-spacing="3">02 / OPERATING DOCTRINE</text>
+    <text x="650" y="427" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="27" font-weight="700" letter-spacing="-1">UNDERSTANDING THE GAME</text>
+    <text x="650" y="489" fill="#f5054d" font-family="Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="-3">IS CONTROL.</text>
+  </g>
+
+  <line x1="74" y1="548" x2="1126" y2="548" stroke="#43515a"/>
+  <text x="74" y="590" fill="#aab4ba" font-family="monospace" font-size="17" letter-spacing="3">SYSTEMS / WORKS / THOUGHT / INDEX</text>
+  <rect x="1083" y="565" width="22" height="22" fill="#0ae8f7"/>
 </svg>
