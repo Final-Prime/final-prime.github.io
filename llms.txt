@@ -1,0 +1,18 @@
+# Final Prime
+
+> Public systems, works, research, game reviews, and analysis by Daniel Kenessy. This file is a navigation aid, not a grant of access, reuse, training, or other rights.
+
+## Primary routes
+
+- [Final Prime](https://final-prime.github.io/): Public overview and current release state.
+- [Systems](https://final-prime.github.io/systems/): Public systems index and disclosure boundaries.
+- [Works](https://final-prime.github.io/works/): Public works and release-lane index.
+- [Thought](https://final-prime.github.io/thought/): Published analysis tracks and explicitly empty lanes.
+- [Game reviews](https://final-prime.github.io/reviews/): Review methodology, registry, and published dossiers.
+- [Metro 2033 Redux review](https://final-prime.github.io/reviews/metro-2033-redux/): FP-REV-0001, a scored long-form review dossier.
+- [Public index](https://final-prime.github.io/index/): Route-level public object inventory.
+- [Legal and IP](https://final-prime.github.io/legal/): Ownership, trademark, copyright, reuse, and permission boundaries.
+
+## Scope
+
+Only the routes listed above are represented as public content. Private research, unpublished materials, credentials, personal data, and trade secrets are outside this public surface. The legal and IP page controls where any summary conflicts with a rights notice.
