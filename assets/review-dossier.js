@@ -111,6 +111,8 @@
     const collapse = evidenceToolbar.querySelector("[data-evidence-collapse]");
     let statusFrame = 0;
     let bulkUpdate = false;
+    let bulkPending = 0;
+    let bulkAnnouncement = "";
 
     const updateEvidenceStatus = announcement => {
       const openCount = arcs.filter(arc => arc.open).length;
@@ -130,29 +132,45 @@
       });
     };
 
-    const finishBulkUpdate = announcement => {
+    const finishBulkUpdate = () => {
       if (statusFrame) cancelAnimationFrame(statusFrame);
-      statusFrame = requestAnimationFrame(() => {
-        statusFrame = requestAnimationFrame(() => {
-          statusFrame = 0;
-          bulkUpdate = false;
-          updateEvidenceStatus(announcement);
-        });
-      });
+      statusFrame = 0;
+      bulkUpdate = false;
+      bulkPending = 0;
+      const announcement = bulkAnnouncement;
+      bulkAnnouncement = "";
+      updateEvidenceStatus(announcement);
     };
 
-    arcs.forEach(arc => arc.addEventListener("toggle", scheduleEvidenceStatus));
+    const beginBulkUpdate = (targets, open, announcement) => {
+      if (bulkUpdate) return;
+      const changed = targets.filter(arc => arc.open !== open);
+      bulkUpdate = true;
+      bulkPending = changed.length;
+      bulkAnnouncement = announcement;
+      changed.forEach(arc => { arc.open = open; });
+      if (!bulkPending) finishBulkUpdate();
+    };
+
+    arcs.forEach(arc => arc.addEventListener("toggle", () => {
+      if (!bulkUpdate) {
+        scheduleEvidenceStatus();
+        return;
+      }
+      bulkPending = Math.max(0, bulkPending - 1);
+      if (!bulkPending) finishBulkUpdate();
+    }));
 
     openLight?.addEventListener("click", () => {
-      bulkUpdate = true;
-      lightArcs.forEach(arc => { arc.open = true; });
-      finishBulkUpdate(`${lightArcs.length} spoiler-light arcs expanded. Medium and heavy spoilers remain closed.`);
+      beginBulkUpdate(
+        lightArcs,
+        true,
+        `${lightArcs.length} spoiler-light arcs expanded. Medium and heavy spoilers remain closed.`
+      );
     });
 
     collapse?.addEventListener("click", () => {
-      bulkUpdate = true;
-      arcs.forEach(arc => { arc.open = false; });
-      finishBulkUpdate("All evidence arcs collapsed.");
+      beginBulkUpdate(arcs, false, "All evidence arcs collapsed.");
     });
 
     evidenceToolbar.classList.add("is-enhanced");
