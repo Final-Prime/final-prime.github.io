@@ -7,19 +7,40 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
+  deployments: read
+  pages: read
 
 jobs:
   verify-live-hero:
     runs-on: ubuntu-latest
     steps:
+      - name: Capture Pages deployment state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p live-hero-report
+          api_get() {
+            target="$1"
+            output="$2"
+            curl -sS -L \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -w '\nHTTP_STATUS:%{http_code}\n' \
+              "$target" > "$output"
+          }
+          api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages" live-hero-report/pages.json
+          api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds/latest" live-hero-report/latest-pages-build.json
+          api_get "https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments?environment=github-pages&per_page=5" live-hero-report/pages-deployments.json
+
       - name: Probe deployed GitHub Pages assets
         id: probe
         continue-on-error: true
         run: |
-          mkdir -p live-hero-report
           success=0
-          for attempt in $(seq 1 24); do
+          for attempt in $(seq 1 36); do
             cache_key="${GITHUB_RUN_ID}-${attempt}"
             if curl -fsSL --connect-timeout 10 --max-time 30 -H 'Cache-Control: no-cache' "https://final-prime.github.io/?v=${cache_key}" -o live-hero-report/index.html \
               && curl -fsSL --connect-timeout 10 --max-time 30 -H 'Cache-Control: no-cache' "https://final-prime.github.io/assets/hero.css?v=${cache_key}" -o live-hero-report/hero.css \
@@ -41,7 +62,7 @@ jobs:
           done
 
           if [ "$success" -ne 1 ]; then
-            printf 'FAILED\nMerged hero assets were not visible after 24 attempts.\n' > live-hero-report/summary.txt
+            printf 'FAILED\nMerged hero assets were not visible after 36 attempts.\n' > live-hero-report/summary.txt
             exit 1
           fi
 
