@@ -96,11 +96,29 @@ jobs:
               const metrics = await page.evaluate(() => {
                 const main = document.querySelector("main[data-review-id='FP-REV-0001']");
                 const axisScores = [...document.querySelectorAll("[data-axis-score]")].map(node => Number(node.getAttribute("data-axis-score")));
-                const bodyText = document.body.innerText;
+                const bodyText = document.body.innerText.toLowerCase();
+                const offenders = [...document.querySelectorAll("body *")].map(node => {
+                  const rect = node.getBoundingClientRect();
+                  const style = getComputedStyle(node);
+                  return {
+                    tag: node.tagName.toLowerCase(),
+                    id: node.id || "",
+                    className: typeof node.className === "string" ? node.className : "",
+                    left: Math.round(rect.left),
+                    right: Math.round(rect.right),
+                    width: Math.round(rect.width),
+                    scrollWidth: node.scrollWidth,
+                    display: style.display,
+                    whiteSpace: style.whiteSpace,
+                    overflowX: style.overflowX,
+                    text: (node.textContent || "").replace(/\s+/g, " ").trim().slice(0, 90)
+                  };
+                }).filter(item => item.display !== "none" && (item.right > window.innerWidth + 1 || item.left < -1)).slice(0, 30);
                 return {
                   viewportWidth: window.innerWidth,
                   documentWidth: document.documentElement.scrollWidth,
                   horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+                  offenders,
                   h1Count: document.querySelectorAll("h1").length,
                   reviewId: main?.getAttribute("data-review-id"),
                   raw: Number(main?.getAttribute("data-review-raw")),
@@ -113,12 +131,12 @@ jobs:
                   tasteCards: document.querySelectorAll(".taste-card").length,
                   fitGates: document.querySelectorAll(".fit-gate").length,
                   legalRoute: Boolean(document.querySelector('a[href="/legal/"]')),
-                  titleVisible: bodyText.includes("Metro 2033 Redux"),
-                  verdictVisible: bodyText.includes("Strong / caveated buy")
+                  titleVisible: bodyText.includes("metro 2033 redux"),
+                  verdictVisible: bodyText.includes("strong / caveated buy")
                 };
               });
 
-              if (metrics.horizontalOverflow) failures.push(`${item.name}: horizontal overflow ${metrics.documentWidth}/${metrics.viewportWidth}`);
+              if (metrics.horizontalOverflow) failures.push(`${item.name}: horizontal overflow ${metrics.documentWidth}/${metrics.viewportWidth}: ${JSON.stringify(metrics.offenders)}`);
               if (metrics.h1Count !== 1) failures.push(`${item.name}: expected one H1, got ${metrics.h1Count}`);
               if (metrics.reviewId !== "FP-REV-0001") failures.push(`${item.name}: missing review id`);
               if (metrics.raw !== 90 || metrics.correction !== -4 || metrics.score !== 86) failures.push(`${item.name}: score receipt mismatch`);
