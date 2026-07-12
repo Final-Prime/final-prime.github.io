@@ -141,6 +141,8 @@ def validate_page(path: Path) -> list[str]:
         errors.append(f"{relative}: must have one non-empty title")
     if len(parser.mains) != 1 or parser.mains[0].get("id") != "main-content":
         errors.append(f"{relative}: must have one main#main-content")
+    elif parser.mains[0].get("tabindex") != "-1":
+        errors.append(f"{relative}: main#main-content must accept skip-link focus with tabindex=-1")
     if parser.first_body_child is None:
         errors.append(f"{relative}: body is empty")
     else:
