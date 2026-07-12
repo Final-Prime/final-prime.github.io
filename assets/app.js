@@ -64,6 +64,11 @@
   const observedSections = navLinks
     .map(link => document.querySelector(link.getAttribute("href")))
     .filter(Boolean);
+  const systemsFeature = document.querySelector(".system-feature");
+  if (systemsFeature) {
+    systemsFeature.dataset.navKey = "systems";
+    observedSections.push(systemsFeature);
+  }
 
   const setCurrentNav = id => {
     navLinks.forEach(link => {
@@ -76,7 +81,7 @@
   if ("IntersectionObserver" in window && observedSections.length) {
     const visible = new Map();
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => visible.set(entry.target.id, entry.intersectionRatio));
+      entries.forEach(entry => visible.set(entry.target.dataset.navKey || entry.target.id, entry.intersectionRatio));
       const active = [...visible.entries()].sort((a, b) => b[1] - a[1])[0];
       if (active && active[1] > 0) setCurrentNav(active[0]);
     }, { rootMargin: "-18% 0px -62% 0px", threshold: [0, 0.08, 0.25, 0.5, 0.75] });
