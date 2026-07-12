@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">Final Prime mark</title>
-  <desc id="desc">An orthogonal field of points crossed by a fuchsia diagonal, ending in a cyan node.</desc>
+  <title id="title">Final Prime signal lattice mark</title>
+  <desc id="desc">An orthogonal lattice with fuchsia and cyan signal rails crossing a central prime gate.</desc>
   <metadata>Copyright © 2026 Daniel Kenessy. All rights reserved. Final Prime™ and the Final Prime logo are claimed as unregistered marks of Daniel Kenessy.</metadata>
   <rect x="1" y="1" width="62" height="62" fill="#090b0d" stroke="#43515a" stroke-width="2"/>
-  <circle cx="15" cy="18" r="3" fill="#f2f4f5"/>
-  <circle cx="15" cy="31" r="3" fill="#aab4ba"/>
-  <circle cx="15" cy="44" r="3" fill="#aab4ba"/>
-  <circle cx="28" cy="24" r="3" fill="#aab4ba"/>
-  <circle cx="28" cy="38" r="3" fill="#f2f4f5"/>
-  <path d="M44 10 25 54" fill="none" stroke="#f5054d" stroke-width="4" stroke-linecap="square"/>
-  <rect x="44" y="40" width="9" height="9" fill="#0ae8f7"/>
+  <path d="M10 16H47M52 16H55" fill="none" stroke="#f5054d" stroke-width="3"/>
+  <path d="M10 32H26M38 32H54" fill="none" stroke="#f2f4f5" stroke-width="3"/>
+  <path d="M10 48H42M47 48H54" fill="none" stroke="#0ae8f7" stroke-width="3"/>
+  <path d="M32 10V26M32 38V54" fill="none" stroke="#7f8a91" stroke-width="2"/>
+  <rect x="27" y="27" width="10" height="10" fill="#090b0d" stroke="#f2f4f5" stroke-width="2"/>
+  <rect x="9" y="13" width="7" height="7" fill="#f5054d"/>
+  <rect x="47" y="44" width="8" height="8" fill="#0ae8f7"/>
 </svg>
