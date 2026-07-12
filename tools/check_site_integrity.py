@@ -25,6 +25,7 @@ SCRIPT_BUDGETS = {
 }
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
 FORBIDDEN_ROUTE_STYLESHEETS = {
+    "index.html": {"/assets/catalog.css"},
     "thought/index.html": {"/assets/reviews.css"},
     "reviews/metro-2033-redux/index.html": {"/assets/reviews.css", "/assets/catalog.css"},
 }

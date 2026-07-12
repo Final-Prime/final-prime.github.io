@@ -197,6 +197,22 @@
 .domain-foot strong { color: var(--text); }
 .domain-active .domain-foot strong { color: var(--fuchsia-text); }
 .domain-rare .domain-foot strong { color: var(--cyan); }
+.index-section .domain-route {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 16px;
+  color: var(--text);
+  font: 800 0.625rem/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.index-section .domain-route::after { margin-left: 8px; color: var(--fuchsia-text); content: "↗"; }
+.index-section .domain-route:hover,
+.index-section .domain-route:focus-visible { color: var(--cyan); }
+.index-section .domain-route:hover::after,
+.index-section .domain-route:focus-visible::after { color: var(--cyan); }
 
 /* A/SYNC public system surface: meaningful map, explicit state, no private implementation disclosure. */
 .object-stage.is-enhanced {
