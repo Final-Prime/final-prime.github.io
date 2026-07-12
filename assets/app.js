@@ -1,13 +1,14 @@
 (() => {
   "use strict";
 
-  document.documentElement.classList.remove("no-js");
   document.documentElement.classList.add("js");
 
   const body = document.body;
   const header = document.querySelector("[data-site-header]");
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const siteNav = document.querySelector("[data-site-nav]");
+  const homeBrand = header?.querySelector('.brand[href="#top"]');
+  if (homeBrand) homeBrand.setAttribute("aria-label", "FINAL / PRIME, back to top");
   const demoTrack = document.querySelector("[data-demo-track]");
   const trackState = document.querySelector("[data-track-state]");
   const trackOwner = document.querySelector("[data-track-owner]");
