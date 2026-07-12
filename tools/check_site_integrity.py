@@ -16,6 +16,12 @@ ORIGIN = "https://final-prime.github.io"
 REFERENCE_ATTRIBUTES = ("href", "src", "poster", "action")
 ARIA_IDREF_ATTRIBUTES = ("aria-controls", "aria-describedby", "aria-labelledby")
 CSS_REFERENCE = re.compile(r"(?:@import\s+url\(|@import\s+|url\()\s*['\"]?([^'\")\s]+)")
+SCRIPT_BUDGETS = {
+    "assets/app.js": 6500,
+    "assets/home.js": 11500,
+    "assets/review-dossier.js": 7000,
+}
+FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
 
 
 class DocumentParser(HTMLParser):
@@ -137,6 +143,21 @@ def main() -> int:
             if not target.exists() or not target.is_file():
                 errors.append(f"{relative}: missing CSS asset {value}")
 
+    checked_scripts = 0
+    for relative, budget in SCRIPT_BUDGETS.items():
+        path = ROOT / relative
+        if not path.is_file():
+            errors.append(f"{relative}: required runtime script is missing")
+            continue
+        checked_scripts += 1
+        size = path.stat().st_size
+        if size > budget:
+            errors.append(f"{relative}: {size} bytes exceeds the {budget}-byte runtime budget")
+        content = path.read_text(encoding="utf-8")
+        for pattern in FORBIDDEN_SCRIPT_PATTERNS:
+            if pattern in content:
+                errors.append(f"{relative}: forbidden dynamic script pattern {pattern}")
+
     manifest = json.loads((ROOT / "site.webmanifest").read_text(encoding="utf-8"))
     manifest_urls = [manifest.get("start_url", ""), manifest.get("id", "")]
     manifest_urls.extend(item.get("src", "") for item in manifest.get("icons", []))
@@ -157,7 +178,8 @@ def main() -> int:
     print(
         "Site integrity OK: "
         f"{len(documents)} HTML documents, {checked_references} local references, "
-        f"{checked_css_references} CSS references, and {len(manifest_urls)} manifest targets verified."
+        f"{checked_css_references} CSS references, {checked_scripts} budgeted scripts, "
+        f"and {len(manifest_urls)} manifest targets verified."
     )
     return 0
 
