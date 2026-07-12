@@ -12,7 +12,7 @@ CANONICAL = f"https://final-prime.github.io{ROUTE}"
 SOURCE_COMMIT = "e8e77e9d628027106bfe741563df2fc9aadf65d2"
 
 REVIEW_PAGE = ROOT / "reviews" / "metro-2033-redux" / "index.html"
-OG_ASSET = ROOT / "assets" / "reviews" / "metro-2033-redux-og.svg"
+OG_ASSET = ROOT / "assets" / "reviews" / "metro-2033-redux-og.png"
 DOSSIER_CSS = ROOT / "assets" / "review-dossier.css"
 POLISH_CSS = ROOT / "assets" / "review-dossier-polish.css"
 DOSSIER_JS = ROOT / "assets" / "review-dossier.js"
@@ -56,7 +56,8 @@ def main() -> int:
     errors: list[str] = []
 
     review = read(REVIEW_PAGE, errors)
-    read(OG_ASSET, errors)
+    if not OG_ASSET.is_file():
+        errors.append(f"Missing required review file: {OG_ASSET.relative_to(ROOT)}")
     read(DOSSIER_CSS, errors)
     polish_css = read(POLISH_CSS, errors)
     dossier_js = read(DOSSIER_JS, errors)
@@ -73,7 +74,7 @@ def main() -> int:
     if review:
         require(review, f'<link rel="canonical" href="{CANONICAL}">', "review page", errors)
         require(review, 'data-review-id="FP-REV-0001"', "review page", errors)
-        require(review, "/assets/reviews/metro-2033-redux-og.svg", "review page", errors)
+        require(review, "/assets/reviews/metro-2033-redux-og.png", "review page", errors)
         require(review, "/assets/review-dossier.css", "review page", errors)
         require(review, "/assets/review-dossier-polish.css", "review page", errors)
         require(review, "/assets/review-dossier.js", "review page", errors)
