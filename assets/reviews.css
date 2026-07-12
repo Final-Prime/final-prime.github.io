@@ -83,7 +83,38 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-
+.review-feature-receipt {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: end;
+  width: min(420px, 100%);
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid rgba(255, 159, 47, 0.32);
+  background: rgba(255, 159, 47, 0.045);
+}
+.review-feature-receipt > strong {
+  color: #ff9f2f;
+  font-family: var(--display);
+  font-size: 4.8rem;
+  line-height: 0.72;
+  letter-spacing: -0.07em;
+}
+.review-feature-receipt > span {
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 0.8;
+}
+.review-feature-receipt > small {
+  align-self: center;
+  color: var(--muted);
+  font: 800 0.625rem/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 .review-feature h3,
 .review-index-hero h1,
 .review-archive h2 {
@@ -129,6 +160,12 @@
 .review-pipeline small { margin-top: 9px; }
 .review-pipeline li[aria-current="step"] span,
 .review-pipeline li[aria-current="step"] small { color: var(--cyan); }
+.review-pipeline li.is-complete {
+  background: rgba(10, 232, 247, 0.022);
+  box-shadow: inset 2px 0 0 rgba(10, 232, 247, 0.58);
+}
+.review-pipeline li.is-complete span,
+.review-pipeline li.is-complete small { color: var(--cyan); }
 
 .review-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
@@ -207,6 +244,8 @@
 }
 
 @media (max-width: 760px) {
+  .review-feature-receipt { grid-template-columns: auto auto; }
+  .review-feature-receipt > small { grid-column: 1 / -1; }
   .review-feature-body { padding: 20px 18px; }
   .review-topline { align-items: flex-start; flex-direction: column; gap: 6px; padding-block: 13px; }
   .review-feature h3 { font-size: clamp(2.3rem, 12vw, 4.4rem); }
@@ -234,7 +273,8 @@
   .review-card,
   .review-archive,
   .review-principles,
-  .review-pipeline { border-color: CanvasText; }
+  .review-pipeline,
+  .review-feature-receipt { border-color: CanvasText; }
   .review-state i { background: Highlight; box-shadow: none; }
 }
 
