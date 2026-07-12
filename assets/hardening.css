@@ -28,19 +28,19 @@
 .tracking-outcomes,
 .tracking-metrics,
 .contact-routing {
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 
 .inspector-list dd,
 .tracking-card dd,
 .status-ledger dd {
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 
 .section-kicker {
-  font-size: 0.64rem;
+  font-size: 0.75rem;
   line-height: 1.2;
 }
 

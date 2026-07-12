@@ -1,0 +1,13 @@
+/* Mobile navigation fallback loaded only when JavaScript is unavailable. */
+@media (max-width: 760px) {
+  html .menu-toggle { display: none; }
+  html .site-nav {
+    position: static;
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: none;
+  }
+  html .header-inner { flex-wrap: wrap; height: auto; padding: 12px 0; }
+  html .site-header { position: relative; height: auto; }
+}
