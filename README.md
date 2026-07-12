@@ -64,6 +64,7 @@ python tools/check_social_cards.py
 python tools/check_search_contract.py
 python tools/check_site_integrity.py
 python tools/check_security_contract.py
+python tools/check_accessibility_contract.py
 ```
 
 ## Deployment

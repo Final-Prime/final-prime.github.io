@@ -54,18 +54,24 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 18px 0 0;
+  padding: 0;
   border: 1px solid var(--line);
+  list-style: none;
 }
+.legal-card .legal-mark-list { padding: 0; }
 
-.legal-mark-list > div {
+.legal-mark-list > li {
+  display: block;
   min-width: 0;
   padding: 12px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
-.legal-mark-list > div:nth-child(2n) { border-right: 0; }
-.legal-mark-list > div:nth-last-child(-n + 2) { border-bottom: 0; }
+.legal-mark-list > li:nth-child(2n) { border-right: 0; }
+.legal-mark-list > li:nth-last-child(-n + 2) { border-bottom: 0; }
+.legal-card .legal-mark-list > li { margin-top: 0; }
+.legal-mark-list dl { margin: 0; }
 .legal-mark-list dt { color: var(--muted-dark); font: 800 0.625rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 .legal-mark-list dd { margin: 7px 0 0; color: var(--text); font: 800 0.72rem/1.4 var(--mono); overflow-wrap: anywhere; text-transform: uppercase; }
 
@@ -84,10 +90,10 @@
 
 @media (max-width: 520px) {
   .legal-mark-list { grid-template-columns: 1fr; }
-  .legal-mark-list > div,
-  .legal-mark-list > div:nth-child(2n),
-  .legal-mark-list > div:nth-last-child(-n + 2) { border-right: 0; border-bottom: 1px solid var(--line); }
-  .legal-mark-list > div:last-child { border-bottom: 0; }
+  .legal-mark-list > li,
+  .legal-mark-list > li:nth-child(2n),
+  .legal-mark-list > li:nth-last-child(-n + 2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .legal-mark-list > li:last-child { border-bottom: 0; }
 }
 
 @media (forced-colors: active) {
