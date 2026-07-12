@@ -17,6 +17,7 @@ ORIGIN = "https://final-prime.github.io"
 REFERENCE_ATTRIBUTES = ("href", "src", "poster", "action")
 ARIA_IDREF_ATTRIBUTES = ("aria-controls", "aria-describedby", "aria-labelledby")
 CSS_REFERENCE = re.compile(r"(?:@import\s+url\(|@import\s+|url\()\s*['\"]?([^'\")\s]+)")
+CSS_CLASS_SELECTOR = re.compile(r"(?<![\w-])\.([A-Za-z_-][\w-]*)")
 SCRIPT_BUDGETS = {
     "assets/app.js": 6500,
     "assets/home.js": 11500,
@@ -109,6 +110,15 @@ def local_target(value: str, source: Path) -> tuple[Path, str] | None:
     return target, unquote(parsed.fragment)
 
 
+def unreferenced_css_classes(css: str, runtime_sources: str) -> list[str]:
+    classes = set(CSS_CLASS_SELECTOR.findall(css))
+    return sorted(
+        class_name
+        for class_name in classes
+        if not re.search(rf"(?<![\w-]){re.escape(class_name)}(?![\w-])", runtime_sources)
+    )
+
+
 def main() -> int:
     errors: list[str] = []
     documents: dict[Path, DocumentParser] = {}
@@ -150,9 +160,11 @@ def main() -> int:
                     errors.append(f"{relative}: missing fragment target {value}")
 
     checked_css_references = 0
+    css_sources: list[str] = []
     for path in sorted((ROOT / "assets").glob("*.css")):
         relative = path.relative_to(ROOT).as_posix()
         content = path.read_text(encoding="utf-8")
+        css_sources.append(content)
         if "@import" in content:
             errors.append(f"{relative}: CSS @import is forbidden; use direct stylesheet discovery")
         for match in CSS_REFERENCE.finditer(content):
@@ -167,6 +179,16 @@ def main() -> int:
             target = (path.parent / unquote(parsed.path)).resolve()
             if not target.exists() or not target.is_file():
                 errors.append(f"{relative}: missing CSS asset {value}")
+
+    runtime_sources = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in [*html_paths, *sorted((ROOT / "assets").glob("*.js"))]
+    )
+    css_content = "\n".join(css_sources)
+    unreachable_classes = unreferenced_css_classes(css_content, runtime_sources)
+    if unreachable_classes:
+        errors.append(f"CSS classes have no HTML or JavaScript runtime source: {unreachable_classes}")
+    css_class_count = len(set(CSS_CLASS_SELECTOR.findall(css_content)))
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
@@ -221,7 +243,8 @@ def main() -> int:
     print(
         "Site integrity OK: "
         f"{len(documents)} HTML documents, {checked_references} local references, "
-        f"{checked_css_references} CSS references, {checked_scripts} budgeted scripts, "
+        f"{checked_css_references} CSS references, {css_class_count} reachable CSS classes, "
+        f"{checked_scripts} budgeted scripts, "
         f"and {len(manifest_urls)} manifest targets verified."
     )
     return 0
