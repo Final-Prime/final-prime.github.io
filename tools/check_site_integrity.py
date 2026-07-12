@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
+import struct
 from urllib.parse import unquote, urlsplit
 
 
@@ -22,6 +23,21 @@ SCRIPT_BUDGETS = {
     "assets/review-dossier.js": 7000,
 }
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
+REQUIRED_ICON_LINKS = {
+    ("icon", "/assets/favicon.svg", "image/svg+xml", ""),
+    ("icon", "/assets/icon-192.png", "image/png", "192x192"),
+    ("apple-touch-icon", "/apple-touch-icon.png", "", "180x180"),
+}
+REQUIRED_MANIFEST_ICONS = {
+    ("/assets/favicon.svg", "any", "image/svg+xml", "any"),
+    ("/assets/icon-192.png", "192x192", "image/png", "any maskable"),
+    ("/assets/icon-512.png", "512x512", "image/png", "any maskable"),
+}
+REQUIRED_PNG_DIMENSIONS = {
+    "apple-touch-icon.png": (180, 180),
+    "assets/icon-192.png": (192, 192),
+    "assets/icon-512.png": (512, 512),
+}
 
 
 class DocumentParser(HTMLParser):
@@ -31,9 +47,16 @@ class DocumentParser(HTMLParser):
         self.references: list[tuple[str, str, str]] = []
         self.idrefs: list[tuple[str, str]] = []
         self.remote_embeds: list[tuple[str, str]] = []
+        self.icon_links: set[tuple[str, str, str, str]] = set()
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         data = {key: value or "" for key, value in attrs}
+        if tag == "link":
+            for relation in data.get("rel", "").split():
+                if relation in {"icon", "apple-touch-icon"}:
+                    self.icon_links.add(
+                        (relation, data.get("href", ""), data.get("type", ""), data.get("sizes", ""))
+                    )
         if data.get("id"):
             self.ids.append(data["id"])
         for attribute in REFERENCE_ATTRIBUTES:
@@ -104,6 +127,8 @@ def main() -> int:
                 errors.append(f"{relative}: {attribute} points to missing #{target}")
         for tag, value in document.remote_embeds:
             errors.append(f"{relative}: remote {tag} dependency is not allowed: {value}")
+        if document.icon_links != REQUIRED_ICON_LINKS:
+            errors.append(f"{relative}: platform icon links do not match the required contract")
 
     checked_references = 0
     for source, document in documents.items():
@@ -158,7 +183,25 @@ def main() -> int:
             if pattern in content:
                 errors.append(f"{relative}: forbidden dynamic script pattern {pattern}")
 
+    for relative, expected in REQUIRED_PNG_DIMENSIONS.items():
+        path = ROOT / relative
+        try:
+            data = path.read_bytes()
+            if data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
+                raise ValueError("invalid PNG signature or IHDR")
+            dimensions = struct.unpack(">II", data[16:24])
+            if dimensions != expected:
+                errors.append(f"{relative}: PNG dimensions {dimensions} do not match {expected}")
+        except (OSError, ValueError, struct.error) as error:
+            errors.append(f"{relative}: invalid required PNG: {error}")
+
     manifest = json.loads((ROOT / "site.webmanifest").read_text(encoding="utf-8"))
+    manifest_icons = {
+        (item.get("src", ""), item.get("sizes", ""), item.get("type", ""), item.get("purpose", ""))
+        for item in manifest.get("icons", [])
+    }
+    if manifest_icons != REQUIRED_MANIFEST_ICONS:
+        errors.append("site.webmanifest: icons do not match the required platform contract")
     manifest_urls = [manifest.get("start_url", ""), manifest.get("id", "")]
     manifest_urls.extend(item.get("src", "") for item in manifest.get("icons", []))
     manifest_urls.extend(item.get("url", "") for item in manifest.get("shortcuts", []))
