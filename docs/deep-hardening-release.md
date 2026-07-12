@@ -1,14 +1,14 @@
-# Final Prime — public architecture completion release
+# Final Prime: public architecture completion release
 
 Date: 2026-07-12  
 Target: `Final-Prime/final-prime.github.io` / `main`
 
 ## Added
 
-- `/works/` — truthful release index for Art, Games, Film and Experiments.
-- `/index/` — canonical registry of disclosed public objects and states.
-- `/.well-known/security.txt` — standard security contact.
-- `assets/catalog.css` — shared responsive design system for registry surfaces.
+- `/works/`: truthful release index for Art, Games, Film and Experiments.
+- `/index/`: canonical registry of disclosed public objects and states.
+- `/.well-known/security.txt`: standard security contact.
+- `assets/catalog.css`: shared responsive design system for registry surfaces.
 
 ## Updated
 
