@@ -1,0 +1,44 @@
+name: Review registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "thought/**"
+      - "reviews/**"
+      - "index/**"
+      - "assets/review-*.css"
+      - "assets/reviews/**"
+      - "docs/metro-2033-redux-import-audit.md"
+      - "sitemap.xml"
+      - "tools/check_review_registry.py"
+      - ".github/workflows/review-registry.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "thought/**"
+      - "reviews/**"
+      - "index/**"
+      - "assets/review-*.css"
+      - "assets/reviews/**"
+      - "docs/metro-2033-redux-import-audit.md"
+      - "sitemap.xml"
+      - "tools/check_review_registry.py"
+      - ".github/workflows/review-registry.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-published-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify review registry
+        run: python tools/check_review_registry.py

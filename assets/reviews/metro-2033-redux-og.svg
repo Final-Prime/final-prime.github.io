@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Metro 2033 Redux review: 86 A</title>
+  <desc id="desc">Final Prime game review cover with an abstract underground route, Metro 2033 Redux title, score 86, and grade A.</desc>
+  <metadata>Copyright © 2026 Daniel Kenessy. All rights reserved. Final Prime™ is claimed as an unregistered mark of Daniel Kenessy. Metro 2033 Redux and related marks remain the property of their respective owners.</metadata>
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#2d3941" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="amberGlow" cx="18%" cy="74%" r="70%">
+      <stop offset="0" stop-color="#ff9f2f" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#090b0d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pinkGlow" cx="92%" cy="6%" r="62%">
+      <stop offset="0" stop-color="#f5054d" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#090b0d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#090b0d"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity=".72"/>
+  <rect width="1200" height="630" fill="url(#amberGlow)"/>
+  <rect width="1200" height="630" fill="url(#pinkGlow)"/>
+
+  <g transform="translate(70 50)">
+    <rect x="1" y="1" width="52" height="52" fill="#090b0d" stroke="#43515a" stroke-width="2"/>
+    <path d="M9 14H38M43 14H47" fill="none" stroke="#f5054d" stroke-width="3"/>
+    <path d="M9 27H21M33 27H46" fill="none" stroke="#f2f4f5" stroke-width="3"/>
+    <path d="M9 40H35M40 40H46" fill="none" stroke="#0ae8f7" stroke-width="3"/>
+    <path d="M27 9V21M27 33V47" fill="none" stroke="#7f8a91" stroke-width="2"/>
+    <rect x="23" y="23" width="8" height="8" fill="#090b0d" stroke="#f2f4f5" stroke-width="2"/>
+  </g>
+  <text x="140" y="84" fill="#aab4ba" font-family="monospace" font-size="18" font-weight="700" letter-spacing="4">FINAL / PRIME · FP-REV-0001</text>
+  <text x="70" y="150" fill="#ff9f2f" font-family="monospace" font-size="16" font-weight="700" letter-spacing="4">PUBLISHED DOSSIER / ALERTED FIELD REPORT</text>
+
+  <text x="66" y="290" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="116" font-weight="800" letter-spacing="-7">METRO</text>
+  <text x="66" y="398" fill="#ff9f2f" font-family="Arial, sans-serif" font-size="112" font-weight="800" letter-spacing="-7">2033 REDUX</text>
+
+  <g transform="translate(870 164)">
+    <rect width="254" height="258" fill="#0f1316" fill-opacity=".95" stroke="#ff9f2f" stroke-opacity=".55" stroke-width="2"/>
+    <rect width="5" height="258" fill="#ff9f2f"/>
+    <text x="28" y="44" fill="#aab4ba" font-family="monospace" font-size="15" font-weight="700" letter-spacing="3">FINAL SCORE</text>
+    <text x="24" y="166" fill="#ff9f2f" font-family="Arial, sans-serif" font-size="136" font-weight="900" letter-spacing="-8">86</text>
+    <text x="188" y="164" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="72" font-weight="800">A</text>
+    <line x1="28" y1="194" x2="226" y2="194" stroke="#2d3941"/>
+    <text x="28" y="226" fill="#0ae8f7" font-family="monospace" font-size="13" font-weight="700" letter-spacing="2">STRONG / CAVEATED BUY</text>
+  </g>
+
+  <g opacity=".92">
+    <path d="M72 492H220L270 446H428L480 520H642L704 470H830" fill="none" stroke="#43515a" stroke-width="3"/>
+    <circle cx="72" cy="492" r="7" fill="#0ae8f7"/>
+    <circle cx="270" cy="446" r="7" fill="#ff9f2f"/>
+    <circle cx="480" cy="520" r="7" fill="#f5054d"/>
+    <circle cx="704" cy="470" r="7" fill="#ff9f2f"/>
+    <circle cx="830" cy="470" r="7" fill="#0ae8f7"/>
+  </g>
+
+  <line x1="70" y1="552" x2="1128" y2="552" stroke="#43515a"/>
+  <text x="70" y="592" fill="#aab4ba" font-family="monospace" font-size="16" letter-spacing="3">ATMOSPHERE 20 · LOOP 17 · ENGAGEMENT 17 · READABILITY 17 · TECHNICAL 19</text>
+</svg>
