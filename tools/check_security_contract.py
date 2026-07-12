@@ -35,6 +35,17 @@ PINNED_ACTIONS = {
     "actions/checkout": ("9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0", "v7.0.0"),
     "actions/setup-python": ("ece7cb06caefa5fff74198d8649806c4678c61a1", "v6.3.0"),
 }
+WORKFLOW_CHECK_COMMANDS = (
+    "python tools/check_accessibility_contract.py",
+    "python tools/check_editorial_style.py",
+    "python tools/check_ip_notices.py",
+    "python tools/check_public_surface.py --history",
+    "python tools/check_review_registry.py",
+    "python tools/check_search_contract.py",
+    "python tools/check_security_contract.py",
+    "python tools/check_site_integrity.py",
+    "python tools/check_social_cards.py",
+)
 
 
 class SecurityParser(HTMLParser):
@@ -179,6 +190,9 @@ def validate_workflow_content(content: str, relative: str) -> list[str]:
     checkout_count = sum(action == "actions/checkout" for action, _, _ in references)
     if content.count("persist-credentials: false") != checkout_count:
         errors.append(f"{relative}: every checkout must disable persisted credentials")
+    python_setup_count = sum(action == "actions/setup-python" for action, _, _ in references)
+    if content.count('python-version: "3.12"') != python_setup_count:
+        errors.append(f"{relative}: every Python setup must pin the supported 3.12 minor line")
     if "permissions:\n  contents: read\n" not in content.replace("\r\n", "\n"):
         errors.append(f"{relative}: workflow token permissions must be explicitly read-only")
     if "pull_request_target:" in content or "workflow_run:" in content:
@@ -192,6 +206,14 @@ def validate_workflow(path: Path) -> list[str]:
     )
 
 
+def validate_workflow_suite(contents: str) -> list[str]:
+    return [
+        f"workflow suite: {command} must occur exactly once (found {contents.count(command)})"
+        for command in WORKFLOW_CHECK_COMMANDS
+        if contents.count(command) != 1
+    ]
+
+
 def main() -> int:
     errors: list[str] = []
     html_paths = sorted(ROOT.rglob("*.html"))
@@ -201,6 +223,11 @@ def main() -> int:
     workflow_paths = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
     for path in workflow_paths:
         errors.extend(validate_workflow(path))
+    errors.extend(
+        validate_workflow_suite(
+            "\n".join(path.read_text(encoding="utf-8") for path in workflow_paths)
+        )
+    )
     if errors:
         print("Security contract validation failed:")
         for error in errors:
