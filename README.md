@@ -1,51 +1,66 @@
-# Final Prime — public site
+# Final Prime public site
 
-This repository contains the public website for **Final Prime**.
+This repository contains the public website for **Final Prime™**.
 
-## Current design system
+## Current owner
 
-- conservative, logic-oriented visual language;
-- orthogonal geometry with no decorative rounding;
-- fuchsia `#f5054d` as the primary signal and cyan `#0ae8f7` as the rare verified/access signal;
-- four-branch public information architecture: `Systems / Works / Thought / Index`;
-- product surfaces remain public where reviewable; source code, research internals and serious business activity remain private by default;
-- a dedicated game-review surface under `Thought`, with an honest pre-publication state and reusable review pipeline;
-- no external fonts, frameworks, analytics, cookies or trackers;
-- truthful early-stage positioning without implying a registered legal entity, launched account platform, clients or public technical results;
-- responsive and keyboard-accessible static implementation;
-- progressive enhancement: core content remains usable without JavaScript.
+Original Final Prime materials are currently owned by **Daniel Kenessy**, acting in an individual capacity, unless a file or notice identifies another owner or license. No rights have been assigned to a company.
 
-## Structure
+Any future transfer to a company requires a separate signed assignment. GitHub organization ownership, repository hosting, domains, or public presentation do not by themselves transfer copyright or trademark rights.
+
+## Public architecture
 
 ```text
-.
-├── index.html
+/
+├── systems/
+├── works/
+├── thought/
 ├── reviews/
-│   └── index.html
-├── 404.html
-├── robots.txt
-├── sitemap.xml
-├── site.webmanifest
-├── .nojekyll
-├── assets/
-│   ├── app.js
-│   ├── styles.css
-│   ├── base.css
-│   ├── hero.css
-│   ├── content-a.css
-│   ├── content-b.css
-│   ├── responsive.css
-│   ├── hardening.css
-│   ├── reviews.css
-│   ├── mark.svg
-│   ├── favicon.svg
-│   └── og-cover.svg
-└── docs/
-    ├── quality-report.md
-    └── review-surface-audit.md
+├── index/
+├── legal/
+└── .well-known/security.txt
 ```
 
-## Local preview
+The website uses a conservative, logic-oriented visual language, orthogonal geometry, fuchsia and cyan signal modes, explicit public and private boundaries, and progressive enhancement. Core content remains usable without JavaScript.
+
+## Rights and permissions
+
+This repository is proprietary. It is not released under an open source license.
+
+- `LICENSE` reserves copyright and other rights.
+- `NOTICE` identifies the current rights holder and claimed marks.
+- `TRADEMARKS.md` defines nominative use and permission boundaries.
+- `CONTRIBUTING.md` rejects unsolicited contributions until written terms exist.
+- `SECURITY.md` defines private security reporting.
+- `/legal/` publishes the current website-facing legal and IP notice.
+- `docs/ip-policy.md` defines the publication and ownership gate.
+- `docs/ip-register.md` contains the public IP summary.
+
+Copyright © 2026 Daniel Kenessy. All rights reserved.
+
+Claimed unregistered marks include Final Prime™, FINAL / PRIME™, the Final Prime logo, A/SYNC™, VRAXION™, the VRAXION logo, AlphaSync™, and INSTNCT™. No registration is claimed unless a later notice states otherwise.
+
+## Legal safeguards
+
+Automated checks reject:
+
+- U+2013 and U+2014 long dash punctuation;
+- use of the registered trademark symbol before registration;
+- missing legal files or public legal route;
+- inconsistent owner, license, and mark notices.
+
+Run locally:
+
+```bash
+python tools/check_editorial_style.py
+python tools/check_ip_notices.py
+```
+
+## Deployment
+
+The site is deployed through GitHub Pages from the `main` branch and repository root.
+
+Local preview:
 
 ```bash
 python3 -m http.server 8000
@@ -53,26 +68,8 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-## Deployment
+## Private boundary
 
-The site is deployed through GitHub Pages from the `main` branch, repository root.
+Do not commit confidential source, client information, credentials, personal data, unpublished invention detail, private research evidence, or trade secrets. Patent-sensitive material must remain private until a filing, trade-secret, or intentional disclosure decision has been made.
 
-## Game review surface
-
-The homepage contains an upcoming-review slot and links to `/reviews/`. Until the first review is actually ready, the public surface shows only:
-
-- the stable object ID `FP-REV-0001`;
-- the truthful state `In research`;
-- the production pipeline `Experience → Model → Verify → Publish`;
-- the declared review lens;
-- an explicit empty archive.
-
-No game title, verdict, score or publication date is invented in advance.
-
-## Prime Access wording
-
-Prime Access is presented as an interface and operating-model preview only. No public account or proposal-tracking backend is claimed to be live.
-
-## Rights
-
-No open-source license is granted by this repository. Unless stated otherwise, all rights are reserved.
+Permission and rights requests: finalprime.official@gmail.com
