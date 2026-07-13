@@ -89,4 +89,7 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
 .menu-toggle[aria-expanded="true"] span { opacity: 0; }
 .menu-toggle[aria-expanded="true"]::before { transform: translateY(6px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"]::after { transform: translateY(-6px) rotate(-45deg); }
+.section-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: end; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.section-head h2 { margin: 13px 0 0; font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.35rem); font-style: normal; font-weight: 720; line-height: 1.04; letter-spacing: -0.055em; }
+.section-note { max-width: 430px; margin: 0; color: var(--muted); font: 700 0.5rem/1.5 var(--mono); letter-spacing: 0.08em; text-align: right; text-transform: uppercase; }
 .footer-nav a[href="/legal/"] { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
