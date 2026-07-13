@@ -34,6 +34,7 @@
   .site-nav a { min-height: 52px; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--line-soft); }
   .site-nav a:last-child { border-bottom: 0; }
   .site-nav .nav-access { justify-content: center; margin: 10px; border-bottom: 1px solid rgba(10, 232, 247, 0.36); }
+  html.no-js .site-nav { display: flex; }
   .hero { padding: 40px 0 54px; }
   .hero-topline { align-items: flex-start; flex-direction: column; gap: 14px; }
   .hero-wordmark { font-size: min(6.5rem, 16.8vw); letter-spacing: -0.075em; }

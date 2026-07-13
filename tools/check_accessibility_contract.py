@@ -137,6 +137,8 @@ def validate_page(path: Path) -> list[str]:
 
     if len(parser.html_elements) != 1 or parser.html_elements[0].get("lang") != "en":
         errors.append(f"{relative}: html language must be exactly en")
+    if relative != "404.html" and "no-js" not in parser.html_elements[0].get("class", "").split():
+        errors.append(f"{relative}: html must begin in the no-js fallback state")
     if parser.titles == [] or len(parser.titles) != 1 or not parser.titles[0]:
         errors.append(f"{relative}: must have one non-empty title")
     if len(parser.mains) != 1 or parser.mains[0].get("id") != "main-content":
@@ -171,6 +173,8 @@ def validate_page(path: Path) -> list[str]:
             errors.append(f"{relative}: button missing an explicit valid type")
         if not button.get("aria-label") and not button.get("_text"):
             errors.append(f"{relative}: button has no accessible name")
+        if "data-menu-toggle" in button and "hidden" not in button:
+            errors.append(f"{relative}: menu toggle must remain hidden until app initialization")
     if parser.invalid_labels:
         errors.append(f"{relative}: aria-label used on non-nameable elements {parser.invalid_labels}")
     if parser.positive_tabindex:
