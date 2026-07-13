@@ -65,10 +65,14 @@
 
   const focusHashTarget = target => {
     if (!target) return;
+    const previousTabindex = target.getAttribute("tabindex");
     target.setAttribute("tabindex", "-1");
     requestAnimationFrame(() => {
       target.focus({ preventScroll: true });
-      target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
+      target.addEventListener("blur", () => {
+        if (previousTabindex === null) target.removeAttribute("tabindex");
+        else target.setAttribute("tabindex", previousTabindex);
+      }, { once: true });
     });
   };
 
@@ -151,6 +155,13 @@
     document.documentElement.classList.replace("no-js", "js");
     menuToggle.hidden = false;
   }
+
+  document.addEventListener("click", event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const anchor = event.target.closest?.("a");
+    if (!anchor || anchor.matches(".skip-link") || siteNav?.contains(anchor)) return;
+    focusHashTarget(samePageHashTarget(anchor));
+  });
 
   const progress = document.createElement("div");
   progress.className = "site-progress";

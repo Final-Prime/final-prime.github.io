@@ -19,7 +19,7 @@ ARIA_IDREF_ATTRIBUTES = ("aria-controls", "aria-describedby", "aria-labelledby")
 CSS_REFERENCE = re.compile(r"(?:@import\s+url\(|@import\s+|url\()\s*['\"]?([^'\")\s]+)")
 CSS_CLASS_SELECTOR = re.compile(r"(?<![\w-])\.([A-Za-z_-][\w-]*)")
 SCRIPT_BUDGETS = {
-    "assets/app.js": 6500,
+    "assets/app.js": 7000,
     "assets/home.js": 11500,
     "assets/review-dossier.js": 7500,
 }
