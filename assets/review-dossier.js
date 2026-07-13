@@ -175,5 +175,6 @@
 
     evidenceToolbar.classList.add("is-enhanced");
     updateEvidenceStatus();
+    if (openLight && collapse) evidenceToolbar.querySelector(".evidence-toolbar-actions")?.removeAttribute("hidden");
   }
 })();

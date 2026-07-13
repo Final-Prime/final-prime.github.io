@@ -39,6 +39,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; }
 button, input, textarea, select { font: inherit; }
 button { color: inherit; }
+[hidden] { display: none !important; }
 h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
 .shell { width: var(--shell); margin-inline: auto; }
 
