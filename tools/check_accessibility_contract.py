@@ -222,8 +222,10 @@ def validate_tracking_preview(content: str, homepage: str) -> list[str]:
     errors: list[str] = []
     required_runtime = (
         'primary.setAttribute("role", "status")',
-        'primary.setAttribute("aria-live", "polite")',
+        'primary.setAttribute("aria-live", "off")',
         'primary.setAttribute("aria-atomic", "true")',
+        'primaryStatus?.setAttribute("aria-live", "polite")',
+        'if (node && node.textContent !== text) node.textContent = text',
         '<span>Clarification required</span><span>Qualified</span><span>Proposal issued</span>',
         '{ state: "Proposal issued"',
     )
