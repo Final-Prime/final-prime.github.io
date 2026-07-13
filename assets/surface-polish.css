@@ -29,7 +29,13 @@ html { scroll-padding-top: calc(var(--header-height) + 18px); }
   text-transform: uppercase;
 }
 
-.page-context a { color: var(--muted); text-decoration: none; }
+.page-context a {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  color: var(--muted);
+  text-decoration: none;
+}
 .page-context a:hover,
 .page-context a:focus-visible { color: var(--cyan); }
 .page-context span[aria-hidden="true"] { color: var(--fuchsia-text); }

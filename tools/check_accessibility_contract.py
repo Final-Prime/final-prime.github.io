@@ -314,6 +314,16 @@ def validate_forced_colors(content: str) -> list[str]:
     return [f"assets/base.css: forced-colors contract is missing {token}" for token in required if token not in content]
 
 
+def validate_target_sizes(content: str) -> list[str]:
+    required = (
+        ".page-context a {",
+        "display: inline-flex;",
+        "min-height: 24px;",
+        "align-items: center;",
+    )
+    return [f"assets/surface-polish.css: target-size contract is missing {token}" for token in required if token not in content]
+
+
 def main() -> int:
     errors: list[str] = []
     paths = sorted(ROOT.rglob("*.html"))
@@ -328,6 +338,7 @@ def main() -> int:
     base_css = (ROOT / "assets" / "base.css").read_text(encoding="utf-8")
     errors.extend(validate_palette(base_css))
     errors.extend(validate_forced_colors(base_css))
+    errors.extend(validate_target_sizes((ROOT / "assets" / "surface-polish.css").read_text(encoding="utf-8")))
     if errors:
         print("Accessibility contract validation failed:")
         for error in errors:
