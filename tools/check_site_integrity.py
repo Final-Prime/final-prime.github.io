@@ -78,6 +78,9 @@ ROUTE_REFLOW_CONTRACTS = {
         "overflow-wrap: anywhere;",
     ),
     "assets/catalog.css": (
+        ".catalog-hero h1 {",
+        ".catalog-intro {",
+        ".release-lane h2 {",
         ".boundary-copy h2 {",
         ".catalog-empty h2 {",
         "overflow-wrap: anywhere;",
@@ -90,6 +93,10 @@ ROUTE_REFLOW_CONTRACTS = {
         ".feature-layout > *,",
         ".object-stage.is-enhanced > * { min-width: 0; max-width: 100%; }",
         "grid-template-columns: minmax(72px, auto) minmax(0, 1fr);",
+    ),
+    "assets/hero.css": (
+        ".hero-wordmark {",
+        "flex-wrap: wrap;",
     ),
     "assets/legal.css": (
         ".legal-card h2 {",
