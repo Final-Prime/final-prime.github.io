@@ -139,6 +139,7 @@ def main() -> int:
             "data-evidence-collapse",
             "aria-current",
             "--dossier-progress",
+            'document.addEventListener("toggle", requestNavigationUpdate, true)',
             'link.addEventListener("focus"',
             'revealActiveLink(link, "auto")',
             "bulkPending",

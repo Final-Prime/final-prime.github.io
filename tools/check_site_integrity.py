@@ -19,9 +19,9 @@ ARIA_IDREF_ATTRIBUTES = ("aria-controls", "aria-describedby", "aria-labelledby")
 CSS_REFERENCE = re.compile(r"(?:@import\s+url\(|@import\s+|url\()\s*['\"]?([^'\")\s]+)")
 CSS_CLASS_SELECTOR = re.compile(r"(?<![\w-])\.([A-Za-z_-][\w-]*)")
 SCRIPT_BUDGETS = {
-    "assets/app.js": 7000,
+    "assets/app.js": 7100,
     "assets/home.js": 11500,
-    "assets/review-dossier.js": 7500,
+    "assets/review-dossier.js": 7600,
 }
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
 FORBIDDEN_ROUTE_STYLESHEETS = {
