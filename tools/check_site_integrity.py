@@ -71,6 +71,13 @@ NO_JS_CONTRACT_TOKENS = (
     "html .menu-toggle { display: none; }",
     "html .site-nav {",
 )
+PROGRESSIVE_ENHANCEMENT_CONTRACT = {
+    "index.html": ("data-demo-track hidden",),
+    "assets/home.js": ("demoTrack.hidden = false",),
+    "reviews/metro-2033-redux/index.html": ('class="evidence-toolbar-actions" hidden',),
+    "assets/review-dossier.js": ('.removeAttribute("hidden")',),
+    "assets/base.css": ("[hidden] { display: none !important; }",),
+}
 
 
 class DocumentParser(HTMLParser):
@@ -247,6 +254,11 @@ def main() -> int:
     missing_no_js_tokens = [token for token in NO_JS_CONTRACT_TOKENS if token not in no_js_content]
     if missing_no_js_tokens:
         errors.append(f"no-JavaScript fallback contract is missing {missing_no_js_tokens}")
+    for relative, tokens in PROGRESSIVE_ENHANCEMENT_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: progressive-enhancement contract is missing {missing}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():

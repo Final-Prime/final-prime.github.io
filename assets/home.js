@@ -175,5 +175,6 @@
       trackingIndex = (trackingIndex + 1) % trackingStates.length;
       renderTracking(trackingStates[trackingIndex]);
     });
+    demoTrack.hidden = false;
   }
 })();
