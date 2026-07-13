@@ -1,8 +1,6 @@
 (() => {
   "use strict";
 
-  document.documentElement.classList.add("js");
-
   const body = document.body;
   const header = document.querySelector("[data-site-header]");
   const menuToggle = document.querySelector("[data-menu-toggle]");
@@ -53,7 +51,6 @@
   };
 
   const menuFocusables = () => {
-    if (!menuToggle || !siteNav) return [];
     return [menuToggle, ...siteNav.querySelectorAll(focusableSelector)].filter(element => {
       return !element.hasAttribute("disabled") && element.getClientRects().length > 0;
     });
@@ -77,13 +74,11 @@
 
   const closeMenu = ({ restoreFocus = false } = {}) => {
     body.classList.remove("menu-open");
-    siteNav?.classList.remove("is-open");
+    siteNav.classList.remove("is-open");
     setBackgroundInert(false);
 
-    if (menuToggle) {
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open primary navigation");
-    }
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open primary navigation");
 
     if (restoreFocus) {
       const target = menuReturnFocus instanceof HTMLElement ? menuReturnFocus : menuToggle;
@@ -93,7 +88,6 @@
   };
 
   const openMenu = () => {
-    if (!menuToggle || !siteNav) return;
     menuReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : menuToggle;
     body.classList.add("menu-open");
     siteNav.classList.add("is-open");
@@ -154,6 +148,8 @@
     }, { passive: true });
 
     window.addEventListener("pagehide", () => closeMenu());
+    document.documentElement.classList.replace("no-js", "js");
+    menuToggle.hidden = false;
   }
 
   const progress = document.createElement("div");
