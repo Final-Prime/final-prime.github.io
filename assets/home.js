@@ -116,6 +116,7 @@
   }
 
   const trackingCard = document.querySelector(".tracking-card");
+  let primaryStatus = null;
   let primaryState = null;
   let primaryNote = null;
   let outcomeNodes = [];
@@ -124,7 +125,7 @@
     const primary = document.createElement("div");
     primary.className = "tracking-primary";
     primary.setAttribute("role", "status");
-    primary.setAttribute("aria-live", "polite");
+    primary.setAttribute("aria-live", "off");
     primary.setAttribute("aria-atomic", "true");
     primary.innerHTML = '<span>Current state</span><strong data-track-state-primary>Under review</strong><p data-track-note>Final Prime owns the next move.</p>';
     const branch = document.createElement("div");
@@ -135,6 +136,7 @@
     dl?.before(primary, branch);
     dl?.classList.add("tracking-metrics");
     trackingCard.classList.add("is-enhanced");
+    primaryStatus = primary;
     primaryState = primary.querySelector("[data-track-state-primary]");
     primaryNote = primary.querySelector("[data-track-note]");
     outcomeNodes = [...branch.querySelectorAll(".tracking-outcomes span")];
@@ -158,13 +160,17 @@
   ];
   let trackingIndex = 0;
 
+  const updateText = (node, text) => {
+    if (node && node.textContent !== text) node.textContent = text;
+  };
+
   const renderTracking = item => {
-    if (trackState) trackState.textContent = item.state;
-    if (primaryState) primaryState.textContent = item.state;
-    if (primaryNote) primaryNote.textContent = item.note;
-    if (trackOwner) trackOwner.textContent = item.owner;
-    if (trackOutcomes) trackOutcomes.textContent = item.outcomes;
-    if (trackCheck) trackCheck.textContent = "Interface example";
+    updateText(trackState, item.state);
+    updateText(primaryState, item.state);
+    updateText(primaryNote, item.note);
+    updateText(trackOwner, item.owner);
+    updateText(trackOutcomes, item.outcomes);
+    updateText(trackCheck, "Interface example");
     outcomeNodes.forEach((node, index) => node.classList.toggle("is-active", index === item.active));
   };
 
@@ -172,6 +178,7 @@
   if (demoTrack) {
     demoTrack.textContent = "Advance state preview";
     demoTrack.addEventListener("click", () => {
+      primaryStatus?.setAttribute("aria-live", "polite");
       trackingIndex = (trackingIndex + 1) % trackingStates.length;
       renderTracking(trackingStates[trackingIndex]);
     });
