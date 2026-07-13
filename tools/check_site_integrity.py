@@ -71,6 +71,31 @@ DOSSIER_POLISH_REFLOW_TOKEN = (
     ".review-dossier-page .dossier-axis h3 {\n"
     "  overflow-wrap: anywhere;"
 )
+ROUTE_REFLOW_CONTRACTS = {
+    "assets/base.css": (
+        ".section-head > * { min-width: 0; }",
+        ".section-head h2 {",
+        "overflow-wrap: anywhere;",
+    ),
+    "assets/catalog.css": (
+        ".boundary-copy h2 {",
+        ".catalog-empty h2 {",
+        "overflow-wrap: anywhere;",
+    ),
+    "assets/content-b.css": (
+        ".status-layout h2, .contact-layout h2 {",
+        "overflow-wrap: anywhere;",
+    ),
+    "assets/hardening.css": (
+        ".feature-layout > *,",
+        ".object-stage.is-enhanced > * { min-width: 0; max-width: 100%; }",
+        "grid-template-columns: minmax(72px, auto) minmax(0, 1fr);",
+    ),
+    "assets/legal.css": (
+        ".legal-card h2 {",
+        "overflow-wrap: anywhere;",
+    ),
+}
 NO_JS_CONTRACT_TOKENS = (
     "html [data-demo-track]",
     "html .review-dossier-page .evidence-toolbar-actions",
@@ -266,6 +291,11 @@ def main() -> int:
     dossier_polish = (ROOT / "assets" / "review-dossier-polish.css").read_text(encoding="utf-8")
     if DOSSIER_POLISH_REFLOW_TOKEN not in dossier_polish:
         errors.append("dossier polish must preserve narrow-screen axis heading wrapping")
+    for relative, tokens in ROUTE_REFLOW_CONTRACTS.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative} route reflow contract is missing {missing}")
     no_js_content = (ROOT / "assets" / "no-js.css").read_text(encoding="utf-8")
     missing_no_js_tokens = [token for token in NO_JS_CONTRACT_TOKENS if token not in no_js_content]
     if missing_no_js_tokens:

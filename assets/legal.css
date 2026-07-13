@@ -36,6 +36,7 @@
   font-size: clamp(1.8rem, 3.6vw, 3.6rem);
   line-height: 0.98;
   letter-spacing: -0.055em;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 
