@@ -116,9 +116,8 @@
 
     const updateEvidenceStatus = announcement => {
       const openCount = arcs.filter(arc => arc.open).length;
-      if (status) {
-        status.textContent = announcement || `${openCount} of ${arcs.length} arcs open. Medium and heavy spoilers remain closed unless selected.`;
-      }
+      const message = announcement || `${openCount} of ${arcs.length} arcs open. Medium and heavy spoilers remain closed unless selected.`;
+      if (status && status.textContent !== message) status.textContent = message;
       if (openLight) openLight.disabled = lightArcs.every(arc => arc.open);
       if (collapse) collapse.disabled = openCount === 0;
     };
