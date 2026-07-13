@@ -145,8 +145,15 @@ def main() -> int:
             "beginBulkUpdate",
             "spoiler-light arcs expanded",
             "All evidence arcs collapsed.",
+            "status.textContent !== message",
         ):
             require(dossier_js, token, "review dossier JavaScript", errors)
+    require(
+        review,
+        "0 of 9 arcs open. Medium and heavy spoilers remain closed unless selected.",
+        "review dossier initial evidence status",
+        errors,
+    )
 
     if provenance:
         require(provenance, SOURCE_COMMIT, "provenance record", errors)
