@@ -95,6 +95,7 @@
       });
     });
     rail?.addEventListener("scroll", syncRailState, { passive: true });
+    document.addEventListener("toggle", requestNavigationUpdate, true);
     window.addEventListener("scroll", requestNavigationUpdate, { passive: true });
     window.addEventListener("resize", requestNavigationUpdate, { passive: true });
     window.addEventListener("hashchange", requestNavigationUpdate);

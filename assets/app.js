@@ -179,6 +179,7 @@
   };
 
   requestAnimationFrame(updateHeader);
+  document.addEventListener("toggle", updateHeader, true);
   window.addEventListener("scroll", updateHeader, { passive: true });
   window.addEventListener("resize", updateHeader, { passive: true });
 
