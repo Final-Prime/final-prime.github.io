@@ -28,6 +28,7 @@ FORBIDDEN_ROUTE_STYLESHEETS = {
     "index.html": {"/assets/catalog.css", "/assets/review-release.css"},
     "404.html": {"/assets/content-a.css", "/assets/hero.css"},
     "systems/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
+    "systems/prime-compression/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css", "/assets/reviews.css", "/assets/review-release.css"},
     "works/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
     "thought/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css", "/assets/reviews.css", "/assets/review-release.css"},
     "reviews/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
@@ -111,6 +112,13 @@ ROUTE_REFLOW_CONTRACTS = {
         ".legal-card h2 {",
         "overflow-wrap: anywhere;",
     ),
+    "assets/prime-compression.css": (
+        ".pc-hero h1 {",
+        ".pc-capability-grid h3 {",
+        ".pc-package-grid h2 {",
+        ".pc-cta h2 {",
+        "overflow-wrap: anywhere;",
+    ),
 }
 NO_JS_CONTRACT_TOKENS = (
     "html [data-demo-track]",
@@ -132,6 +140,23 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     "assets/review-dossier.js": ('.removeAttribute("hidden")',),
     "assets/base.css": ("[hidden] { display: none !important; }",),
 }
+PRIME_COMPRESSION_REQUIRED_TOKENS = (
+    "Exact offline archives. Minimal runtime decode.",
+    "The operator and implementation stay private.",
+    "Customer holdout",
+    "No general zstd or xz superiority",
+    "No public binary or source release",
+    "Request private evaluation",
+)
+PRIME_COMPRESSION_FORBIDDEN_CLAIMS = (
+    "beats zstd",
+    "beats xz",
+    "better than zstd",
+    "better than xz",
+    "production ready",
+    "production-ready",
+    "public download",
+)
 
 
 class DocumentParser(HTMLParser):
@@ -321,6 +346,20 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: progressive-enhancement contract is missing {missing}")
+
+    prime_relative = "systems/prime-compression/index.html"
+    prime_surface = (ROOT / prime_relative).read_text(encoding="utf-8")
+    missing_prime_tokens = [
+        token for token in PRIME_COMPRESSION_REQUIRED_TOKENS if token not in prime_surface
+    ]
+    if missing_prime_tokens:
+        errors.append(f"{prime_relative}: claim boundary is missing {missing_prime_tokens}")
+    normalized_prime_surface = prime_surface.lower()
+    forbidden_prime_claims = [
+        claim for claim in PRIME_COMPRESSION_FORBIDDEN_CLAIMS if claim in normalized_prime_surface
+    ]
+    if forbidden_prime_claims:
+        errors.append(f"{prime_relative}: forbidden broad claims found {forbidden_prime_claims}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():

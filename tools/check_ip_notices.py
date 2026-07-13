@@ -20,6 +20,7 @@ REQUIRED_FILES = [
 PUBLIC_HTML = [
     ROOT / "index.html",
     ROOT / "systems" / "index.html",
+    ROOT / "systems" / "prime-compression" / "index.html",
     ROOT / "works" / "index.html",
     ROOT / "thought" / "index.html",
     ROOT / "reviews" / "index.html",
