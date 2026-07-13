@@ -237,6 +237,29 @@ def validate_tracking_preview(content: str, homepage: str) -> list[str]:
     return errors
 
 
+def validate_home_nav_tracking(content: str) -> list[str]:
+    required = (
+        '[document.querySelector("#index"), "/index/"]',
+        '[document.querySelector(".system-feature"), "/systems/"]',
+        '[document.querySelector(".review-section"), "/thought/"]',
+        '[document.querySelector("#prime-access"), "/#prime-access"]',
+        'const activeRoute = active && active[1] > 0 ? active[0] : ""',
+        "setCurrentNav(activeRoute)",
+    )
+    errors = [
+        f"assets/home.js: homepage navigation contract is missing {token}"
+        for token in required
+        if token not in content
+    ]
+    for selector in ("#systems", "#works", "#thought"):
+        token = f'[document.querySelector("{selector}"),'
+        if token in content:
+            errors.append(
+                f"assets/home.js: homepage navigation must track sections, not simultaneous {selector} cards"
+            )
+    return errors
+
+
 def validate_mobile_hash_focus(content: str) -> list[str]:
     required = (
         "const samePageHashTarget = anchor =>",
@@ -290,6 +313,7 @@ def main() -> int:
     app_runtime = (ROOT / "assets" / "app.js").read_text(encoding="utf-8")
     errors.extend(validate_dynamic_div_names(home_runtime))
     errors.extend(validate_tracking_preview(home_runtime, (ROOT / "index.html").read_text(encoding="utf-8")))
+    errors.extend(validate_home_nav_tracking(home_runtime))
     errors.extend(validate_mobile_hash_focus(app_runtime))
     errors.extend(validate_palette((ROOT / "assets" / "base.css").read_text(encoding="utf-8")))
     if errors:
