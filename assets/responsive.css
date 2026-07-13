@@ -23,6 +23,9 @@
     right: 14px;
     left: 14px;
     display: none;
+    max-height: calc(100dvh - var(--header-height) - 16px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     flex-direction: column;
     align-items: stretch;
     gap: 0;

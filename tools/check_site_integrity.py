@@ -75,7 +75,12 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     "index.html": ("data-demo-track hidden",),
     "assets/home.js": ("demoTrack.hidden = false",),
     "assets/app.js": ('classList.replace("no-js", "js")', "menuToggle.hidden = false"),
-    "assets/responsive.css": ("html.no-js .site-nav",),
+    "assets/responsive.css": (
+        "html.no-js .site-nav",
+        "max-height: calc(100dvh - var(--header-height) - 16px);",
+        "overflow-y: auto;",
+        "overscroll-behavior: contain;",
+    ),
     "reviews/metro-2033-redux/index.html": ('class="evidence-toolbar-actions" hidden',),
     "assets/review-dossier.js": ('.removeAttribute("hidden")',),
     "assets/base.css": ("[hidden] { display: none !important; }",),
