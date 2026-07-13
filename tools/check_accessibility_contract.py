@@ -304,6 +304,16 @@ def validate_palette(content: str) -> list[str]:
     return errors
 
 
+def validate_forced_colors(content: str) -> list[str]:
+    required = (
+        "@media (forced-colors: active)",
+        ".menu-toggle span,",
+        ".menu-toggle::before,",
+        ".menu-toggle::after { background: CanvasText; forced-color-adjust: none; }",
+    )
+    return [f"assets/base.css: forced-colors contract is missing {token}" for token in required if token not in content]
+
+
 def main() -> int:
     errors: list[str] = []
     paths = sorted(ROOT.rglob("*.html"))
@@ -315,7 +325,9 @@ def main() -> int:
     errors.extend(validate_tracking_preview(home_runtime, (ROOT / "index.html").read_text(encoding="utf-8")))
     errors.extend(validate_home_nav_tracking(home_runtime))
     errors.extend(validate_mobile_hash_focus(app_runtime))
-    errors.extend(validate_palette((ROOT / "assets" / "base.css").read_text(encoding="utf-8")))
+    base_css = (ROOT / "assets" / "base.css").read_text(encoding="utf-8")
+    errors.extend(validate_palette(base_css))
+    errors.extend(validate_forced_colors(base_css))
     if errors:
         print("Accessibility contract validation failed:")
         for error in errors:

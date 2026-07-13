@@ -101,4 +101,10 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
 .button-primary { color: #050708; border-color: var(--fuchsia); background: var(--fuchsia); }
 .button-primary:hover { background: #ff1d5f; border-color: #ff1d5f; }
 .button-secondary { color: var(--cyan); border-color: var(--cyan); }
+
+@media (forced-colors: active) {
+  .menu-toggle span,
+  .menu-toggle::before,
+  .menu-toggle::after { background: CanvasText; forced-color-adjust: none; }
+}
 .footer-nav a[href="/legal/"] { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
