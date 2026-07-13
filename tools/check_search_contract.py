@@ -26,6 +26,7 @@ class PageParser(HTMLParser):
         self.canonicals: list[str] = []
         self.og_urls: list[str] = []
         self.robots: list[str] = []
+        self.descriptions: list[str] = []
         self.itemtypes: list[str] = []
         self.itemprops: list[dict[str, str]] = []
 
@@ -38,6 +39,8 @@ class PageParser(HTMLParser):
                 self.og_urls.append(data.get("content", ""))
             if data.get("name", "").lower() == "robots":
                 self.robots.append(data.get("content", ""))
+            if data.get("name", "").lower() == "description":
+                self.descriptions.append(data.get("content", ""))
         if data.get("itemtype"):
             self.itemtypes.append(data["itemtype"])
         if data.get("itemprop"):
@@ -60,6 +63,7 @@ def parse_page(path: Path) -> PageParser:
 def main() -> int:
     errors: list[str] = []
     canonical_urls: set[str] = set()
+    descriptions: set[str] = set()
 
     for path in sorted(ROOT.rglob("*.html")):
         if ".git" in path.parts:
@@ -79,6 +83,17 @@ def main() -> int:
             errors.append(f"{relative}: canonical must be exactly {wanted}")
         if page.og_urls != [wanted]:
             errors.append(f"{relative}: og:url must be exactly {wanted}")
+        if len(page.descriptions) != 1:
+            errors.append(f"{relative}: must expose exactly one meta description")
+        else:
+            description = page.descriptions[0]
+            if not 70 <= len(description) <= 160:
+                errors.append(
+                    f"{relative}: meta description length {len(description)} is outside 70-160 characters"
+                )
+            if description in descriptions:
+                errors.append(f"{relative}: duplicate meta description")
+            descriptions.add(description)
         if any("noindex" in value.lower() for value in page.robots):
             errors.append(f"{relative}: indexable route declares noindex")
         parsed = urlparse(wanted)
