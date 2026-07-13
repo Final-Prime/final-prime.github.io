@@ -10,14 +10,11 @@
   const isHomepage = location.pathname === "/" || location.pathname.endsWith("/index.html");
   if (isHomepage && "IntersectionObserver" in window) {
     const sectionMap = [
-      [document.querySelector("#systems"), "/systems/"],
-      [document.querySelector("#works"), "/works/"],
-      [document.querySelector("#thought"), "/thought/"],
       [document.querySelector("#index"), "/index/"],
+      [document.querySelector(".system-feature"), "/systems/"],
+      [document.querySelector(".review-section"), "/thought/"],
       [document.querySelector("#prime-access"), "/#prime-access"]
     ].filter(([section]) => section);
-    const systemsFeature = document.querySelector(".system-feature");
-    if (systemsFeature) sectionMap.push([systemsFeature, "/systems/"]);
     const visible = new Map();
 
     const setCurrentNav = route => {
@@ -34,7 +31,8 @@
         if (route) visible.set(route, entry.intersectionRatio);
       });
       const active = [...visible.entries()].sort((a, b) => b[1] - a[1])[0];
-      if (active && active[1] > 0) setCurrentNav(active[0]);
+      const activeRoute = active && active[1] > 0 ? active[0] : "";
+      setCurrentNav(activeRoute);
     }, { rootMargin: "-18% 0px -62% 0px", threshold: [0, 0.08, 0.25, 0.5, 0.75] });
 
     sectionMap.forEach(([section]) => observer.observe(section));
