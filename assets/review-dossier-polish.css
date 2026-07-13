@@ -333,7 +333,7 @@
 }
 
 .review-dossier-page .dossier-axis h3 {
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
   word-break: normal;
   hyphens: none;
 }
@@ -350,6 +350,7 @@
   .review-dossier-page .dossier-axis h3 {
     font-size: clamp(1.4rem, 1.75vw, 2.05rem);
     letter-spacing: -0.04em;
+    overflow-wrap: normal;
     white-space: nowrap;
   }
 }

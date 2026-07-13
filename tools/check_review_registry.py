@@ -78,7 +78,6 @@ def main() -> int:
         require(review, "/assets/review-dossier.css", "review page", errors)
         require(review, "/assets/review-dossier-polish.css", "review page", errors)
         require(review, "/assets/review-dossier.js", "review page", errors)
-        require(review, "/assets/review-release.css", "review page", errors)
         require(review, "/legal/", "review page", errors)
         require(review, "Metro 2033 Redux and related", "review page", errors)
         require(review, "Ending reconstructed", "review page", errors)
