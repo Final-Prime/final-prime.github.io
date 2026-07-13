@@ -6,6 +6,7 @@
 
 - [Final Prime](https://final-prime.github.io/): Public overview and current release state.
 - [Systems](https://final-prime.github.io/systems/): Public systems index and disclosure boundaries.
+- [Prime Compression](https://final-prime.github.io/systems/prime-compression/): Private evaluation surface for exact offline archive compilation and minimal runtime decoding.
 - [Works](https://final-prime.github.io/works/): Public works and release-lane index.
 - [Thought](https://final-prime.github.io/thought/): Published analysis tracks and explicitly empty lanes.
 - [Game reviews](https://final-prime.github.io/reviews/): Review methodology, registry, and published dossiers.
