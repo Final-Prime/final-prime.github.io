@@ -92,4 +92,11 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
 .section-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: end; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
 .section-head h2 { margin: 13px 0 0; font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.35rem); font-style: normal; font-weight: 720; line-height: 1.04; letter-spacing: -0.055em; }
 .section-note { max-width: 430px; margin: 0; color: var(--muted); font: 700 0.5rem/1.5 var(--mono); letter-spacing: 0.08em; text-align: right; text-transform: uppercase; }
+.section-kicker { margin-bottom: 0; color: var(--fuchsia-text); font: 800 0.56rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 18px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 800 0.66rem/1 var(--mono); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, color 150ms ease; }
+.button:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+.button-primary { color: #050708; border-color: var(--fuchsia); background: var(--fuchsia); }
+.button-primary:hover { background: #ff1d5f; border-color: #ff1d5f; }
+.button-secondary { color: var(--cyan); border-color: var(--cyan); }
 .footer-nav a[href="/legal/"] { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
