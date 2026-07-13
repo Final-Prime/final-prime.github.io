@@ -116,12 +116,6 @@
 .doctrine-cyan { color: var(--cyan); }
 .doctrine-fuchsia { color: var(--fuchsia-text); }
 .hero-intro { max-width: 680px; margin: 24px 0 0; padding-left: 18px; border-left: 1px solid var(--line-strong); color: var(--muted); font-size: clamp(1rem, 1.18vw, 1.14rem); line-height: 1.68; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-.button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 18px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 800 0.66rem/1 var(--mono); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, color 150ms ease; }
-.button:hover { transform: translateY(-2px); border-color: var(--line-strong); }
-.button-primary { color: #050708; border-color: var(--fuchsia); background: var(--fuchsia); }
-.button-primary:hover { background: #ff1d5f; border-color: #ff1d5f; }
-.button-secondary { color: var(--cyan); border-color: var(--cyan); }
 .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin: 30px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(9, 11, 13, 0.28); }
 .hero-meta > div { min-width: 0; padding: 14px; border-right: 1px solid var(--line); }
 .hero-meta > div:first-child { padding-left: 0; }
@@ -136,7 +130,6 @@
 .matrix-status { display: flex; align-items: center; gap: 8px; color: var(--cyan); }
 .matrix-status i { width: 6px; height: 6px; background: var(--cyan); box-shadow: 0 0 0 4px rgba(10, 232, 247, 0.10); }
 .matrix-heading { padding: 18px 18px 17px; border-bottom: 1px solid var(--line); }
-.section-kicker { margin-bottom: 0; color: var(--fuchsia-text); font: 800 0.56rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
 .matrix-heading h2 { margin: 12px 0 0; font-family: var(--display); font-size: clamp(1.5rem, 2vw, 1.9rem); font-style: normal; font-weight: 740; line-height: 1.08; letter-spacing: -0.045em; }
 .matrix-grid { display: block; counter-reset: matrix; }
 .matrix-cell {
