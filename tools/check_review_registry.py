@@ -147,6 +147,9 @@ def main() -> int:
             "spoiler-light arcs expanded",
             "All evidence arcs collapsed.",
             "status.textContent !== message",
+            'window.addEventListener("beforeprint"',
+            'window.addEventListener("afterprint"',
+            "printRendering",
         ):
             require(dossier_js, token, "review dossier JavaScript", errors)
     require(

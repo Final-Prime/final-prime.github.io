@@ -191,6 +191,13 @@ html { scroll-padding-top: calc(var(--header-height) + 18px); }
     background: #fff;
   }
 
+  body * {
+    color: var(--text) !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
   body::before,
   body::after,
   .skip-link,
@@ -200,7 +207,8 @@ html { scroll-padding-top: calc(var(--header-height) + 18px); }
   .hero-actions,
   .surface-actions,
   .dossier-actions,
-  .dossier-nav { display: none !important; }
+  .dossier-nav,
+  button { display: none !important; }
 
   *,
   *::before,
@@ -226,6 +234,14 @@ html { scroll-padding-top: calc(var(--header-height) + 18px); }
     width: 100%;
     max-width: none !important;
     justify-self: stretch !important;
+  }
+
+  .evidence-arc { break-inside: avoid-page; }
+  [data-evidence-status] { display: none !important; }
+  .evidence-arc summary::after { display: none !important; }
+  .evidence-arc-body {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
   }
 
   a,
