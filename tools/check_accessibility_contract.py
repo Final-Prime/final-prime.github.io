@@ -265,8 +265,13 @@ def validate_mobile_hash_focus(content: str) -> list[str]:
         "const samePageHashTarget = anchor =>",
         "decodeURIComponent(url.hash.slice(1))",
         'target.setAttribute("tabindex", "-1")',
+        'const previousTabindex = target.getAttribute("tabindex")',
         "target.focus({ preventScroll: true })",
         "target.removeAttribute(\"tabindex\")",
+        'document.addEventListener("click", event =>',
+        "event.defaultPrevented",
+        'anchor.matches(".skip-link")',
+        "siteNav?.contains(anchor)",
         "const hashTarget = samePageHashTarget(anchor)",
         "focusHashTarget(hashTarget)",
     )
