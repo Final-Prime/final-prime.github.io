@@ -65,6 +65,12 @@ REFLOW_CONTRACT_TOKENS = (
     ".dossier-section-head h2 {",
     "overflow-wrap: anywhere;",
 )
+NO_JS_CONTRACT_TOKENS = (
+    "html [data-demo-track]",
+    "html .review-dossier-page .evidence-toolbar-actions",
+    "html .menu-toggle { display: none; }",
+    "html .site-nav {",
+)
 
 
 class DocumentParser(HTMLParser):
@@ -237,6 +243,10 @@ def main() -> int:
     )
     if missing_reflow_tokens:
         errors.append(f"text-spacing reflow contract is missing {missing_reflow_tokens}")
+    no_js_content = (ROOT / "assets" / "no-js.css").read_text(encoding="utf-8")
+    missing_no_js_tokens = [token for token in NO_JS_CONTRACT_TOKENS if token not in no_js_content]
+    if missing_no_js_tokens:
+        errors.append(f"no-JavaScript fallback contract is missing {missing_no_js_tokens}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
