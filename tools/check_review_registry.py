@@ -139,6 +139,8 @@ def main() -> int:
             "data-evidence-collapse",
             "aria-current",
             "--dossier-progress",
+            'link.addEventListener("focus"',
+            'revealActiveLink(link, "auto")',
             "bulkPending",
             "bulkAnnouncement",
             "beginBulkUpdate",

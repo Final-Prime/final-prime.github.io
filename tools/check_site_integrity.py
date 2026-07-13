@@ -73,6 +73,8 @@ DOSSIER_POLISH_REFLOW_TOKEN = (
 )
 ROUTE_REFLOW_CONTRACTS = {
     "assets/base.css": (
+        "html { scroll-behavior: auto;",
+        "transition: none;",
         ".section-head > * { min-width: 0; }",
         ".section-head h2 {",
         "overflow-wrap: anywhere;",
