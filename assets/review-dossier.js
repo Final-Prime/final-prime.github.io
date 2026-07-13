@@ -114,6 +114,8 @@
     let bulkUpdate = false;
     let bulkPending = 0;
     let bulkAnnouncement = "";
+    let printState = [];
+    let printRendering = false;
 
     const updateEvidenceStatus = announcement => {
       const openCount = arcs.filter(arc => arc.open).length;
@@ -153,6 +155,7 @@
     };
 
     arcs.forEach(arc => arc.addEventListener("toggle", () => {
+      if (printRendering) return;
       if (!bulkUpdate) {
         scheduleEvidenceStatus();
         return;
@@ -160,6 +163,20 @@
       bulkPending = Math.max(0, bulkPending - 1);
       if (!bulkPending) finishBulkUpdate();
     }));
+
+    window.addEventListener("beforeprint", () => {
+      printRendering = true;
+      printState = arcs.map(arc => arc.open);
+      arcs.forEach(arc => { arc.open = true; });
+    });
+
+    window.addEventListener("afterprint", () => {
+      arcs.forEach((arc, index) => { arc.open = printState[index]; });
+      requestAnimationFrame(() => {
+        printRendering = false;
+        updateEvidenceStatus();
+      });
+    });
 
     openLight?.addEventListener("click", () => {
       beginBulkUpdate(

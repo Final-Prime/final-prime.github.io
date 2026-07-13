@@ -21,7 +21,7 @@ CSS_CLASS_SELECTOR = re.compile(r"(?<![\w-])\.([A-Za-z_-][\w-]*)")
 SCRIPT_BUDGETS = {
     "assets/app.js": 6500,
     "assets/home.js": 11500,
-    "assets/review-dossier.js": 7000,
+    "assets/review-dossier.js": 7500,
 }
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
 FORBIDDEN_ROUTE_STYLESHEETS = {
@@ -56,10 +56,17 @@ PRINT_CONTRACT_TOKENS = (
     ".skip-link,",
     ".menu-toggle,",
     ".site-progress,",
+    "body * {",
+    "background-image: none !important;",
+    "button { display: none !important; }",
     "animation: none !important;",
     "orphans: 3; widows: 3;",
     "break-inside: avoid-page;",
     ".dossier-hero-grid { grid-template-columns: 1fr !important; }",
+    ".evidence-arc-body {",
+    "[data-evidence-status] { display: none !important; }",
+    ".evidence-arc summary::after { display: none !important; }",
+    "display: grid !important;",
 )
 REFLOW_CONTRACT_TOKENS = (
     ".dossier-section-head h2 {",
