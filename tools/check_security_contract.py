@@ -18,7 +18,7 @@ COMMON_CSP = {
     "img-src": ("'self'", "data:"),
     "font-src": ("'none'",),
     "media-src": ("'none'",),
-    "connect-src": ("'none'",),
+    "connect-src": ("'self'",),
     "worker-src": ("'none'",),
     "child-src": ("'none'",),
     "object-src": ("'none'",),
@@ -46,6 +46,7 @@ WORKFLOW_CHECK_COMMANDS = (
     "python tools/check_site_integrity.py",
     "python tools/check_social_cards.py",
 )
+FORBIDDEN_NETWORK_APIS = ("fetch(", "XMLHttpRequest", "WebSocket(", "sendBeacon(")
 
 
 class SecurityParser(HTMLParser):
@@ -219,6 +220,11 @@ def main() -> int:
     html_paths = sorted(ROOT.rglob("*.html"))
     for path in html_paths:
         errors.extend(validate_html(path))
+    for path in sorted((ROOT / "assets").glob("*.js")):
+        content = path.read_text(encoding="utf-8")
+        for token in FORBIDDEN_NETWORK_APIS:
+            if token in content:
+                errors.append(f"{path.relative_to(ROOT).as_posix()}: undeclared runtime network API {token}")
     errors.extend(validate_security_txt(datetime.now(timezone.utc)))
     workflow_paths = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
     for path in workflow_paths:
