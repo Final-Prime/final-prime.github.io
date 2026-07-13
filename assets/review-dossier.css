@@ -805,6 +805,36 @@
   .friction-row p { grid-column: 1 / -1; }
 }
 
+/* Text-scaling hardening: grid items may shrink below min-content width. */
+.fit-gate,
+.taste-card,
+.dossier-axis,
+.modifier-card,
+.field-note,
+.fit-tags,
+.insight-card,
+.audit-card,
+.evidence-arc,
+.protocol-grid article {
+  min-width: 0;
+  max-width: 100%;
+}
+.dossier-axis > header,
+.dossier-axis-body,
+.score-equation > div {
+  min-width: 0;
+  max-width: 100%;
+}
+.fit-gate h3,
+.dossier-axis h3,
+.modifier-card h3,
+.field-note h3,
+.insight-card h3,
+.audit-card h3,
+.protocol-grid h3 {
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 760px) {
   .dossier-hero { padding-top: 46px; }
   .dossier-hero-copy h1 { font-size: min(18vw, 6.2rem); }
@@ -822,6 +852,12 @@
   .insight-grid,
   .audit-grid,
   .protocol-grid { grid-template-columns: 1fr; }
+  .taste-grid,
+  .dossier-axis-grid,
+  .modifier-grid,
+  .insight-grid,
+  .audit-grid,
+  .protocol-grid { min-width: 0; width: 100%; }
   .taste-card,
   .taste-card:nth-child(4),
   .dossier-axis,

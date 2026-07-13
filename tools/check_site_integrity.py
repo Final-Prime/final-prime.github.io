@@ -31,7 +31,7 @@ FORBIDDEN_ROUTE_STYLESHEETS = {
     "works/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
     "thought/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css", "/assets/reviews.css", "/assets/review-release.css"},
     "reviews/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
-    "reviews/metro-2033-redux/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css", "/assets/reviews.css", "/assets/catalog.css"},
+    "reviews/metro-2033-redux/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css", "/assets/reviews.css", "/assets/catalog.css", "/assets/review-release.css"},
     "index/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
     "legal/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
 }
@@ -64,6 +64,12 @@ PRINT_CONTRACT_TOKENS = (
 REFLOW_CONTRACT_TOKENS = (
     ".dossier-section-head h2 {",
     "overflow-wrap: anywhere;",
+    ".dossier-axis > header,",
+    ".score-equation > div {",
+)
+DOSSIER_POLISH_REFLOW_TOKEN = (
+    ".review-dossier-page .dossier-axis h3 {\n"
+    "  overflow-wrap: anywhere;"
 )
 NO_JS_CONTRACT_TOKENS = (
     "html [data-demo-track]",
@@ -257,6 +263,9 @@ def main() -> int:
     )
     if missing_reflow_tokens:
         errors.append(f"text-spacing reflow contract is missing {missing_reflow_tokens}")
+    dossier_polish = (ROOT / "assets" / "review-dossier-polish.css").read_text(encoding="utf-8")
+    if DOSSIER_POLISH_REFLOW_TOKEN not in dossier_polish:
+        errors.append("dossier polish must preserve narrow-screen axis heading wrapping")
     no_js_content = (ROOT / "assets" / "no-js.css").read_text(encoding="utf-8")
     missing_no_js_tokens = [token for token in NO_JS_CONTRACT_TOKENS if token not in no_js_content]
     if missing_no_js_tokens:
