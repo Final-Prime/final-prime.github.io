@@ -35,7 +35,7 @@
       nav.classList.toggle("at-end", rail.scrollLeft >= maxScroll - 1);
     };
 
-    const revealActiveLink = link => {
+    const revealActiveLink = (link, behavior = reducedMotion ? "auto" : "smooth") => {
       if (!rail || rail.scrollWidth <= rail.clientWidth + 1) return;
       const left = link.offsetLeft;
       const right = left + link.offsetWidth;
@@ -43,7 +43,7 @@
       const visibleRight = visibleLeft + rail.clientWidth;
       if (left >= visibleLeft + 8 && right <= visibleRight - 8) return;
       const target = Math.max(0, left - (rail.clientWidth - link.offsetWidth) / 2);
-      rail.scrollTo({ left: target, behavior: reducedMotion ? "auto" : "smooth" });
+      rail.scrollTo({ left: target, behavior });
     };
 
     const setActive = id => {
@@ -87,6 +87,7 @@
     };
 
     links.forEach(link => {
+      link.addEventListener("focus", () => revealActiveLink(link, "auto"));
       link.addEventListener("click", () => {
         const id = link.getAttribute("href")?.slice(1);
         if (id) setActive(id);

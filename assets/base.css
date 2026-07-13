@@ -20,7 +20,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--bg); }
+html { scroll-behavior: auto; background: var(--bg); }
 body {
   margin: 0;
   min-width: 320px;
@@ -55,7 +55,7 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
   color: #031012;
   background: var(--cyan);
   transform: translateY(-180%);
-  transition: transform 160ms ease;
+  transition: none;
   font: 800 0.72rem/1 var(--mono);
   letter-spacing: 0.08em;
   text-decoration: none;
