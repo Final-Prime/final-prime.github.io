@@ -13,6 +13,7 @@ Any future transfer to a company requires a separate signed assignment. GitHub o
 ```text
 /
 ├── systems/
+│   └── prime-compression/
 ├── works/
 ├── thought/
 ├── reviews/
@@ -25,9 +26,11 @@ Any future transfer to a company requires a separate signed assignment. GitHub o
 
 The website uses a conservative, logic-oriented visual language, orthogonal geometry, fuchsia and cyan signal modes, explicit public and private boundaries, and progressive enhancement. Core content remains usable without JavaScript.
 
+The disclosed system record `FP-SYS-0004` is available at `/systems/prime-compression/`. It presents the exact offline archive compiler and minimal runtime decoder through a narrow private-evaluation boundary.
+
 The first published review record is `FP-REV-0001`, available at `/reviews/metro-2033-redux/`.
 
-`/llms.txt` is a machine-readable map of the same eight indexable public routes. It is a navigation aid only and does not grant access, reuse, training, or other rights.
+`/llms.txt` is a machine-readable map of the same nine indexable public routes. It is a navigation aid only and does not grant access, reuse, training, or other rights.
 
 ## Rights and permissions
 
@@ -45,7 +48,7 @@ This repository is proprietary. It is not released under an open source license.
 
 Copyright © 2026 Daniel Kenessy. All rights reserved.
 
-Claimed unregistered marks include Final Prime™, FINAL / PRIME™, the Final Prime logo, A/SYNC™, VRAXION™, the VRAXION logo, AlphaSync™, and INSTNCT™. No registration is claimed unless a later notice states otherwise.
+Claimed unregistered marks include Final Prime™, FINAL / PRIME™, the Final Prime logo, Prime Compression™, A/SYNC™, VRAXION™, the VRAXION logo, AlphaSync™, and INSTNCT™. No registration is claimed unless a later notice states otherwise.
 
 ## Legal safeguards
 
