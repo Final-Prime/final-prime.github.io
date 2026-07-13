@@ -1,8 +1,4 @@
 .section { padding: 86px 0; border-bottom: 1px solid var(--line); }
-.section-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: end; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
-.section-head h2 { margin: 13px 0 0; font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.35rem); font-style: normal; font-weight: 720; line-height: 1.04; letter-spacing: -0.055em; }
-.section-note { max-width: 430px; margin: 0; color: var(--muted); font: 700 0.5rem/1.5 var(--mono); letter-spacing: 0.08em; text-align: right; text-transform: uppercase; }
-
 .domain-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 24px; border: 1px solid var(--line); }
 .domain { min-height: 260px; padding: 18px; border-right: 1px solid var(--line); background: rgba(15, 19, 22, 0.48); }
 .domain:last-child { border-right: 0; }
