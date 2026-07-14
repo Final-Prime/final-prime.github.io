@@ -63,6 +63,7 @@ class SemanticsParser(HTMLParser):
         self.images: list[dict[str, str]] = []
         self.buttons: list[dict[str, str]] = []
         self.button_buffer: list[str] | None = None
+        self.complementary_landmarks_in_main = 0
         self.current_items: list[tuple[str, str, str]] = []
         self.invalid_labels: list[str] = []
         self.meters: list[dict[str, str]] = []
@@ -96,6 +97,8 @@ class SemanticsParser(HTMLParser):
         if tag == "button":
             self.buttons.append(data)
             self.button_buffer = []
+        if tag == "aside" and "main" in self.stack:
+            self.complementary_landmarks_in_main += 1
         if data.get("aria-current"):
             self.current_items.append((tag, data["aria-current"], data.get("href", "")))
             if self.active_nav_name is not None:
@@ -214,6 +217,11 @@ def validate_page(path: Path) -> list[str]:
             errors.append(f"{relative}: menu toggle must remain hidden until app initialization")
     if parser.invalid_labels:
         errors.append(f"{relative}: aria-label used on non-nameable elements {parser.invalid_labels}")
+    if parser.complementary_landmarks_in_main:
+        errors.append(
+            f"{relative}: {parser.complementary_landmarks_in_main} complementary landmarks "
+            "are nested inside main; use a named group for visual support panels"
+        )
     if parser.positive_tabindex:
         errors.append(f"{relative}: positive tabindex found {parser.positive_tabindex}")
     if any(not name for name in parser.nav_names):
