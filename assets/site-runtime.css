@@ -1,15 +1,4 @@
 /* Shared runtime styles required outside the homepage-specific hardening layer. */
-.section-note,
-.contact-note {
-  font-size: 0.75rem;
-  line-height: 1.4;
-}
-
-.section-kicker {
-  font-size: 0.75rem;
-  line-height: 1.2;
-}
-
 .site-header { overflow: visible; }
 .site-progress {
   position: absolute;

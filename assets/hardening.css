@@ -3,7 +3,6 @@
 .matrix-topline,
 .matrix-cell > span,
 .inspector-code,
-.section-note,
 .domain-code,
 .matrix-status,
 .matrix-cell::after,
@@ -27,11 +26,6 @@
 .status-ledger dd {
   font-size: 0.75rem;
   line-height: 1.4;
-}
-
-.section-kicker {
-  font-size: 0.75rem;
-  line-height: 1.2;
 }
 
 /* Preserve the two-line doctrine whenever the layout provides a full-width text column. */
