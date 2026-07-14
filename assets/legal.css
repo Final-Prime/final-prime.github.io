@@ -22,7 +22,7 @@
   padding: 0 15px;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
-  font: 800 0.625rem/1.4 var(--mono);
+  font: 800 0.75rem/1.4 var(--mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -73,8 +73,8 @@
 .legal-mark-list > li:nth-last-child(-n + 2) { border-bottom: 0; }
 .legal-card .legal-mark-list > li { margin-top: 0; }
 .legal-mark-list dl { margin: 0; }
-.legal-mark-list dt { color: var(--muted-dark); font: 800 0.625rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
-.legal-mark-list dd { margin: 7px 0 0; color: var(--text); font: 800 0.72rem/1.4 var(--mono); overflow-wrap: anywhere; text-transform: uppercase; }
+.legal-mark-list dt { color: var(--muted-dark); font: 800 0.75rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.legal-mark-list dd { margin: 7px 0 0; color: var(--text); font: 800 0.75rem/1.4 var(--mono); overflow-wrap: anywhere; text-transform: uppercase; }
 
 .legal-callout {
   margin-top: 18px;
@@ -84,7 +84,7 @@
   background: rgba(9, 11, 13, 0.5);
 }
 
-.legal-callout strong { display: block; color: var(--fuchsia-text); font: 800 0.7rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.legal-callout strong { display: block; color: var(--fuchsia-text); font: 800 0.75rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 .legal-callout p { margin-top: 9px; }
 
 .boundary-copy p a {
