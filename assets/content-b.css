@@ -4,14 +4,14 @@
 .access-copy h3 em { display: block; color: var(--cyan); font-family: var(--display); font-style: normal; font-weight: 760; text-transform: none; }
 .access-copy > p { max-width: 740px; margin: 20px 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.65; }
 .access-benefits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-.access-benefits span { padding: 8px 10px; border: 1px solid var(--line); color: var(--muted); font: 700 0.625rem/1.2 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
-.tracking-topline { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); color: var(--muted); font: 800 0.625rem/1.2 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; }
+.access-benefits span { padding: 8px 10px; border: 1px solid var(--line); color: var(--muted); font: 700 0.75rem/1.4 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
+.tracking-topline { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); color: var(--muted); font: 800 0.75rem/1.4 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; }
 .tracking-topline strong { color: var(--fuchsia-text); }
 .private-boundary-card dl { margin: 12px 0 0; }
 .private-boundary-card dl > div { display: grid; grid-template-columns: 110px 1fr; gap: 10px; min-height: 52px; align-items: center; border-bottom: 1px solid var(--line-soft); }
 .private-boundary-card dl > div:last-child { border-bottom: 0; }
-.private-boundary-card dt { color: var(--muted); font: 700 0.625rem/1.4 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
-.private-boundary-card dd { margin: 0; color: var(--text); font: 700 0.66rem/1.4 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; }
+.private-boundary-card dt { color: var(--muted); font: 700 0.75rem/1.4 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
+.private-boundary-card dd { margin: 0; color: var(--text); font: 700 0.75rem/1.4 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; }
 .private-boundary-card dd:first-letter { color: var(--cyan); }
 
 .status-layout, .contact-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr); gap: clamp(50px, 8vw, 110px); align-items: start; }
@@ -26,9 +26,26 @@
 .status-active { background: var(--fuchsia); border-color: var(--fuchsia); }
 .status-clear { background: var(--cyan); border-color: var(--cyan); }
 .contact-copy > p { margin-bottom: 24px; color: var(--muted); font-size: 0.84rem; line-height: 1.65; }
-.contact-link { display: flex; justify-content: space-between; gap: 20px; align-items: center; min-height: 64px; padding: 0 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--text); font: 800 0.68rem/1 var(--mono); letter-spacing: 0.06em; text-decoration: none; }
+.contact-link { display: flex; justify-content: space-between; gap: 20px; align-items: center; min-height: 64px; padding: 0 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--text); font: 800 0.75rem/1.4 var(--mono); letter-spacing: 0.06em; text-decoration: none; }
 .contact-link:hover, .contact-link:focus-visible { color: var(--cyan); }
-.contact-note { margin-top: 16px; color: var(--muted-dark); font: 700 0.625rem/1.5 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
+.contact-note { margin-top: 16px; color: var(--muted-dark); font: 700 0.75rem/1.5 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
+
+.access-layout > *,
+.contact-layout > * { min-width: 0; max-width: 100%; }
+.contact-routing { margin: 16px 0 0; border: 1px solid var(--line); font-size: 0.75rem; line-height: 1.4; }
+.contact-routing > div { display: grid; grid-template-columns: 1fr auto; gap: 18px; min-height: 48px; align-items: center; padding: 0 12px; border-bottom: 1px solid var(--line-soft); }
+.contact-routing > div:last-child { border-bottom: 0; }
+.contact-routing dt { color: var(--muted); font-family: var(--mono); font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+.contact-routing dd { margin: 0; color: var(--text); font-family: var(--mono); font-weight: 700; letter-spacing: 0.05em; text-align: right; text-transform: uppercase; }
+
+@media (max-width: 760px) {
+  .contact-routing > div { grid-template-columns: 1fr; gap: 6px; padding: 10px 12px; }
+  .contact-routing dd { text-align: left; }
+}
+
+@media (forced-colors: active) {
+  .contact-routing { border-color: CanvasText; }
+}
 
 .error-page { min-height: 100svh; }
 .error-main { min-height: calc(100svh - var(--header-height)); display: grid; place-items: center; padding: 60px 0; }
