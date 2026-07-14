@@ -32,10 +32,10 @@
   }
 
   const domainData = [
-    { state: "Mixed access", specs: [["Surface", "Selected demonstrations"], ["Core", "Private by default"], ["State", "Active / prototype"]], foot: ["Current object", "A/SYNC"] },
-    { state: "Public", specs: [["Surface", "Reviewable releases"], ["Core", "Process selectively shown"], ["State", "Index prepared"]], foot: ["Primary mode", "Objects"] },
-    { state: "Public", specs: [["Surface", "Long-form analysis"], ["Core", "Research trails retained"], ["State", "Editorial pipeline"]], foot: ["Primary mode", "Models"] },
-    { state: "Registry", specs: [["Surface", "Object registry"], ["Core", "Canonical state"], ["State", "Continuous"]], foot: ["Primary mode", "Lineage"] }
+    { state: "Mixed access", specs: [["Surface", "Public concept"], ["Core", "Private by default"], ["State", "Active / prototype"]], foot: ["Current object", "A/SYNC"] },
+    { state: "Prepared", specs: [["Surface", "Release lanes"], ["Core", "No public objects"], ["State", "Prepared / empty"]], foot: ["Public objects", "00"] },
+    { state: "Published", specs: [["Surface", "Game review dossier"], ["Core", "Drafts remain private"], ["State", "Active / 1 dossier"]], foot: ["Current object", "FP-REV-0001"] },
+    { state: "Registry", specs: [["Surface", "Canonical public records"], ["Core", "Protected inventory unlisted"], ["State", "Current"]], foot: ["Primary mode", "Disclosure"] }
   ];
 
   document.querySelectorAll(".domain").forEach((domain, index) => {
