@@ -67,7 +67,7 @@
   const stage = document.querySelector(".object-stage");
   if (stage && !stage.classList.contains("is-enhanced")) {
     stage.innerHTML = `
-      <div class="stage-topline"><span>COORDINATION FIELD / 04 INPUTS</span><strong><i aria-hidden="true"></i> TRACKED</strong></div>
+      <div class="stage-topline"><span>COORDINATION FIELD / 04 NODES</span><strong><i aria-hidden="true"></i> MAPPED</strong></div>
       <svg class="system-map" viewBox="0 0 920 520" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="routeFuchsia" x1="0" x2="1"><stop offset="0" stop-color="#f5054d" stop-opacity=".15"/><stop offset="1" stop-color="#f5054d" stop-opacity="1"/></linearGradient>

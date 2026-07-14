@@ -198,6 +198,9 @@ def validate_security_policy() -> list[str]:
     homepage = (ROOT / "index.html").read_text(encoding="utf-8")
     if "scoped business work" not in homepage or "business workspaces" in homepage:
         errors.append("index.html: private layer must describe scoped work, not live workspaces")
+    home_runtime = (ROOT / "assets" / "home.js").read_text(encoding="utf-8")
+    if "04 NODES" not in home_runtime or "MAPPED" not in home_runtime or "TRACKED" in home_runtime:
+        errors.append("assets/home.js: concept map must not imply live tracking")
     return errors
 
 
