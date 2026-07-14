@@ -97,9 +97,9 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
 .section-kicker { margin-bottom: 0; color: var(--fuchsia-text); font: 800 0.56rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 18px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 800 0.66rem/1 var(--mono); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, color 150ms ease; }
-.button:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+.button:hover, .button:focus-visible { transform: translateY(-2px); border-color: var(--line-strong); }
 .button-primary { color: #050708; border-color: var(--fuchsia); background: var(--fuchsia); }
-.button-primary:hover { background: #ff1d5f; border-color: #ff1d5f; }
+.button-primary:hover, .button-primary:focus-visible { background: #ff1d5f; border-color: #ff1d5f; }
 .button-secondary { color: var(--cyan); border-color: var(--cyan); }
 
 @media (forced-colors: active) {
