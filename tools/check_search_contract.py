@@ -27,6 +27,8 @@ class PageParser(HTMLParser):
         self.og_urls: list[str] = []
         self.robots: list[str] = []
         self.descriptions: list[str] = []
+        self.article_published_times: list[str] = []
+        self.article_modified_times: list[str] = []
         self.itemtypes: list[str] = []
         self.itemprops: list[dict[str, str]] = []
 
@@ -41,6 +43,10 @@ class PageParser(HTMLParser):
                 self.robots.append(data.get("content", ""))
             if data.get("name", "").lower() == "description":
                 self.descriptions.append(data.get("content", ""))
+            if data.get("property") == "article:published_time":
+                self.article_published_times.append(data.get("content", ""))
+            if data.get("property") == "article:modified_time":
+                self.article_modified_times.append(data.get("content", ""))
         if data.get("itemtype"):
             self.itemtypes.append(data["itemtype"])
         if data.get("itemprop"):
@@ -105,10 +111,12 @@ def main() -> int:
 
     sitemap = ET.parse(ROOT / "sitemap.xml").getroot()
     sitemap_urls: list[str] = []
+    sitemap_lastmod: dict[str, str] = {}
     for entry in sitemap.findall("sm:url", NS):
         loc = entry.findtext("sm:loc", default="", namespaces=NS).strip()
         sitemap_urls.append(loc)
         lastmod = entry.findtext("sm:lastmod", default="", namespaces=NS).strip()
+        sitemap_lastmod[loc] = lastmod
         try:
             date.fromisoformat(lastmod)
         except ValueError:
@@ -146,18 +154,41 @@ def main() -> int:
     missing_types = required_types.difference(review.itemtypes)
     if missing_types:
         errors.append(f"review: missing schema types {sorted(missing_types)}")
-    required_properties = {"itemReviewed", "name", "author", "publisher", "reviewRating", "ratingValue", "bestRating", "worstRating", "datePublished"}
+    required_properties = {
+        "itemReviewed",
+        "name",
+        "author",
+        "publisher",
+        "reviewRating",
+        "ratingValue",
+        "bestRating",
+        "worstRating",
+        "datePublished",
+        "dateModified",
+    }
     present_properties = {item["itemprop"] for item in review.itemprops}
     missing_properties = required_properties.difference(present_properties)
     if missing_properties:
         errors.append(f"review: missing schema properties {sorted(missing_properties)}")
-    expected_values = {"ratingValue": "86", "bestRating": "100", "worstRating": "0", "datePublished": "2026-07-12"}
+    review_url = f"{ORIGIN}/reviews/metro-2033-redux/"
+    review_lastmod = sitemap_lastmod.get(review_url, "")
+    expected_values = {
+        "ratingValue": "86",
+        "bestRating": "100",
+        "worstRating": "0",
+        "datePublished": "2026-07-12",
+        "dateModified": review_lastmod,
+    }
     for prop, value in expected_values.items():
         if not any(
             item.get("itemprop") == prop and (item.get("content") == value or item.get("datetime") == value)
             for item in review.itemprops
         ):
             errors.append(f"review: {prop} must expose value {value}")
+    if review.article_published_times != ["2026-07-12"]:
+        errors.append("review: article:published_time must be exactly 2026-07-12")
+    if review.article_modified_times != [review_lastmod]:
+        errors.append("review: article:modified_time must match the sitemap lastmod")
 
     if errors:
         print("Search contract validation failed:")
