@@ -48,6 +48,11 @@ FORBIDDEN_ROUTE_STYLESHEETS = {
     "index/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
     "legal/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
 }
+RESPONSIVE_PRECEDENCE_STYLES = {
+    "/assets/hero.css",
+    "/assets/content-a.css",
+    "/assets/content-b.css",
+}
 REQUIRED_ICON_LINKS = {
     ("icon", "/assets/favicon.svg", "image/svg+xml", ""),
     ("icon", "/assets/icon-192.png", "image/png", "192x192"),
@@ -254,10 +259,23 @@ def main() -> int:
             errors.append(f"{relative}: remote {tag} dependency is not allowed: {value}")
         if document.icon_links != REQUIRED_ICON_LINKS:
             errors.append(f"{relative}: platform icon links do not match the required contract")
-        linked_stylesheets = {value for tag, _, value in document.references if tag == "link"}
+        stylesheet_order = [value for tag, _, value in document.references if tag == "link"]
+        linked_stylesheets = set(stylesheet_order)
         forbidden_stylesheets = linked_stylesheets.intersection(FORBIDDEN_ROUTE_STYLESHEETS.get(relative, set()))
         if forbidden_stylesheets:
             errors.append(f"{relative}: unused route stylesheets restored {sorted(forbidden_stylesheets)}")
+        if "/assets/responsive.css" in linked_stylesheets:
+            responsive_index = stylesheet_order.index("/assets/responsive.css")
+            late_component_styles = sorted(
+                stylesheet
+                for stylesheet in linked_stylesheets.intersection(RESPONSIVE_PRECEDENCE_STYLES)
+                if stylesheet_order.index(stylesheet) > responsive_index
+            )
+            if late_component_styles:
+                errors.append(
+                    f"{relative}: responsive stylesheet must follow component styles "
+                    f"{late_component_styles}"
+                )
 
     checked_references = 0
     for source, document in documents.items():
