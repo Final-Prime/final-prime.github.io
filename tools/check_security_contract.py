@@ -195,6 +195,9 @@ def validate_security_policy() -> list[str]:
     for phrase in ("Security report", "Private email", "Do not send credentials"):
         if phrase not in contact:
             errors.append(f"contact/index.html: missing safe security routing {phrase!r}")
+    homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+    if "scoped business work" not in homepage or "business workspaces" in homepage:
+        errors.append("index.html: private layer must describe scoped work, not live workspaces")
     return errors
 
 
