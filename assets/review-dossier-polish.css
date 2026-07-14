@@ -185,8 +185,29 @@
 }
 
 .review-dossier-page .method-disclosure summary,
-.review-dossier-page .evidence-arc summary > span,
-.review-dossier-page .evidence-arc summary > small {
+.review-dossier-page .evidence-arc summary > span {
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.review-dossier-page .dossier-tags span,
+.review-dossier-page .dossier-score > header,
+.review-dossier-page .dossier-score dd,
+.review-dossier-page .review-label,
+.review-dossier-page .taste-card header strong,
+.review-dossier-page .method-disclosure dd strong,
+.review-dossier-page .dossier-axis > header,
+.review-dossier-page .modifier-card > header,
+.review-dossier-page .modifier-card footer,
+.review-dossier-page .friction-ledger > header > strong,
+.review-dossier-page .friction-row > div > span,
+.review-dossier-page .fit-tags > div > strong,
+.review-dossier-page .fit-tags > div > span,
+.review-dossier-page .audit-card header span,
+.review-dossier-page .evidence-arc-body h3,
+.review-dossier-page .evidence-arc-body footer span,
+.review-dossier-page .evidence-arc-body footer strong,
+.review-dossier-page small {
   font-size: 0.75rem;
   line-height: 1.35;
 }
