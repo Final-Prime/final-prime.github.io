@@ -33,6 +33,16 @@ EXPECTED_NAV_LINKS = {
         "/legal/",
     ],
 }
+EXPECTED_BREADCRUMB_LINKS = {
+    "systems/index.html": ["/"],
+    "works/index.html": ["/"],
+    "thought/index.html": ["/"],
+    "reviews/index.html": ["/", "/thought/"],
+    "reviews/metro-2033-redux/index.html": ["/", "/thought/", "/reviews/"],
+    "index/index.html": ["/"],
+    "contact/index.html": ["/"],
+    "legal/index.html": ["/"],
+}
 
 
 class SemanticsParser(HTMLParser):
@@ -211,6 +221,15 @@ def validate_page(path: Path) -> list[str]:
                 errors.append(
                     f"{relative}: {name} links must be {expected_links}, got {actual_links}"
                 )
+    if relative not in {"index.html", "404.html"}:
+        expected_breadcrumb = EXPECTED_BREADCRUMB_LINKS.get(relative)
+        if expected_breadcrumb is None:
+            errors.append(f"{relative}: missing breadcrumb route contract")
+        elif parser.nav_links.get("Breadcrumb") != expected_breadcrumb:
+            errors.append(
+                f"{relative}: Breadcrumb links must be {expected_breadcrumb}, "
+                f"got {parser.nav_links.get('Breadcrumb')}"
+            )
 
     for tag, value, href in parser.current_items:
         if value not in ARIA_CURRENT_VALUES:
