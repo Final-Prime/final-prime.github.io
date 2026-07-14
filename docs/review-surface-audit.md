@@ -1,14 +1,14 @@
-# Final Prime: game review surface adversarial audit
+# Final Prime: game-review surface audit
 
 ## Scope
 
-This audit covers the first public game-review surface added on 2026-07-12:
+This audit covers the current public game-review surface reviewed on 2026-07-14:
 
-- the new homepage `Thought / Game reviews` section;
+- the homepage `Thought / Game reviews` feature;
 - the dedicated `/reviews/` index;
-- the `FP-REV-0001` pre-publication state;
-- the responsive review pipeline and declared methodology;
-- the explicit empty archive.
+- the published `FP-REV-0001` Metro 2033 Redux dossier;
+- the review pipeline and declared methodology; and
+- the public/private evidence boundary.
 
 ## Design result
 
@@ -17,50 +17,53 @@ The review surface follows the existing Final Prime system language:
 - orthogonal panels and explicit borders;
 - fuchsia for primary editorial signal;
 - cyan for verified/current state;
-- one featured review object and one method inspector;
+- one published review object and one method inspector;
 - a visible four-stage pipeline: `Experience / Model / Verify / Publish`;
-- no decorative score, fake cover, placeholder title or invented release date.
+- explicit score anatomy, friction, audit and evidence structures; and
+- no fake cover, placeholder title, invented publication date or decorative score.
+
+## Current public state
+
+- `FP-REV-0001` is published at `/reviews/metro-2033-redux/`.
+- The final score is `86 / A`, derived from a 90-point core subtotal and a -4 fit-and-risk correction.
+- The dossier exposes four friction rows, eight adversarial checks and nine route-level evidence arcs.
+- The archive contains one published dossier.
+- Later review formats may differ, but each public dossier must expose its thesis, evidence path, caveats, spoiler boundary and lifecycle state.
 
 ## Truthfulness boundary
 
-The implementation deliberately avoids implying that the first review has already been published or that a title has been selected publicly.
-
-The current public claims are limited to:
-
-- `FP-REV-0001` exists as a reserved review object;
-- its state is `In research`;
-- the review method and publication path are defined;
-- the published archive is currently empty.
+- Review claims are limited to the evidence and caveats disclosed in the dossier.
+- The final interpretation identifies reconstructed evidence where direct capture was blocked.
+- Unpublished notes, private research trails and source material are not represented as public.
+- Metro 2033 Redux and related third-party marks remain attributed to their respective owners.
+- No relationship with the game publisher or developer is implied.
 
 ## Accessibility and resilience
 
-- one H1 on each document;
-- semantic `article`, `aside`, `ol`, `dl`, `header`, `main` and `footer` structures;
-- `aria-current="step"` marks the current review stage;
-- keyboard-operable links and mobile navigation;
-- minimum 44 CSS-pixel action targets;
+- one H1 on each review document;
+- semantic article, aside, list, definition-list, header, main and footer structures;
+- keyboard-operable links, disclosure controls and mobile navigation;
+- minimum action-target and visible-focus contracts;
 - no-JavaScript review content and navigation remain visible;
-- display headlines use viewport-capped mobile sizing to survive 200% root text scaling;
-- status meaning is present in text, not only color;
-- forced-colors structural fallback included.
+- display headlines and cards permit narrow-screen and 200% text reflow;
+- status meaning is present in text, not only color; and
+- forced-colors, reduced-motion and print fallbacks are included.
 
 ## Automated result
 
-- Static, semantic, responsive and behavior assertions: **67 / 67 passed**.
-- Tested viewports: **320 × 800, 390 × 844, 768 × 900 and 1440 × 1000**.
-- Horizontal overflow: **0** for the new review surfaces at every tested width.
-- 200% mobile text reflow: **passed** for the homepage review section and dedicated review index.
-- Review pipeline stages: **4 / 4 present**.
-- Action controls: **at least 44 CSS pixels**.
-- Mobile menu open / Escape close: **passed**.
-- No-JavaScript content and navigation: **passed**.
-- Runtime console errors: **0**.
-- Failed local asset requests in the bundled test: **0**.
+- Review object: `FP-REV-0001`.
+- Canonical route: `/reviews/metro-2033-redux/`.
+- Score contract: `90 - 4 = 86 / A`.
+- Evidence arcs: `9`.
+- Audit checks: `8`.
+- Friction rows: `4`.
+- Review registry, social metadata, schema, site integrity, accessibility, security and public-surface checks: passed.
+- W3C Nu structural HTML errors on the review index and dossier: `0`.
 
-## Adversarial findings corrected
+## Adversarial findings retained
 
-1. A minimum `rem` size on the large review wordmark could exceed the mobile viewport at 200% text scaling. The mobile display size is now capped by viewport width.
-2. Review cards and metadata needed explicit `min-width: 0` to prevent min-content expansion.
-3. The first draft exposed a “Suggest a title” conversion path, which would invite noise and conflict with the async-first operating model. It was replaced with a methodology link.
-4. The archive could have looked unfinished without context. It now presents an explicit, truthful empty state explaining why placeholder reviews are not shown.
-5. The review pipeline avoids fake percentages and dates; only categorical states are exposed.
+1. Large review headings use viewport-capped mobile sizing and shrinkable containers.
+2. Review cards and metadata explicitly permit min-content shrinkage.
+3. Conversion links route to public methodology, the dossier or Contact rather than soliciting unpublished material.
+4. Empty publication lanes explain their state instead of presenting placeholders as work.
+5. Score math, correction layers and caveats remain inspectable rather than being compressed into a single promotional rating.
