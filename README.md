@@ -26,6 +26,8 @@ Any future transfer to a company requires a separate signed assignment. GitHub o
 
 The website uses a conservative, logic-oriented visual language, orthogonal geometry, fuchsia and cyan signal modes, explicit public and private boundaries, and progressive enhancement. Core content remains usable without JavaScript.
 
+Platform raster icons are derived from `assets/mark.svg`. Normal and maskable icons remain separate because maskable assets require a larger safe area; do not combine their manifest `purpose` values.
+
 The first published review record is `FP-REV-0001`, available at `/reviews/metro-2033-redux/`.
 
 `/llms.txt` is a machine-readable map of the same nine indexable public routes. It is a navigation aid only and does not grant access, reuse, training, or other rights.
