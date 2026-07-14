@@ -1,38 +1,53 @@
-# Final Prime: public architecture completion release
+# Final Prime: public architecture release record
 
-Date: 2026-07-12  
-Target: `Final-Prime/final-prime.github.io` / `main`
+- Date reviewed: 2026-07-14
+- Repository: `Final-Prime/final-prime.github.io`
+- Working branch: `polish/website-first-safe`
+- Deployment source: `main`, unchanged pending intentional review and merge
 
-## Added
+## Public architecture
 
-- `/works/`: truthful release index for Art, Games, Film and Experiments.
-- `/index/`: canonical registry of disclosed public objects and states.
-- `/.well-known/security.txt`: standard security contact.
-- `assets/catalog.css`: shared responsive design system for registry surfaces.
+- `/`: brand, operating position, selected public objects and current state.
+- `/systems/`: disclosed systems and technical boundaries.
+- `/works/`: truthful release lanes with no fabricated objects.
+- `/thought/`: publication lanes and the published game-review track.
+- `/reviews/`: game-review method and published dossier registry.
+- `/reviews/metro-2033-redux/`: published `FP-REV-0001` dossier.
+- `/index/`: canonical registry of eight disclosed public records.
+- `/contact/`: direct contact and protected-material boundary.
+- `/legal/`: current ownership, rights and disclosure notice.
+- `/.well-known/security.txt`: standard private security-reporting contact.
 
-## Updated
+The nine page routes above are indexable. `404.html` is a tenth public document and explicitly declares `noindex`.
 
-- Homepage primary CTA now opens the real Public Index.
-- Domain cards now expose explicit routes to Systems, Works, Reviews and Index.
-- Public state ledger now reflects the active registry and prepared Works Index.
-- `/reviews/` navigation now routes to the real Works and Index pages.
-- Sitemap now contains `/`, `/index/`, `/reviews/` and `/works/`.
-- Manifest now declares `id`, `scope` and the complete public-surface description.
-- Homepage, review index and 404 now include a no-referrer policy and same-origin CSP.
-- 404 recovery offers both origin and Public Index routes without disclosing protected data.
+## Hardened behavior
+
+- Primary and footer navigation resolve to real public routes.
+- Contact is a dedicated page rather than a simulated account or request-tracking flow.
+- Canonical URLs, Open Graph URLs, sitemap entries and `llms.txt` contain the same route set.
+- The web manifest includes scoped shortcuts for all primary surfaces, including Contact.
+- Every HTML document declares a no-referrer policy and a same-origin Content Security Policy.
+- Mobile navigation supports JavaScript and no-JavaScript operation.
+- The 404 route offers safe recovery without exposing protected names or inventory.
+- Print, forced-colors, reduced-motion and narrow-screen reflow rules are present.
 
 ## Truthfulness boundary
 
-- No work object, game title, release date, client, partner, result or commercial claim was invented.
+- No client, partner, revenue, funding, result or savings claim is introduced.
+- A/SYNC is presented as a concept/prototype, not a released implementation.
 - The Works archive is explicitly empty.
 - The Public Index lists disclosed records only and does not enumerate private inventory.
-- Private work remains a contact path, not a live account system.
+- Private work remains a scoped contact path, not a live account system.
+- Visitors are told not to send credentials, client data, private source or unpublished research in the first message.
 
 ## Release checks
 
-- Parseable HTML, XML and JSON.
-- One H1 per public document.
-- No duplicate IDs.
-- Local routes and assets resolve against the repository tree.
-- 320 px responsive minimum and 200% text reflow considered in `assets/catalog.css`.
-- No third-party scripts, fonts, forms, analytics, cookies or runtime API calls introduced.
+- parseable HTML, XML and JSON;
+- zero W3C Nu structural HTML errors across all 10 documents;
+- one H1 per public document and no duplicate IDs;
+- complete local route, fragment and asset resolution;
+- canonical, sitemap, social-card and review-schema consistency;
+- mobile navigation and no-JavaScript fallback contracts;
+- accessibility, forced-colors, print and reflow contracts;
+- no third-party scripts, fonts, forms, analytics, cookies or runtime API calls; and
+- full-history privacy, credential and metadata scanning.

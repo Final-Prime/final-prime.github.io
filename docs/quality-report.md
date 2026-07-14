@@ -1,106 +1,86 @@
-# Final Prime website: adversarial quality report
+# Final Prime website: public-surface quality report
 
 ## Scope
 
-This report covers the fourth public-surface polish pass applied to the Final Prime GitHub Pages site on 2026-07-12.
+This report covers the current Final Prime GitHub Pages public surface as reviewed on 2026-07-14. The website is the primary deliverable. Repository documentation and automated checks support developer handoff and guard the public/private boundary.
 
-The approved brand-first hero and corrected Prime Matrix remain intact. This round establishes the first launch-ready editorial surface: a homepage game-review section and a dedicated review index prepared for the first long-form review.
+The review covers nine indexable routes plus the non-indexable 404 document. It does not evaluate or enumerate private code, research, client material or unpublished work.
+
+## Current public surface
+
+- The homepage positions Final Prime as an independent, founder-led studio and routes visitors to disclosed work.
+- `/systems/` presents one public A/SYNC concept record without implementation internals.
+- `/works/` declares four prepared release lanes and no fabricated public objects.
+- `/thought/` separates the published game-review track from three explicitly empty lanes.
+- `/reviews/` and `/reviews/metro-2033-redux/` expose the published `FP-REV-0001` dossier.
+- `/index/` lists eight disclosed public records without enumerating private inventory.
+- `/contact/` provides a direct email path and an explicit protected-material boundary.
+- `/legal/` states the current ownership, rights and disclosure position.
 
 ## Implemented polish
 
-- Added a `Thought / Game reviews` homepage section.
-- Added the dedicated `/reviews/` index.
-- Added a stable first-review object: `FP-REV-0001`.
-- Added an explicit state: `In research`.
-- Added the review pipeline: `Experience → Model → Verify → Publish`.
-- Added the declared review lens: `System / Experience / Meaning / Failure / Verdict`.
-- Added a truthful published-archive empty state.
-- Added responsive and forced-colors review styles in `assets/reviews.css`.
-- Added the review index to the sitemap and repository structure.
-- Preserved progressive enhancement and the no-tracking / no-external-dependency policy.
-
-## Game review surface
-
-The review surface is intentionally structured as an object system rather than a blog feed.
-
-The homepage presents:
-
-- object ID and current lifecycle state;
-- a large upcoming-dossier slot;
-- the production pipeline;
-- a method inspector;
-- links to the review index and methodology.
-
-The dedicated review index presents:
-
-- current index state;
-- review-object state;
-- publication cadence policy;
-- spoiler policy;
-- reusable first-review card structure;
-- review methodology;
-- an explicit empty archive.
+- Clarified the homepage description, calls to action and public/private positioning.
+- Removed simulated request tracking, proposal states and fabricated request identifiers.
+- Moved contact and private-work guidance from the homepage to `/contact/`.
+- Added a compact homepage closing path to Contact and the Public Index.
+- Aligned homepage registry labels with the actual published states and routes.
+- Raised compact interface typography to a readable floor while retaining the dense system language.
+- Completed the footer navigation grid with Contact and matched keyboard focus feedback to pointer hover feedback.
+- Updated canonical route maps, sitemap dates, machine-readable navigation and installable-site shortcuts.
+- Preserved the existing brand-first hero, Prime Matrix, system object and published review feature.
 
 ## Truthfulness and disclosure boundary
 
-- Final Prime remains described as an independent initiative in formation, not a registered company.
-- A/SYNC remains a concept/prototype surface; no published implementation architecture is claimed.
-- Private work remains explicitly by-request; the public surface shows the boundary, not the private process.
-- No clients, partners, revenue, funding, product results or savings claims are introduced.
-- No game title, verdict, score or publication date is fabricated before the first review is ready.
-- The review index explicitly states that no review has been published yet.
-- The only real conversion path remains the existing email line.
+- Final Prime remains an independent initiative owned by Daniel Kenessy in an individual capacity; no registered-company claim is introduced.
+- A/SYNC remains a concept/prototype surface; no implementation architecture or performance result is claimed.
+- No clients, partners, revenue, funding, savings or product-result claims are introduced.
+- Empty Works and Thought lanes remain visibly empty instead of using decorative placeholders or invented dates.
+- The contact route warns visitors not to send credentials, client data, private source or unpublished research in the first message.
+- No account system, private workspace, analytics, form or request tracker is represented as live.
 
 ## Accessibility and resilience
 
-Verified in the updated public surface:
+- Every document has semantic landmarks, one H1 and a working skip link.
+- Primary and footer navigation expose named landmarks and valid current-page states.
+- Mobile navigation supports focus trapping, Escape, outside-click close and focus restoration.
+- Core navigation and content remain usable without JavaScript.
+- Action targets meet the repository touch-target contract.
+- Focus indicators, reduced motion, forced colors, print output and narrow-screen reflow are covered by repository checks.
+- Status meaning is expressed in text rather than color alone.
 
-- semantic landmarks and one H1 per document;
-- visible focus and keyboard-operable controls;
-- `aria-current="step"` on the review pipeline;
-- mobile navigation remains usable with and without JavaScript;
-- status meaning is expressed in text, not color alone;
-- 44 CSS-pixel minimum action targets in tested layouts;
-- reduced-motion preferences remain respected;
-- forced-colors mode receives explicit review-surface borders and state treatment;
-- 200% mobile text scaling does not create overflow on the review surfaces;
-- no runtime exception during enhancement.
+## Verification result
 
-## Adversarial test result
+The current branch passes all repository quality gates:
 
-### Existing hero and system baseline
+- editorial style and punctuation;
+- IP notices and current rights holder;
+- review registry, score math and evidence structure;
+- Open Graph and X card metadata;
+- canonical routes, sitemap, `llms.txt` and review schema;
+- local navigation, assets, CSS reachability, reflow, print and script budgets;
+- CSP and security-contact policy;
+- semantic and ARIA accessibility contracts; and
+- full-history public-surface privacy and secret scanning.
 
-- Matrix static and geometry assertions: **55 / 55 passed**.
-- Existing homepage system-surface assertions: **69 / 69 passed**.
+Current measured surface:
 
-### Game review surface pass
+- 10 HTML documents;
+- 9 indexable canonical routes;
+- 360 local references;
+- 235 reachable CSS classes;
+- 3 budgeted scripts; and
+- 12 validated web-manifest targets.
 
-- Static, semantic, responsive and behavior assertions: **67 / 67 passed**.
-- Tested viewports: **320 × 800, 390 × 844, 768 × 900 and 1440 × 1000**.
-- Horizontal overflow: **0** for the new review surfaces.
-- 200% mobile text reflow: **passed**.
-- Four-stage review pipeline: **passed**.
-- Mobile menu open / Escape / focus behavior: **passed**.
-- No-JavaScript review content and navigation: **passed**.
-- Runtime exceptions: **0**.
-
-## Adversarial findings corrected
-
-1. The new editorial surface initially risked becoming a generic “coming soon” card. It was rebuilt as a stateful review object with method and pipeline.
-2. Large review headings could expand min-content width at 200% text scaling. Display sizes are now viewport-capped on mobile and containers explicitly allow shrinkage.
-3. A suggestion-email CTA conflicted with the site’s low-noise async posture. It was replaced with a review-methodology route.
-4. No placeholder cover, score, title or release date is shown as if it were content.
-5. The empty archive now explains the publication standard rather than appearing broken.
+All 10 HTML documents also returned zero structural errors from the W3C Nu HTML checker on 2026-07-14. Relative-resource CSP notices from direct document upload are expected because the checker does not receive the GitHub Pages origin used by the live site.
 
 ## Privacy and dependency review
 
-- no analytics, cookies, forms or tracking;
+- no analytics, cookies, forms or behavioral tracking;
 - no external fonts, CDNs or third-party JavaScript;
-- no new network calls;
-- no user-controlled HTML or query-string rendering;
-- authored static review markup only;
-- no private game notes or unpublished review evidence is exposed.
+- no remote embedded media or runtime API calls;
+- no user-controlled HTML or query-string rendering; and
+- no credentials, private source, client material or unpublished research in the public surface.
 
 ## Deployment note
 
-The update is intended for direct deployment to `main`; no temporary branch is required. GitHub Pages and social-card caches may briefly show the previous version after the commit.
+Polish work is prepared on the isolated `polish/website-first-safe` branch. The `main` branch and live GitHub Pages site remain unchanged until an intentional review and merge. Social-card and Pages caches may briefly retain a previous version after any later deployment.
