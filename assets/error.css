@@ -1,0 +1,57 @@
+/* Minimal recovery-route layout. */
+
+.error-page { min-height: 100svh; }
+.error-main {
+  min-height: calc(100svh - var(--header-height));
+  display: grid;
+  place-items: center;
+  padding: 60px 0;
+}
+.error-panel {
+  max-width: 760px;
+  padding: clamp(24px, 6vw, 64px);
+  border: 1px solid var(--line);
+  background: rgba(15, 19, 22, 0.62);
+}
+.error-code {
+  color: var(--fuchsia-text);
+  font: 800 0.75rem/1.2 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.error-panel h1 {
+  margin: 22px 0 0;
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 7vw, 6.2rem);
+  font-style: normal;
+  font-weight: 780;
+  line-height: 0.92;
+  letter-spacing: -0.07em;
+  overflow-wrap: anywhere;
+}
+.error-panel > p:not(.error-code) {
+  max-width: 580px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.error-panel .contact-note {
+  color: var(--muted-dark);
+  font: 700 0.75rem/1.5 var(--mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1080px) {
+  :root { --shell: min(100% - 44px, 980px); }
+}
+
+@media (max-width: 760px) {
+  :root { --shell: min(100% - 28px, 720px); --header-height: 70px; }
+  .error-panel .hero-actions { display: grid; }
+  .error-panel .button { width: 100%; }
+}
+
+@media (forced-colors: active) {
+  .error-panel { border-color: CanvasText; }
+}

@@ -26,7 +26,13 @@ SCRIPT_BUDGETS = {
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
 FORBIDDEN_ROUTE_STYLESHEETS = {
     "index.html": {"/assets/catalog.css", "/assets/review-release.css"},
-    "404.html": {"/assets/content-a.css", "/assets/hero.css"},
+    "404.html": {
+        "/assets/content-a.css",
+        "/assets/content-b.css",
+        "/assets/hero.css",
+        "/assets/responsive.css",
+        "/assets/surface-polish.css",
+    },
     "contact/index.html": {
         "/assets/content-a.css",
         "/assets/hardening.css",

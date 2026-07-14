@@ -46,11 +46,3 @@
 @media (forced-colors: active) {
   .contact-routing { border-color: CanvasText; }
 }
-
-.error-page { min-height: 100svh; }
-.error-main { min-height: calc(100svh - var(--header-height)); display: grid; place-items: center; padding: 60px 0; }
-.error-panel { max-width: 760px; border: 1px solid var(--line); background: rgba(15, 19, 22, 0.62); padding: clamp(24px, 6vw, 64px); }
-.error-code { color: var(--fuchsia-text); font: 800 0.75rem/1.2 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
-.error-panel h1 { margin: 22px 0 0; font-family: var(--display); font-size: clamp(2.8rem, 7vw, 6.2rem); font-style: normal; font-weight: 780; line-height: 0.92; letter-spacing: -0.07em; }
-.error-panel > p:not(.error-code) { max-width: 580px; margin: 24px 0 0; color: var(--muted); line-height: 1.65; }
-.error-panel .button { margin-top: 26px; }
