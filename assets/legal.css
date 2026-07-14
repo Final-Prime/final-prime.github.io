@@ -87,6 +87,14 @@
 .legal-callout strong { display: block; color: var(--fuchsia-text); font: 800 0.7rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 .legal-callout p { margin-top: 9px; }
 
+.boundary-copy p a {
+  color: var(--text);
+  text-decoration-color: var(--cyan);
+  text-underline-offset: 3px;
+}
+.boundary-copy p a:hover,
+.boundary-copy p a:focus-visible { color: var(--cyan); }
+
 @media (max-width: 900px) { .legal-grid { grid-template-columns: 1fr; } }
 
 @media (max-width: 520px) {
