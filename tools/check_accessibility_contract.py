@@ -363,10 +363,14 @@ def validate_forced_colors(content: str) -> list[str]:
 
 def validate_target_sizes(content: str) -> list[str]:
     required = (
-        ".page-context a {",
-        "display: inline-flex;",
-        "min-height: 24px;",
-        "align-items: center;",
+        ".page-context a {\n"
+        "  display: inline-flex;\n"
+        "  min-height: 24px;\n"
+        "  align-items: center;",
+        ".footer-meta a {\n"
+        "  min-height: 24px;\n"
+        "  display: inline-flex;\n"
+        "  align-items: center;",
     )
     return [f"assets/surface-polish.css: target-size contract is missing {token}" for token in required if token not in content]
 
