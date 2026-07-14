@@ -45,7 +45,7 @@ The dedicated review index presents:
 
 - Final Prime remains described as an independent initiative in formation, not a registered company.
 - A/SYNC remains a concept/prototype surface; no published implementation architecture is claimed.
-- Prime Access remains explicitly non-live and illustrative.
+- Private work remains explicitly by-request; the public surface shows the boundary, not the private process.
 - No clients, partners, revenue, funding, product results or savings claims are introduced.
 - No game title, verdict, score or publication date is fabricated before the first review is ready.
 - The review index explicitly states that no review has been published yet.

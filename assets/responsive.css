@@ -10,7 +10,7 @@
   .domain:nth-child(2) { border-right: 0; }
   .domain:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
   .feature-layout, .access-layout, .status-layout, .contact-layout { grid-template-columns: 1fr; }
-  .tracking-card, .status-ledger { max-width: 680px; }
+  .private-boundary-card, .status-ledger { max-width: 680px; }
 }
 
 @media (max-width: 760px) {
@@ -70,8 +70,8 @@
   .domain:last-child { border-bottom: 0; }
   .object-stage { min-height: 340px; }
   .inspector-list > div { grid-template-columns: 1fr; gap: 5px; padding: 10px 0; }
-  .access-copy, .tracking-card { padding: 18px; }
-  .tracking-card dl > div { grid-template-columns: 1fr; gap: 5px; padding: 10px 0; }
+  .access-copy, .private-boundary-card { padding: 18px; }
+  .private-boundary-card dl > div { grid-template-columns: 1fr; gap: 5px; padding: 10px 0; }
   .contact-link { font-size: 0.75rem; overflow-wrap: anywhere; }
 }
 
