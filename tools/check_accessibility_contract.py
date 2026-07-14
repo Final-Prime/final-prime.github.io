@@ -21,6 +21,18 @@ CONTRAST_REQUIREMENTS = (
     ("fuchsia-text", "surface-3", 4.5),
     ("cyan", "surface-3", 4.5),
 )
+EXPECTED_NAV_LINKS = {
+    "Primary navigation": ["/systems/", "/works/", "/thought/", "/index/", "/contact/"],
+    "Footer navigation": [
+        "/systems/",
+        "/works/",
+        "/thought/",
+        "/reviews/",
+        "/index/",
+        "/contact/",
+        "/legal/",
+    ],
+}
 
 
 class SemanticsParser(HTMLParser):
@@ -46,6 +58,8 @@ class SemanticsParser(HTMLParser):
         self.meters: list[dict[str, str]] = []
         self.positive_tabindex: list[str] = []
         self.nav_names: list[str] = []
+        self.nav_links: dict[str, list[str]] = {}
+        self.active_nav_name: str | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         data = {key.lower(): value or "" for key, value in attrs}
@@ -84,7 +98,12 @@ class SemanticsParser(HTMLParser):
         if tabindex and tabindex.lstrip("+").isdigit() and int(tabindex) > 0:
             self.positive_tabindex.append(f"{tag}[tabindex={tabindex}]")
         if tag == "nav":
-            self.nav_names.append(data.get("aria-label") or data.get("aria-labelledby") or "")
+            name = data.get("aria-label") or data.get("aria-labelledby") or ""
+            self.nav_names.append(name)
+            self.nav_links[name] = []
+            self.active_nav_name = name
+        elif tag == "a" and self.active_nav_name is not None:
+            self.nav_links[self.active_nav_name].append(data.get("href", ""))
         self.stack.append(tag)
 
     def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -112,6 +131,8 @@ class SemanticsParser(HTMLParser):
             self.button_buffer = None
         if tag == "article" and self.article_heading_counts:
             self.closed_articles.append(self.article_heading_counts.pop())
+        if tag == "nav":
+            self.active_nav_name = None
         if tag == "body":
             self.in_body = False
         if tag in self.stack:
@@ -183,6 +204,13 @@ def validate_page(path: Path) -> list[str]:
         errors.append(f"{relative}: every navigation landmark must have a name")
     if len(parser.nav_names) != len(set(parser.nav_names)):
         errors.append(f"{relative}: navigation landmark names must be unique")
+    if relative != "404.html":
+        for name, expected_links in EXPECTED_NAV_LINKS.items():
+            actual_links = parser.nav_links.get(name)
+            if actual_links != expected_links:
+                errors.append(
+                    f"{relative}: {name} links must be {expected_links}, got {actual_links}"
+                )
 
     for tag, value, href in parser.current_items:
         if value not in ARIA_CURRENT_VALUES:
