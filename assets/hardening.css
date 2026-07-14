@@ -3,7 +3,7 @@
 .matrix-topline,
 .matrix-cell > span,
 .access-benefits span,
-  .contact-note,
+.contact-note,
 .inspector-code,
 .section-note,
 .domain-code,
@@ -11,7 +11,7 @@
 .matrix-cell::after,
 .stage-caption,
 .inspector-list dt,
-  .status-ledger dt,
+.status-ledger dt,
 .domain li,
 .domain-state,
 .domain-spec dt,
@@ -21,7 +21,7 @@
 .stage-readout,
 .object-state,
 .access-boundary,
-  .contact-routing {
+.contact-routing {
   font-size: 0.75rem;
   line-height: 1.4;
 }
