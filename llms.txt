@@ -11,6 +11,7 @@
 - [Game reviews](https://final-prime.github.io/reviews/): Review methodology, registry, and published dossiers.
 - [Metro 2033 Redux review](https://final-prime.github.io/reviews/metro-2033-redux/): FP-REV-0001, a scored long-form review dossier.
 - [Public index](https://final-prime.github.io/index/): Route-level public object inventory.
+- [Contact](https://final-prime.github.io/contact/): Direct contact path and private-work disclosure boundary.
 - [Legal and IP](https://final-prime.github.io/legal/): Ownership, trademark, copyright, reuse, and permission boundaries.
 
 ## Scope
