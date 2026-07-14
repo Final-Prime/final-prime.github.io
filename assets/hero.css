@@ -121,13 +121,13 @@
 .hero-meta > div { min-width: 0; padding: 14px; border-right: 1px solid var(--line); }
 .hero-meta > div:first-child { padding-left: 0; }
 .hero-meta > div:last-child { border-right: 0; }
-.hero-meta dt { color: var(--muted); font: 700 0.625rem/1.2 var(--mono); letter-spacing: 0.11em; text-transform: uppercase; }
+.hero-meta dt { color: var(--muted); font: 700 0.75rem/1.4 var(--mono); letter-spacing: 0.11em; text-transform: uppercase; }
 .hero-meta dd { margin: 9px 0 0; color: var(--text); font-size: 0.75rem; overflow-wrap: anywhere; text-transform: uppercase; }
 
 .prime-matrix { position: relative; width: 100%; max-width: 560px; justify-self: end; border: 1px solid var(--line); background: rgba(15, 19, 22, 0.92); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28); }
 .prime-matrix::before { position: absolute; top: -1px; left: -1px; width: 29%; height: 1px; content: ""; background: var(--fuchsia); }
 .prime-matrix::after { position: absolute; right: -1px; bottom: -1px; width: 23%; height: 1px; content: ""; background: var(--cyan); }
-.matrix-topline { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 50px; padding: 0 15px; border-bottom: 1px solid var(--line); color: var(--muted); font: 800 0.625rem/1.2 var(--mono); letter-spacing: 0.11em; text-transform: uppercase; }
+.matrix-topline { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 50px; padding: 0 15px; border-bottom: 1px solid var(--line); color: var(--muted); font: 800 0.75rem/1.4 var(--mono); letter-spacing: 0.11em; text-transform: uppercase; }
 .matrix-status { display: flex; align-items: center; gap: 8px; color: var(--cyan); }
 .matrix-status i { width: 6px; height: 6px; background: var(--cyan); box-shadow: 0 0 0 4px rgba(10, 232, 247, 0.10); }
 .matrix-heading { padding: 18px 18px 17px; border-bottom: 1px solid var(--line); }
@@ -153,7 +153,7 @@
   padding-top: 2px;
   color: var(--muted);
   content: "0" counter(matrix);
-  font: 800 0.625rem/1.4 var(--mono);
+  font: 800 0.75rem/1.4 var(--mono);
   letter-spacing: 0.08em;
 }
 .matrix-cell::after {
@@ -161,7 +161,7 @@
   align-self: start;
   padding-top: 2px;
   color: var(--muted-dark);
-  font: 800 0.625rem/1.4 var(--mono);
+  font: 800 0.75rem/1.4 var(--mono);
   letter-spacing: 0.09em;
   text-transform: uppercase;
   white-space: nowrap;
