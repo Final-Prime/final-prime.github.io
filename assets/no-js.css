@@ -1,5 +1,4 @@
 /* Mobile navigation fallback loaded only when JavaScript is unavailable. */
-html [data-demo-track],
 html .review-dossier-page .evidence-toolbar-actions { display: none; }
 
 @media (max-width: 760px) {

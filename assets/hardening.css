@@ -3,8 +3,7 @@
 .matrix-topline,
 .matrix-cell > span,
 .access-benefits span,
-.tracking-topline,
-.contact-note,
+  .contact-note,
 .inspector-code,
 .section-note,
 .domain-code,
@@ -12,8 +11,7 @@
 .matrix-cell::after,
 .stage-caption,
 .inspector-list dt,
-.tracking-card dt,
-.status-ledger dt,
+  .status-ledger dt,
 .domain li,
 .domain-state,
 .domain-spec dt,
@@ -23,16 +21,12 @@
 .stage-readout,
 .object-state,
 .access-boundary,
-.tracking-primary > span,
-.tracking-outcomes,
-.tracking-metrics,
-.contact-routing {
+  .contact-routing {
   font-size: 0.75rem;
   line-height: 1.4;
 }
 
 .inspector-list dd,
-.tracking-card dd,
 .status-ledger dd {
   font-size: 0.75rem;
   line-height: 1.4;
@@ -294,34 +288,6 @@
 .access-boundary span { display: block; color: var(--muted-dark); font-family: var(--mono); letter-spacing: 0.08em; }
 .access-boundary strong { display: block; margin-top: 7px; color: var(--text); font-family: var(--mono); letter-spacing: 0.04em; overflow-wrap: anywhere; text-transform: uppercase; }
 
-/* Prime Access: show current state and the unresolved branch instead of a flat ledger. */
-.tracking-card.is-enhanced { position: relative; overflow: hidden; }
-.tracking-card.is-enhanced::after { position: absolute; right: -1px; bottom: -1px; width: 26%; height: 1px; content: ""; background: var(--cyan); }
-.tracking-primary { padding: 20px 0 18px; border-bottom: 1px solid var(--line); }
-.tracking-primary > span { color: var(--muted-dark); font-family: var(--mono); font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
-.tracking-primary strong { display: block; margin-top: 10px; color: var(--fuchsia-text); font-family: var(--display); font-size: clamp(1.45rem, 2.4vw, 2.1rem); line-height: 1; letter-spacing: -0.05em; text-transform: uppercase; }
-.tracking-primary p { margin: 9px 0 0; color: var(--muted); font-size: 0.72rem; }
-.tracking-branch { position: relative; padding: 23px 0 7px; }
-.tracking-origin { position: absolute; top: 0; left: 50%; width: 1px; height: 22px; background: var(--fuchsia); }
-.tracking-origin::after { position: absolute; bottom: -3px; left: -3px; width: 7px; height: 7px; content: ""; background: var(--fuchsia); }
-.tracking-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
-.tracking-outcomes span {
-  min-width: 0;
-  padding: 12px 8px;
-  border-right: 1px solid var(--line);
-  color: var(--muted);
-  font-family: var(--mono);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  overflow-wrap: anywhere;
-  text-align: center;
-  text-transform: uppercase;
-}
-.tracking-outcomes span:last-child { border-right: 0; }
-.tracking-outcomes span.is-active { color: var(--cyan); background: rgba(10, 232, 247, 0.035); }
-.tracking-card.is-enhanced .tracking-current { display: none; }
-.tracking-metrics { margin-top: 8px !important; }
-
 /* Contact routing makes the async-first policy immediately operational. */
 .contact-routing { margin: 16px 0 0; border: 1px solid var(--line); }
 .contact-routing > div { display: grid; grid-template-columns: 1fr auto; gap: 18px; min-height: 48px; align-items: center; padding: 0 12px; border-bottom: 1px solid var(--line-soft); }
@@ -355,10 +321,6 @@
   .inspector-topline { align-items: flex-start; flex-direction: column; }
   .access-boundary { grid-template-columns: 1fr; }
   .access-boundary > div + div { border-top: 1px solid var(--fuchsia); border-left: 0; }
-  .tracking-outcomes { grid-template-columns: 1fr; }
-  .tracking-outcomes span { border-right: 0; border-bottom: 1px solid var(--line); text-align: left; }
-  .tracking-outcomes span:last-child { border-bottom: 0; }
-  .tracking-origin { left: 18px; }
   .contact-routing > div { grid-template-columns: 1fr; gap: 6px; padding: 10px 12px; }
   .contact-routing dd { text-align: left; }
 }
@@ -382,8 +344,6 @@
   .matrix-status i,
   .stage-topline i,
   .object-state i,
-  .tracking-origin,
-  .tracking-origin::after,
   .status-dot { forced-color-adjust: none; }
   .domain-active,
   .domain-rare,
@@ -391,7 +351,6 @@
   .matrix-cell-fuchsia,
   .object-stage,
   .object-inspector,
-  .tracking-card,
   .contact-routing { border: 1px solid CanvasText; box-shadow: none; }
   .button-primary { color: ButtonText; background: ButtonFace; border-color: ButtonText; }
 }

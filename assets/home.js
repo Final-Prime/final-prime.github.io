@@ -1,12 +1,6 @@
 (() => {
   "use strict";
 
-  const demoTrack = document.querySelector("[data-demo-track]");
-  const trackState = document.querySelector("[data-track-state]");
-  const trackOwner = document.querySelector("[data-track-owner]");
-  const trackOutcomes = document.querySelector("[data-track-outcomes]");
-  const trackCheck = document.querySelector("[data-track-check]");
-
   const isHomepage = location.pathname === "/" || location.pathname.endsWith("/index.html");
   if (isHomepage && "IntersectionObserver" in window) {
     const sectionMap = [
@@ -113,33 +107,6 @@
     inspector.classList.add("is-enhanced");
   }
 
-  const trackingCard = document.querySelector(".tracking-card");
-  let primaryStatus = null;
-  let primaryState = null;
-  let primaryNote = null;
-  let outcomeNodes = [];
-  if (trackingCard && !trackingCard.classList.contains("is-enhanced")) {
-    const dl = trackingCard.querySelector("dl");
-    const primary = document.createElement("div");
-    primary.className = "tracking-primary";
-    primary.setAttribute("role", "status");
-    primary.setAttribute("aria-live", "off");
-    primary.setAttribute("aria-atomic", "true");
-    primary.innerHTML = '<span>Current state</span><strong data-track-state-primary>Under review</strong><p data-track-note>Final Prime owns the next move.</p>';
-    const branch = document.createElement("div");
-    branch.className = "tracking-branch";
-    branch.setAttribute("role", "group");
-    branch.setAttribute("aria-label", "Potential next states");
-    branch.innerHTML = '<span class="tracking-origin" aria-hidden="true"></span><div class="tracking-outcomes"><span>Clarification required</span><span>Qualified</span><span>Proposal issued</span></div>';
-    dl?.before(primary, branch);
-    dl?.classList.add("tracking-metrics");
-    trackingCard.classList.add("is-enhanced");
-    primaryStatus = primary;
-    primaryState = primary.querySelector("[data-track-state-primary]");
-    primaryNote = primary.querySelector("[data-track-note]");
-    outcomeNodes = [...branch.querySelectorAll(".tracking-outcomes span")];
-  }
-
   const contactCopy = document.querySelector(".contact-copy");
   if (contactCopy && !contactCopy.querySelector(".contact-routing")) {
     const note = contactCopy.querySelector(".contact-note");
@@ -150,36 +117,4 @@
     note?.before(routing);
   }
 
-  const trackingStates = [
-    { state: "Under review", owner: "Final Prime", outcomes: "Clarify / qualify / close", note: "Final Prime owns the next move.", active: -1 },
-    { state: "Clarification required", owner: "Buyer", outcomes: "Answer, then review resumes", note: "A targeted buyer response is required.", active: 0 },
-    { state: "Qualified", owner: "Final Prime", outcomes: "Private scope / clear close", note: "The private-scoping branch is available.", active: 1 },
-    { state: "Proposal issued", owner: "Buyer", outcomes: "Accept / counter / decline / expire", note: "A versioned proposal is ready for decision.", active: 2 }
-  ];
-  let trackingIndex = 0;
-
-  const updateText = (node, text) => {
-    if (node && node.textContent !== text) node.textContent = text;
-  };
-
-  const renderTracking = item => {
-    updateText(trackState, item.state);
-    updateText(primaryState, item.state);
-    updateText(primaryNote, item.note);
-    updateText(trackOwner, item.owner);
-    updateText(trackOutcomes, item.outcomes);
-    updateText(trackCheck, "Interface example");
-    outcomeNodes.forEach((node, index) => node.classList.toggle("is-active", index === item.active));
-  };
-
-  renderTracking(trackingStates[0]);
-  if (demoTrack) {
-    demoTrack.textContent = "Advance state preview";
-    demoTrack.addEventListener("click", () => {
-      primaryStatus?.setAttribute("aria-live", "polite");
-      trackingIndex = (trackingIndex + 1) % trackingStates.length;
-      renderTracking(trackingStates[trackingIndex]);
-    });
-    demoTrack.hidden = false;
-  }
 })();

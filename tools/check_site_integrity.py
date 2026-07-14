@@ -113,14 +113,11 @@ ROUTE_REFLOW_CONTRACTS = {
     ),
 }
 NO_JS_CONTRACT_TOKENS = (
-    "html [data-demo-track]",
     "html .review-dossier-page .evidence-toolbar-actions",
     "html .menu-toggle { display: none; }",
     "html .site-nav {",
 )
 PROGRESSIVE_ENHANCEMENT_CONTRACT = {
-    "index.html": ("data-demo-track hidden",),
-    "assets/home.js": ("demoTrack.hidden = false",),
     "assets/app.js": ('classList.replace("no-js", "js")', "menuToggle.hidden = false"),
     "assets/responsive.css": (
         "html.no-js .site-nav",

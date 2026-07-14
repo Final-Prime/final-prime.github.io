@@ -26,7 +26,7 @@ Target: `Final-Prime/final-prime.github.io` / `main`
 - No work object, game title, release date, client, partner, result or commercial claim was invented.
 - The Works archive is explicitly empty.
 - The Public Index lists disclosed records only and does not enumerate private inventory.
-- Prime Access remains an interface preview, not a live account system.
+- Private work remains a contact path, not a live account system.
 
 ## Release checks
 
