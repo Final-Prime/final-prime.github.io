@@ -52,6 +52,8 @@ def validate_page(path: Path) -> list[str]:
 
     required = (
         "og:type",
+        "og:locale",
+        "og:site_name",
         "og:title",
         "og:description",
         "og:url",
@@ -75,6 +77,10 @@ def validate_page(path: Path) -> list[str]:
 
     if meta["og:image:type"] != "image/png":
         errors.append(f"{relative}: og:image:type must be image/png")
+    if meta["og:locale"] != "en_US":
+        errors.append(f"{relative}: og:locale must be en_US")
+    if meta["og:site_name"] != "Final Prime":
+        errors.append(f"{relative}: og:site_name must be Final Prime")
     if (meta["og:image:width"], meta["og:image:height"]) != ("1200", "630"):
         errors.append(f"{relative}: declared social image size must be 1200x630")
     if meta["og:image"] != meta["twitter:image"]:
