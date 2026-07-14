@@ -69,7 +69,7 @@ Current measured surface:
 - 361 local references;
 - 235 reachable CSS classes;
 - 3 budgeted scripts; and
-- 12 validated web-manifest targets.
+- 14 validated web-manifest targets.
 
 All 10 HTML documents also returned zero structural errors from the W3C Nu HTML checker on 2026-07-14. Relative-resource CSP notices from direct document upload are expected because the checker does not receive the GitHub Pages origin used by the live site.
 

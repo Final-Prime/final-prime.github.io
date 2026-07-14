@@ -42,13 +42,17 @@ REQUIRED_ICON_LINKS = {
 }
 REQUIRED_MANIFEST_ICONS = {
     ("/assets/favicon.svg", "any", "image/svg+xml", "any"),
-    ("/assets/icon-192.png", "192x192", "image/png", "any maskable"),
-    ("/assets/icon-512.png", "512x512", "image/png", "any maskable"),
+    ("/assets/icon-192.png", "192x192", "image/png", "any"),
+    ("/assets/icon-512.png", "512x512", "image/png", "any"),
+    ("/assets/icon-maskable-192.png", "192x192", "image/png", "maskable"),
+    ("/assets/icon-maskable-512.png", "512x512", "image/png", "maskable"),
 }
 REQUIRED_PNG_DIMENSIONS = {
     "apple-touch-icon.png": (180, 180),
     "assets/icon-192.png": (192, 192),
     "assets/icon-512.png": (512, 512),
+    "assets/icon-maskable-192.png": (192, 192),
+    "assets/icon-maskable-512.png": (512, 512),
 }
 PRINT_CONTRACT_TOKENS = (
     "@media print",
