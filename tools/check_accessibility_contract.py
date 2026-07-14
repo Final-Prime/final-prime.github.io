@@ -206,6 +206,13 @@ def validate_page(path: Path) -> list[str]:
     for image in parser.images:
         if "alt" not in image:
             errors.append(f"{relative}: img missing alt")
+        try:
+            width = int(image["width"])
+            height = int(image["height"])
+            if width <= 0 or height <= 0:
+                raise ValueError
+        except (KeyError, ValueError):
+            errors.append(f"{relative}: img must reserve space with positive width and height")
         if image.get("src", "").endswith("mark.svg") and image.get("alt") != "":
             errors.append(f"{relative}: redundant brand mark must remain decorative")
     for button in parser.buttons:
