@@ -47,6 +47,14 @@ WORKFLOW_CHECK_COMMANDS = (
     "python tools/check_social_cards.py",
 )
 FORBIDDEN_NETWORK_APIS = ("fetch(", "XMLHttpRequest", "WebSocket(", "sendBeacon(")
+SECURITY_POLICY_REQUIRED = (
+    "finalprime.official@gmail.com",
+    "direct email path",
+    "not a live account",
+    "Do not include secrets",
+    "private source",
+    "https://final-prime.github.io/.well-known/security.txt",
+)
 
 
 class SecurityParser(HTMLParser):
@@ -176,6 +184,15 @@ def validate_security_txt(now: datetime) -> list[str]:
     return errors
 
 
+def validate_security_policy() -> list[str]:
+    content = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+    return [
+        f"SECURITY.md: missing current public boundary {phrase!r}"
+        for phrase in SECURITY_POLICY_REQUIRED
+        if phrase not in content
+    ]
+
+
 def validate_workflow_content(content: str, relative: str) -> list[str]:
     errors: list[str] = []
     uses_lines = [line for line in content.splitlines() if line.strip().lstrip("- ").startswith("uses:")]
@@ -226,6 +243,7 @@ def main() -> int:
             if token in content:
                 errors.append(f"{path.relative_to(ROOT).as_posix()}: undeclared runtime network API {token}")
     errors.extend(validate_security_txt(datetime.now(timezone.utc)))
+    errors.extend(validate_security_policy())
     workflow_paths = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
     for path in workflow_paths:
         errors.extend(validate_workflow(path))

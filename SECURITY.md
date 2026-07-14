@@ -13,9 +13,9 @@ issue.
 
 ## Scope
 
-The current public website is a static GitHub Pages surface. Prime Access is
-an interface preview and is not a live account, authentication, messaging, or
-proposal system.
+The current public website is a static GitHub Pages surface. Contact is a
+direct email path, not a live account, authentication, messaging, request
+tracking, private workspace, or proposal system.
 
 ## Response boundary
 
