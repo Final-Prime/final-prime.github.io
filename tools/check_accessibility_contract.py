@@ -300,8 +300,11 @@ def validate_home_nav_tracking(content: str) -> list[str]:
 
 def validate_mobile_hash_focus(content: str) -> list[str]:
     required = (
+        "const hashTarget = hash =>",
         "const samePageHashTarget = anchor =>",
-        "decodeURIComponent(url.hash.slice(1))",
+        "decodeURIComponent(hash.slice(1))",
+        "return hashTarget(url.hash)",
+        "if (location.hash) focusHashTarget(hashTarget(location.hash))",
         'target.setAttribute("tabindex", "-1")',
         'const previousTabindex = target.getAttribute("tabindex")',
         "target.focus({ preventScroll: true })",

@@ -56,11 +56,20 @@
     });
   };
 
+  const hashTarget = hash => {
+    if (!hash) return null;
+    try {
+      return document.getElementById(decodeURIComponent(hash.slice(1)));
+    } catch {
+      return null;
+    }
+  };
+
   const samePageHashTarget = anchor => {
     if (!anchor.hash) return null;
     const url = new URL(anchor.href);
     if (url.pathname !== location.pathname || url.search !== location.search) return null;
-    return document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    return hashTarget(url.hash);
   };
 
   const focusHashTarget = target => {
@@ -162,6 +171,8 @@
     if (!anchor || anchor.matches(".skip-link") || siteNav?.contains(anchor)) return;
     focusHashTarget(samePageHashTarget(anchor));
   });
+
+  if (location.hash) focusHashTarget(hashTarget(location.hash));
 
   const progress = document.createElement("div");
   progress.className = "site-progress";
