@@ -6,8 +6,7 @@
     const sectionMap = [
       [document.querySelector("#index"), "/index/"],
       [document.querySelector(".system-feature"), "/systems/"],
-      [document.querySelector(".review-section"), "/thought/"],
-      [document.querySelector("#contact"), "/#contact"]
+      [document.querySelector(".review-section"), "/thought/"]
     ].filter(([section]) => section);
     const visible = new Map();
 
@@ -105,16 +104,6 @@
     boundary.innerHTML = '<div><span>PUBLIC</span><strong>Capability surface</strong></div><div><span>PRIVATE</span><strong>Implementation + research</strong></div>';
     actions?.before(boundary);
     inspector.classList.add("is-enhanced");
-  }
-
-  const contactCopy = document.querySelector(".contact-copy");
-  if (contactCopy && !contactCopy.querySelector(".contact-routing")) {
-    const note = contactCopy.querySelector(".contact-note");
-    const routing = document.createElement("dl");
-    routing.className = "contact-routing";
-    routing.setAttribute("aria-label", "Contact routing guidance");
-    routing.innerHTML = '<div><dt>General question</dt><dd>Email reply</dd></div><div><dt>Concrete business idea</dt><dd>Qualified workspace invitation</dd></div><div><dt>Phone call</dt><dd>Not required</dd></div>';
-    note?.before(routing);
   }
 
 })();
