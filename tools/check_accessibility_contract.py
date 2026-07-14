@@ -69,6 +69,7 @@ class SemanticsParser(HTMLParser):
         self.positive_tabindex: list[str] = []
         self.nav_names: list[str] = []
         self.nav_links: dict[str, list[str]] = {}
+        self.nav_current_items: dict[str, list[tuple[str, str, str]]] = {}
         self.active_nav_name: str | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -97,6 +98,10 @@ class SemanticsParser(HTMLParser):
             self.button_buffer = []
         if data.get("aria-current"):
             self.current_items.append((tag, data["aria-current"], data.get("href", "")))
+            if self.active_nav_name is not None:
+                self.nav_current_items[self.active_nav_name].append(
+                    (tag, data["aria-current"], data.get("href", ""))
+                )
         if data.get("aria-label"):
             if tag in {"p", "span", "strong", "small"}:
                 self.invalid_labels.append(tag)
@@ -111,6 +116,7 @@ class SemanticsParser(HTMLParser):
             name = data.get("aria-label") or data.get("aria-labelledby") or ""
             self.nav_names.append(name)
             self.nav_links[name] = []
+            self.nav_current_items[name] = []
             self.active_nav_name = name
         elif tag == "a" and self.active_nav_name is not None:
             self.nav_links[self.active_nav_name].append(data.get("href", ""))
@@ -230,13 +236,18 @@ def validate_page(path: Path) -> list[str]:
                 f"{relative}: Breadcrumb links must be {expected_breadcrumb}, "
                 f"got {parser.nav_links.get('Breadcrumb')}"
             )
+        if parser.nav_current_items.get("Breadcrumb") != [("span", "page", "")]:
+            errors.append(f"{relative}: Breadcrumb must identify one non-link current page")
 
     for tag, value, href in parser.current_items:
         if value not in ARIA_CURRENT_VALUES:
             errors.append(f"{relative}: invalid aria-current value {value}")
         target_path = urlsplit(href).path
-        if value == "page" and (tag != "a" or target_path != route):
-            errors.append(f"{relative}: aria-current=page points to {target_path}, not {route}")
+        if value == "page":
+            if tag == "a" and target_path != route:
+                errors.append(f"{relative}: aria-current=page points to {target_path}, not {route}")
+            elif tag not in {"a", "span"} or (tag == "span" and href):
+                errors.append(f"{relative}: invalid non-link aria-current=page on {tag}")
         if value == "location" and target_path == route:
             errors.append(f"{relative}: exact page link must use page, not location")
     for meter in parser.meters:
