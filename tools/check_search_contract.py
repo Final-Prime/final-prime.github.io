@@ -170,6 +170,10 @@ def main() -> int:
     missing_properties = required_properties.difference(present_properties)
     if missing_properties:
         errors.append(f"review: missing schema properties {sorted(missing_properties)}")
+    for prop in ("author", "publisher", "itemReviewed"):
+        items = [item for item in review.itemprops if item.get("itemprop") == prop]
+        if len(items) != 1 or items[0].get("aria-hidden") != "true":
+            errors.append(f"review: non-visual {prop} schema must stay out of the accessibility tree")
     review_url = f"{ORIGIN}/reviews/metro-2033-redux/"
     review_lastmod = sitemap_lastmod.get(review_url, "")
     expected_values = {
