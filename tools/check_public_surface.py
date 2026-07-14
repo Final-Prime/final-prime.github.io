@@ -155,7 +155,7 @@ def url_is_external(value: str) -> bool:
 
 def validate_current_tree() -> tuple[list[str], int]:
     errors: list[str] = []
-    paths = tracked_paths()
+    paths = [path for path in tracked_paths() if path.is_file()]
     for path in paths:
         relative = path.relative_to(ROOT).as_posix()
         suffix = path.suffix.lower()

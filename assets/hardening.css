@@ -1,11 +1,6 @@
 /* Readability floor: preserve the compact system language without sub-10px labels. */
-.hero-meta dt,
-.matrix-topline,
-.matrix-cell > span,
 .inspector-code,
 .domain-code,
-.matrix-status,
-.matrix-cell::after,
 .stage-caption,
 .inspector-list dt,
 .status-ledger dt,
@@ -32,87 +27,6 @@
 @media (min-width: 761px) {
   .doctrine > span { white-space: nowrap; }
 }
-
-/* Sticky reading progress and current-location navigation. */
-.site-header { overflow: visible; }
-.site-progress {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  height: 2px;
-  overflow: hidden;
-  pointer-events: none;
-}
-.site-progress > span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, var(--fuchsia) 0 72%, var(--cyan));
-  transform: scaleX(0);
-  transform-origin: left center;
-  will-change: transform;
-}
-.site-nav a[aria-current="location"] { color: var(--text); }
-.site-nav a[aria-current="location"]::after {
-  width: 5px;
-  height: 5px;
-  margin-left: 8px;
-  content: "";
-  background: var(--fuchsia);
-}
-.site-nav .nav-access[aria-current="location"]::after { background: var(--cyan); }
-
-/* Compact abstraction ladder: keep the index, title, explanation and scope in explicit columns. */
-.matrix-grid {
-  display: block;
-  counter-reset: matrix;
-}
-.matrix-cell {
-  position: relative;
-  display: grid;
-  grid-template-columns: 38px minmax(0, 1fr) auto;
-  grid-template-areas: "index title scope" "index copy scope";
-  gap: 0 14px;
-  align-items: center;
-  min-height: 88px;
-  padding: 13px 16px;
-  border-right: 0;
-  border-bottom: 1px solid var(--line);
-  counter-increment: matrix;
-}
-.matrix-cell:last-child { border-bottom: 0; }
-.matrix-cell::before {
-  grid-area: index;
-  align-self: start;
-  padding-top: 2px;
-  color: var(--muted);
-  content: "0" counter(matrix);
-  font: 800 0.625rem/1.4 var(--mono);
-  letter-spacing: 0.08em;
-}
-.matrix-cell::after {
-  grid-area: scope;
-  align-self: start;
-  padding-top: 2px;
-  color: var(--muted-dark);
-  content: "";
-  font: 800 0.625rem/1.4 var(--mono);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.matrix-cell:nth-child(1)::after { content: "Immediate"; }
-.matrix-cell:nth-child(2)::after { content: "Relational"; }
-.matrix-cell:nth-child(3)::after { content: "Structural"; }
-.matrix-cell:nth-child(4)::after { content: "Conditional"; }
-.matrix-cell > span { display: none; }
-.matrix-cell h3 { grid-area: title; margin: 0; }
-.matrix-cell p { grid-area: copy; max-width: 34ch; margin: 6px 0 0; line-height: 1.45; }
-.matrix-cell-cyan { box-shadow: inset 2px 0 0 var(--cyan); background: linear-gradient(90deg, rgba(10, 232, 247, 0.035), transparent 42%); }
-.matrix-cell-fuchsia { box-shadow: inset 2px 0 0 var(--fuchsia); background: linear-gradient(90deg, rgba(245, 5, 77, 0.035), transparent 42%); }
-.matrix-cell-cyan::before, .matrix-cell-cyan h3 { color: var(--cyan); }
-.matrix-cell-fuchsia::before, .matrix-cell-fuchsia h3 { color: var(--fuchsia-text); }
 
 /* Domain cards expose scope, state and a current operating mode. */
 .domain.is-enhanced {
@@ -282,8 +196,6 @@
 }
 
 @media (max-width: 760px) {
-  .site-progress { bottom: 0; }
-  .site-nav a[aria-current="location"]::after { margin-left: auto; }
   .matrix-cell {
     grid-template-columns: 32px minmax(0, 1fr);
     grid-template-areas: "index title" "index copy" ". scope";
@@ -319,17 +231,13 @@
 }
 
 @media (forced-colors: active) {
-  .site-progress > span,
-  .access-dot,
   .matrix-status i,
   .stage-topline i,
-  .object-state i,
-  .status-dot { forced-color-adjust: none; }
+  .object-state i { forced-color-adjust: none; }
   .domain-active,
   .domain-rare,
   .matrix-cell-cyan,
   .matrix-cell-fuchsia,
   .object-stage,
   .object-inspector { border: 1px solid CanvasText; box-shadow: none; }
-  .button-primary { color: ButtonText; background: ButtonFace; border-color: ButtonText; }
 }
