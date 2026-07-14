@@ -186,11 +186,16 @@ def validate_security_txt(now: datetime) -> list[str]:
 
 def validate_security_policy() -> list[str]:
     content = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-    return [
+    errors = [
         f"SECURITY.md: missing current public boundary {phrase!r}"
         for phrase in SECURITY_POLICY_REQUIRED
         if phrase not in content
     ]
+    contact = (ROOT / "contact" / "index.html").read_text(encoding="utf-8")
+    for phrase in ("Security report", "Private email", "Do not send credentials"):
+        if phrase not in contact:
+            errors.append(f"contact/index.html: missing safe security routing {phrase!r}")
+    return errors
 
 
 def validate_workflow_content(content: str, relative: str) -> list[str]:
