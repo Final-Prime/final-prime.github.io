@@ -37,6 +37,7 @@
     {"name": "Thought Index", "short_name": "Thought", "url": "/thought/"},
     {"name": "Game Reviews", "short_name": "Reviews", "url": "/reviews/"},
     {"name": "Public Index", "short_name": "Index", "url": "/index/"},
+    {"name": "Contact Final Prime", "short_name": "Contact", "url": "/contact/"},
     {"name": "Legal and IP", "short_name": "Legal", "url": "/legal/"}
   ]
 }
