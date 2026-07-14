@@ -13,7 +13,7 @@
       [document.querySelector("#index"), "/index/"],
       [document.querySelector(".system-feature"), "/systems/"],
       [document.querySelector(".review-section"), "/thought/"],
-      [document.querySelector("#prime-access"), "/#prime-access"]
+      [document.querySelector("#contact"), "/#contact"]
     ].filter(([section]) => section);
     const visible = new Map();
 

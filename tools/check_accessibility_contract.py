@@ -242,7 +242,7 @@ def validate_home_nav_tracking(content: str) -> list[str]:
         '[document.querySelector("#index"), "/index/"]',
         '[document.querySelector(".system-feature"), "/systems/"]',
         '[document.querySelector(".review-section"), "/thought/"]',
-        '[document.querySelector("#prime-access"), "/#prime-access"]',
+        '[document.querySelector("#contact"), "/#contact"]',
         'const activeRoute = active && active[1] > 0 ? active[0] : ""',
         "setCurrentNav(activeRoute)",
     )
