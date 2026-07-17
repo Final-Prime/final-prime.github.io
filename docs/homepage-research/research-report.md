@@ -196,13 +196,21 @@ The complete procedure is in [`test-protocol.md`](test-protocol.md). It specifie
 
 [`human-test-results.md`](human-test-results.md) is intentionally empty. No synthetic participant scores, invented conversion estimate, or fake winner has been created.
 
+## Solo-first operating gate
+
+The owner does not currently have access to a large English-reading participant pool. This changes the publication workflow, not the meaning of evidence. [`solo-validation-protocol.md`](solo-validation-protocol.md) therefore defines a reproducible gate for provisional working versions using deterministic structure checks, the full viewport matrix, CTA and overflow measurements, keyboard and accessibility checks, adversarial self-review, and explicit owner acceptance.
+
+Passing the solo gate permits a version to become the current live iteration. It does not fill the human-results table, create synthetic opinions, or declare Sparse signal a human-validated winner. Two to four external reviewers may later provide lightweight reinforcement; the original cohort gate remains the standard for a final research claim.
+
+The recorded v2 implementation run covered all seven declared viewports. Every view had zero horizontal overflow, the primary CTA remained fully visible, Selected Work immediately followed the hero, the anchor route resolved correctly, and the browser console reported no errors. The focusable DOM order placed the primary CTA before the secondary action and all later content. The connected browser driver could not synthesize Tab movement, so dynamic sequential keyboard traversal remains an explicitly recorded manual spot-check rather than a claimed automated pass.
+
 ## Delivery boundary and next decision
 
-Research artefacts are complete enough to start real participant sessions. The only unresolved evidence is the human counter-test and the formal implementation QA that depends on a chosen direction. Until the user accepts the research and closes the provisional hero sentence element by element:
+The owner accepted Sparse signal as the provisional implementation direction and approved a solo-first publication path. The live version may therefore evolve after the recorded implementation gate passes, while the following boundaries remain:
 
-- do not modify the production homepage;
-- do not present A/SYNC as proof;
-- do not commit, push, or deploy the research as a live redesign;
-- do not declare a winner from the expert prior alone.
+- do not present A/SYNC or any concept surface as shipped proof;
+- do not invent participant results or adjust the original human thresholds;
+- do not call a provisional live iteration the human-validated winner;
+- run and record the viewport, 320 px reflow, focus order and focus-style contract, reduced motion, colour-independent meaning, strong-light, and low-brightness QA before publication; record any browser-driver limitation explicitly.
 
-After real test results are entered, apply the decision gate without adjusting thresholds to fit the favourite variant. If one passes, lock the final orientation copy with the founder, implement the selected specification, then run 200% text resize, 320 px reflow, keyboard focus, reduced motion, grayscale / colour-vision, strong-light, and low-brightness QA before production publication.
+If real participant results are later entered, apply the original decision gate without adjusting thresholds to fit the favourite variant.

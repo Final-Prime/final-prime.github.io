@@ -1,6 +1,6 @@
 # Final Prime homepage research
 
-Status: research package complete; real participant test pending
+Status: research package complete; solo-first implementation gate active; real participant test pending
 Started: 2026-07-17
 Scope: homepage and hero research; the repository history tracks the provisional live implementation separately
 
@@ -24,8 +24,10 @@ The internal target is **controlled disorientation**: difficult to categorise, e
 - `screenshot-notes.md`: baseline and benchmark visual annotations, including capture limits.
 - `research-report.md`: synthesis, adversarial findings, recommendation, and fallback.
 - `test-protocol.md`: two-cohort human-test procedure and decision gates.
+- `solo-validation-protocol.md`: reproducible working-version gate that does not depend on a large participant pool.
 - `test-results-template.csv`: anonymous response sheet.
 - `human-test-results.md`: deliberately empty summary shell until real participants are tested.
+- `implementation-v2-metrics.csv`: measured browser results for the live Sparse signal implementation.
 - `decision-matrix.csv`: expert prior and post-test decision fields.
 - `hypotheses/`: paired desktop/mobile test stimuli for the three structures, plus editable source snapshots.
 - `prototype-metrics.csv`: CTA, frame, reflow, and viewport measurements for the prototypes.
