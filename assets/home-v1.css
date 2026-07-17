@@ -5,39 +5,6 @@
   border-bottom: 1px solid var(--line);
 }
 
-.hero-manifesto {
-  display: grid;
-  gap: 16px;
-  max-width: 720px;
-}
-
-.hero-manifesto > span {
-  display: block;
-}
-
-.hero-manifesto-lead {
-  color: var(--text);
-  font-family: var(--display);
-  font-size: clamp(1.45rem, 2.2vw, 2.15rem);
-  font-weight: 720;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
-}
-
-.hero-manifesto-lead strong {
-  display: block;
-  margin-top: 5px;
-  color: var(--fuchsia-text);
-  font-weight: 780;
-}
-
-.hero-manifesto-copy {
-  max-width: 64ch;
-  color: var(--muted);
-  font-size: 0.98rem;
-  line-height: 1.68;
-}
-
 .focus-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -286,8 +253,6 @@
 }
 
 @media (max-width: 760px) {
-  .hero-manifesto { gap: 13px; }
-  .hero-manifesto-lead { font-size: clamp(1.4rem, 7vw, 1.9rem); }
   .focus-card,
   .focus-card:first-child,
   .focus-card:last-child,

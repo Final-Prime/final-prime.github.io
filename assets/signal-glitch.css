@@ -42,33 +42,7 @@ body::after {
 
 .footer-brand::after { width: 32px; }
 
-.hero-wordmark {
-  isolation: isolate;
-  transform-origin: left center;
-  will-change: transform, filter;
-}
-
-.hero-rule {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-rule::after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -22%;
-  width: 18%;
-  content: "";
-  background: linear-gradient(90deg, transparent, var(--text), transparent);
-  opacity: 0;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  .hero-wordmark {
-    animation: fp-wordmark-signal-check 15.5s steps(1, end) infinite;
-  }
-
   .brand-mark {
     animation: fp-mark-signal-check 18s steps(1, end) infinite;
   }
@@ -83,68 +57,6 @@ body::after {
     animation: fp-mark-scan 420ms linear 1;
   }
 
-  .hero-wordmark:hover {
-    animation: fp-wordmark-hover-fault 300ms steps(1, end) 1;
-  }
-
-  .hero-rule::after {
-    animation: fp-rule-scan 10s ease-in-out infinite;
-  }
-}
-
-@keyframes fp-wordmark-signal-check {
-  0%, 94%, 95.2%, 100% {
-    filter: none;
-    text-shadow: none;
-    transform: none;
-    clip-path: inset(0 0 0 0);
-  }
-  94.15% {
-    filter: contrast(1.08);
-    text-shadow: 3px 0 var(--fuchsia), -3px 0 var(--cyan);
-    transform: translateX(-1px) skewX(-0.25deg);
-    clip-path: inset(0 0 61% 0);
-  }
-  94.38% {
-    text-shadow: -2px 0 var(--fuchsia), 2px 0 var(--cyan);
-    transform: translateX(2px);
-    clip-path: inset(37% 0 27% 0);
-  }
-  94.62% {
-    text-shadow: 1px 0 var(--fuchsia), -2px 0 var(--cyan);
-    transform: translateX(-1px);
-    clip-path: inset(72% 0 0 0);
-  }
-  94.86% {
-    filter: none;
-    text-shadow: none;
-    transform: none;
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes fp-wordmark-hover-fault {
-  0%, 100% {
-    filter: none;
-    text-shadow: none;
-    transform: none;
-    clip-path: inset(0 0 0 0);
-  }
-  20% {
-    text-shadow: 3px 0 var(--fuchsia), -3px 0 var(--cyan);
-    transform: translateX(-2px);
-    clip-path: inset(0 0 58% 0);
-  }
-  45% {
-    text-shadow: -3px 0 var(--fuchsia), 2px 0 var(--cyan);
-    transform: translateX(2px);
-    clip-path: inset(39% 0 24% 0);
-  }
-  70% {
-    text-shadow: 2px 0 var(--fuchsia), -2px 0 var(--cyan);
-    transform: translateX(-1px);
-    clip-path: inset(73% 0 0 0);
-  }
 }
 
 @keyframes fp-mark-signal-check {
@@ -180,17 +92,9 @@ body::after {
   100% { opacity: 0; transform: translateY(15px); }
 }
 
-@keyframes fp-rule-scan {
-  0%, 73%, 100% { left: -22%; opacity: 0; }
-  77% { opacity: 0.48; }
-  84% { left: 105%; opacity: 0; }
-}
-
 @media (forced-colors: active) {
   body::after,
-  .brand::after,
-  .hero-rule::after { display: none; }
+  .brand::after { display: none; }
 
-  .brand-mark,
-  .hero-wordmark { animation: none; filter: none; text-shadow: none; transform: none; clip-path: none; }
+  .brand-mark { animation: none; filter: none; text-shadow: none; transform: none; clip-path: none; }
 }

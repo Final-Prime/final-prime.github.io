@@ -121,8 +121,10 @@ ROUTE_REFLOW_CONTRACTS = {
         "overflow-wrap: anywhere;",
     ),
     "assets/hero.css": (
-        ".hero-wordmark {",
-        "flex-wrap: wrap;",
+        ".doctrine strong {",
+        ".doctrine > span {",
+        "letter-spacing: -0.02em;",
+        ".sparse-signal-copy {",
     ),
     "assets/legal.css": (
         ".legal-card h2 {",
@@ -146,6 +148,27 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     "assets/review-dossier.js": ('.removeAttribute("hidden")',),
     "assets/base.css": ("[hidden] { display: none !important; }",),
 }
+
+HOMEPAGE_SPARSE_REQUIRED_TOKENS = (
+    'class="hero sparse-hero"',
+    'Independent software · research · systems',
+    'Knowing the next move',
+    'is survival.',
+    'Understanding the game',
+    'is control.',
+    'Final Prime is founder-led.',
+    'href="#selected-work">Explore selected work</a>',
+    'class="sparse-signal"',
+    'id="selected-work"',
+    'class="section method-section"',
+)
+
+HOMEPAGE_SPARSE_FORBIDDEN_TOKENS = (
+    'class="prime-matrix',
+    'class="root-trace',
+    'our company',
+    'our team',
+)
 
 
 class DocumentParser(HTMLParser):
@@ -234,6 +257,44 @@ def validate_reflow_contract(content: str) -> list[str]:
     return [token for token in REFLOW_CONTRACT_TOKENS if token not in content]
 
 
+def validate_homepage_sparse_contract(content: str) -> list[str]:
+    errors: list[str] = []
+    missing = [token for token in HOMEPAGE_SPARSE_REQUIRED_TOKENS if token not in content]
+    if missing:
+        errors.append(
+            "index.html is missing sparse-homepage contract token(s): "
+            + ", ".join(repr(token) for token in missing)
+        )
+
+    lowered = content.lower()
+    forbidden = [token for token in HOMEPAGE_SPARSE_FORBIDDEN_TOKENS if token in lowered]
+    if forbidden:
+        errors.append(
+            "index.html contains retired or misleading homepage token(s): "
+            + ", ".join(repr(token) for token in forbidden)
+        )
+
+    hero_index = content.find('class="hero sparse-hero"')
+    selected_index = content.find('id="selected-work"')
+    focus_index = content.find('class="section focus-section"')
+    method_index = content.find('class="section method-section"')
+    if not (-1 < hero_index < selected_index < focus_index < method_index):
+        errors.append(
+            "index.html section order must be sparse hero, Selected Work, Focus, then Method"
+        )
+
+    if not re.search(
+        r'</section>\s*<section class="section selected-section"\s+id="selected-work"',
+        content,
+    ):
+        errors.append("Selected Work must be the sparse hero's direct following section")
+
+    if content.count('class="section method-section"') != 1:
+        errors.append("index.html must contain exactly one Method section")
+
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     documents: dict[Path, DocumentParser] = {}
@@ -254,7 +315,11 @@ def main() -> int:
             errors.append(f"{relative}: remote {tag} dependency is not allowed: {value}")
         if document.icon_links != REQUIRED_ICON_LINKS:
             errors.append(f"{relative}: platform icon links do not match the required contract")
-        stylesheet_order = [value for tag, _, value in document.references if tag == "link"]
+        stylesheet_order = [
+            urlsplit(value).path
+            for tag, _, value in document.references
+            if tag == "link"
+        ]
         linked_stylesheets = set(stylesheet_order)
         forbidden_stylesheets = linked_stylesheets.intersection(FORBIDDEN_ROUTE_STYLESHEETS.get(relative, set()))
         if forbidden_stylesheets:
@@ -271,6 +336,8 @@ def main() -> int:
                     f"{relative}: responsive stylesheet must follow component styles "
                     f"{late_component_styles}"
                 )
+        if relative == "index.html":
+            errors.extend(validate_homepage_sparse_contract(path.read_text(encoding="utf-8")))
 
     checked_references = 0
     for source, document in documents.items():

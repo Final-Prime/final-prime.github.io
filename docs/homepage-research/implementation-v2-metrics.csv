@@ -1,0 +1,8 @@
+viewport,width,height,horizontal_overflow_px,primary_cta_top,primary_cta_bottom,primary_cta_in_view,selected_work_top,visible_clip_count,selected_work_direct_sibling,console_errors,result
+320x568,320,568,0,399,449,yes,913,0,yes,0,pass
+390x844,390,844,0,397,447,yes,910,0,yes,0,pass
+412x915,412,915,0,381,431,yes,894,0,yes,0,pass
+768x1024,768,1024,0,434,484,yes,927,0,yes,0,pass
+1280x720,1280,720,0,556,606,yes,721,0,yes,0,pass
+1440x900,1440,900,0,660,710,yes,901,0,yes,0,pass
+1920x1080,1920,1080,0,763,813,yes,1081,0,yes,0,pass
