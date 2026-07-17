@@ -63,15 +63,43 @@
   font-weight: 820;
   line-height: 0.76;
   letter-spacing: -0.075em;
-  text-shadow: 0 22px 62px rgba(0, 0, 0, 0.24);
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-.wordmark-slash {
-  color: var(--fuchsia-text);
+.hero-wordmark > span {
+  display: inline-block;
+  color: var(--text);
+}
+
+.wordmark-final {
+  text-shadow:
+    -0.014em 0 0 rgba(10, 232, 247, 0.56),
+    -0.038em 0.004em 0.018em rgba(10, 232, 247, 0.3),
+    -0.076em 0.009em 0.04em rgba(10, 232, 247, 0.15),
+    -0.118em 0.014em 0.07em rgba(10, 232, 247, 0.07),
+    0 22px 62px rgba(0, 0, 0, 0.24);
+}
+
+.wordmark-prime {
+  text-shadow:
+    0.014em 0 0 rgba(245, 5, 77, 0.56),
+    0.038em 0.004em 0.018em rgba(245, 5, 77, 0.3),
+    0.076em 0.009em 0.04em rgba(245, 5, 77, 0.15),
+    0.118em 0.014em 0.07em rgba(245, 5, 77, 0.07),
+    0 22px 62px rgba(0, 0, 0, 0.24);
+}
+
+.wordmark-divider {
   font-weight: 300;
-  transform: translateY(-0.035em);
+  text-shadow:
+    -0.024em -0.01em 0.014em rgba(10, 232, 247, 0.72),
+    0.026em 0.012em 0.016em rgba(245, 5, 77, 0.76),
+    -0.062em -0.014em 0.05em rgba(10, 232, 247, 0.22),
+    0.066em 0.018em 0.055em rgba(245, 5, 77, 0.24),
+    0 22px 62px rgba(0, 0, 0, 0.24);
+  transform: translateY(-0.035em) scaleX(0.96);
+  transform-origin: center;
 }
 
 .hero-rule {
@@ -193,5 +221,14 @@
 @media (forced-colors: active) {
   .hero::after { display: none; }
   .eyebrow::before { background: CanvasText; box-shadow: none; }
+  .hero-wordmark > span { color: CanvasText; text-shadow: none; }
   .hero-rule { background: CanvasText; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .hero-wordmark > span { text-shadow: none; }
+}
+
+@media print {
+  .hero-wordmark > span { color: #000; text-shadow: none; }
 }
