@@ -5,7 +5,7 @@
 }
 
 @media (max-width: 760px) {
-  :root { --shell: min(100% - 28px, 720px); --header-height: 70px; }
+  :root { --shell: min(100% - 28px, 720px); --header-height: 60px; }
   .menu-toggle { display: block; }
   .site-nav {
     position: fixed;
