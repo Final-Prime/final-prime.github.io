@@ -23,7 +23,7 @@
 html { scroll-behavior: auto; background: var(--bg); }
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
   color: var(--text);
   background: radial-gradient(circle at 82% 4%, rgba(245, 5, 77, 0.09), transparent 29rem), var(--bg);
   font-family: var(--sans);
@@ -130,8 +130,7 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
   .menu-toggle::before,
   .menu-toggle::after { background: CanvasText; forced-color-adjust: none; }
   .site-progress > span,
-  .access-dot,
-  .status-dot { forced-color-adjust: none; }
+  .access-dot { forced-color-adjust: none; }
   .button-primary { color: ButtonText; background: ButtonFace; border-color: ButtonText; }
 }
 .footer-nav a[href="/legal/"] { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }

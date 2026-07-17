@@ -4,13 +4,10 @@
   .hero-wordmark { font-size: min(9rem, 14.5vw); }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-copy { max-width: 780px; }
-  .prime-matrix { max-width: 760px; justify-self: start; }
+  .root-trace { max-width: 760px; justify-self: start; }
   .doctrine strong { font-size: min(3.6rem, 6vw); }
-  .domain-grid { grid-template-columns: 1fr 1fr; }
-  .domain:nth-child(2) { border-right: 0; }
-  .domain:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
-  .feature-layout, .access-layout, .status-layout, .contact-layout { grid-template-columns: 1fr; }
-  .private-boundary-card, .status-ledger { max-width: 680px; }
+  .access-layout, .contact-layout { grid-template-columns: 1fr; }
+  .private-boundary-card { max-width: 680px; }
 }
 
 @media (max-width: 760px) {
@@ -58,18 +55,18 @@
   .hero-meta { grid-template-columns: 1fr; }
   .hero-meta > div, .hero-meta > div:first-child { padding: 13px 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .hero-meta > div:last-child { border-bottom: 0; }
-  .matrix-grid { grid-template-columns: 1fr; }
-  .matrix-cell { border-right: 0; border-bottom: 1px solid var(--line); }
-  .matrix-cell:nth-last-child(2) { border-bottom: 1px solid var(--line); }
-  .matrix-cell:last-child { border-bottom: 0; }
+  .root-trace-step {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 0 12px;
+  }
+  .root-trace-step small {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 9px;
+  }
   .section { padding: 66px 0; }
   .section-head { grid-template-columns: 1fr; }
   .section-note { text-align: left; }
-  .domain-grid { grid-template-columns: 1fr; }
-  .domain { border-right: 0; border-bottom: 1px solid var(--line); }
-  .domain:last-child { border-bottom: 0; }
-  .object-stage { min-height: 340px; }
-  .inspector-list > div { grid-template-columns: 1fr; gap: 5px; padding: 10px 0; }
   .access-copy, .private-boundary-card { padding: 18px; }
   .private-boundary-card dl > div { grid-template-columns: 1fr; gap: 5px; padding: 10px 0; }
   .contact-link { font-size: 0.75rem; overflow-wrap: anywhere; }
@@ -86,7 +83,7 @@
 @media (max-width: 380px) {
   :root { --shell: calc(100% - 22px); }
   .brand-name { font-size: 0.64rem; }
-  .matrix-topline, .tracking-topline { align-items: flex-start; flex-direction: column; padding: 14px; }
+  .root-trace-topline, .tracking-topline { align-items: flex-start; flex-direction: column; padding: 14px; }
   .doctrine strong { font-size: min(2.1rem, 8.7vw); }
 }
 

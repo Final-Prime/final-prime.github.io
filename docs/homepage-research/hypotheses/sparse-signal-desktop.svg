@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1100 619" preserveAspectRatio="xMidYMin meet" role="img" aria-labelledby="title description">
+  <title id="title">Final Prime sparse-signal hero, desktop research stimulus</title>
+  <desc id="description">The locked motto and founder-led orientation on the left, a compact field and route signal on the right, and Explore selected work as the primary action.</desc>
+  <rect width="1100" height="619" fill="#090b0d" />
+  <image href="../screenshots/hypotheses/sparse-signal-desktop-1280x720.png" x="0" y="0" width="1100" height="619" />
+  <a href="selected-work-placeholder.svg" aria-label="Explore selected work">
+    <rect x="44" y="571" width="164" height="43" fill="#ffffff" fill-opacity="0.001"><title>Explore selected work</title></rect>
+  </a>
+  <a href="selected-work-placeholder.svg#contact" aria-label="Discuss a problem">
+    <rect x="217" y="571" width="140" height="43" fill="#ffffff" fill-opacity="0.001"><title>Discuss a problem</title></rect>
+  </a>
+</svg>

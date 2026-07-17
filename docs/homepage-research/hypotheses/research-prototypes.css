@@ -1,0 +1,302 @@
+:root {
+  color-scheme: dark;
+  --bg: #090b0d;
+  --surface: #101419;
+  --text: #f2f4f5;
+  --muted: #a9b0b5;
+  --line: #343c43;
+  --control-line: #56616b;
+  --cyan: #4ff6ff;
+  --magenta: #ff2da8;
+  --max: 1600px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+.prototype-document { height: 100%; overflow: auto; }
+
+body {
+  margin: 0;
+  min-width: 280px;
+  background:
+    radial-gradient(circle at 88% 5%, rgb(79 246 255 / 0.055), transparent 28rem),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: inherit; }
+
+.prototype-header {
+  width: min(100%, var(--max));
+  min-height: 68px;
+  margin: 0 auto;
+  padding: 18px clamp(18px, 4vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 760;
+  letter-spacing: 0.13em;
+  line-height: 0.87;
+  text-transform: uppercase;
+}
+
+.wordmark span { display: block; }
+.wordmark span:last-child { color: var(--cyan); }
+
+.research-flag {
+  margin: 0;
+  color: var(--muted);
+  font: 600 10px/1.3 ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: 0.09em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.hero {
+  width: min(100%, var(--max));
+  min-height: calc(100svh - 68px);
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 78px) clamp(18px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(310px, 0.72fr);
+  gap: clamp(42px, 7vw, 116px);
+  align-items: center;
+}
+
+.primary { max-width: 820px; }
+
+.eyebrow,
+.side-label,
+.trace-stage,
+.proof-kicker,
+.signal-code {
+  font: 650 11px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  margin: 0 0 20px;
+  color: var(--cyan);
+}
+
+.motto {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(44px, 5.25vw, 82px);
+  font-weight: 680;
+  letter-spacing: -0.065em;
+  line-height: 0.91;
+}
+
+.motto span { display: block; }
+.motto .turn { color: var(--muted); }
+
+.orientation {
+  max-width: 690px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(15px, 1.25vw, 19px);
+  line-height: 1.55;
+}
+
+.orientation strong { color: var(--text); font-weight: 620; }
+
+.actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button {
+  min-height: 48px;
+  padding: 13px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--control-line);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.button.primary-action {
+  border-color: var(--cyan);
+  background: var(--cyan);
+  color: #071012;
+}
+
+.button:hover,
+.button:focus-visible { border-color: var(--magenta); outline: 2px solid transparent; }
+.button.primary-action:hover,
+.button.primary-action:focus-visible { background: var(--text); color: var(--bg); }
+
+.side { min-width: 0; }
+.side-label { margin: 0 0 14px; color: var(--muted); }
+
+/* Control: a full frame remains because this hypothesis tests the current grouping. */
+.trace-panel {
+  border: 1px solid var(--control-line);
+  background: rgb(16 20 25 / 0.74);
+}
+
+.trace-intro { padding: 18px 20px; border-bottom: 1px solid var(--control-line); }
+.trace-intro p { margin: 7px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.trace-stage { color: var(--cyan); }
+
+.trace-list { margin: 0; padding: 0; list-style: none; }
+.trace-list li {
+  padding: 15px 20px;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  border-bottom: 1px solid var(--control-line);
+}
+.trace-list li:last-child { border-bottom: 0; }
+.trace-list span { color: var(--muted); font-size: 12px; }
+.trace-list strong { font-size: 14px; font-weight: 620; }
+
+/* Proof-led: the only other full frame is the evidence object itself. */
+.proof-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--control-line);
+  background: #0c1014;
+}
+
+.proof-visual {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 49.8%, rgb(79 246 255 / 0.16) 50%, transparent 50.2%),
+    linear-gradient(0deg, transparent 0 49.8%, rgb(255 45 168 / 0.14) 50%, transparent 50.2%),
+    repeating-linear-gradient(90deg, transparent 0 37px, rgb(255 255 255 / 0.035) 38px),
+    repeating-linear-gradient(0deg, transparent 0 37px, rgb(255 255 255 / 0.035) 38px);
+}
+
+.proof-visual::before,
+.proof-visual::after {
+  content: "";
+  position: absolute;
+  border: 1px solid;
+  transform: rotate(45deg);
+}
+
+.proof-visual::before {
+  width: 140px; height: 140px; right: 16%; top: 22%;
+  border-color: var(--cyan);
+}
+
+.proof-visual::after {
+  width: 76px; height: 76px; right: 35%; top: 38%;
+  border-color: var(--magenta);
+}
+
+.proof-top,
+.proof-copy { position: relative; z-index: 1; }
+.proof-kicker { color: var(--cyan); }
+.proof-status { float: right; color: var(--muted); font: 600 10px/1.4 ui-monospace, monospace; text-transform: uppercase; }
+.proof-copy h2 { margin: 0 0 10px; font-size: 30px; letter-spacing: -0.04em; }
+.proof-copy p { max-width: 390px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+.proof-warning { margin-top: 14px !important; color: #e6b9d4 !important; font-size: 11px !important; }
+
+/* Sparse signal: proximity and one rule do the grouping. */
+.signal {
+  min-height: 360px;
+  padding: 22px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.signal-code { color: var(--magenta); }
+.signal-orbit { position: relative; min-height: 190px; }
+.signal-orbit::before {
+  content: "";
+  position: absolute;
+  width: 156px;
+  height: 156px;
+  right: 10%;
+  top: 16px;
+  border: 1px solid rgb(79 246 255 / 0.58);
+  border-radius: 50%;
+}
+.signal-orbit::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  right: calc(10% + 74px);
+  top: 90px;
+  background: var(--magenta);
+  box-shadow: 0 0 24px var(--magenta);
+}
+.signal-line { width: 58%; height: 1px; margin-top: 94px; background: var(--line); }
+.signal-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.signal-copy p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.signal-copy strong { display: block; margin-bottom: 4px; color: var(--text); font-size: 15px; }
+
+.selected-placeholder {
+  min-height: 50vh;
+  padding: 72px clamp(18px, 4vw, 64px);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+.selected-placeholder > * { width: min(100%, var(--max)); margin-left: auto; margin-right: auto; }
+.selected-placeholder h2 { margin-top: 0; font-size: clamp(32px, 5vw, 72px); letter-spacing: -0.055em; }
+.selected-placeholder p { max-width: 680px; color: var(--muted); line-height: 1.6; }
+
+@media (max-width: 800px) {
+  .prototype-header { min-height: 60px; padding-block: 14px; }
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 46px;
+    align-items: start;
+    padding-top: 30px;
+    padding-bottom: 54px;
+  }
+  .motto { font-size: clamp(40px, 11vw, 64px); }
+  .orientation { max-width: 600px; margin-top: 22px; }
+  .actions { margin-top: 22px; }
+  .side { order: 2; }
+  .proof-card { min-height: 350px; }
+  .signal { min-height: 290px; }
+}
+
+@media (max-width: 420px) {
+  .research-flag span { display: none; }
+  .hero { gap: 38px; padding-top: 24px; }
+  .eyebrow { margin-bottom: 14px; }
+  .motto { font-size: clamp(31px, 9.8vw, 41px); line-height: 0.96; letter-spacing: -0.055em; }
+  .orientation { font-size: 14px; line-height: 1.47; }
+  .actions { display: grid; grid-template-columns: 1fr; }
+  .button { min-height: 46px; }
+  .trace-list li { grid-template-columns: 62px 1fr; padding: 13px 16px; gap: 12px; }
+  .proof-card { min-height: 310px; padding: 18px; }
+  .proof-copy h2 { font-size: 26px; }
+  .signal-copy { grid-template-columns: 1fr; gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
