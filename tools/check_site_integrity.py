@@ -176,6 +176,8 @@ HEADER_LAYOUT_CONTRACT = {
         "@media print {",
         "background-image: none;",
         "min-height: 44px;",
+        ".brand-name { display: inline-flex; gap: 0.42em;",
+        ".brand-divider { min-width: 0.75em;",
         ".menu-toggle { display: none; width: 46px; height: 46px;",
         "gap: clamp(18px, 2.2vw, 28px);",
         "gap: clamp(16px, 2vw, 26px);",
@@ -228,15 +230,33 @@ HEADER_GLITCH_CONTRACT = {
     "assets/signal-glitch.css": (
         ".site-header .brand-mark",
         ".site-header .brand-name",
+        ".site-header .brand-word-final",
+        ".site-header .brand-word-prime",
+        ".site-header .brand-divider",
         ".site-header .brand.is-glitching .brand-mark",
         ".site-header .brand.is-glitching .brand-name",
+        ".site-header .brand.is-glitching .brand-word",
+        ".site-header .brand.is-glitching .brand-divider",
         "460ms steps(1, end) 1",
         "@keyframes fp-brand-mark-trigger",
         "@keyframes fp-brand-name-trigger",
+        "@keyframes fp-brand-echo-trigger",
+        "@keyframes fp-brand-divider-trigger",
         "@media (prefers-reduced-motion: reduce)",
+        "@media (prefers-reduced-transparency: reduce)",
         "@media (forced-colors: active)",
+        "@media print",
     ),
 }
+
+BRAND_LOCKUP_REQUIRED_TOKENS = (
+    'class="brand-name" aria-hidden="true"',
+    'class="brand-word brand-word-final">FINAL</span>',
+    'class="brand-divider">\\</span>',
+    'class="brand-word brand-word-prime">PRIME</span>',
+)
+
+RETIRED_BRAND_LOCKUP = '<span class="brand-name">FINAL <span aria-hidden="true">/</span> PRIME</span>'
 
 HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'class="hero identity-hero"',
@@ -399,6 +419,7 @@ def main() -> int:
         document = parse_document(path)
         documents[path.resolve()] = document
         relative = path.relative_to(ROOT).as_posix()
+        html_content = path.read_text(encoding="utf-8")
         duplicates = sorted(key for key, count in Counter(document.ids).items() if count > 1)
         if duplicates:
             errors.append(f"{relative}: duplicate IDs {duplicates}")
@@ -432,7 +453,15 @@ def main() -> int:
                     f"{late_component_styles}"
                 )
         if relative == "index.html":
-            errors.extend(validate_homepage_identity_contract(path.read_text(encoding="utf-8")))
+            errors.extend(validate_homepage_identity_contract(html_content))
+        if 'class="site-header"' in html_content:
+            missing_brand_tokens = [
+                token for token in BRAND_LOCKUP_REQUIRED_TOKENS if token not in html_content
+            ]
+            if missing_brand_tokens:
+                errors.append(f"{relative}: header brand lockup is missing {missing_brand_tokens}")
+            if RETIRED_BRAND_LOCKUP in html_content:
+                errors.append(f"{relative}: retired forward-slash brand lockup restored")
 
     checked_references = 0
     for source, document in documents.items():
