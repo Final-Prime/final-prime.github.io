@@ -77,7 +77,6 @@ PRINT_CONTRACT_TOKENS = (
     "--bg: #fff;",
     ".skip-link,",
     ".menu-toggle,",
-    ".site-progress,",
     "body * {",
     "background-image: none !important;",
     "button { display: none !important; }",
@@ -157,6 +156,30 @@ NAVIGATION_POLISH_CONTRACT = (
     ".site-nav a:hover::after,",
     ".site-nav a:focus-visible::after",
 )
+
+RETIRED_HEADER_TOKENS = ("site-progress", "data-scroll-progress")
+HEADER_GLITCH_CONTRACT = {
+    "assets/app.js": (
+        'header.querySelector(".brand")',
+        'matchMedia("(prefers-reduced-motion: reduce)")',
+        '30000 + Math.random() * 20000',
+        'document.hidden',
+        '"is-glitching"',
+        '"pointerdown"',
+        '"visibilitychange"',
+    ),
+    "assets/signal-glitch.css": (
+        ".site-header .brand-mark",
+        ".site-header .brand-name",
+        ".site-header .brand.is-glitching .brand-mark",
+        ".site-header .brand.is-glitching .brand-name",
+        "460ms steps(1, end) 1",
+        "@keyframes fp-brand-mark-trigger",
+        "@keyframes fp-brand-name-trigger",
+        "@media (prefers-reduced-motion: reduce)",
+        "@media (forced-colors: active)",
+    ),
+}
 
 HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'class="hero identity-hero"',
@@ -439,6 +462,16 @@ def main() -> int:
             "assets/base.css: navigation polish contract is missing "
             f"{missing_navigation_polish}"
         )
+    for relative in ("assets/app.js", "assets/base.css", "assets/surface-polish.css"):
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        retired = [token for token in RETIRED_HEADER_TOKENS if token in content]
+        if retired:
+            errors.append(f"{relative}: retired header token(s) restored {retired}")
+    for relative, tokens in HEADER_GLITCH_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: header glitch contract is missing {missing}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():

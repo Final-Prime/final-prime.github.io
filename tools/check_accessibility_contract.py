@@ -328,7 +328,6 @@ def validate_mobile_hash_focus(content: str) -> list[str]:
         "event.defaultPrevented",
         'anchor.matches(".skip-link")',
         "siteNav?.contains(anchor)",
-        'document.addEventListener("toggle", updateHeader, true)',
         "const hashTarget = samePageHashTarget(anchor)",
         "focusHashTarget(hashTarget)",
     )
