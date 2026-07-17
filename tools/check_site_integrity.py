@@ -22,6 +22,7 @@ SCRIPT_BUDGETS = {
     "assets/app.js": 7100,
     "assets/home.js": 11500,
     "assets/review-dossier.js": 7600,
+    "assets/scroll-readout.js": 1400,
 }
 FORBIDDEN_SCRIPT_PATTERNS = ("document.write(", "eval(", "new Function(")
 FORBIDDEN_ROUTE_STYLESHEETS = {
@@ -150,14 +151,63 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
 
 NAVIGATION_POLISH_CONTRACT = (
     ".site-header.is-scrolled {",
-    "0 12px 34px rgba(245, 5, 77, 0.10)",
+    "0 10px 28px rgba(245, 5, 77, 0.08)",
     ".site-nav a::after {",
     "background: var(--cyan);",
     ".site-nav a:hover::after,",
     ".site-nav a:focus-visible::after",
 )
 
-RETIRED_HEADER_TOKENS = ("site-progress", "data-scroll-progress")
+HEADER_LAYOUT_CONTRACT = {
+    "assets/base.css": (
+        "--header-height: 64px;",
+        "position: sticky;",
+        "height: var(--header-height);",
+        "background-color: #0c0e10;",
+        "background-color: rgba(9, 11, 13, 0.84);",
+        "transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;",
+        "@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)))",
+        "@media (prefers-reduced-transparency: reduce)",
+        "min-height: 44px;",
+        ".menu-toggle { display: none; width: 46px; height: 46px;",
+        "gap: clamp(18px, 2.2vw, 28px);",
+        "gap: clamp(16px, 2vw, 26px);",
+    ),
+    "assets/responsive.css": (
+        "--header-height: 60px;",
+        ".site-nav a { min-height: 52px;",
+    ),
+    "assets/error.css": ("--header-height: 60px;",),
+    "assets/surface-polish.css": (
+        '.site-nav a[aria-current="page"]::after,',
+        "opacity: 1;",
+        "background: var(--fuchsia);",
+        "transform: scaleX(1);",
+    ),
+}
+
+SCROLL_READOUT_CONTRACT = {
+    "assets/scroll-readout.js": (
+        'document.createElement("output")',
+        'readout.setAttribute("aria-hidden", "true")',
+        'document.body.classList.contains("review-dossier-page")',
+        'window.matchMedia("(min-width: 1081px)")',
+        'window.requestAnimationFrame(update)',
+        'window.addEventListener("scroll", scheduleUpdate, { passive: true })',
+    ),
+    "assets/surface-polish.css": (
+        ".scroll-readout {",
+        "body.menu-open .scroll-readout { display: none; }",
+        "@media (max-width: 1080px)",
+    ),
+}
+
+RETIRED_HEADER_TOKENS = (
+    "site-progress",
+    "data-scroll-progress",
+    "is-header-hidden",
+    "header-scroll-direction",
+)
 HEADER_GLITCH_CONTRACT = {
     "assets/app.js": (
         'header.querySelector(".brand")',
@@ -467,6 +517,16 @@ def main() -> int:
         retired = [token for token in RETIRED_HEADER_TOKENS if token in content]
         if retired:
             errors.append(f"{relative}: retired header token(s) restored {retired}")
+    for relative, tokens in HEADER_LAYOUT_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: header layout contract is missing {missing}")
+    for relative, tokens in SCROLL_READOUT_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: scroll readout contract is missing {missing}")
     for relative, tokens in HEADER_GLITCH_CONTRACT.items():
         content = (ROOT / relative).read_text(encoding="utf-8")
         missing = [token for token in tokens if token not in content]
