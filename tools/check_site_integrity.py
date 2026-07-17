@@ -121,10 +121,10 @@ ROUTE_REFLOW_CONTRACTS = {
         "overflow-wrap: anywhere;",
     ),
     "assets/hero.css": (
+        ".hero-wordmark {",
+        ".wordmark-prime {",
         ".doctrine strong {",
-        ".doctrine > span {",
-        "letter-spacing: -0.02em;",
-        ".sparse-signal-copy {",
+        ".hero-orientation-panel {",
     ),
     "assets/legal.css": (
         ".legal-card h2 {",
@@ -149,23 +149,29 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     "assets/base.css": ("[hidden] { display: none !important; }",),
 }
 
-HOMEPAGE_SPARSE_REQUIRED_TOKENS = (
-    'class="hero sparse-hero"',
+HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
+    'class="hero identity-hero"',
     'Independent software · research · systems',
+    'class="hero-wordmark"',
+    'aria-label="Final Prime"',
+    'class="wordmark-final">FINAL</span>',
+    'class="wordmark-slash"',
+    'class="wordmark-prime">PRIME</span>',
     'Knowing the next move',
     'is survival.',
     'Understanding the game',
     'is control.',
     'Final Prime is founder-led.',
     'href="#selected-work">Explore selected work</a>',
-    'class="sparse-signal"',
+    'class="hero-orientation-panel"',
     'id="selected-work"',
     'class="section method-section"',
 )
 
-HOMEPAGE_SPARSE_FORBIDDEN_TOKENS = (
+HOMEPAGE_IDENTITY_FORBIDDEN_TOKENS = (
     'class="prime-matrix',
     'class="root-trace',
+    'class="sparse-signal',
     'our company',
     'our team',
 )
@@ -257,37 +263,37 @@ def validate_reflow_contract(content: str) -> list[str]:
     return [token for token in REFLOW_CONTRACT_TOKENS if token not in content]
 
 
-def validate_homepage_sparse_contract(content: str) -> list[str]:
+def validate_homepage_identity_contract(content: str) -> list[str]:
     errors: list[str] = []
-    missing = [token for token in HOMEPAGE_SPARSE_REQUIRED_TOKENS if token not in content]
+    missing = [token for token in HOMEPAGE_IDENTITY_REQUIRED_TOKENS if token not in content]
     if missing:
         errors.append(
-            "index.html is missing sparse-homepage contract token(s): "
+            "index.html is missing identity-homepage contract token(s): "
             + ", ".join(repr(token) for token in missing)
         )
 
     lowered = content.lower()
-    forbidden = [token for token in HOMEPAGE_SPARSE_FORBIDDEN_TOKENS if token in lowered]
+    forbidden = [token for token in HOMEPAGE_IDENTITY_FORBIDDEN_TOKENS if token in lowered]
     if forbidden:
         errors.append(
             "index.html contains retired or misleading homepage token(s): "
             + ", ".join(repr(token) for token in forbidden)
         )
 
-    hero_index = content.find('class="hero sparse-hero"')
+    hero_index = content.find('class="hero identity-hero"')
     selected_index = content.find('id="selected-work"')
     focus_index = content.find('class="section focus-section"')
     method_index = content.find('class="section method-section"')
     if not (-1 < hero_index < selected_index < focus_index < method_index):
         errors.append(
-            "index.html section order must be sparse hero, Selected Work, Focus, then Method"
+            "index.html section order must be identity hero, Selected Work, Focus, then Method"
         )
 
     if not re.search(
         r'</section>\s*<section class="section selected-section"\s+id="selected-work"',
         content,
     ):
-        errors.append("Selected Work must be the sparse hero's direct following section")
+        errors.append("Selected Work must be the identity hero's direct following section")
 
     if content.count('class="section method-section"') != 1:
         errors.append("index.html must contain exactly one Method section")
@@ -337,7 +343,7 @@ def main() -> int:
                     f"{late_component_styles}"
                 )
         if relative == "index.html":
-            errors.extend(validate_homepage_sparse_contract(path.read_text(encoding="utf-8")))
+            errors.extend(validate_homepage_identity_contract(path.read_text(encoding="utf-8")))
 
     checked_references = 0
     for source, document in documents.items():
