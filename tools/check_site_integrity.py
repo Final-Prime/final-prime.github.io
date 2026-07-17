@@ -149,6 +149,15 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     "assets/base.css": ("[hidden] { display: none !important; }",),
 }
 
+NAVIGATION_POLISH_CONTRACT = (
+    ".site-header.is-scrolled {",
+    "0 12px 34px rgba(245, 5, 77, 0.10)",
+    ".site-nav a::after {",
+    "background: var(--cyan);",
+    ".site-nav a:hover::after,",
+    ".site-nav a:focus-visible::after",
+)
+
 HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'class="hero identity-hero"',
     'Independent software · research · systems',
@@ -421,6 +430,15 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: progressive-enhancement contract is missing {missing}")
+    base_content = (ROOT / "assets" / "base.css").read_text(encoding="utf-8")
+    missing_navigation_polish = [
+        token for token in NAVIGATION_POLISH_CONTRACT if token not in base_content
+    ]
+    if missing_navigation_polish:
+        errors.append(
+            "assets/base.css: navigation polish contract is missing "
+            f"{missing_navigation_polish}"
+        )
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
