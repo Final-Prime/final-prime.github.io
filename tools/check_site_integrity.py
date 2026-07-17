@@ -249,6 +249,21 @@ HEADER_GLITCH_CONTRACT = {
     ),
 }
 
+HERO_WORDMARK_CONTRACT = {
+    "assets/hero.css": (
+        ".hero-wordmark > span {",
+        ".wordmark-final {",
+        "-0.118em 0.014em 0.07em rgba(10, 232, 247, 0.07)",
+        ".wordmark-prime {",
+        "0.118em 0.014em 0.07em rgba(245, 5, 77, 0.07)",
+        ".wordmark-divider {",
+        "transform: translateY(-0.035em) scaleX(0.96);",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
 BRAND_LOCKUP_REQUIRED_TOKENS = (
     'class="brand-name" aria-hidden="true"',
     'class="brand-word brand-word-final">FINAL</span>',
@@ -264,7 +279,7 @@ HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'class="hero-wordmark"',
     'aria-label="Final Prime"',
     'class="wordmark-final">FINAL</span>',
-    'class="wordmark-slash"',
+    'class="wordmark-divider" aria-hidden="true">\\</span>',
     'class="wordmark-prime">PRIME</span>',
     'Knowing the next move',
     'is survival.',
@@ -568,6 +583,11 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: header glitch contract is missing {missing}")
+    for relative, tokens in HERO_WORDMARK_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: hero wordmark contract is missing {missing}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
