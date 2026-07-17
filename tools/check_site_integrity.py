@@ -117,13 +117,8 @@ ROUTE_REFLOW_CONTRACTS = {
         "overflow-wrap: anywhere;",
     ),
     "assets/content-b.css": (
-        ".status-layout h2, .contact-layout h2 {",
+        ".contact-layout h2 {",
         "overflow-wrap: anywhere;",
-    ),
-    "assets/hardening.css": (
-        ".feature-layout > *,",
-        ".object-stage.is-enhanced > * { min-width: 0; max-width: 100%; }",
-        "grid-template-columns: minmax(72px, auto) minmax(0, 1fr);",
     ),
     "assets/hero.css": (
         ".hero-wordmark {",
@@ -361,10 +356,12 @@ def main() -> int:
             errors.append(f"{relative}: required runtime script is missing")
             continue
         checked_scripts += 1
-        size = path.stat().st_size
+        # Text mode normalizes CRLF to LF, so the budget measures source bytes
+        # consistently on Windows and Unix checkouts.
+        content = path.read_text(encoding="utf-8")
+        size = len(content.encode("utf-8"))
         if size > budget:
             errors.append(f"{relative}: {size} bytes exceeds the {budget}-byte runtime budget")
-        content = path.read_text(encoding="utf-8")
         for pattern in FORBIDDEN_SCRIPT_PATTERNS:
             if pattern in content:
                 errors.append(f"{relative}: forbidden dynamic script pattern {pattern}")

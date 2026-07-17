@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1100 619" preserveAspectRatio="xMidYMin meet" role="img" aria-labelledby="title description">
+  <title id="title">Selected work research target</title>
+  <desc id="description">A placeholder confirming that the participant selected the intended work route.</desc>
+  <rect width="1100" height="619" fill="#101419" />
+  <line x1="54" y1="68" x2="1046" y2="68" stroke="#56616b" />
+  <text x="54" y="132" fill="#4ff6ff" font-family="monospace" font-size="15" letter-spacing="2">RESEARCH TARGET / SELECTED WORK</text>
+  <text x="54" y="236" fill="#f2f4f5" font-family="Arial, sans-serif" font-size="64" font-weight="700">Selected work</text>
+  <text x="54" y="292" fill="#a9b0b5" font-family="Arial, sans-serif" font-size="22">The intended primary route was activated.</text>
+  <g id="contact">
+    <text x="54" y="402" fill="#ff2da8" font-family="monospace" font-size="15" letter-spacing="2">CONTACT PLACEHOLDER</text>
+  </g>
+</svg>

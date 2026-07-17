@@ -1,0 +1,13 @@
+variant,viewport,first_view_words,visible_full_frames,horizontal_overflow,primary_cta_top_px,primary_cta_fully_visible,notes
+control,1440x900,78,3,false,754,true,"Root Trace is visible as the control counterweight."
+control,1280x720,78,not_recorded,false,665,true,"CTA ends at y=713 inside the 720 px viewport."
+control,390x844,63,3,false,460,true,"Mobile order is motto, orientation, actions, then Root Trace."
+control,320x568,33,2,false,457,true,"CTA ends at y=503; the secondary action also remains in view."
+proof-led,1440x900,90,3,false,754,true,"The framed object is explicitly labelled as a concept and insufficient final proof."
+proof-led,1280x720,90,not_recorded,false,665,true,"CTA ends at y=713 inside the 720 px viewport."
+proof-led,390x844,63,3,false,460,true,"Mobile order is motto, orientation, actions, then proof."
+proof-led,320x568,33,2,false,457,true,"Proof begins after the action group."
+sparse-signal,1440x900,41,2,false,754,true,"Right side uses two rules and proximity; no content frame."
+sparse-signal,1280x720,41,not_recorded,false,665,true,"CTA ends at y=713 inside the 720 px viewport."
+sparse-signal,390x844,41,2,false,460,true,"Mobile order is motto, orientation, actions, then signal."
+sparse-signal,320x568,34,2,false,457,true,"Signal remains a later orientation cue; actions stay first."
