@@ -8,22 +8,12 @@
   const homeBrand = header?.querySelector('.brand[href="#top"]');
   if (homeBrand) homeBrand.setAttribute("aria-label", "FINAL / PRIME, back to top");
   const backgroundRegions = [...document.querySelectorAll("main, .site-footer")];
-  const focusableSelector = [
-    "a[href]",
-    "button:not([disabled])",
-    "input:not([disabled])",
-    "select:not([disabled])",
-    "textarea:not([disabled])",
-    "[tabindex]:not([tabindex='-1'])"
-  ].join(",");
-
+  const focusableSelector = ":is(a[href],button,input,select,textarea):not([disabled]),[tabindex]:not([tabindex='-1'])";
   let menuReturnFocus = null;
   const fallbackTabState = new Map();
 
-  const currentYear = String(new Date().getFullYear());
-  document.querySelectorAll("[data-current-year]").forEach(element => {
-    if (element.textContent !== currentYear) element.textContent = currentYear;
-  });
+  document.querySelectorAll("[data-current-year]")
+    .forEach(element => element.textContent = new Date().getFullYear());
 
   const setBackgroundInert = open => {
     backgroundRegions.forEach(region => {
@@ -50,11 +40,8 @@
     });
   };
 
-  const menuFocusables = () => {
-    return [menuToggle, ...siteNav.querySelectorAll(focusableSelector)].filter(element => {
-      return !element.hasAttribute("disabled") && element.getClientRects().length > 0;
-    });
-  };
+  const menuFocusables = () => [menuToggle, ...siteNav.querySelectorAll(focusableSelector)]
+    .filter(element => !element.hasAttribute("disabled") && element.getClientRects().length > 0);
 
   const hashTarget = hash => {
     if (!hash) return null;
@@ -164,7 +151,6 @@
     document.documentElement.classList.replace("no-js", "js");
     menuToggle.hidden = false;
   }
-
   document.addEventListener("click", event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const anchor = event.target.closest?.("a");
@@ -173,25 +159,29 @@
   });
 
   if (location.hash) focusHashTarget(hashTarget(location.hash));
-
-  const progress = document.createElement("div");
-  progress.className = "site-progress";
-  progress.setAttribute("aria-hidden", "true");
-  progress.innerHTML = "<span data-scroll-progress></span>";
-  header?.append(progress);
-  const progressFill = progress.querySelector("[data-scroll-progress]");
-
-  const updateHeader = () => {
-    header?.classList.toggle("is-scrolled", window.scrollY > 12);
-    if (!progressFill) return;
-    const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    const ratio = Math.min(1, Math.max(0, window.scrollY / scrollable));
-    progressFill.style.transform = `scaleX(${ratio})`;
+  const brand = header.querySelector(".brand");
+  const motion = matchMedia("(prefers-reduced-motion: reduce)");
+  let timer;
+  const glitch = () => {
+    if (motion.matches) return;
+    brand.classList.remove("is-glitching");
+    requestAnimationFrame(() => brand.classList.add("is-glitching"));
   };
-
-  requestAnimationFrame(updateHeader);
-  document.addEventListener("toggle", updateHeader, true);
+  const stopGlitch = () => brand.classList.remove("is-glitching");
+  const schedule = () => {
+    clearTimeout(timer);
+    if (motion.matches || document.hidden) return;
+    timer = setTimeout(() => {
+      if (!brand.matches(":hover, :focus-visible, .is-glitching")) glitch();
+      schedule();
+    }, 30000 + Math.random() * 20000);
+  };
+  brand.addEventListener("pointerdown", glitch);
+  brand.addEventListener("pointerleave", stopGlitch);
+  brand.addEventListener("animationend", () => !brand.matches(":hover") && stopGlitch());
+  document.addEventListener("visibilitychange", schedule);
+  schedule();
+  const updateHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 12);
+  updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
-  window.addEventListener("resize", updateHeader, { passive: true });
-
 })();
