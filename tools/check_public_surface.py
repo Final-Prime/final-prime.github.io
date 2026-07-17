@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 from binascii import crc32
+import os
 from pathlib import Path
 import re
 from struct import unpack
@@ -222,7 +223,8 @@ def validate_future_commit_identity() -> list[str]:
     if configured:
         email = configured
     else:
-        email = git("log", "-1", "--format=%ae").decode().strip().lower()
+        ref = "HEAD^2" if os.environ.get("GITHUB_EVENT_NAME") == "pull_request" else "HEAD"
+        email = git("log", "-1", "--format=%ae", ref).decode().strip().lower()
     if not email.endswith("@users.noreply.github.com"):
         return ["future commit identity must use a GitHub noreply address"]
     return []
