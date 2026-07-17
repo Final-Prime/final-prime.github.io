@@ -6,7 +6,7 @@
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const siteNav = document.querySelector("[data-site-nav]");
   const homeBrand = header?.querySelector('.brand[href="#top"]');
-  if (homeBrand) homeBrand.setAttribute("aria-label", "FINAL / PRIME, back to top");
+  if (homeBrand) homeBrand.setAttribute("aria-label", "Final Prime, back to top");
   const backgroundRegions = [...document.querySelectorAll("main, .site-footer")];
   const focusableSelector = ":is(a[href],button,input,select,textarea):not([disabled]),[tabindex]:not([tabindex='-1'])";
   let menuReturnFocus = null;

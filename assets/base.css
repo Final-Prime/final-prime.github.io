@@ -100,8 +100,10 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: clamp(18px, 2.2vw, 28px); }
 .brand { display: inline-flex; align-items: center; min-height: 44px; gap: 12px; text-decoration: none; }
 .brand-mark { flex: 0 0 auto; }
-.brand-name { color: var(--text); font: 800 0.78rem/1 var(--mono); letter-spacing: 0.16em; white-space: nowrap; }
-.brand-name > span { color: var(--fuchsia-text); }
+.brand-name { display: inline-flex; gap: 0.42em; align-items: baseline; color: var(--text); font: 800 0.78rem/1 var(--mono); letter-spacing: 0.16em; white-space: nowrap; }
+.brand-word,
+.brand-divider { display: inline-block; }
+.brand-divider { min-width: 0.75em; color: var(--text); font-weight: 500; letter-spacing: 0; text-align: center; }
 .site-nav { display: flex; align-items: center; gap: clamp(16px, 2vw, 26px); }
 .site-nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); font: 800 0.75rem/1.3 var(--mono); letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; }
 .site-nav a::after {
