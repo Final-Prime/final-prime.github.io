@@ -350,7 +350,7 @@ HOMEPAGE_CTA_CONTRACT = {
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-9">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-10">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -388,6 +388,7 @@ HOMEPAGE_FIELDS_CONTRACT = {
         "grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);",
         ".field-parent h2 .field-joiner,",
         ".field-parent h2 .field-secondary { display: block; }",
+        "font-size: 1em;",
         ".field-feature-list > li + li {",
         "border-top: 1px solid var(--line);",
         "@media (max-width: 1080px)",
