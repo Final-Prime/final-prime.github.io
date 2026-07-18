@@ -45,7 +45,11 @@
   text-transform: uppercase;
 }
 
+.eyebrow-copy { min-width: 0; }
+.eyebrow-term { white-space: nowrap; }
+
 .eyebrow::before {
+  flex: 0 0 auto;
   width: 34px;
   height: 1px;
   content: "";
