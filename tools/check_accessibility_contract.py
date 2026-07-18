@@ -36,6 +36,7 @@ EXPECTED_NAV_LINKS = {
 EXPECTED_BREADCRUMB_LINKS = {
     "systems/index.html": ["/"],
     "works/index.html": ["/"],
+    "works/realops-01/index.html": ["/", "/works/"],
     "thought/index.html": ["/"],
     "reviews/index.html": ["/", "/thought/"],
     "reviews/metro-2033-redux/index.html": ["/", "/thought/", "/reviews/"],
