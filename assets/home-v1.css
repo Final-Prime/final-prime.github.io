@@ -116,7 +116,8 @@ html {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: clamp(18px, 2vw, 26px);
-  margin: 28px 0 0;
+  margin: auto 0 0;
+  padding-top: 42px;
 }
 
 .field-parent-intro p {
@@ -136,8 +137,8 @@ html {
 .field-parent-meta {
   display: grid;
   gap: 14px;
-  margin: auto 0 0;
-  padding-top: 42px;
+  margin: 32px 0 0;
+  padding-top: 0;
 }
 
 .field-parent-meta div {
