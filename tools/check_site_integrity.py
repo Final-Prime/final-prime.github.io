@@ -278,7 +278,7 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-8">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
         '<script src="/assets/motto-glitch.js?v=20260718-2" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
@@ -318,14 +318,26 @@ HOMEPAGE_MOTTO_CONTRACT = {
 }
 
 HOMEPAGE_CTA_CONTRACT = {
+    "index.html": (
+        'href="#fields"',
+        '<span>Explore the fields</span>',
+        'class="button-icon button-icon-down" aria-hidden="true" focusable="false"',
+        '<span>Discuss a project</span>',
+        'class="button-icon button-icon-right" aria-hidden="true" focusable="false"',
+    ),
     "assets/hero.css": (
         ".hero .button {",
+        ".hero .button-icon {",
         "transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1)",
         "@media (hover: hover) and (pointer: fine)",
         ".hero .button-secondary { color: var(--fuchsia-text); border-color: var(--fuchsia); }",
         "transform: translateY(-1px);",
         "box-shadow: -5px 0 12px -3px rgba(10, 232, 247, 0.58), -16px 0 26px -9px rgba(10, 232, 247, 0.28);",
         "box-shadow: 5px 0 12px -3px rgba(245, 5, 77, 0.58), 16px 0 26px -9px rgba(245, 5, 77, 0.28);",
+        ".hero .button:hover .button-icon-down,",
+        "transform: translateY(2px);",
+        ".hero .button:hover .button-icon-right,",
+        "transform: translateX(2px);",
         ".hero .button:active {",
         "transform: translateY(1px);",
         "transition-duration: 80ms;",
@@ -335,10 +347,18 @@ HOMEPAGE_CTA_CONTRACT = {
     ),
 }
 
-HOMEPAGE_SELECTED_WORK_CONTRACT = {
+HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-6">',
-        '<section class="section selected-section" id="selected-work" aria-labelledby="selected-title">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-7">',
+        '<div class="field-region" id="fields">',
+        'data-field-layer="theory"',
+        'data-field-layer="systems"',
+        'data-field-layer="work"',
+        '<span>A/SYNC / Theory preview</span><strong>In development</strong>',
+        '<h3 id="theory-feature-title">A/SYNC / Theoretical foundations</h3>',
+        '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
+        '<div><dt>Publication</dt><dd>Not yet published</dd></div>',
         'href="/systems/#async">Open system record</a>',
         'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
     ),
@@ -346,7 +366,11 @@ HOMEPAGE_SELECTED_WORK_CONTRACT = {
         "border-bottom: 0;",
     ),
     "assets/home-v1.css": (
-        ".selected-section::before {",
+        "scroll-behavior: smooth;",
+        "scroll-padding-top: 0;",
+        ".field-region {",
+        "scroll-margin-top: var(--header-height);",
+        "[data-field-layer]::before {",
         "width: 22px;",
         "height: 24px;",
         "viewBox='0%200%2022%2024'",
@@ -357,9 +381,9 @@ HOMEPAGE_SELECTED_WORK_CONTRACT = {
         "drop-shadow(3px 0 4px rgba(245, 5, 77, 0.18));",
         "transform: translateX(-50%);",
         "transform: translateX(-50%) rotate(-22deg);",
-        ".selected-section .section-head {",
-        "grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);",
-        ".selected-card:not(.selected-card-review) h3 {",
+        ".field-layer-grid {",
+        "grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);",
+        ".field-feature-list > li + li {",
         "border-top: 1px solid var(--line);",
         "@media (max-width: 1080px)",
         "@media (prefers-reduced-transparency: reduce)",
@@ -368,9 +392,17 @@ HOMEPAGE_SELECTED_WORK_CONTRACT = {
     ),
 }
 
-RETIRED_HOMEPAGE_SELECTED_WORK_TOKENS = (
+RETIRED_HOMEPAGE_FIELD_TOKENS = (
     "Discuss A/SYNC",
     "Review index",
+    "Explore selected work",
+    "Parent field",
+    "Curated TopK",
+    'id="selected-work"',
+    'class="section selected-section"',
+    'class="section focus-section"',
+    'class="section method-section"',
+    "Open Thought Index",
 )
 
 BRAND_LOCKUP_REQUIRED_TOKENS = (
@@ -404,11 +436,14 @@ HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'It formulates and tests <b>hypotheses</b>.',
     'It develops theory and builds software on foundations designed',
     '<b>no longer arises</b>.',
-    'href="#selected-work">Explore selected work</a>',
+    'href="#fields"',
+    '<span>Explore the fields</span>',
     'href="/contact/">Discuss a project</a>',
     'class="hero-orientation-panel"',
-    'id="selected-work"',
-    'class="section method-section"',
+    'class="field-region" id="fields"',
+    'data-field-layer="theory"',
+    'data-field-layer="systems"',
+    'data-field-layer="work"',
 )
 
 HOMEPAGE_IDENTITY_FORBIDDEN_TOKENS = (
@@ -525,22 +560,28 @@ def validate_homepage_identity_contract(content: str) -> list[str]:
         )
 
     hero_index = content.find('class="hero identity-hero"')
-    selected_index = content.find('id="selected-work"')
-    focus_index = content.find('class="section focus-section"')
-    method_index = content.find('class="section method-section"')
-    if not (-1 < hero_index < selected_index < focus_index < method_index):
+    fields_index = content.find('class="field-region" id="fields"')
+    theory_index = content.find('data-field-layer="theory"')
+    systems_index = content.find('data-field-layer="systems"')
+    work_index = content.find('data-field-layer="work"')
+    closing_index = content.find('class="section closing-section"')
+    if not (-1 < hero_index < fields_index < theory_index < systems_index < work_index < closing_index):
         errors.append(
-            "index.html section order must be identity hero, Selected Work, Focus, then Method"
+            "index.html section order must be identity hero, Theory, Systems, Work, then closing"
         )
 
     if not re.search(
-        r'</section>\s*<section class="section selected-section"\s+id="selected-work"',
+        r'</section>\s*<div class="field-region" id="fields">\s*<section class="section"[^>]+data-field-layer="theory"',
         content,
     ):
-        errors.append("Selected Work must be the identity hero's direct following section")
+        errors.append("The fields region and Theory must directly follow the identity hero")
 
-    if content.count('class="section method-section"') != 1:
-        errors.append("index.html must contain exactly one Method section")
+    if content.count('data-field-layer=') != 3:
+        errors.append("index.html must contain exactly three field layers")
+    if content.count('<ol class="field-feature-list"') != 3:
+        errors.append("index.html must contain exactly one ordered record list per field layer")
+    if content.count('<article class="field-feature') != 3:
+        errors.append("index.html v1 must contain exactly one selected article per field layer")
 
     return errors
 
@@ -718,15 +759,15 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: homepage CTA contract is missing {missing}")
-    for relative, tokens in HOMEPAGE_SELECTED_WORK_CONTRACT.items():
+    for relative, tokens in HOMEPAGE_FIELDS_CONTRACT.items():
         content = (ROOT / relative).read_text(encoding="utf-8")
         missing = [token for token in tokens if token not in content]
         if missing:
-            errors.append(f"{relative}: homepage selected work contract is missing {missing}")
+            errors.append(f"{relative}: homepage fields contract is missing {missing}")
     homepage = (ROOT / "index.html").read_text(encoding="utf-8")
-    retired_selected = [token for token in RETIRED_HOMEPAGE_SELECTED_WORK_TOKENS if token in homepage]
-    if retired_selected:
-        errors.append(f"index.html: retired selected work token(s) restored {retired_selected}")
+    retired_fields = [token for token in RETIRED_HOMEPAGE_FIELD_TOKENS if token in homepage]
+    if retired_fields:
+        errors.append(f"index.html: retired homepage field token(s) restored {retired_fields}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
