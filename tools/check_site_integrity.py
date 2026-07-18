@@ -350,7 +350,7 @@ HOMEPAGE_CTA_CONTRACT = {
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-10">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-11">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -362,7 +362,10 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<h3 id="theory-feature-title">A/SYNC / Theoretical foundations</h3>',
         '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
         '<div><dt>Publication</dt><dd>Not yet published</dd></div>',
-        'href="/systems/#async">Open system record</a>',
+        'href="/thought/">Explore theory</a>',
+        'href="/systems/">Explore systems</a>',
+        'href="/systems/#async">Open A/SYNC record</a>',
+        'href="/works/">Explore work</a>',
         'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
     ),
     "assets/hero.css": (
@@ -389,6 +392,7 @@ HOMEPAGE_FIELDS_CONTRACT = {
         ".field-parent h2 .field-joiner,",
         ".field-parent h2 .field-secondary { display: block; }",
         "font-size: 1em;",
+        ".field-parent-actions { padding-top: 24px; }",
         ".field-feature-list > li + li {",
         "border-top: 1px solid var(--line);",
         "@media (max-width: 1080px)",
