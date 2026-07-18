@@ -16,6 +16,8 @@ REQUIRED_FILES = [
     ROOT / "docs" / "ip-policy.md",
     ROOT / "docs" / "ip-register.md",
     ROOT / "legal" / "index.html",
+    ROOT / "assets" / "fonts" / "inter-v4.1" / "LICENSE.txt",
+    ROOT / "assets" / "fonts" / "inter-v4.1" / "SOURCE.md",
 ]
 PUBLIC_HTML = [
     ROOT / "index.html",
@@ -93,6 +95,31 @@ def main() -> int:
         for forbidden in ("ensureLegalNotice", "data.legalMark", "data.legalLink", 'document.createElement("meta")'):
             if forbidden in app:
                 errors.append(f"assets/app.js must not repair static legal notices at runtime: {forbidden}")
+
+    notice_path = ROOT / "NOTICE"
+    if notice_path.is_file():
+        notice = notice_path.read_text(encoding="utf-8")
+        for phrase in ("Inter v4.1", "The Inter Project Authors", "SIL Open Font License, Version 1.1"):
+            if phrase not in notice:
+                errors.append(f"NOTICE missing Inter attribution: {phrase}")
+
+    inter_license_path = ROOT / "assets" / "fonts" / "inter-v4.1" / "LICENSE.txt"
+    if inter_license_path.is_file():
+        inter_license = inter_license_path.read_text(encoding="utf-8")
+        for phrase in ("SIL OPEN FONT LICENSE Version 1.1", "Copyright (c) 2016 The Inter Project Authors"):
+            if phrase not in inter_license:
+                errors.append(f"Inter license missing required phrase: {phrase}")
+
+    inter_source_path = ROOT / "assets" / "fonts" / "inter-v4.1" / "SOURCE.md"
+    if inter_source_path.is_file():
+        inter_source = inter_source_path.read_text(encoding="utf-8")
+        for phrase in (
+            "https://github.com/rsms/inter/releases/tag/v4.1",
+            "693B77D4F32EE9B8BFC995589B5FAD5E99ADF2832738661F5402F9978429A8E3",
+            "copied without modification",
+        ):
+            if phrase not in inter_source:
+                errors.append(f"Inter source record missing provenance: {phrase}")
 
     if errors:
         print("IP notice check failed.")

@@ -271,6 +271,31 @@ HERO_WORDMARK_CONTRACT = {
     ),
 }
 
+HOMEPAGE_MOTTO_CONTRACT = {
+    "index.html": (
+        '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-2">',
+        '<p class="doctrine hero-motto">',
+        '<strong class="doctrine-cyan">is survival.</strong>',
+        '<strong class="doctrine-fuchsia">is control.</strong>',
+    ),
+    "assets/hero.css": (
+        'font-family: "FP Inter";',
+        'src: url("fonts/inter-v4.1/InterVariable.woff2") format("woff2");',
+        'font-family: "FP Inter", var(--sans);',
+        "font-weight: 620;",
+        "font-size: clamp(2.95rem, 5.1vw, 5.25rem);",
+        "font-weight: 770;",
+        "line-height: 0.94;",
+        "letter-spacing: -0.025em;",
+        "overflow-wrap: anywhere;",
+        "text-transform: uppercase;",
+        "font-size: clamp(2.25rem, calc(1.7rem + 2.9vw), 2.95rem);",
+        "@media (max-width: 360px) and (max-height: 640px)",
+        ".hero-grid { gap: 15px; margin-top: 18px; }",
+    ),
+}
+
 BRAND_LOCKUP_REQUIRED_TOKENS = (
     'class="brand-name" aria-hidden="true"',
     'class="brand-word brand-word-final">FINAL</span>',
@@ -597,6 +622,11 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: hero wordmark contract is missing {missing}")
+    for relative, tokens in HOMEPAGE_MOTTO_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: homepage motto contract is missing {missing}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():

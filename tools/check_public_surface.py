@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_TRACKED_BYTES = 1024 * 1024
 ALLOWED_SUFFIXES = {
     ".css", ".csv", ".html", ".js", ".md", ".png", ".py", ".svg",
-    ".txt", ".webmanifest", ".xml", ".yml",
+    ".txt", ".webmanifest", ".woff2", ".xml", ".yml",
 }
 ALLOWED_EXTENSIONLESS_PATHS = {".github/CODEOWNERS", ".nojekyll", "LICENSE", "NOTICE"}
 RISKY_BASENAMES = {".env", "credentials", "id_dsa", "id_ed25519", "id_rsa", "secrets"}
@@ -149,6 +149,20 @@ def validate_svg(path: Path, data: bytes) -> list[str]:
     return errors
 
 
+def validate_woff2(path: Path, data: bytes) -> list[str]:
+    relative = path.relative_to(ROOT).as_posix()
+    errors = scan_secret_bytes(data, relative)
+    if len(data) < 48 or data[:4] != b"wOF2":
+        return [*errors, f"{relative}: invalid WOFF2 header"]
+    declared_length = unpack(">I", data[8:12])[0]
+    table_count = unpack(">H", data[12:14])[0]
+    if declared_length != len(data):
+        errors.append(f"{relative}: WOFF2 declared length does not match file size")
+    if table_count == 0:
+        errors.append(f"{relative}: WOFF2 contains no font tables")
+    return errors
+
+
 def url_is_external(value: str) -> bool:
     lowered = value.strip().lower()
     return lowered.startswith(("http://", "https://", "//"))
@@ -169,7 +183,9 @@ def validate_current_tree() -> tuple[list[str], int]:
         data = path.read_bytes()
         if len(data) > MAX_TRACKED_BYTES:
             errors.append(f"{relative}: tracked file exceeds 1 MiB")
-        if suffix == ".png":
+        if suffix == ".woff2":
+            errors.extend(validate_woff2(path, data))
+        elif suffix == ".png":
             errors.extend(validate_png(path, data))
         elif suffix == ".svg":
             errors.extend(validate_svg(path, data))

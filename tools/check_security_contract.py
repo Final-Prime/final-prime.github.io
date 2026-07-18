@@ -16,7 +16,7 @@ COMMON_CSP = {
     "default-src": ("'self'",),
     "style-src": ("'self'",),
     "img-src": ("'self'", "data:"),
-    "font-src": ("'none'",),
+    "font-src": ("'self'",),
     "media-src": ("'none'",),
     "connect-src": ("'self'",),
     "worker-src": ("'none'",),
