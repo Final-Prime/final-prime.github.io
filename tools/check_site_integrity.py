@@ -205,6 +205,8 @@ SCROLL_READOUT_CONTRACT = {
         'document.body.classList.contains("review-dossier-page")',
         'window.matchMedia("(min-width: 1081px)")',
         'window.requestAnimationFrame(update)',
+        'readout.hidden = percent === 0',
+        'readout.value = `${percent}%`',
         'window.addEventListener("scroll", scheduleUpdate, { passive: true })',
     ),
     "assets/surface-polish.css": (
@@ -225,6 +227,7 @@ HEADER_GLITCH_CONTRACT = {
         'header.querySelector(".brand")',
         'matchMedia("(prefers-reduced-motion: reduce)")',
         '30000 + Math.random() * 20000',
+        'document.querySelector(".hero-motto.is-glitching,.brand:is(:hover,:focus-visible,.is-glitching)")',
         'document.hidden',
         '"is-glitching"',
         '"pointerdown"',
@@ -276,7 +279,7 @@ HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-7">',
-        '<script src="/assets/motto-glitch.js?v=20260718-1" defer></script>',
+        '<script src="/assets/motto-glitch.js?v=20260718-2" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
         '<strong class="doctrine-fuchsia"><span class="doctrine-effect" aria-hidden="true">is control.</span><span class="doctrine-core">is control.</span></strong>',
@@ -309,7 +312,7 @@ HOMEPAGE_MOTTO_CONTRACT = {
         '"pointerenter"',
         '"pointerdown"',
         '"visibilitychange"',
-        '20000 + Math.random() * 12000',
+        '40000 + Math.random() * 20000',
         '"fp-motto-complementary-glitch"',
     ),
 }
