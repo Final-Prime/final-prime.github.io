@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Final Prime motto finalists</title>
+  <style>
+    :root { color-scheme: dark; background: #07090b; font-family: Inter, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { width: 1480px; margin: 0; padding: 48px; color: #f4f7f8; background: radial-gradient(circle at 8% 0, rgba(10,232,247,.05), transparent 34rem), radial-gradient(circle at 94% 12%, rgba(245,5,77,.07), transparent 34rem), #07090b; }
+    body > header { display: grid; grid-template-columns: 1fr 560px; gap: 40px; align-items: end; padding-bottom: 30px; border-bottom: 1px solid #293238; }
+    .kicker { margin: 0; color: #0ae8f7; font: 800 12px/1.3 Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 12px 0 0; font-size: 48px; line-height: 1; letter-spacing: -.04em; }
+    body > header p:last-child { margin: 0; color: #9ca6ad; font-size: 15px; line-height: 1.55; text-align: right; }
+    main { display: grid; gap: 32px; margin-top: 36px; }
+    article { display: grid; grid-template-columns: 792px 230px 1fr; grid-template-rows: auto 495px; gap: 14px 24px; padding: 18px; border: 1px solid #293238; background: rgba(14,18,21,.76); }
+    article > header { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding-bottom: 13px; border-bottom: 1px solid rgba(41,50,56,.8); }
+    article h2 { margin: 0; font: 800 14px/1.3 Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    article header span { color: #9ca6ad; font: 700 11px/1.3 Consolas, monospace; letter-spacing: .05em; text-transform: uppercase; }
+    .frame { position: relative; overflow: hidden; background: #090b0d; }
+    .desktop { width: 792px; height: 495px; }
+    .desktop iframe { position: absolute; width: 1440px; height: 900px; border: 0; transform: scale(.55); transform-origin: top left; }
+    .mobile { width: 230px; height: 495px; }
+    .mobile iframe { position: absolute; width: 390px; height: 844px; border: 0; transform: scale(.587); transform-origin: top left; }
+    .notes { align-self: stretch; padding: 18px; border-left: 1px solid #293238; }
+    .notes strong { display: block; color: #0ae8f7; font: 800 11px/1.3 Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .notes p { margin: 12px 0 0; color: #c5cdd2; font-size: 15px; line-height: 1.55; }
+    .notes small { display: block; margin-top: 18px; color: #8d989f; font: 700 10px/1.5 Consolas, monospace; letter-spacing: .04em; text-transform: uppercase; }
+    footer { display: flex; justify-content: space-between; gap: 30px; margin-top: 34px; padding-top: 22px; border-top: 1px solid #293238; color: #7f8a91; font: 700 10px/1.5 Consolas, monospace; letter-spacing: .05em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <header>
+    <div><p class="kicker">Adversarial shortlist</p><h1>Desktop + mobile finalists</h1></div>
+    <p>The same real hero proportions are shown at 1440×900 and 390×844. These are decision stimuli, not isolated font specimens.</p>
+  </header>
+  <main>
+    <article>
+      <header><h2>P1 · Inter / balanced stack</h2><span>4 visual lines · outcome color</span></header>
+      <div class="frame desktop"><iframe title="P1 desktop" src="preview.html?variant=P1"></iframe></div>
+      <div class="frame mobile"><iframe title="P1 mobile" src="preview.html?variant=P1"></iframe></div>
+      <div class="notes"><strong>Safe dramatic direction</strong><p>Preserves the call-and-response rhythm while removing the compressed display typography.</p><small>Risk: still creates a second poster beneath the wordmark.</small></div>
+    </article>
+    <article>
+      <header><h2>P2 · Source Sans 3 / balanced stack</h2><span>4 visual lines · warmer family</span></header>
+      <div class="frame desktop"><iframe title="P2 desktop" src="preview.html?variant=P2"></iframe></div>
+      <div class="frame mobile"><iframe title="P2 mobile" src="preview.html?variant=P2"></iframe></div>
+      <div class="notes"><strong>Warmer dramatic direction</strong><p>More open and human than Inter, while keeping the existing four-part cadence.</p><small>Risk: softer shapes reduce the industrial edge.</small></div>
+    </article>
+    <article>
+      <header><h2>P3 · IBM Plex Sans / balanced stack</h2><span>4 visual lines · technical family</span></header>
+      <div class="frame desktop"><iframe title="P3 desktop" src="preview.html?variant=P3"></iframe></div>
+      <div class="frame mobile"><iframe title="P3 mobile" src="preview.html?variant=P3"></iframe></div>
+      <div class="notes"><strong>Technical dramatic direction</strong><p>Engineered and readable with more identity than a system sans.</p><small>Risk: visibly inherits IBM's corporate design language.</small></div>
+    </article>
+    <article>
+      <header><h2>P4 · Inter / keyword signal</h2><span>2 desktop lines · keyword color</span></header>
+      <div class="frame desktop"><iframe title="P4 desktop" src="preview.html?variant=P4"></iframe></div>
+      <div class="frame mobile"><iframe title="P4 mobile" src="preview.html?variant=P4"></iframe></div>
+      <div class="notes"><strong>Quiet confidence direction</strong><p>Reads as two complete ideas and lets the wordmark remain the only oversized poster element.</p><small>Risk: sacrifices some manifesto-like drama.</small></div>
+    </article>
+    <article>
+      <header><h2>P5 · Source Sans 3 / keyword signal</h2><span>2 desktop lines · warmer family</span></header>
+      <div class="frame desktop"><iframe title="P5 desktop" src="preview.html?variant=P5"></iframe></div>
+      <div class="frame mobile"><iframe title="P5 mobile" src="preview.html?variant=P5"></iframe></div>
+      <div class="notes"><strong>Human quiet direction</strong><p>The least aggressive finalist; direct, readable and approachable.</p><small>Risk: may become too editorial and ordinary.</small></div>
+    </article>
+    <article>
+      <header><h2>P6 · Inter / phrase signal</h2><span>2 desktop lines · full outcome color</span></header>
+      <div class="frame desktop"><iframe title="P6 desktop" src="preview.html?variant=P6"></iframe></div>
+      <div class="frame mobile"><iframe title="P6 mobile" src="preview.html?variant=P6"></iframe></div>
+      <div class="notes"><strong>Balanced two-line direction</strong><p>Keeps the complete sentence reading while preserving the logic→outcome color contrast.</p><small>Risk: color starts to compete with the wordmark again.</small></div>
+    </article>
+  </main>
+  <footer><span>Final Prime / Motto typography / 2026-07-18</span><span>Research preview / not production</span></footer>
+  <script>
+    const part = new URLSearchParams(location.search).get("part");
+    if (part === "1" || part === "2") {
+      const split = part === "1" ? [0, 1, 2] : [3, 4, 5];
+      [...document.querySelectorAll("main > article")].forEach((card, index) => {
+        if (!split.includes(index)) card.remove();
+      });
+    }
+  </script>
+</body>
+</html>

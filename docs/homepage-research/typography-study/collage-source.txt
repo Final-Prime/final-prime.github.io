@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Final Prime typography collage</title>
+  <style>
+    :root { color-scheme: dark; background: #07090b; font-family: Inter, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { width: 1480px; margin: 0; padding: 48px; color: #f4f7f8; background: radial-gradient(circle at 8% 0, rgba(10,232,247,.05), transparent 34rem), radial-gradient(circle at 94% 12%, rgba(245,5,77,.07), transparent 34rem), #07090b; }
+    header { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-bottom: 30px; border-bottom: 1px solid #293238; }
+    .kicker { margin: 0; color: #0ae8f7; font: 800 12px/1.3 Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 12px 0 0; font-size: 48px; line-height: 1; letter-spacing: -.04em; }
+    header p:last-child { max-width: 520px; margin: 0; color: #9ca6ad; font-size: 15px; line-height: 1.55; text-align: right; }
+    .board { display: grid; grid-template-columns: repeat(2, 640px); gap: 34px; margin-top: 36px; }
+    article { padding: 10px; border: 1px solid #293238; background: rgba(14,18,21,.76); }
+    article > header { display: flex; min-height: 48px; align-items: center; justify-content: space-between; padding: 2px 5px 12px; border: 0; }
+    article h2 { margin: 0; color: #f4f7f8; font: 800 13px/1.3 Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    article small { color: #9ca6ad; font: 700 10px/1.3 Consolas, monospace; letter-spacing: .05em; text-transform: uppercase; }
+    .desktop-frame { position: relative; width: 620px; height: 388px; overflow: hidden; background: #090b0d; }
+    .desktop-frame iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; border: 0; transform: scale(.4305556); transform-origin: top left; }
+    footer { display: flex; justify-content: space-between; gap: 30px; margin-top: 34px; padding-top: 22px; border-top: 1px solid #293238; color: #7f8a91; font: 700 10px/1.5 Consolas, monospace; letter-spacing: .05em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <p class="kicker" data-kicker>Controlled typography study</p>
+      <h1 data-title>Font-family sweep</h1>
+    </div>
+    <p data-description>One layout, one text, one viewport. Only the type family changes after the current control.</p>
+  </header>
+  <main class="board" data-board></main>
+  <footer><span>Final Prime / Motto typography / 2026-07-18</span><span>Research preview / not production</span></footer>
+  <script>
+    const boards = {
+      fonts: {
+        title: "Font-family sweep",
+        description: "One layout, one text, one viewport. Only the type family changes after the current control.",
+        variants: [
+          ["C0", "Current control", "Aptos Display"],
+          ["F1", "Neutral screen sans", "Inter"],
+          ["F2", "Humanist screen sans", "Source Sans 3"],
+          ["F3", "Technical humanist sans", "IBM Plex Sans"],
+          ["F4", "Geometric contemporary", "Manrope"],
+          ["F5", "System sans baseline", "Segoe UI Variable"]
+        ]
+      },
+      layouts: {
+        title: "Composition and color sweep",
+        description: "Inter is held constant. Line count, hierarchy, grouping, alignment and color distribution are tested independently.",
+        variants: [
+          ["L1", "Balanced hierarchy", "4 visual lines"],
+          ["L2", "Complete statements", "2 visual lines"],
+          ["L3", "Equal-weight stack", "4 equal lines"],
+          ["L4", "Keyword signal", "2 lines / color on nouns"],
+          ["L5", "Compressed poster", "4 lines / uppercase lead"],
+          ["L6", "Editorial index", "4 lines / numbered"],
+          ["L7", "Offset outcomes", "4 lines / asymmetric"],
+          ["L8", "Maximum accent probe", "2 full-color lines"],
+          ["L9", "Muted outcomes", "4 lines / low chroma"],
+          ["L10", "Quiet statement", "2 lines / lower weight"],
+          ["L11", "Parallel statements", "2-column blocks"]
+        ]
+      }
+    };
+    const requested = new URLSearchParams(location.search).get("board") || "fonts";
+    const board = boards[requested] || boards.fonts;
+    document.querySelector("[data-title]").textContent = board.title;
+    document.querySelector("[data-description]").textContent = board.description;
+    document.title = `${board.title} · Final Prime typography study`;
+    const root = document.querySelector("[data-board]");
+    board.variants.forEach(([id, title, detail]) => {
+      const card = document.createElement("article");
+      card.innerHTML = `<header><h2>${id} · ${title}</h2><small>${detail}</small></header><div class="desktop-frame"><iframe title="${id} ${title}" src="preview.html?variant=${id}" loading="eager"></iframe></div>`;
+      root.append(card);
+    });
+  </script>
+</body>
+</html>
