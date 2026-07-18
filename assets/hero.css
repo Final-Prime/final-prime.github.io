@@ -267,6 +267,7 @@
 }
 .hero-actions { display: flex; flex-wrap: wrap; margin-top: 20px; }
 .hero .button {
+  gap: 10px;
   box-shadow: none;
   transition:
     transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -274,6 +275,17 @@
     border-color 150ms ease,
     background 150ms ease,
     color 150ms ease;
+}
+.hero .button-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.5;
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .hero .button:hover { transform: none; box-shadow: none; }
 .hero .button-primary { color: #041012; border-color: var(--cyan); background: var(--cyan); }
@@ -296,12 +308,17 @@
 }
 .hero .button-primary:focus-visible { box-shadow: -5px 0 12px -3px rgba(10, 232, 247, 0.58), -16px 0 26px -9px rgba(10, 232, 247, 0.28); }
 .hero .button-secondary:focus-visible { box-shadow: 5px 0 12px -3px rgba(245, 5, 77, 0.58), 16px 0 26px -9px rgba(245, 5, 77, 0.28); }
+.hero .button:hover .button-icon-down,
+.hero .button:focus-visible .button-icon-down { transform: translateY(2px); }
+.hero .button:hover .button-icon-right,
+.hero .button:focus-visible .button-icon-right { transform: translateX(2px); }
 
 .hero .button:active {
   transform: translateY(1px);
   box-shadow: none;
   transition-duration: 80ms;
 }
+.hero .button:active .button-icon { transform: none; }
 .hero .button-primary:active { border-color: #08d7e5; background: #08d7e5; }
 .hero .button-secondary:active { background: rgba(245, 5, 77, 0.14); }
 
@@ -358,6 +375,10 @@
   .hero .button:hover,
   .hero .button:focus-visible,
   .hero .button:active { transform: none; }
+  .hero .button-icon,
+  .hero .button:hover .button-icon,
+  .hero .button:focus-visible .button-icon,
+  .hero .button:active .button-icon { transition: none; transform: none; }
 }
 
 @media (forced-colors: active) {
