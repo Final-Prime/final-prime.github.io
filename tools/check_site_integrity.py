@@ -121,6 +121,8 @@ ROUTE_REFLOW_CONTRACTS = {
         "overflow-wrap: anywhere;",
     ),
     "assets/hero.css": (
+        ".eyebrow-copy {",
+        ".eyebrow-term { white-space: nowrap; }",
         ".hero-wordmark {",
         ".wordmark-prime {",
         ".doctrine strong {",
@@ -280,7 +282,8 @@ RETIRED_BRAND_LOCKUP = '<span class="brand-name">FINAL <span aria-hidden="true">
 
 HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'class="hero identity-hero"',
-    'Independent software · research · systems',
+    'class="eyebrow-copy">Independent studio · software &amp; ',
+    'class="eyebrow-term">technical research</span>',
     'class="hero-wordmark"',
     'aria-label="Final Prime"',
     'class="wordmark-final">FINAL</span>',
