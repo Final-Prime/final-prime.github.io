@@ -1,0 +1,278 @@
+@import url("https://rsms.me/inter/inter.css");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400..800&family=Source+Sans+3:wght@400..900&display=swap");
+
+:root {
+  --bg: #090b0d;
+  --surface: #0e1215;
+  --text: #f4f7f8;
+  --muted: #9ca6ad;
+  --line: #293238;
+  --cyan: #0ae8f7;
+  --fuchsia: #ff336f;
+  --motto-family: "Aptos Display", "Segoe UI Variable Display", "Helvetica Neue", Arial, sans-serif;
+  --shell: min(1360px, calc(100% - 80px));
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; color-scheme: dark; background: var(--bg); }
+body {
+  min-width: 0;
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 43%, rgba(10, 232, 247, 0.055), transparent 28rem),
+    radial-gradient(circle at 88% 17%, rgba(245, 5, 77, 0.09), transparent 31rem),
+    var(--bg);
+  font-family: InterVariable, Inter, ui-sans-serif, system-ui, sans-serif;
+}
+.shell { width: var(--shell); margin-inline: auto; }
+
+.study-header {
+  height: 64px;
+  border-bottom: 1px solid #263038;
+  background: rgba(9, 11, 13, 0.94);
+}
+.header-inner { display: flex; height: 100%; align-items: center; justify-content: space-between; }
+.mini-brand { display: flex; align-items: center; gap: 12px; font: 760 0.72rem/1 "SFMono-Regular", Consolas, monospace; letter-spacing: 0.12em; }
+.mini-brand b { color: var(--fuchsia); font-weight: 800; }
+.mini-mark { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid var(--line); color: var(--cyan); font-size: 1.2rem; }
+.study-header nav { display: flex; gap: 28px; align-items: center; color: #b5bec4; font: 700 0.67rem/1 "SFMono-Regular", Consolas, monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+.study-header nav strong { padding: 15px 12px; border: 1px solid rgba(10, 232, 247, 0.4); color: var(--cyan); }
+
+.hero-study { min-height: 640px; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero-shell { padding-top: 66px; }
+.eyebrow { margin: 0; color: var(--cyan); font: 800 0.75rem/1.4 "SFMono-Regular", Consolas, monospace; letter-spacing: 0.13em; text-transform: uppercase; }
+.eyebrow::before { display: inline-block; width: 34px; height: 1px; margin-right: 12px; vertical-align: middle; content: ""; background: #47545c; }
+.wordmark { display: flex; align-items: baseline; gap: 0.055em; margin: 38px 0 0; font-family: "Aptos Display", "Segoe UI Variable Display", Arial, sans-serif; font-size: clamp(7rem, 12.4vw, 11rem); font-weight: 820; line-height: 0.76; letter-spacing: -0.075em; white-space: nowrap; }
+.wordmark > span { display: inline-block; }
+.wordmark-final { text-shadow: -0.014em 0 var(--cyan), -0.045em 0.006em 0.025em rgba(10, 232, 247, 0.25); }
+.wordmark-prime { text-shadow: 0.014em 0 var(--fuchsia), 0.045em 0.006em 0.025em rgba(245, 5, 77, 0.25); }
+.wordmark-divider { font-weight: 300; text-shadow: -0.024em -0.01em 0.014em rgba(10,232,247,.72), 0.026em 0.012em 0.016em rgba(245,5,77,.76); transform: translateY(-0.035em); }
+.hero-rule { height: 1px; margin-top: 42px; background: linear-gradient(90deg, var(--fuchsia) 0 18%, var(--line) 18% 82%, var(--cyan) 82%); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.72fr); gap: clamp(52px, 7vw, 112px); align-items: start; margin-top: 52px; }
+
+.motto-field { min-width: 0; }
+.motto { display: grid; margin: 0; font-family: var(--motto-family); }
+.thought { display: block; min-width: 0; }
+.thought + .thought { margin-top: 18px; }
+.index-mark { display: none; }
+.clause { display: block; font-size: clamp(1.35rem, 2.1vw, 2rem); font-weight: 690; line-height: 1.04; letter-spacing: -0.02em; }
+.outcome { display: block; margin-top: 2px; font-size: clamp(3.15rem, 5.55vw, 5.7rem); font-weight: 820; line-height: 0.87; letter-spacing: -0.07em; }
+.thought-one .outcome { color: var(--cyan); }
+.thought-two .outcome { color: var(--fuchsia); }
+
+.orientation-panel { min-width: 0; padding-top: 4px; }
+.orientation-panel p { max-width: 590px; margin: 0; color: var(--muted); font-size: clamp(0.98rem, 1.2vw, 1.12rem); line-height: 1.64; }
+.orientation-panel strong { color: var(--text); }
+.actions { display: flex; gap: 12px; margin-top: 28px; }
+.button { display: grid; min-height: 50px; place-items: center; padding: 0 20px; border: 1px solid var(--cyan); font: 800 0.69rem/1 "SFMono-Regular", Consolas, monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+.button.primary { color: #041012; background: var(--cyan); }
+.button.secondary { color: var(--cyan); }
+.next-section { min-height: 260px; padding-top: 84px; }
+.next-section p { margin: 0; color: var(--fuchsia); font: 800 0.72rem/1 "SFMono-Regular", Consolas, monospace; letter-spacing: 0.14em; text-transform: uppercase; }
+.next-section h2 { margin: 18px 0 0; font-family: "Aptos Display", "Segoe UI Variable Display", Arial, sans-serif; font-size: 3rem; letter-spacing: -0.055em; }
+.study-tag { position: fixed; z-index: 3; right: 18px; bottom: 18px; display: grid; max-width: 360px; grid-template-columns: auto 1fr; gap: 7px 11px; padding: 10px 12px; border: 1px solid rgba(156, 166, 173, 0.35); color: #c8d0d5; background: rgba(9, 11, 13, 0.94); font: 700 0.65rem/1.35 "SFMono-Regular", Consolas, monospace; letter-spacing: 0.04em; text-transform: uppercase; }
+.study-tag strong { color: var(--cyan); }
+
+/* Font-family sweep: one composition, one variable changed. */
+html[data-variant="F1"] { --motto-family: InterVariable, Inter, Arial, sans-serif; }
+html[data-variant="F2"] { --motto-family: "Source Sans 3", Arial, sans-serif; }
+html[data-variant="F3"] { --motto-family: "IBM Plex Sans", Arial, sans-serif; }
+html[data-variant="F4"] { --motto-family: Manrope, Arial, sans-serif; }
+html[data-variant="F5"] { --motto-family: "Segoe UI Variable", "Segoe UI", Arial, sans-serif; }
+
+html[data-variant^="F"] .clause {
+  font-weight: 620;
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+}
+html[data-variant^="F"] .outcome {
+  font-weight: 770;
+  line-height: 0.94;
+  letter-spacing: -0.038em;
+}
+
+/* Composition sweep: Inter is held constant. */
+html[data-variant^="L"] { --motto-family: InterVariable, Inter, Arial, sans-serif; }
+html[data-variant^="L"] .clause { font-weight: 620; }
+html[data-variant^="L"] .outcome { font-weight: 770; letter-spacing: -0.038em; }
+
+/* Shortlist: combines only the strongest family and composition candidates. */
+html[data-variant="P1"],
+html[data-variant="P4"],
+html[data-variant="P6"] { --motto-family: InterVariable, Inter, Arial, sans-serif; }
+html[data-variant="P2"],
+html[data-variant="P5"] { --motto-family: "Source Sans 3", Arial, sans-serif; }
+html[data-variant="P3"] { --motto-family: "IBM Plex Sans", Arial, sans-serif; }
+html[data-variant^="P"] .clause { font-weight: 620; }
+html[data-variant^="P"] .outcome { font-weight: 770; letter-spacing: -0.038em; }
+
+/* L1: same four semantic lines, smaller hierarchy gap. */
+html[data-variant="L1"] .clause,
+html[data-variant="P1"] .clause,
+html[data-variant="P2"] .clause,
+html[data-variant="P3"] .clause { font-size: clamp(1.55rem, 2.3vw, 2.25rem); line-height: 1.08; }
+html[data-variant="L1"] .outcome,
+html[data-variant="P1"] .outcome,
+html[data-variant="P2"] .outcome,
+html[data-variant="P3"] .outcome { font-size: clamp(2.85rem, 4.7vw, 4.8rem); line-height: 0.96; }
+html[data-variant="L1"] .thought + .thought,
+html[data-variant="P1"] .thought + .thought,
+html[data-variant="P2"] .thought + .thought,
+html[data-variant="P3"] .thought + .thought { margin-top: 20px; }
+
+/* L2: each statement is one visual line on desktop. */
+html[data-variant="L2"] .motto,
+html[data-variant="P6"] .motto { gap: 22px; }
+html[data-variant="L2"] .thought,
+html[data-variant="P6"] .thought { white-space: normal; }
+html[data-variant="L2"] .thought + .thought,
+html[data-variant="P6"] .thought + .thought { margin-top: 0; }
+html[data-variant="L2"] .clause,
+html[data-variant="L2"] .outcome,
+html[data-variant="P6"] .clause,
+html[data-variant="P6"] .outcome { display: inline; font-size: clamp(2rem, 3.15vw, 3.35rem); font-weight: 680; line-height: 1.04; letter-spacing: -0.04em; }
+html[data-variant="L2"] .outcome,
+html[data-variant="P6"] .outcome { margin: 0 0 0 0.18em; }
+
+/* L3: four equal lines, hierarchy comes from color and phrasing only. */
+html[data-variant="L3"] .clause,
+html[data-variant="L3"] .outcome { font-size: clamp(2.3rem, 3.85vw, 4rem); font-weight: 700; line-height: 0.98; letter-spacing: -0.045em; }
+html[data-variant="L3"] .outcome { margin-top: 0; }
+html[data-variant="L3"] .thought + .thought { margin-top: 24px; }
+
+/* L4: two lines, with color only on the semantic keywords. */
+html[data-variant="L4"] .motto,
+html[data-variant="P4"] .motto,
+html[data-variant="P5"] .motto { gap: 24px; }
+html[data-variant="L4"] .thought,
+html[data-variant="P4"] .thought,
+html[data-variant="P5"] .thought { white-space: normal; }
+html[data-variant="L4"] .thought + .thought,
+html[data-variant="P4"] .thought + .thought,
+html[data-variant="P5"] .thought + .thought { margin-top: 0; }
+html[data-variant="L4"] .clause,
+html[data-variant="L4"] .outcome,
+html[data-variant="P4"] .clause,
+html[data-variant="P4"] .outcome,
+html[data-variant="P5"] .clause,
+html[data-variant="P5"] .outcome { display: inline; color: var(--text); font-size: clamp(1.95rem, 3.1vw, 3.25rem); font-weight: 680; line-height: 1.04; letter-spacing: -0.038em; }
+html[data-variant="L4"] .outcome,
+html[data-variant="P4"] .outcome,
+html[data-variant="P5"] .outcome { margin: 0 0 0 0.18em; }
+html[data-variant="L4"] .thought-one .keyword,
+html[data-variant="P4"] .thought-one .keyword,
+html[data-variant="P5"] .thought-one .keyword { color: var(--cyan); }
+html[data-variant="L4"] .thought-two .keyword,
+html[data-variant="P4"] .thought-two .keyword,
+html[data-variant="P5"] .thought-two .keyword { color: var(--fuchsia); }
+
+/* L5: tighter poster stack, intentionally confrontational. */
+html[data-variant="L5"] .clause { font-size: clamp(1.05rem, 1.55vw, 1.45rem); font-weight: 760; letter-spacing: 0.005em; text-transform: uppercase; }
+html[data-variant="L5"] .outcome { font-size: clamp(3.45rem, 5.85vw, 6rem); font-weight: 820; line-height: 0.84; letter-spacing: -0.055em; }
+html[data-variant="L5"] .thought + .thought { margin-top: 15px; }
+
+/* L6: restrained editorial numbering and equal blocks. */
+html[data-variant="L6"] .thought { position: relative; padding-left: 52px; }
+html[data-variant="L6"] .index-mark { position: absolute; top: 6px; left: 0; display: block; color: var(--muted); font: 750 0.68rem/1 "SFMono-Regular", Consolas, monospace; letter-spacing: 0.12em; }
+html[data-variant="L6"] .clause { font-size: clamp(1.55rem, 2.25vw, 2.15rem); line-height: 1.08; }
+html[data-variant="L6"] .outcome { font-size: clamp(2.8rem, 4.6vw, 4.7rem); line-height: 0.95; }
+html[data-variant="L6"] .thought + .thought { margin-top: 24px; }
+
+/* L7: spatial tension through a small offset, not a different font. */
+html[data-variant="L7"] .clause { font-size: clamp(1.45rem, 2.2vw, 2.1rem); }
+html[data-variant="L7"] .outcome { width: max-content; margin-top: 3px; margin-left: clamp(24px, 4vw, 58px); font-size: clamp(3rem, 4.8vw, 4.95rem); line-height: 0.94; }
+html[data-variant="L7"] .thought + .thought { margin-top: 21px; }
+
+/* L8: deliberate failure probe / maximum color field. */
+html[data-variant="L8"] .motto { gap: 22px; }
+html[data-variant="L8"] .thought { white-space: normal; }
+html[data-variant="L8"] .thought + .thought { margin-top: 0; }
+html[data-variant="L8"] .clause,
+html[data-variant="L8"] .outcome { display: inline; font-size: clamp(1.95rem, 3.05vw, 3.2rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.04em; }
+html[data-variant="L8"] .outcome { margin: 0 0 0 0.18em; }
+html[data-variant="L8"] .thought-one .clause { color: var(--cyan); }
+html[data-variant="L8"] .thought-two .clause { color: var(--fuchsia); }
+
+/* L9: keep outcome hierarchy, lower chroma and brightness. */
+html[data-variant="L9"] .clause { font-size: clamp(1.5rem, 2.15vw, 2.05rem); line-height: 1.08; }
+html[data-variant="L9"] .outcome { font-size: clamp(2.9rem, 4.7vw, 4.85rem); line-height: 0.95; }
+html[data-variant="L9"] .thought-one .outcome { color: #73cdd3; }
+html[data-variant="L9"] .thought-two .outcome { color: #d86285; }
+html[data-variant="L9"] .thought + .thought { margin-top: 22px; }
+
+/* L10: quiet two-line editorial reading. */
+html[data-variant="L10"] .motto { gap: 25px; }
+html[data-variant="L10"] .thought { max-width: 25ch; }
+html[data-variant="L10"] .thought + .thought { margin-top: 0; }
+html[data-variant="L10"] .clause,
+html[data-variant="L10"] .outcome { display: inline; font-size: clamp(1.8rem, 2.75vw, 2.85rem); font-weight: 590; line-height: 1.12; letter-spacing: -0.028em; }
+html[data-variant="L10"] .outcome { margin: 0 0 0 0.18em; }
+
+/* L11: two statements as peer objects; collapses on mobile. */
+html[data-variant="L11"] .motto { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+html[data-variant="L11"] .thought + .thought { margin-top: 0; padding-left: 28px; border-left: 1px solid var(--line); }
+html[data-variant="L11"] .clause { font-size: clamp(1.3rem, 1.75vw, 1.7rem); line-height: 1.12; }
+html[data-variant="L11"] .outcome { font-size: clamp(2.35rem, 3.4vw, 3.4rem); line-height: 0.96; }
+
+@media (max-width: 760px) {
+  :root { --shell: calc(100% - 32px); }
+  .study-header { height: 60px; }
+  .study-header nav { display: none; }
+  .hero-study { min-height: auto; }
+  .hero-shell { padding-top: 28px; }
+  .eyebrow { font-size: 0.64rem; letter-spacing: 0.1em; }
+  .eyebrow::before { width: 22px; margin-right: 8px; }
+  .wordmark { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 0 0.08em; margin-top: 24px; font-size: clamp(4.35rem, 23.5vw, 6rem); line-height: 0.76; white-space: normal; }
+  .wordmark-prime { grid-column: 1 / -1; }
+  .hero-rule { margin-top: 27px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 28px; margin-top: 31px; }
+  .clause { font-size: clamp(1rem, 4.5vw, 1.28rem); }
+  .outcome { font-size: clamp(2.42rem, 10.7vw, 4rem); }
+  .orientation-panel p { font-size: 0.92rem; line-height: 1.57; }
+  .actions { display: grid; grid-template-columns: 1fr; margin-top: 22px; }
+  .next-section { padding-top: 58px; }
+  .next-section h2 { font-size: 2.2rem; }
+  .study-tag { position: static; width: calc(100% - 32px); max-width: none; margin: 28px auto 16px; }
+
+  html[data-variant="L2"] .thought,
+  html[data-variant="L4"] .thought,
+  html[data-variant="L8"] .thought,
+  html[data-variant="P4"] .thought,
+  html[data-variant="P5"] .thought,
+  html[data-variant="P6"] .thought { white-space: normal; }
+  html[data-variant="L2"] .clause,
+  html[data-variant="L2"] .outcome,
+  html[data-variant="L4"] .clause,
+  html[data-variant="L4"] .outcome,
+  html[data-variant="L8"] .clause,
+  html[data-variant="L8"] .outcome,
+  html[data-variant="P4"] .clause,
+  html[data-variant="P4"] .outcome,
+  html[data-variant="P5"] .clause,
+  html[data-variant="P5"] .outcome,
+  html[data-variant="P6"] .clause,
+  html[data-variant="P6"] .outcome { font-size: clamp(1.62rem, 7.6vw, 2.4rem); line-height: 1.09; }
+  html[data-variant="L4"] .motto,
+  html[data-variant="L2"] .motto,
+  html[data-variant="L8"] .motto,
+  html[data-variant="P4"] .motto,
+  html[data-variant="P5"] .motto,
+  html[data-variant="P6"] .motto { gap: 18px; }
+  html[data-variant="L3"] .clause,
+  html[data-variant="L3"] .outcome { font-size: clamp(2rem, 9vw, 3rem); }
+  html[data-variant="L5"] .clause { font-size: 0.86rem; }
+  html[data-variant="L5"] .outcome { font-size: clamp(2.65rem, 12vw, 3.6rem); }
+  html[data-variant="L6"] .thought { padding-left: 35px; }
+  html[data-variant="L6"] .clause { font-size: 1.05rem; }
+  html[data-variant="L6"] .outcome { font-size: clamp(2.35rem, 10.5vw, 3.2rem); }
+  html[data-variant="L7"] .outcome { margin-left: 16px; font-size: clamp(2.45rem, 11vw, 3.4rem); }
+  html[data-variant="L10"] .clause,
+  html[data-variant="L10"] .outcome { font-size: clamp(1.55rem, 7vw, 2.2rem); }
+  html[data-variant="L11"] .motto { grid-template-columns: 1fr; gap: 22px; }
+  html[data-variant="L11"] .thought + .thought { padding: 22px 0 0; border-top: 1px solid var(--line); border-left: 0; }
+  html[data-variant="L11"] .clause { font-size: 1.08rem; }
+  html[data-variant="L11"] .outcome { font-size: clamp(2.3rem, 10.5vw, 3.1rem); }
+}
+
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }

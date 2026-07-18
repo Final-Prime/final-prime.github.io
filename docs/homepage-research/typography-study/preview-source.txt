@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-variant="C0">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:,">
+  <title>Final Prime motto typography study</title>
+  <link rel="stylesheet" href="study.css">
+</head>
+<body>
+  <header class="study-header">
+    <div class="shell header-inner">
+      <div class="mini-brand" aria-label="Final Prime">
+        <span class="mini-mark" aria-hidden="true">⌁</span>
+        <span>FINAL <b>\</b> PRIME</span>
+      </div>
+      <nav aria-label="Preview navigation">
+        <span>Systems</span><span>Works</span><span>Thought</span><span>Index</span><strong>Contact</strong>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-study" aria-labelledby="study-wordmark">
+      <div class="shell hero-shell">
+        <p class="eyebrow">Independent studio · software &amp; technical research</p>
+        <h1 class="wordmark" id="study-wordmark" aria-label="Final Prime">
+          <span class="wordmark-final">FINAL</span>
+          <span class="wordmark-divider">\</span>
+          <span class="wordmark-prime">PRIME</span>
+        </h1>
+        <div class="hero-rule" aria-hidden="true"></div>
+
+        <div class="hero-grid">
+          <div class="motto-field">
+            <p class="motto" aria-label="Knowing the next move is survival. Understanding the game is control.">
+              <span class="thought thought-one">
+                <span class="index-mark" aria-hidden="true">01</span>
+                <span class="clause">Knowing the next move</span><span class="outcome"><span class="verb">is </span><span class="keyword">survival</span><span class="period">.</span></span>
+              </span>
+              <span class="thought thought-two">
+                <span class="index-mark" aria-hidden="true">02</span>
+                <span class="clause">Understanding the game</span><span class="outcome"><span class="verb">is </span><span class="keyword">control</span><span class="period">.</span></span>
+              </span>
+            </p>
+          </div>
+
+          <div class="orientation-panel">
+            <p><strong>Final Prime is created and operated by Daniel Kenessy.</strong> It traces difficult failures back to the logic that makes them possible, then builds software and research around the place where the problem no longer exists.</p>
+            <div class="actions" aria-label="Primary actions">
+              <span class="button primary">Explore selected work</span>
+              <span class="button secondary">Discuss a problem</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-section">
+      <div class="shell">
+        <p>Selected work / Public evidence</p>
+        <h2>Show the work. State the limits.</h2>
+      </div>
+    </section>
+  </main>
+
+  <aside class="study-tag" aria-live="polite">
+    <strong data-study-id>C0</strong>
+    <span data-study-name>Control · Aptos Display · 4-line hierarchy</span>
+  </aside>
+
+  <script>
+    (() => {
+      const variants = {
+        C0: "Control · Aptos Display · 4-line hierarchy",
+        F1: "Inter · refined 4-line hierarchy",
+        F2: "Source Sans 3 · refined 4-line hierarchy",
+        F3: "IBM Plex Sans · refined 4-line hierarchy",
+        F4: "Manrope · refined 4-line hierarchy",
+        F5: "Segoe UI Variable · refined 4-line hierarchy",
+        L1: "Inter · balanced 4-line",
+        L2: "Inter · two full sentences",
+        L3: "Inter · equal-weight 4-line",
+        L4: "Inter · two-line keyword signal",
+        L5: "Inter · compact poster stack",
+        L6: "Inter · indexed editorial stack",
+        L7: "Inter · offset outcomes",
+        L8: "Inter · full-sentence accents",
+        L9: "Inter · low-chroma outcomes",
+        L10: "Inter · quiet two-line",
+        L11: "Inter · split statements",
+        P1: "Finalist · Inter · balanced 4-line",
+        P2: "Finalist · Source Sans 3 · balanced 4-line",
+        P3: "Finalist · IBM Plex Sans · balanced 4-line",
+        P4: "Finalist · Inter · two-line keyword signal",
+        P5: "Finalist · Source Sans 3 · two-line keyword signal",
+        P6: "Finalist · Inter · two-line phrase signal"
+      };
+      const requested = new URLSearchParams(location.search).get("variant") || "C0";
+      const variant = variants[requested] ? requested : "C0";
+      document.documentElement.dataset.variant = variant;
+      document.querySelector("[data-study-id]").textContent = variant;
+      document.querySelector("[data-study-name]").textContent = variants[variant];
+      document.title = `${variant} · ${variants[variant]} · Final Prime typography study`;
+    })();
+  </script>
+</body>
+</html>
