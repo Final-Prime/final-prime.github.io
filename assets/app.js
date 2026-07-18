@@ -172,7 +172,7 @@
     clearTimeout(timer);
     if (motion.matches || document.hidden) return;
     timer = setTimeout(() => {
-      if (!brand.matches(":hover, :focus-visible, .is-glitching")) glitch();
+      if (!document.querySelector(".hero-motto.is-glitching,.brand:is(:hover,:focus-visible,.is-glitching)")) glitch();
       schedule();
     }, 30000 + Math.random() * 20000);
   };

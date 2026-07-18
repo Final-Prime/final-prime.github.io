@@ -16,10 +16,14 @@
     frame = 0;
     const range = root.scrollHeight - window.innerHeight;
     const visible = window.matchMedia("(min-width: 1081px)").matches && range > 160;
-    readout.hidden = !visible;
-    if (!visible) return;
+    if (!visible) {
+      readout.hidden = true;
+      return;
+    }
     const ratio = Math.min(1, Math.max(0, window.scrollY / range));
-    readout.value = `${Math.round(ratio * 100)}%`;
+    const percent = Math.round(ratio * 100);
+    readout.hidden = percent === 0;
+    readout.value = `${percent}%`;
   };
 
   const scheduleUpdate = () => {

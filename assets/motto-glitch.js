@@ -20,7 +20,7 @@
     timer = setTimeout(() => {
       if (!motto.matches(":hover, .is-glitching") && !document.querySelector(".brand.is-glitching")) play();
       schedule();
-    }, 20000 + Math.random() * 12000);
+    }, 40000 + Math.random() * 20000);
   };
 
   motto.addEventListener("pointerenter", play);
