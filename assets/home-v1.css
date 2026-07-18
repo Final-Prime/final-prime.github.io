@@ -65,9 +65,21 @@ html {
   text-transform: uppercase;
 }
 
-.field-parent h2 span { display: block; color: var(--muted); }
-[data-field-layer="theory"] .field-parent h2 span { color: var(--cyan); }
-[data-field-layer="work"] .field-parent h2 span { color: var(--fuchsia-text); }
+.field-parent h2 > span {
+  display: flex;
+  align-items: baseline;
+  gap: 0.16em;
+}
+.field-parent h2 .field-joiner {
+  color: var(--muted-dark);
+  font-size: 0.5em;
+  font-weight: 680;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.field-parent h2 .field-secondary { color: var(--muted); }
+[data-field-layer="theory"] .field-parent h2 .field-secondary { color: var(--cyan); }
+[data-field-layer="work"] .field-parent h2 .field-secondary { color: var(--fuchsia-text); }
 .field-parent > p:not(.field-index) {
   max-width: 42ch;
   margin: 28px 0 0;
