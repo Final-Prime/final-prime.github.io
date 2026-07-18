@@ -267,7 +267,7 @@
 }
 .hero-actions { display: flex; flex-wrap: wrap; margin-top: 20px; }
 .hero .button {
-  box-shadow: 0 0 0 rgba(245, 5, 77, 0);
+  box-shadow: none;
   transition:
     transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 150ms ease,
@@ -277,30 +277,33 @@
 }
 .hero .button:hover { transform: none; box-shadow: none; }
 .hero .button-primary { color: #041012; border-color: var(--cyan); background: var(--cyan); }
+.hero .button-secondary { color: var(--fuchsia-text); border-color: var(--fuchsia); }
 .hero .button-primary:hover,
 .hero .button-primary:focus-visible { color: #041012; border-color: var(--cyan); background: var(--cyan); }
 .hero .button-secondary:hover,
-.hero .button-secondary:focus-visible { color: var(--cyan); border-color: var(--cyan); background: rgba(10, 232, 247, 0.055); }
+.hero .button-secondary:focus-visible { color: var(--fuchsia-text); border-color: var(--fuchsia); background: rgba(245, 5, 77, 0.065); }
 
 @media (hover: hover) and (pointer: fine) {
   .hero .button:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 2px 2px 0 rgba(245, 5, 77, 0.66);
+    transform: translateY(-1px);
   }
+  .hero .button-primary:hover { box-shadow: -5px 0 12px -3px rgba(10, 232, 247, 0.58), -16px 0 26px -9px rgba(10, 232, 247, 0.28); }
+  .hero .button-secondary:hover { box-shadow: 5px 0 12px -3px rgba(245, 5, 77, 0.58), 16px 0 26px -9px rgba(245, 5, 77, 0.28); }
 }
 
 .hero .button:focus-visible {
-  transform: translate(-1px, -1px);
-  box-shadow: 2px 2px 0 rgba(245, 5, 77, 0.66);
+  transform: translateY(-1px);
 }
+.hero .button-primary:focus-visible { box-shadow: -5px 0 12px -3px rgba(10, 232, 247, 0.58), -16px 0 26px -9px rgba(10, 232, 247, 0.28); }
+.hero .button-secondary:focus-visible { box-shadow: 5px 0 12px -3px rgba(245, 5, 77, 0.58), 16px 0 26px -9px rgba(245, 5, 77, 0.28); }
 
 .hero .button:active {
   transform: translateY(1px);
-  box-shadow: 0 0 0 rgba(245, 5, 77, 0);
+  box-shadow: none;
   transition-duration: 80ms;
 }
 .hero .button-primary:active { border-color: #08d7e5; background: #08d7e5; }
-.hero .button-secondary:active { background: rgba(10, 232, 247, 0.11); }
+.hero .button-secondary:active { background: rgba(245, 5, 77, 0.14); }
 
 @media (max-width: 1080px) {
   .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr); gap: 44px; }

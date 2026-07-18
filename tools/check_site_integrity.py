@@ -275,7 +275,7 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-6">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-7">',
         '<script src="/assets/motto-glitch.js?v=20260718-1" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
@@ -319,8 +319,10 @@ HOMEPAGE_CTA_CONTRACT = {
         ".hero .button {",
         "transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1)",
         "@media (hover: hover) and (pointer: fine)",
-        "transform: translate(-1px, -1px);",
-        "box-shadow: 2px 2px 0 rgba(245, 5, 77, 0.66);",
+        ".hero .button-secondary { color: var(--fuchsia-text); border-color: var(--fuchsia); }",
+        "transform: translateY(-1px);",
+        "box-shadow: -5px 0 12px -3px rgba(10, 232, 247, 0.58), -16px 0 26px -9px rgba(10, 232, 247, 0.28);",
+        "box-shadow: 5px 0 12px -3px rgba(245, 5, 77, 0.58), 16px 0 26px -9px rgba(245, 5, 77, 0.28);",
         ".hero .button:active {",
         "transform: translateY(1px);",
         "transition-duration: 80ms;",
