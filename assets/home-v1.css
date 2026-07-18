@@ -48,15 +48,38 @@ html {
 
 .field-index {
   margin: 0;
-  color: var(--fuchsia-text);
-  font: 800 0.69rem/1.4 var(--mono);
-  letter-spacing: 0.13em;
+  color: var(--muted);
+  font: 700 0.75rem/1.3 var(--mono);
+  letter-spacing: 0.11em;
   text-transform: uppercase;
+}
+
+.field-index > .sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.field-index-visual {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.58em;
+}
+
+.field-index-visual strong {
+  color: var(--fuchsia-text);
+  font-weight: 800;
 }
 
 .field-parent h2 {
   max-width: 9ch;
-  margin: clamp(28px, 3vw, 44px) 0 0;
+  margin: clamp(20px, 1.6vw, 24px) 0 0;
   font-family: var(--display);
   font-size: clamp(3.4rem, 5.4vw, 5.8rem);
   font-weight: 790;
@@ -263,7 +286,7 @@ html {
   [data-field-layer] { padding: 106px 0 92px; }
   [data-field-layer]::before { top: 34px; }
   .field-parent { min-height: 340px; }
-  .field-parent h2 { font-size: min(16vw, 4.8rem); }
+  .field-parent h2 { margin-top: 18px; font-size: min(16vw, 4.8rem); }
   .field-feature-list { margin-top: 42px; padding-top: 36px; }
   .field-feature { min-height: 430px; }
   .field-feature h3 { margin-top: 48px; font-size: min(11.5vw, 3.75rem); }
