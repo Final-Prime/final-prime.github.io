@@ -275,7 +275,7 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-5">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-6">',
         '<script src="/assets/motto-glitch.js?v=20260718-1" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
@@ -311,6 +311,22 @@ HOMEPAGE_MOTTO_CONTRACT = {
         '"visibilitychange"',
         '20000 + Math.random() * 12000',
         '"fp-motto-complementary-glitch"',
+    ),
+}
+
+HOMEPAGE_CTA_CONTRACT = {
+    "assets/hero.css": (
+        ".hero .button {",
+        "transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "@media (hover: hover) and (pointer: fine)",
+        "transform: translate(-1px, -1px);",
+        "box-shadow: 2px 2px 0 rgba(245, 5, 77, 0.66);",
+        ".hero .button:active {",
+        "transform: translateY(1px);",
+        "transition-duration: 80ms;",
+        ".hero .button-primary:active { border-color: #08d7e5; background: #08d7e5; }",
+        "@media (prefers-reduced-motion: reduce)",
+        "@media (forced-colors: active)",
     ),
 }
 
@@ -654,6 +670,11 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: homepage motto contract is missing {missing}")
+    for relative, tokens in HOMEPAGE_CTA_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: homepage CTA contract is missing {missing}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
