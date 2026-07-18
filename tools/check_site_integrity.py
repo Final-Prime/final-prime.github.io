@@ -346,6 +346,7 @@ HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'It develops theory and builds software on foundations designed',
     '<b>no longer arises</b>.',
     'href="#selected-work">Explore selected work</a>',
+    'href="/contact/">Discuss a project</a>',
     'class="hero-orientation-panel"',
     'id="selected-work"',
     'class="section method-section"',
