@@ -238,15 +238,23 @@ html {
   margin: clamp(58px, 6vw, 86px) 0 0;
   font-family: var(--display);
   font-size: clamp(2.8rem, 4.8vw, 5.2rem);
-  font-weight: 780;
-  line-height: 0.92;
-  letter-spacing: -0.07em;
-  overflow-wrap: anywhere;
+  font-weight: 790;
+  line-height: 0.88;
+  letter-spacing: -0.075em;
+  overflow-wrap: normal;
+  text-transform: uppercase;
+  word-break: normal;
 }
+
+.field-feature h3 > span { display: block; }
+.field-feature h3 .field-title-primary { color: var(--text); }
+.field-feature h3 .field-title-accent,
+.field-feature h3 .field-title-mark { color: var(--cyan); }
+.field-feature-review h3 .field-title-accent,
+.field-feature-review h3 .field-title-mark { color: var(--fuchsia-text); }
 
 [data-field-layer="systems"] .field-feature h3 {
   font-size: clamp(4.8rem, 8vw, 8.2rem);
-  text-transform: uppercase;
 }
 
 .field-feature > p {
