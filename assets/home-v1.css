@@ -24,13 +24,13 @@ html {
   position: absolute;
   top: clamp(34px, 4vw, 54px);
   left: 50%;
-  width: 22px;
-  height: 24px;
+  width: 64px;
+  height: 28px;
   content: "";
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%2022%2024'%3E%3Cpath d='M1%203L7%2021' stroke='%230ae8f7' stroke-opacity='.84' stroke-width='2'/%3E%3Cpath d='M7%200L15%2024' stroke='%23f2f4f5' stroke-width='2'/%3E%3Cpath d='M15%203L21%2021' stroke='%23f5054d' stroke-opacity='.88' stroke-width='2'/%3E%3C/svg%3E") center / 22px 24px no-repeat;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%2064%2028' fill='none' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M2%2012L4%2014L2%2016' stroke='%230ae8f7' stroke-opacity='.18' stroke-width='1.2'/%3E%3Cpath d='M7%2010L11%2014L7%2018' stroke='%230ae8f7' stroke-opacity='.34' stroke-width='1.25'/%3E%3Cpath d='M13%207L19%2014L13%2021' stroke='%230ae8f7' stroke-opacity='.56' stroke-width='1.35'/%3E%3Cpath d='M20%203L29%2014L20%2025' stroke='%230ae8f7' stroke-opacity='.82' stroke-width='1.5'/%3E%3Cpath d='M32%202L35%2014L32%2026L29%2014Z' stroke='%23f2f4f5' stroke-opacity='.96' stroke-width='1.4'/%3E%3Cpath d='M44%203L35%2014L44%2025' stroke='%23f5054d' stroke-opacity='.86' stroke-width='1.5'/%3E%3Cpath d='M51%207L45%2014L51%2021' stroke='%23f5054d' stroke-opacity='.60' stroke-width='1.35'/%3E%3Cpath d='M57%2010L53%2014L57%2018' stroke='%23f5054d' stroke-opacity='.38' stroke-width='1.25'/%3E%3Cpath d='M62%2012L60%2014L62%2016' stroke='%23f5054d' stroke-opacity='.20' stroke-width='1.2'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   filter:
-    drop-shadow(-3px 0 4px rgba(10, 232, 247, 0.18))
-    drop-shadow(3px 0 4px rgba(245, 5, 77, 0.18));
+    drop-shadow(-4px 0 4px rgba(10, 232, 247, 0.12))
+    drop-shadow(4px 0 4px rgba(245, 5, 77, 0.12));
   transform: translateX(-50%);
 }
 
@@ -289,7 +289,7 @@ html {
 
 @media (max-width: 760px) {
   [data-field-layer] { padding: 106px 0 92px; }
-  [data-field-layer]::before { top: 34px; }
+  [data-field-layer]::before { top: 34px; width: 56px; height: 25px; }
   .field-parent { min-height: 340px; }
   .field-parent h2 { margin-top: 18px; font-size: min(16vw, 4.8rem); }
   .field-feature-list { margin-top: 42px; padding-top: 36px; }
