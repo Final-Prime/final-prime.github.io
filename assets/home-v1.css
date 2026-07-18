@@ -5,6 +5,30 @@
   border-bottom: 1px solid var(--line);
 }
 
+.selected-section {
+  position: relative;
+}
+
+.selected-section::before {
+  position: absolute;
+  top: clamp(22px, 2.8vw, 34px);
+  left: 50%;
+  width: 2px;
+  height: 24px;
+  content: "";
+  background: var(--text);
+  box-shadow:
+    -3px 0 7px rgba(10, 232, 247, 0.26),
+    3px 0 7px rgba(245, 5, 77, 0.28);
+  transform: translateX(-50%) rotate(-22deg);
+  transform-origin: center;
+}
+
+.selected-section .section-head {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
 .focus-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -84,25 +108,25 @@
 
 .selected-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
   gap: 0;
-  margin-top: 24px;
+  margin-top: 34px;
 }
 
 .selected-card {
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 470px;
+  min-height: 440px;
   flex-direction: column;
-  padding: 24px 36px 24px 0;
+  padding: 30px clamp(34px, 4vw, 56px) 32px 0;
   overflow: hidden;
   background: transparent;
 }
 
 .selected-card-review {
   padding-right: 0;
-  padding-left: 36px;
+  padding-left: clamp(34px, 4vw, 56px);
   border-left: 1px solid var(--line);
   background: transparent;
 }
@@ -110,8 +134,16 @@
 .selected-card::before {
   display: none;
 }
-.selected-card h3 { margin-top: 58px; }
-.selected-card-review h3 { max-width: 13ch; text-transform: none; }
+.selected-card h3 { margin-top: clamp(50px, 5vw, 68px); }
+.selected-card:not(.selected-card-review) h3 {
+  font-size: clamp(3.8rem, 6.4vw, 6.5rem);
+  letter-spacing: -0.07em;
+}
+.selected-card-review h3 {
+  max-width: 13ch;
+  font-size: clamp(2.2rem, 3.1vw, 3.2rem);
+  text-transform: none;
+}
 
 .selected-copy {
   max-width: 58ch;
@@ -124,13 +156,11 @@
 .selected-spec {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 32px);
   margin: 30px 0 0;
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
 }
-.selected-spec > div { min-width: 0; padding: 14px 12px; border-right: 1px solid var(--line); }
-.selected-spec > div:first-child { padding-left: 0; }
-.selected-spec > div:last-child { border-right: 0; }
+.selected-spec > div { min-width: 0; padding: 15px 0 0; }
 .selected-spec dt { color: var(--muted-dark); font: 800 0.66rem/1.35 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
 .selected-spec dd { margin: 8px 0 0; color: var(--text); font: 700 0.7rem/1.45 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; overflow-wrap: anywhere; }
 
@@ -141,6 +171,7 @@
   margin-top: 28px;
 }
 .selected-score strong { color: var(--text); font-family: var(--display); font-size: clamp(4.5rem, 8vw, 7.5rem); font-weight: 820; line-height: 0.75; letter-spacing: -0.08em; }
+.selected-card-review .selected-score strong { font-size: clamp(4rem, 5.8vw, 6.5rem); }
 .selected-score span { color: var(--cyan); font: 800 1.35rem/1 var(--mono); }
 .selected-score small { color: var(--muted-dark); font: 700 0.68rem/1.4 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
 
@@ -237,7 +268,8 @@
   .method-layout { grid-template-columns: 1fr; }
   .selected-card,
   .selected-card-review {
-    padding: 36px 0;
+    min-height: auto;
+    padding: 42px 0;
     border-left: 0;
   }
   .selected-card-review { border-top: 1px solid var(--line); }
@@ -260,10 +292,13 @@
   .selected-card-review { min-height: auto; padding: 28px 0; }
   .focus-card h3,
   .selected-card h3 { margin-top: 42px; }
+  .selected-card:not(.selected-card-review) h3 { font-size: clamp(3.6rem, 8.8vw, 6rem); }
   .selected-spec { grid-template-columns: 1fr; }
   .selected-spec > div,
-  .selected-spec > div:first-child { padding: 12px 0; border-right: 0; border-bottom: 1px solid var(--line); }
-  .selected-spec > div:last-child { border-bottom: 0; }
+  .selected-spec > div:first-child { padding: 0; border: 0; }
+  .selected-spec { gap: 14px; padding-top: 14px; }
+  .selected-card:not(.selected-card-review) h3 { font-size: clamp(3rem, 15vw, 4.4rem); }
+  .selected-card-review h3 { font-size: clamp(2.2rem, 10vw, 3rem); }
   .selected-actions { display: grid; }
   .method-manifesto { min-height: 360px; padding: 24px 20px; }
   .method-step { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding: 18px; }
@@ -282,9 +317,18 @@
 }
 
 @media (forced-colors: active) {
+  .selected-section::before { background: CanvasText; box-shadow: none; }
   .focus-card,
   .selected-card-review,
   .method-manifesto,
   .method-step,
   .footer-nav a { border-color: CanvasText; box-shadow: none; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .selected-section::before { box-shadow: none; }
+}
+
+@media print {
+  .selected-section::before { display: none; }
 }

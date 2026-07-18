@@ -278,7 +278,7 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-7">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-8">',
         '<script src="/assets/motto-glitch.js?v=20260718-2" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
@@ -334,6 +334,36 @@ HOMEPAGE_CTA_CONTRACT = {
         "@media (forced-colors: active)",
     ),
 }
+
+HOMEPAGE_SELECTED_WORK_CONTRACT = {
+    "index.html": (
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-3">',
+        '<section class="section selected-section" id="selected-work" aria-labelledby="selected-title">',
+        'href="/systems/#async">Open system record</a>',
+        'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
+    ),
+    "assets/hero.css": (
+        "border-bottom: 0;",
+    ),
+    "assets/home-v1.css": (
+        ".selected-section::before {",
+        "height: 24px;",
+        "transform: translateX(-50%) rotate(-22deg);",
+        ".selected-section .section-head {",
+        "grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);",
+        ".selected-card:not(.selected-card-review) h3 {",
+        "border-top: 1px solid var(--line);",
+        "@media (max-width: 1080px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+RETIRED_HOMEPAGE_SELECTED_WORK_TOKENS = (
+    "Discuss A/SYNC",
+    "Review index",
+)
 
 BRAND_LOCKUP_REQUIRED_TOKENS = (
     'class="brand-name" aria-hidden="true"',
@@ -680,6 +710,15 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: homepage CTA contract is missing {missing}")
+    for relative, tokens in HOMEPAGE_SELECTED_WORK_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: homepage selected work contract is missing {missing}")
+    homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+    retired_selected = [token for token in RETIRED_HOMEPAGE_SELECTED_WORK_TOKENS if token in homepage]
+    if retired_selected:
+        errors.append(f"index.html: retired selected work token(s) restored {retired_selected}")
 
     checked_scripts = 0
     for relative, budget in SCRIPT_BUDGETS.items():
