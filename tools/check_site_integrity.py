@@ -337,7 +337,7 @@ HOMEPAGE_CTA_CONTRACT = {
 
 HOMEPAGE_SELECTED_WORK_CONTRACT = {
     "index.html": (
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-5">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-6">',
         '<section class="section selected-section" id="selected-work" aria-labelledby="selected-title">',
         'href="/systems/#async">Open system record</a>',
         'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
@@ -349,11 +349,13 @@ HOMEPAGE_SELECTED_WORK_CONTRACT = {
         ".selected-section::before {",
         "width: 22px;",
         "height: 24px;",
-        "linear-gradient(rgba(10, 232, 247, 0.84), rgba(10, 232, 247, 0.84)) left center / 2px 24px no-repeat,",
-        "linear-gradient(var(--text), var(--text)) center / 2px 24px no-repeat,",
-        "linear-gradient(rgba(245, 5, 77, 0.88), rgba(245, 5, 77, 0.88)) right center / 2px 24px no-repeat;",
+        "viewBox='0%200%2022%2024'",
+        "d='M1%203L7%2021' stroke='%230ae8f7'",
+        "d='M7%200L15%2024' stroke='%23f2f4f5'",
+        "d='M15%203L21%2021' stroke='%23f5054d'",
         "drop-shadow(-3px 0 4px rgba(10, 232, 247, 0.18))",
         "drop-shadow(3px 0 4px rgba(245, 5, 77, 0.18));",
+        "transform: translateX(-50%);",
         "transform: translateX(-50%) rotate(-22deg);",
         ".selected-section .section-head {",
         "grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);",
