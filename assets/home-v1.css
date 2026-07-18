@@ -16,14 +16,11 @@
   width: 22px;
   height: 24px;
   content: "";
-  background:
-    linear-gradient(rgba(10, 232, 247, 0.84), rgba(10, 232, 247, 0.84)) left center / 2px 24px no-repeat,
-    linear-gradient(var(--text), var(--text)) center / 2px 24px no-repeat,
-    linear-gradient(rgba(245, 5, 77, 0.88), rgba(245, 5, 77, 0.88)) right center / 2px 24px no-repeat;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%2022%2024'%3E%3Cpath d='M1%203L7%2021' stroke='%230ae8f7' stroke-opacity='.84' stroke-width='2'/%3E%3Cpath d='M7%200L15%2024' stroke='%23f2f4f5' stroke-width='2'/%3E%3Cpath d='M15%203L21%2021' stroke='%23f5054d' stroke-opacity='.88' stroke-width='2'/%3E%3C/svg%3E") center / 22px 24px no-repeat;
   filter:
     drop-shadow(-3px 0 4px rgba(10, 232, 247, 0.18))
     drop-shadow(3px 0 4px rgba(245, 5, 77, 0.18));
-  transform: translateX(-50%) rotate(-22deg);
+  transform: translateX(-50%);
   transform-origin: center;
 }
 
@@ -320,7 +317,7 @@
 }
 
 @media (forced-colors: active) {
-  .selected-section::before { width: 2px; background: CanvasText; filter: none; }
+  .selected-section::before { width: 2px; background: CanvasText; filter: none; transform: translateX(-50%) rotate(-22deg); }
   .focus-card,
   .selected-card-review,
   .method-manifesto,
