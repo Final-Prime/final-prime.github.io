@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from html import unescape
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -350,7 +351,7 @@ HOMEPAGE_CTA_CONTRACT = {
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-21">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-22">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -361,6 +362,15 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<span class="sr-only">Field 1 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>01</strong><span>/ 03</span></span>',
         '<span class="sr-only">Field 2 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>02</strong><span>/ 03</span></span>',
         '<span class="sr-only">Field 3 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>03</strong><span>/ 03</span></span>',
+        '<div><dt>Selected record</dt><dd>A/SYNC / Theoretical foundations</dd></div>',
+        '<div><dt>Selected record</dt><dd>A/SYNC</dd></div>',
+        '<div><dt>Selected record</dt><dd>Metro 2033 Redux</dd></div>',
+        '<span class="sr-only">Stage 1 of 5: In development</span>',
+        '<span class="sr-only">Stage 3 of 5: Prototype</span>',
+        '<span class="sr-only">Stage 5 of 5: Published</span>',
+        '<span class="field-availability-stage" aria-hidden="true"><strong>I</strong><span>/ V</span></span>',
+        '<span class="field-availability-stage" aria-hidden="true"><strong>III</strong><span>/ V</span></span>',
+        '<span class="field-availability-stage" aria-hidden="true"><strong>V</strong><span>/ V</span></span>',
         '</dl>\n            <div class="field-parent-intro"><p>Public principles and models for tracing complex failures back to the logic that enables them.</p><a class="button button-secondary" href="/thought/">Explore theory</a></div>',
         '</dl>\n            <div class="field-parent-intro"><p>Software and engineered systems built from those principles, with declared states and limits.</p><a class="button button-secondary" href="/systems/">Explore systems</a></div>',
         '</dl>\n            <div class="field-parent-intro"><p>Published analysis and completed records supported by explicit evidence and boundaries.</p><a class="button button-secondary" href="/works/">Explore work</a></div>',
@@ -407,7 +417,8 @@ HOMEPAGE_FIELDS_CONTRACT = {
         "font-size: 1em;",
         "font: 700 0.75rem/1.3 var(--mono);",
         "letter-spacing: 0.11em;",
-        ".field-index > .sr-only {",
+        ".field-index > .sr-only,",
+        ".field-availability > .sr-only {",
         "clip: rect(0, 0, 0, 0) !important;",
         ".field-index-visual {",
         "gap: 0.58em;",
@@ -428,6 +439,12 @@ HOMEPAGE_FIELDS_CONTRACT = {
         ".field-parent-intro .button {",
         "justify-self: end;",
         "white-space: nowrap;",
+        ".field-availability {",
+        "justify-content: flex-end;",
+        ".field-availability-stage {",
+        ".field-availability-stage strong {",
+        '[data-field-layer="theory"] .field-availability-stage strong { color: var(--cyan); }',
+        '[data-field-layer="work"] .field-availability-stage strong { color: var(--fuchsia-text); }',
         "margin: 32px 0 0;",
         "padding-top: 0;",
         "@media (min-width: 1081px) and (max-width: 1240px)",
@@ -639,6 +656,39 @@ def validate_homepage_identity_contract(content: str) -> list[str]:
         errors.append("index.html must contain exactly one ordered record list per field layer")
     if content.count('<article class="field-feature') != 3:
         errors.append("index.html v1 must contain exactly one selected article per field layer")
+
+    field_sections = re.findall(
+        r'<section\b(?=[^>]*\bdata-field-layer="([^"]+)")[^>]*>(.*?)</section>',
+        content,
+        flags=re.DOTALL,
+    )
+    if len(field_sections) != 3:
+        errors.append("index.html must expose three parseable field sections for record sync")
+    for layer, section in field_sections:
+        selected_match = re.search(
+            r'<dt>\s*Selected record\s*</dt>\s*<dd[^>]*>(.*?)</dd>',
+            section,
+            flags=re.DOTALL,
+        )
+        feature_match = re.search(
+            r'<ol class="field-feature-list"[^>]*>.*?<h3[^>]*>(.*?)</h3>',
+            section,
+            flags=re.DOTALL,
+        )
+        if not selected_match or not feature_match:
+            errors.append(f"{layer}: selected-record sync contract is incomplete")
+            continue
+        visible_selected = " ".join(
+            unescape(re.sub(r"<[^>]+>", "", selected_match.group(1))).split()
+        )
+        visible_feature = " ".join(
+            unescape(re.sub(r"<[^>]+>", "", feature_match.group(1))).split()
+        )
+        if visible_selected != visible_feature:
+            errors.append(
+                f"{layer}: Selected record must match the displayed feature title "
+                f"({visible_selected!r} != {visible_feature!r})"
+            )
 
     return errors
 

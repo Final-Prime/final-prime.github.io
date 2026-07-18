@@ -56,7 +56,8 @@ html {
   text-transform: uppercase;
 }
 
-.field-index > .sr-only {
+.field-index > .sr-only,
+.field-availability > .sr-only {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -158,6 +159,29 @@ html {
 }
 .field-parent-meta dt { color: var(--muted-dark); }
 .field-parent-meta dd { color: var(--text); text-align: right; }
+
+.field-availability {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.55em;
+  white-space: nowrap;
+}
+
+.field-availability-stage {
+  display: inline-flex;
+  gap: 0.28em;
+  color: var(--muted-dark);
+}
+
+.field-availability-stage strong {
+  color: var(--text);
+  font-weight: 900;
+}
+
+[data-field-layer="theory"] .field-availability-stage strong { color: var(--cyan); }
+[data-field-layer="work"] .field-availability-stage strong { color: var(--fuchsia-text); }
+.field-availability-separator { color: var(--muted-dark); }
 
 .field-feature-list {
   min-width: 0;
@@ -332,6 +356,7 @@ html {
   .field-index-visual { gap: 0.45em; }
   .field-parent-meta div { align-items: flex-start; flex-direction: column; gap: 6px; }
   .field-parent-meta dd { text-align: left; }
+  .field-availability { justify-content: flex-start; }
   .footer-nav { grid-template-columns: 1fr; }
   .footer-nav a,
   .footer-nav a:nth-child(2n),
@@ -359,6 +384,9 @@ html {
   .field-parent-meta div,
   .field-record-meta,
   .footer-nav a { border-color: CanvasText; box-shadow: none; }
+  .field-availability-stage,
+  .field-availability-stage strong,
+  .field-availability-separator { color: CanvasText; }
 }
 
 @media (prefers-reduced-transparency: reduce) {
