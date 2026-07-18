@@ -72,6 +72,11 @@ html {
   gap: 0.58em;
 }
 
+.field-index-protocol {
+  color: var(--muted-dark);
+  letter-spacing: 0.04em;
+}
+
 .field-index-visual strong {
   color: var(--fuchsia-text);
   font-weight: 800;
@@ -297,6 +302,7 @@ html {
 }
 
 @media (max-width: 420px) {
+  .field-index-visual { gap: 0.45em; }
   .field-parent-meta div { align-items: flex-start; flex-direction: column; gap: 6px; }
   .field-parent-meta dd { text-align: left; }
   .footer-nav { grid-template-columns: 1fr; }
