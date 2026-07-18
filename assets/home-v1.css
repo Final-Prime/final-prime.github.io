@@ -17,9 +17,9 @@
   height: 24px;
   content: "";
   background:
-    linear-gradient(rgba(10, 232, 247, 0.84), rgba(10, 232, 247, 0.84)) left center / 2px 18px no-repeat,
+    linear-gradient(rgba(10, 232, 247, 0.84), rgba(10, 232, 247, 0.84)) left center / 2px 24px no-repeat,
     linear-gradient(var(--text), var(--text)) center / 2px 24px no-repeat,
-    linear-gradient(rgba(245, 5, 77, 0.88), rgba(245, 5, 77, 0.88)) right center / 2px 18px no-repeat;
+    linear-gradient(rgba(245, 5, 77, 0.88), rgba(245, 5, 77, 0.88)) right center / 2px 24px no-repeat;
   filter:
     drop-shadow(-3px 0 4px rgba(10, 232, 247, 0.18))
     drop-shadow(3px 0 4px rgba(245, 5, 77, 0.18));
