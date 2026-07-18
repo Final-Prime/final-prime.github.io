@@ -21,6 +21,7 @@ CSS_CLASS_SELECTOR = re.compile(r"(?<![\w-])\.([A-Za-z_-][\w-]*)")
 SCRIPT_BUDGETS = {
     "assets/app.js": 7100,
     "assets/home.js": 11500,
+    "assets/motto-glitch.js": 1300,
     "assets/review-dossier.js": 7600,
     "assets/scroll-readout.js": 1400,
 }
@@ -274,10 +275,11 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-2">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-3">',
+        '<script src="/assets/motto-glitch.js?v=20260718-1" defer></script>',
         '<p class="doctrine hero-motto">',
-        '<strong class="doctrine-cyan">is survival.</strong>',
-        '<strong class="doctrine-fuchsia">is control.</strong>',
+        '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
+        '<strong class="doctrine-fuchsia"><span class="doctrine-effect" aria-hidden="true">is control.</span><span class="doctrine-core">is control.</span></strong>',
     ),
     "assets/hero.css": (
         'font-family: "FP Inter";',
@@ -290,9 +292,25 @@ HOMEPAGE_MOTTO_CONTRACT = {
         "letter-spacing: -0.025em;",
         "overflow-wrap: anywhere;",
         "text-transform: uppercase;",
+        ".doctrine-effect {",
+        "color: rgba(var(--motto-echo-rgb), 0.34);",
+        ".hero-motto.is-glitching .doctrine-effect {",
+        "animation: fp-motto-complementary-glitch 560ms steps(1, end) 1;",
+        "@keyframes fp-motto-complementary-glitch",
+        "color: rgba(var(--motto-glitch-rgb), 0.40);",
+        "@media (prefers-reduced-transparency: reduce)",
         "font-size: clamp(2.25rem, calc(1.7rem + 2.9vw), 2.95rem);",
         "@media (max-width: 360px) and (max-height: 640px)",
         ".hero-grid { gap: 15px; margin-top: 18px; }",
+    ),
+    "assets/motto-glitch.js": (
+        'document.querySelector(".hero-motto")',
+        'matchMedia("(prefers-reduced-motion: reduce)")',
+        '"pointerenter"',
+        '"pointerdown"',
+        '"visibilitychange"',
+        '20000 + Math.random() * 12000',
+        '"fp-motto-complementary-glitch"',
     ),
 }
 

@@ -150,6 +150,8 @@
 .doctrine > span + span { margin-top: 18px; }
 
 .doctrine strong {
+  position: relative;
+  isolation: isolate;
   display: block;
   margin-top: 2px;
   font-size: clamp(2.95rem, 5.1vw, 5.25rem);
@@ -160,8 +162,94 @@
   text-transform: uppercase;
 }
 
-.doctrine-cyan { color: var(--cyan); }
-.doctrine-fuchsia { color: var(--fuchsia-text); }
+.doctrine-cyan {
+  --motto-echo-rgb: 10, 232, 247;
+  --motto-glitch-rgb: 245, 5, 77;
+  --motto-near: -0.027em;
+  --motto-mid: -0.068em;
+  --motto-far: -0.164em;
+  --motto-burst-near: -0.041em;
+  --motto-burst-mid: -0.095em;
+  --motto-burst-far: -0.19em;
+  color: var(--cyan);
+}
+
+.doctrine-fuchsia {
+  --motto-echo-rgb: 245, 5, 77;
+  --motto-glitch-rgb: 10, 232, 247;
+  --motto-near: 0.027em;
+  --motto-mid: 0.068em;
+  --motto-far: 0.164em;
+  --motto-burst-near: 0.041em;
+  --motto-burst-mid: 0.095em;
+  --motto-burst-far: 0.19em;
+  color: var(--fuchsia-text);
+}
+
+.doctrine-effect,
+.doctrine-core {
+  overflow-wrap: inherit;
+}
+
+.doctrine-effect {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  color: rgba(var(--motto-echo-rgb), 0.34);
+  filter: blur(0.005em);
+  pointer-events: none;
+  text-shadow:
+    var(--motto-mid) 0.004em 0.016em rgba(var(--motto-echo-rgb), 0.22),
+    var(--motto-far) 0.01em 0.046em rgba(var(--motto-echo-rgb), 0.10);
+  transform: translateX(var(--motto-near));
+}
+
+.doctrine-core {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-motto.is-glitching .doctrine-effect {
+    animation: fp-motto-complementary-glitch 560ms steps(1, end) 1;
+  }
+}
+
+@keyframes fp-motto-complementary-glitch {
+  0%, 16%, 32%, 48%, 64%, 100% {
+    color: rgba(var(--motto-echo-rgb), 0.34);
+    filter: blur(0.005em);
+    text-shadow:
+      var(--motto-mid) 0.004em 0.016em rgba(var(--motto-echo-rgb), 0.22),
+      var(--motto-far) 0.01em 0.046em rgba(var(--motto-echo-rgb), 0.10);
+    transform: translateX(var(--motto-near));
+  }
+  10% {
+    color: rgba(var(--motto-glitch-rgb), 0.40);
+    filter: blur(0.006em);
+    text-shadow:
+      var(--motto-mid) 0.004em 0.019em rgba(var(--motto-glitch-rgb), 0.24),
+      var(--motto-far) 0.01em 0.052em rgba(var(--motto-glitch-rgb), 0.11);
+    transform: translateX(var(--motto-near));
+  }
+  26% {
+    color: rgba(var(--motto-glitch-rgb), 0.34);
+    filter: blur(0.004em);
+    text-shadow:
+      var(--motto-burst-mid) -0.004em 0.012em rgba(var(--motto-glitch-rgb), 0.20),
+      var(--motto-burst-far) 0.006em 0.038em rgba(var(--motto-glitch-rgb), 0.09);
+    transform: translate(var(--motto-burst-near), 0.006em);
+  }
+  58% {
+    color: rgba(var(--motto-glitch-rgb), 0.38);
+    filter: blur(0.005em);
+    text-shadow:
+      var(--motto-mid) 0.006em 0.016em rgba(var(--motto-glitch-rgb), 0.22),
+      var(--motto-far) 0.012em 0.046em rgba(var(--motto-glitch-rgb), 0.10);
+    transform: translate(var(--motto-near), -0.004em);
+  }
+}
 
 .hero-intro {
   max-width: 590px;
@@ -234,13 +322,16 @@
   .hero::after { display: none; }
   .eyebrow::before { background: CanvasText; box-shadow: none; }
   .hero-wordmark > span { color: CanvasText; text-shadow: none; }
+  .doctrine-effect { display: none; }
   .hero-rule { background: CanvasText; }
 }
 
 @media (prefers-reduced-transparency: reduce) {
   .hero-wordmark > span { text-shadow: none; }
+  .doctrine-effect { display: none; }
 }
 
 @media print {
   .hero-wordmark > span { color: #000; text-shadow: none; }
+  .doctrine-effect { display: none; }
 }
