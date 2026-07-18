@@ -57,7 +57,8 @@ html {
 }
 
 .field-index > .sr-only,
-.field-availability > .sr-only {
+.field-availability > .sr-only,
+.field-feature-topline .sr-only {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -206,19 +207,31 @@ html {
 }
 
 .field-feature-topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
   gap: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-soft);
   color: var(--muted);
   font: 800 0.68rem/1.4 var(--mono);
   letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
-.field-feature-topline strong { color: var(--cyan); font-weight: 800; }
-.field-feature-theory .field-feature-topline strong { color: var(--muted-dark); }
-.field-feature-review .field-feature-topline strong { color: var(--fuchsia-text); }
+.field-feature-identity,
+.field-feature-state-visual,
+.field-feature-stage { display: inline-flex; align-items: baseline; }
+.field-feature-identity { min-width: 0; gap: 0.62em; }
+.field-feature-protocol { color: var(--muted-dark); letter-spacing: 0.04em; }
+.field-feature-topline > strong { color: var(--cyan); font-weight: 800; white-space: nowrap; }
+.field-feature-state-visual { gap: 0.52em; }
+.field-feature-stage { gap: 0.28em; color: var(--muted-dark); }
+.field-feature-stage b { color: var(--cyan); font-weight: 900; }
+.field-feature-state-separator { color: var(--muted-dark); }
+.field-feature-theory .field-feature-topline > strong { color: var(--muted-dark); }
+.field-feature-review .field-feature-topline > strong,
+.field-feature-review .field-feature-stage b { color: var(--fuchsia-text); }
 
 .field-feature h3 {
   max-width: 14ch;
@@ -353,6 +366,8 @@ html {
 }
 
 @media (max-width: 420px) {
+  .field-feature-topline { grid-template-columns: 1fr; gap: 7px; }
+  .field-feature-topline > strong { justify-self: start; }
   .field-index-visual { gap: 0.45em; }
   .field-parent-meta div { align-items: flex-start; flex-direction: column; gap: 6px; }
   .field-parent-meta dd { text-align: left; }
@@ -381,6 +396,7 @@ html {
   }
   .field-feature-list,
   .field-feature-list > li + li,
+  .field-feature-topline,
   .field-parent-meta div,
   .field-record-meta,
   .footer-nav a { border-color: CanvasText; box-shadow: none; }
