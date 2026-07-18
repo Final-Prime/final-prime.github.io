@@ -293,7 +293,7 @@ HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'is survival.',
     'Understanding the game',
     'is control.',
-    'Final Prime is founder-led.',
+    'Final Prime is created and operated by Daniel Kenessy.',
     'href="#selected-work">Explore selected work</a>',
     'class="hero-orientation-panel"',
     'id="selected-work"',
@@ -304,6 +304,7 @@ HOMEPAGE_IDENTITY_FORBIDDEN_TOKENS = (
     'class="prime-matrix',
     'class="root-trace',
     'class="sparse-signal',
+    'final prime is founder-led.',
     'our company',
     'our team',
 )
