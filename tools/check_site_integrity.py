@@ -350,7 +350,7 @@ HOMEPAGE_CTA_CONTRACT = {
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-11">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-12">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -358,6 +358,9 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<h2 id="theory-title">Theory <span><span class="field-joiner">&amp;</span><span class="field-secondary">Research</span></span></h2>',
         '<h2 id="systems-layer-title">Systems <span><span class="field-joiner">&amp;</span><span class="field-secondary">Software</span></span></h2>',
         '<h2 id="work-layer-title">Work <span><span class="field-joiner">&amp;</span><span class="field-secondary">Evidence</span></span></h2>',
+        '<span class="sr-only">Field 1 of 3</span><span class="field-index-visual" aria-hidden="true"><span>Field</span><strong>01</strong><span>/ 03</span></span>',
+        '<span class="sr-only">Field 2 of 3</span><span class="field-index-visual" aria-hidden="true"><span>Field</span><strong>02</strong><span>/ 03</span></span>',
+        '<span class="sr-only">Field 3 of 3</span><span class="field-index-visual" aria-hidden="true"><span>Field</span><strong>03</strong><span>/ 03</span></span>',
         '<span>A/SYNC / Theory preview</span><strong>In development</strong>',
         '<h3 id="theory-feature-title">A/SYNC / Theoretical foundations</h3>',
         '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
@@ -392,6 +395,15 @@ HOMEPAGE_FIELDS_CONTRACT = {
         ".field-parent h2 .field-joiner,",
         ".field-parent h2 .field-secondary { display: block; }",
         "font-size: 1em;",
+        "font: 700 0.75rem/1.3 var(--mono);",
+        "letter-spacing: 0.11em;",
+        ".field-index > .sr-only {",
+        "clip: rect(0, 0, 0, 0) !important;",
+        ".field-index-visual {",
+        "gap: 0.58em;",
+        ".field-index-visual strong {",
+        "margin: clamp(20px, 1.6vw, 24px) 0 0;",
+        ".field-parent h2 { margin-top: 18px; font-size: min(16vw, 4.8rem); }",
         ".field-parent-actions { padding-top: 24px; }",
         ".field-feature-list > li + li {",
         "border-top: 1px solid var(--line);",
@@ -403,6 +415,9 @@ HOMEPAGE_FIELDS_CONTRACT = {
 }
 
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
+    'class="field-index">01 / Field</p>',
+    'class="field-index">02 / Field</p>',
+    'class="field-index">03 / Field</p>',
     "Discuss A/SYNC",
     "Review index",
     "Explore selected work",
