@@ -111,12 +111,26 @@ html {
 .field-parent h2 .field-secondary { color: var(--muted); }
 [data-field-layer="theory"] .field-parent h2 .field-secondary { color: var(--cyan); }
 [data-field-layer="work"] .field-parent h2 .field-secondary { color: var(--fuchsia-text); }
-.field-parent > p:not(.field-index) {
-  max-width: 42ch;
+.field-parent-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: clamp(18px, 2vw, 26px);
   margin: 28px 0 0;
+}
+
+.field-parent-intro p {
+  max-width: 30ch;
+  margin: 0;
   color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.68;
+}
+
+.field-parent-intro .button {
+  align-self: end;
+  justify-self: end;
+  white-space: nowrap;
 }
 
 .field-parent-meta {
@@ -143,8 +157,6 @@ html {
 }
 .field-parent-meta dt { color: var(--muted-dark); }
 .field-parent-meta dd { color: var(--text); text-align: right; }
-
-.field-parent-actions { padding-top: 24px; }
 
 .field-feature-list {
   min-width: 0;
@@ -289,6 +301,11 @@ html {
   .field-feature { min-height: 460px; }
 }
 
+@media (min-width: 1081px) and (max-width: 1240px) {
+  .field-parent-intro { grid-template-columns: 1fr; gap: 20px; }
+  .field-parent-intro .button { justify-self: end; }
+}
+
 @media (max-width: 760px) {
   [data-field-layer] { padding: 106px 0 92px; }
   [data-field-layer]::before {
@@ -299,6 +316,8 @@ html {
   }
   .field-parent { min-height: 340px; }
   .field-parent h2 { margin-top: 18px; font-size: min(16vw, 4.8rem); }
+  .field-parent-intro { grid-template-columns: 1fr; gap: 20px; }
+  .field-parent-intro .button { justify-self: start; }
   .field-feature-list { margin-top: 42px; padding-top: 36px; }
   .field-feature { min-height: 430px; }
   .field-feature h3 { margin-top: 48px; font-size: min(11.5vw, 3.75rem); }
