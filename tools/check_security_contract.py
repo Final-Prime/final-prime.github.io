@@ -40,6 +40,7 @@ WORKFLOW_CHECK_COMMANDS = (
     "python tools/check_editorial_style.py",
     "python tools/check_ip_notices.py",
     "python tools/check_public_surface.py --history",
+    "python tools/check_realops_registry.py",
     "python tools/check_review_registry.py",
     "python tools/check_search_contract.py",
     "python tools/check_security_contract.py",

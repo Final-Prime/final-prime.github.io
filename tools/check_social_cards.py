@@ -77,7 +77,11 @@ def validate_page(path: Path) -> list[str]:
 
     if meta["og:image:type"] != "image/png":
         errors.append(f"{relative}: og:image:type must be image/png")
-    expected_type = "article" if relative == "reviews/metro-2033-redux/index.html" else "website"
+    article_routes = {
+        "reviews/metro-2033-redux/index.html",
+        "works/realops-01/index.html",
+    }
+    expected_type = "article" if relative in article_routes else "website"
     if meta["og:type"] != expected_type:
         errors.append(f"{relative}: og:type must be {expected_type}")
     if meta["og:locale"] != "en_US":

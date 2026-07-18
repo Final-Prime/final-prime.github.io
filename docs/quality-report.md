@@ -2,18 +2,19 @@
 
 ## Scope
 
-This report covers the current Final Prime GitHub Pages public surface as reviewed on 2026-07-14. The website is the primary deliverable. Repository documentation and automated checks support developer handoff and guard the public/private boundary.
+This report covers the current Final Prime GitHub Pages public surface as reviewed on 2026-07-19. The website is the primary deliverable. Repository documentation and automated checks support developer handoff and guard the public/private boundary.
 
-The review covers nine indexable routes plus the non-indexable 404 document. It does not evaluate or enumerate private code, research, client material or unpublished work.
+The review covers ten indexable routes plus the non-indexable 404 document. It does not evaluate or enumerate private code, research, client material or unpublished work.
 
 ## Current public surface
 
 - The homepage positions Final Prime as an independent, founder-led studio and routes visitors to disclosed work.
 - `/systems/` presents one public A/SYNC concept record without implementation internals.
-- `/works/` declares four prepared release lanes and no fabricated public objects.
+- `/works/` declares four release lanes and presents the published `FP-WRK-0001` REALOPS-01 operational research dossier.
+- `/works/realops-01/` publishes the evidence-bound single-agent routing pilot as aggregate public evidence while keeping fixtures, prompts, transcripts, repositories and grader internals private.
 - `/thought/` separates the published game-review track from three explicitly empty lanes.
 - `/reviews/` and `/reviews/metro-2033-redux/` expose the published `FP-REV-0001` dossier.
-- `/index/` lists eight disclosed public records without enumerating private inventory.
+- `/index/` lists nine disclosed public records without enumerating private inventory.
 - `/contact/` provides a direct email path and an explicit protected-material boundary.
 - `/legal/` states the current ownership, rights and disclosure position.
 
@@ -28,13 +29,17 @@ The review covers nine indexable routes plus the non-indexable 404 document. It 
 - Completed the footer navigation grid with Contact and matched keyboard focus feedback to pointer hover feedback.
 - Updated canonical route maps, sitemap dates, machine-readable navigation and installable-site shortcuts.
 - Preserved the existing brand-first hero, Prime Matrix, system object and published review feature.
+- Integrated the REALOPS-01 handoff into the shared Final Prime header, footer, navigation, responsive and accessibility systems instead of shipping its standalone shell.
+- Added a restrained four-role roster, routing ladder, mission outcomes, Pareto view, token-use panel, exact table, method, limitations and selection audit.
+- Registered REALOPS-01 in Works, the Public Index, sitemap and machine-readable agent map without replacing the homepage feature.
 
 ## Truthfulness and disclosure boundary
 
 - Final Prime remains an independent initiative owned by Daniel Kenessy in an individual capacity; no registered-company claim is introduced.
 - A/SYNC remains a concept/prototype surface; no implementation architecture or performance result is claimed.
 - No clients, partners, revenue, funding, savings or product-result claims are introduced.
-- Empty Works and Thought lanes remain visibly empty instead of using decorative placeholders or invented dates.
+- Empty Thought lanes remain visibly empty instead of using decorative placeholders or invented dates.
+- REALOPS-01 is explicitly scoped as a 40-mission pilot, not a universal model-intelligence ranking or broad statistical claim.
 - The contact route warns visitors not to send credentials, client data, private source or unpublished research in the first message.
 - No account system, private workspace, analytics, form or request tracker is represented as live.
 
@@ -61,17 +66,18 @@ The current branch passes all repository quality gates:
 - CSP and security-contact policy;
 - semantic and ARIA accessibility contracts; and
 - full-history public-surface privacy and secret scanning.
+- REALOPS route, aggregate evidence, frozen hashes and cross-index registry integrity.
 
 Current measured surface:
 
-- 10 HTML documents;
-- 9 indexable canonical routes;
-- 362 local references;
-- 235 reachable CSS classes;
-- 3 budgeted scripts; and
+- 11 HTML documents;
+- 10 indexable canonical routes;
+- 397 local references;
+- 271 reachable CSS classes;
+- 5 budgeted scripts; and
 - 14 validated web-manifest targets.
 
-All 10 HTML documents also returned zero structural errors from the W3C Nu HTML checker on 2026-07-14. Relative-resource CSP notices from direct document upload are expected because the checker does not receive the GitHub Pages origin used by the live site.
+All eleven documents pass the repository semantic and ARIA parser, local-reference graph, print and reflow contracts. The ten-document surface that preceded REALOPS-01 also returned zero structural errors from the W3C Nu HTML checker on 2026-07-14; the new route is protected by the same local semantic contracts pending the next external Nu validation sweep.
 
 ## Privacy and dependency review
 
@@ -83,4 +89,4 @@ All 10 HTML documents also returned zero structural errors from the W3C Nu HTML 
 
 ## Deployment note
 
-Polish work is prepared on the isolated `polish/website-first-safe` branch. The `main` branch and live GitHub Pages site remain unchanged until an intentional review and merge. Social-card and Pages caches may briefly retain a previous version after any later deployment.
+The GitHub `main` branch is the release source of truth. GitHub Pages deploys only after the repository checks succeed. Social-card and Pages caches may briefly retain a previous version after deployment.
