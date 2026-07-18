@@ -259,7 +259,7 @@
   line-height: 1.58;
 }
 
-.hero-orientation strong { color: var(--text); font-weight: 700; }
+.hero-intro b { color: var(--text); font-weight: 700; }
 .hero-method { margin-top: 14px; }
 .hero-orientation-panel {
   min-width: 0;
