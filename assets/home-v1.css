@@ -66,16 +66,17 @@ html {
 }
 
 .field-parent h2 > span {
-  display: flex;
-  align-items: baseline;
-  gap: 0.16em;
+  display: block;
 }
+.field-parent h2 .field-joiner,
+.field-parent h2 .field-secondary { display: block; }
 .field-parent h2 .field-joiner {
   color: var(--muted-dark);
   font-size: 0.5em;
   font-weight: 680;
-  line-height: 1;
+  line-height: 0.95;
   letter-spacing: -0.04em;
+  margin: 0.04em 0 0.02em;
 }
 .field-parent h2 .field-secondary { color: var(--muted); }
 [data-field-layer="theory"] .field-parent h2 .field-secondary { color: var(--cyan); }
