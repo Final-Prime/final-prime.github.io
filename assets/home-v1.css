@@ -13,13 +13,16 @@
   position: absolute;
   top: clamp(22px, 2.8vw, 34px);
   left: 50%;
-  width: 2px;
+  width: 22px;
   height: 24px;
   content: "";
-  background: var(--text);
-  box-shadow:
-    -3px 0 7px rgba(10, 232, 247, 0.26),
-    3px 0 7px rgba(245, 5, 77, 0.28);
+  background:
+    linear-gradient(rgba(10, 232, 247, 0.84), rgba(10, 232, 247, 0.84)) left center / 2px 18px no-repeat,
+    linear-gradient(var(--text), var(--text)) center / 2px 24px no-repeat,
+    linear-gradient(rgba(245, 5, 77, 0.88), rgba(245, 5, 77, 0.88)) right center / 2px 18px no-repeat;
+  filter:
+    drop-shadow(-3px 0 4px rgba(10, 232, 247, 0.18))
+    drop-shadow(3px 0 4px rgba(245, 5, 77, 0.18));
   transform: translateX(-50%) rotate(-22deg);
   transform-origin: center;
 }
@@ -317,7 +320,7 @@
 }
 
 @media (forced-colors: active) {
-  .selected-section::before { background: CanvasText; box-shadow: none; }
+  .selected-section::before { width: 2px; background: CanvasText; filter: none; }
   .focus-card,
   .selected-card-review,
   .method-manifesto,
@@ -326,7 +329,7 @@
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .selected-section::before { box-shadow: none; }
+  .selected-section::before { filter: none; }
 }
 
 @media print {
