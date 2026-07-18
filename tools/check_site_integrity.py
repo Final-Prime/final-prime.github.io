@@ -350,11 +350,14 @@ HOMEPAGE_CTA_CONTRACT = {
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-7">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-8">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
         'data-field-layer="work"',
+        '<h2 id="theory-title">Theory <span><span class="field-joiner">&amp;</span><span class="field-secondary">Research</span></span></h2>',
+        '<h2 id="systems-layer-title">Systems <span><span class="field-joiner">&amp;</span><span class="field-secondary">Software</span></span></h2>',
+        '<h2 id="work-layer-title">Work <span><span class="field-joiner">&amp;</span><span class="field-secondary">Evidence</span></span></h2>',
         '<span>A/SYNC / Theory preview</span><strong>In development</strong>',
         '<h3 id="theory-feature-title">A/SYNC / Theoretical foundations</h3>',
         '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
