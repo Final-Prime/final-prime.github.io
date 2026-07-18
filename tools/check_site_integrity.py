@@ -350,7 +350,7 @@ HOMEPAGE_CTA_CONTRACT = {
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-18">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260718-20">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -361,6 +361,9 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<span class="sr-only">Field 1 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>01</strong><span>/ 03</span></span>',
         '<span class="sr-only">Field 2 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>02</strong><span>/ 03</span></span>',
         '<span class="sr-only">Field 3 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>03</strong><span>/ 03</span></span>',
+        '<div class="field-parent-intro"><p>Public principles and models for tracing complex failures back to the logic that enables them.</p><a class="button button-secondary" href="/thought/">Explore theory</a></div>',
+        '<div class="field-parent-intro"><p>Software and engineered systems built from those principles, with declared states and limits.</p><a class="button button-secondary" href="/systems/">Explore systems</a></div>',
+        '<div class="field-parent-intro"><p>Published analysis and completed records supported by explicit evidence and boundaries.</p><a class="button button-secondary" href="/works/">Explore work</a></div>',
         '<span>A/SYNC / Theory preview</span><strong>In development</strong>',
         '<h3 id="theory-feature-title">A/SYNC / Theoretical foundations</h3>',
         '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
@@ -415,7 +418,18 @@ HOMEPAGE_FIELDS_CONTRACT = {
         ".field-index-visual { gap: 0.45em; }",
         "margin: clamp(20px, 1.6vw, 24px) 0 0;",
         ".field-parent h2 { margin-top: 18px; font-size: min(16vw, 4.8rem); }",
-        ".field-parent-actions { padding-top: 24px; }",
+        ".field-parent-intro {",
+        "grid-template-columns: minmax(0, 1fr) auto;",
+        "gap: clamp(18px, 2vw, 26px);",
+        ".field-parent-intro p {",
+        "max-width: 30ch;",
+        ".field-parent-intro .button {",
+        "justify-self: end;",
+        "white-space: nowrap;",
+        "@media (min-width: 1081px) and (max-width: 1240px)",
+        ".field-parent-intro .button { justify-self: end; }",
+        ".field-parent-intro { grid-template-columns: 1fr; gap: 20px; }",
+        ".field-parent-intro .button { justify-self: start; }",
         ".field-feature-list > li + li {",
         "border-top: 1px solid var(--line);",
         "@media (max-width: 1080px)",
@@ -441,6 +455,7 @@ RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="section focus-section"',
     'class="section method-section"',
     "Open Thought Index",
+    'class="field-parent-actions"',
 )
 
 BRAND_LOCKUP_REQUIRED_TOKENS = (
