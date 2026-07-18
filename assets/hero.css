@@ -256,15 +256,16 @@
   margin: 0;
   color: var(--muted);
   font-size: clamp(0.98rem, 1.2vw, 1.12rem);
-  line-height: 1.64;
+  line-height: 1.58;
 }
 
 .hero-orientation strong { color: var(--text); font-weight: 700; }
+.hero-method { margin-top: 14px; }
 .hero-orientation-panel {
   min-width: 0;
   padding-top: 4px;
 }
-.hero-actions { display: flex; flex-wrap: wrap; margin-top: 28px; }
+.hero-actions { display: flex; flex-wrap: wrap; margin-top: 20px; }
 .hero .button-primary { color: #041012; border-color: var(--cyan); background: var(--cyan); }
 .hero .button-primary:hover,
 .hero .button-primary:focus-visible { color: var(--bg); border-color: var(--text); background: var(--text); }

@@ -275,7 +275,7 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-3">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-4">',
         '<script src="/assets/motto-glitch.js?v=20260718-1" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
@@ -336,7 +336,10 @@ HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'is survival.',
     'Understanding the game',
     'is control.',
-    'Final Prime is created and operated by Daniel Kenessy.',
+    'Final Prime is an independent, cross-domain research and engineering effort created and operated by Daniel Kenessy',
+    'class="hero-intro hero-method"',
+    'Rather than treating visible symptoms, Final Prime traces them back to the logic that makes them possible.',
+    'It then formulates and tests hypotheses, develops theory, and builds software from a foundation where the original problem no longer arises.',
     'href="#selected-work">Explore selected work</a>',
     'class="hero-orientation-panel"',
     'id="selected-work"',
