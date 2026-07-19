@@ -279,7 +279,7 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260719-10">',
         '<script src="/assets/motto-glitch.js?v=20260718-2" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
@@ -306,6 +306,9 @@ HOMEPAGE_MOTTO_CONTRACT = {
         "font-size: clamp(2.25rem, calc(1.7rem + 2.9vw), 2.95rem);",
         "@media (max-width: 360px) and (max-height: 640px)",
         ".hero-grid { gap: 15px; margin-top: 18px; }",
+        "@media (max-width: 900px)",
+        ".hero-grid { grid-template-columns: 1fr; gap: 30px; }",
+        ".hero-orientation-panel { max-width: 640px; padding-top: 0; }",
     ),
     "assets/motto-glitch.js": (
         'document.querySelector(".hero-motto")',
@@ -343,6 +346,8 @@ HOMEPAGE_CTA_CONTRACT = {
         "transform: translateY(1px);",
         "transition-duration: 80ms;",
         ".hero .button-primary:active { border-color: #08d7e5; background: #08d7e5; }",
+        ".hero-grid { gap: 21px; margin-top: 22px; }",
+        ".hero-actions { margin-top: 16px; }",
         "@media (prefers-reduced-motion: reduce)",
         "@media (forced-colors: active)",
     ),
@@ -350,8 +355,8 @@ HOMEPAGE_CTA_CONTRACT = {
 
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-27">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260719-10">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-28">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -386,7 +391,7 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<span class="field-title-accent">Foundations</span></h3>\n                <dl class="field-record-meta">',
         '<span class="field-title-accent">System</span></h3>\n                <dl class="field-record-meta">',
         '<span class="field-title-accent">Game Review</span></h3>\n                <div class="field-score"',
-        '<div class="field-feature-intro"><p>A public placeholder for the principles behind A/SYNC. The formal theory record is still in development.</p></div>',
+        '<div class="field-feature-intro"><p>The theory record remains in development. Publication begins when its thesis, evidence path and public boundary are stable.</p></div>',
         '<div class="field-feature-intro"><p>A coordination-system concept organized around objectives, constraints, signals and resolved outcomes. The public record exposes the capability model while implementation and research internals remain private.</p><a class="button button-primary" href="/systems/#async">Open A/SYNC record</a></div>',
         '<div class="field-feature-intro"><p>An atmosphere-first survival FPS examined through explicit score math, audience fit, friction, risk and route-level evidence.</p><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a></div>',
         '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
@@ -405,6 +410,9 @@ HOMEPAGE_FIELDS_CONTRACT = {
         "scroll-padding-top: 0;",
         ".field-region {",
         "scroll-margin-top: var(--header-height);",
+        ".field-region:focus { outline: none; }",
+        ".field-region:focus > [data-field-layer]:first-child::before {",
+        "outline: 2px solid CanvasText;",
         "[data-field-layer]::before {",
         "width: clamp(240px, 23vw, 340px);",
         "height: 28px;",
@@ -427,6 +435,8 @@ HOMEPAGE_FIELDS_CONTRACT = {
         "grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);",
         ".field-parent h2 .field-joiner,",
         ".field-parent h2 .field-secondary { display: block; }",
+        ".field-feature-theory h3 {",
+        "font-size: clamp(2.65rem, 4.15vw, 4.5rem);",
         "font-size: 1em;",
         "font: 700 0.75rem/1.3 var(--mono);",
         "letter-spacing: 0.11em;",
@@ -573,7 +583,7 @@ HOMEPAGE_IDENTITY_FORBIDDEN_TOKENS = (
 
 HOMEPAGE_CLOSING_CONTRACT = {
     "index.html": (
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-27">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-28">',
         '<p class="section-kicker">Selected projects / Direct line</p>',
         '<h2 id="closing-title">Bring the problem. Fit comes before commitment.</h2>',
         'Each enquiry is reviewed for fit before any commitment. Begin with the objective, current constraint and available evidence. Keep protected material out of the first message.',
@@ -594,6 +604,41 @@ HOMEPAGE_CLOSING_CONTRACT = {
         "@media (prefers-reduced-motion: reduce)",
         "@media (prefers-reduced-transparency: reduce)",
         "@media (forced-colors: active)",
+    ),
+}
+
+THEORY_LABEL_PAGES = (
+    "index.html",
+    "systems/index.html",
+    "works/index.html",
+    "works/realops-01/index.html",
+    "thought/index.html",
+    "reviews/index.html",
+    "reviews/metro-2033-redux/index.html",
+    "index/index.html",
+    "contact/index.html",
+    "legal/index.html",
+)
+
+THEORY_TAXONOMY_CONTRACT = {
+    "thought/index.html": (
+        "The Final Prime Theory Index",
+        "Final Prime Theory Index",
+        "<title>Theory Index | Final Prime</title>",
+        '<span aria-current="page">Theory</span>',
+        '<p class="section-kicker">Theory / Public interpretation index</p>',
+        '<h1 id="thought-title">Theory <span>Index</span></h1>',
+        "A theory record appears only when its thesis, evidence path and publication boundary are stable.",
+        "Theory publication protocol",
+    ),
+    "index/index.html": (
+        "systems, works, theory, reviews",
+        "<h2>Theory Index</h2>",
+        "No theory object is currently published.",
+        'href="/thought/">Open Theory Index</a>',
+    ),
+    "site.webmanifest": (
+        '"name": "Theory Index", "short_name": "Theory", "url": "/thought/"',
     ),
 }
 
@@ -991,6 +1036,22 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: homepage fields contract is missing {missing}")
+    theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
+    for relative in THEORY_LABEL_PAGES:
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        theory_labels = theory_link_pattern.findall(content)
+        if len(theory_labels) != 2:
+            errors.append(
+                f"{relative}: expected Theory in both primary and footer navigation, "
+                f"found {len(theory_labels)}"
+            )
+        if ">Thought</a>" in content:
+            errors.append(f"{relative}: retired Thought navigation label restored")
+    for relative, tokens in THEORY_TAXONOMY_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: Theory taxonomy contract is missing {missing}")
     for relative in FOOTER_PAGES:
         content = (ROOT / relative).read_text(encoding="utf-8")
         missing = [token for token in FOOTER_REQUIRED_TOKENS if token not in content]
