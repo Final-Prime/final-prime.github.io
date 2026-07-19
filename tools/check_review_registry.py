@@ -93,7 +93,7 @@ def main() -> int:
         require(review, "Published 12 Jul 2026", "review page", errors)
         require(review, "Updated 19 Jul 2026", "review page", errors)
         require(review, '<a href="/works/" aria-current="location">Works</a>', "review page", errors)
-        require(review, '<a href="#verdict">Verdict</a><a href="#score">Score</a><a href="#note">Field note</a><a href="#evidence">Evidence</a><a href="#protocol">Protocol</a>', "review page", errors)
+        require(review, '<a href="#verdict">Verdict</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#score">Score</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#note">Field note</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#evidence">Evidence</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#protocol">Protocol</a>', "review page", errors)
 
         raw = attribute(review, "data-review-raw")
         correction = attribute(review, "data-review-correction")

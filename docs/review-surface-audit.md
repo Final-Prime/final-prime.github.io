@@ -20,6 +20,7 @@ The review surface follows the existing Final Prime system language:
 - cyan for verified/current state;
 - magenta for deductions, danger and heavy spoilers;
 - one published review object and one method inspector;
+- a five-link sticky dossier path using breadcrumb separators instead of boxed tabs;
 - a visible four-stage pipeline: `Experience / Model / Verify / Publish`;
 - explicit score anatomy, friction, audit and evidence structures; and
 - no fake cover, placeholder title, invented publication date or decorative score.

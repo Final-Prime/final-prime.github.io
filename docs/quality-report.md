@@ -75,7 +75,7 @@ Current measured surface:
 - 11 HTML documents;
 - 10 indexable canonical routes;
 - 395 local references;
-- 282 reachable CSS classes;
+- 283 reachable CSS classes;
 - 5 budgeted scripts; and
 - 14 validated web-manifest targets.
 
