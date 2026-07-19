@@ -84,7 +84,7 @@ def main() -> int:
         require(review, f'<link rel="canonical" href="{CANONICAL}">', "review page", errors)
         require(review, 'data-review-id="FP-REV-0001"', "review page", errors)
         require(review, "/assets/reviews/metro-2033-redux-og.png", "review page", errors)
-        require(review, '<link rel="stylesheet" href="/assets/review-dossier.css?v=20260719-13">', "review page", errors)
+        require(review, '<link rel="stylesheet" href="/assets/review-dossier.css?v=20260719-14">', "review page", errors)
         require(review, "/assets/review-dossier.js", "review page", errors)
         require(review, "/legal/", "review page", errors)
         require(review, "Metro 2033 Redux and related", "review page", errors)
@@ -181,6 +181,8 @@ def main() -> int:
             errors.append(f"Consolidated review dossier CSS is {dossier_css_bytes} bytes, expected at most 42000")
         if ".dossier-axis p { min-height: 160px;" in dossier_css:
             errors.append("Consolidated review dossier CSS restored the obsolete fixed axis paragraph height")
+        if dossier_css.count("@media (max-width: 1180px)") != 1:
+            errors.append("Consolidated review dossier CSS must contain exactly one 1180px breakpoint")
         canonical_marker = "/* Canonical dossier shell: open ledgers, five-layer navigation, restrained Metro signal. */"
         if canonical_marker not in dossier_css:
             errors.append("Consolidated review dossier CSS is missing the canonical shell boundary")
