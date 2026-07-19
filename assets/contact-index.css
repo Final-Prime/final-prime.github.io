@@ -282,6 +282,13 @@
   line-height: 1.68;
 }
 
+.contact-email-suite {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(14px, 2.2vw, 28px);
+  width: 100%;
+  background: linear-gradient(90deg, var(--cyan), rgba(10, 232, 247, 0.12), transparent) 0 100% / 100% 1px no-repeat;
+}
+
 .contact-link {
   display: flex;
   justify-content: space-between;
@@ -295,6 +302,17 @@
   font: 800 clamp(0.9rem, 1.45vw, 1.25rem)/1.4 var(--mono);
   letter-spacing: 0.04em;
   text-decoration: none;
+}
+
+.contact-email-suite .contact-link {
+  min-width: 0;
+  background: none;
+}
+
+.contact-email-suite .email-copy-button {
+  min-width: 112px;
+  min-height: 50px;
+  align-self: center;
 }
 
 .contact-link span:first-child { overflow-wrap: anywhere; }
@@ -393,6 +411,19 @@
   .access-copy h3 { font-size: clamp(2.55rem, 11vw, 4.4rem); }
   .contact-section { margin-top: 86px; padding-top: 70px; }
   .contact-layout h2 { font-size: clamp(2.55rem, 11vw, 4.4rem); }
+
+  .contact-email-suite {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding-bottom: 14px;
+  }
+
+  .contact-email-suite .contact-link {
+    min-height: 48px;
+    padding-bottom: 0;
+  }
+
+  .contact-email-suite .email-copy-button { justify-self: start; }
 }
 
 @media (max-width: 420px) {
