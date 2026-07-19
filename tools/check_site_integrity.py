@@ -44,6 +44,14 @@ FORBIDDEN_ROUTE_STYLESHEETS = {
         "/assets/review-release.css",
     },
     "systems/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
+    "systems/async/index.html": {
+        "/assets/content-a.css",
+        "/assets/content-b.css",
+        "/assets/hero.css",
+        "/assets/catalog.css",
+        "/assets/reviews.css",
+        "/assets/review-release.css",
+    },
     "works/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
     "thought/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css", "/assets/reviews.css", "/assets/review-release.css"},
     "reviews/index.html": {"/assets/content-a.css", "/assets/content-b.css", "/assets/hero.css"},
@@ -132,6 +140,16 @@ ROUTE_REFLOW_CONTRACTS = {
     ),
     "assets/legal.css": (
         ".legal-card h2 {",
+        "overflow-wrap: anywhere;",
+    ),
+    "assets/async-dossier.css": (
+        ".async-hero h1 {",
+        ".async-section-head h2 {",
+        ".async-overview-grid h3 {",
+        ".async-model h3 {",
+        "text-wrap: balance;",
+        ".async-hero-meta dd {",
+        ".async-ledger dd {",
         "overflow-wrap: anywhere;",
     ),
 }
@@ -392,13 +410,13 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<span class="field-title-accent">System</span></h3>\n                <dl class="field-record-meta">',
         '<span class="field-title-accent">Game Review</span></h3>\n                <div class="field-score"',
         '<div class="field-feature-intro"><p>The theory record remains in development. Publication begins when its thesis, evidence path and public boundary are stable.</p></div>',
-        '<div class="field-feature-intro"><p>A coordination-system concept organized around objectives, constraints, signals and resolved outcomes. The public record exposes the capability model while implementation and research internals remain private.</p><a class="button button-primary" href="/systems/#async">Open A/SYNC record</a></div>',
+        '<div class="field-feature-intro"><p>A coordination-system concept organized around objectives, constraints, signals and resolved outcomes. The public record exposes the capability model while implementation and research internals remain private.</p><a class="button button-primary" href="/systems/async/">Open A/SYNC dossier</a></div>',
         '<div class="field-feature-intro"><p>An atmosphere-first survival FPS examined through explicit score math, audience fit, friction, risk and route-level evidence.</p><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a></div>',
         '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
         '<div><dt>Publication</dt><dd>Not yet published</dd></div>',
         'href="/thought/">Explore theory</a>',
         'href="/systems/">Explore systems</a>',
-        'href="/systems/#async">Open A/SYNC record</a>',
+        'href="/systems/async/">Open A/SYNC dossier</a>',
         'href="/works/">Explore work</a>',
         'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
     ),
@@ -515,6 +533,65 @@ HOMEPAGE_FIELDS_CONTRACT = {
     ),
 }
 
+ASYNC_DOSSIER_CONTRACT = {
+    "systems/index.html": (
+        '<body class="systems-index">',
+        '<link rel="stylesheet" href="/assets/async-dossier.css?v=20260719-3">',
+        'id="async"',
+        'III / V &middot; Prototype',
+        '<dt>Type</dt><dd>Coordination system</dd>',
+        '<dt>Method</dt><dd>Constraint-led</dd>',
+        '<dt>Access</dt><dd>Concept surface</dd>',
+        '<dt>Entry</dt><dd>Qualified enquiry</dd>',
+        'href="/systems/async/">Open A/SYNC dossier →</a>',
+        '<p class="catalog-code">Disclosure rail / Explicit</p>',
+        '<dt>Public</dt><dd>Identity / lifecycle / model / route</dd>',
+        '<dt>Conditional</dt><dd>Business fit / scope / integration context</dd>',
+        '<dt>Private</dt><dd>Source / architecture / research / client records</dd>',
+    ),
+    "systems/async/index.html": (
+        '<link rel="canonical" href="https://final-prime.github.io/systems/async/">',
+        '<link rel="stylesheet" href="/assets/async-dossier.css?v=20260719-3">',
+        '<main class="async-main" id="main-content" tabindex="-1" data-system-id="FP-SYS-0003">',
+        '<span>FP:// SYS-0003 / Coordination system</span><strong>III / V &middot; Prototype</strong>',
+        '<h1 id="async-page-title"><span>A/SYNC <i>/</i></span><span>Coordination</span><span>System</span></h1>',
+        'A prototype coordination-system concept for making objectives, constraints, signals and resolved outcomes explicit.',
+        '<dt>Evidence</dt><dd>No public performance claim</dd>',
+        '<nav class="async-nav" aria-label="A/SYNC sections"><div class="shell"><a href="#overview">Overview</a><span aria-hidden="true">/</span><a href="#model">Model</a><span aria-hidden="true">/</span><a href="#state">State</a><span aria-hidden="true">/</span><a href="#evidence">Evidence</a><span aria-hidden="true">/</span><a href="#access">Access</a>',
+        '<ol class="async-model" aria-label="A/SYNC public model">',
+        '<h3>Objective</h3>',
+        '<h3>Constraints</h3>',
+        '<h3>Signals</h3>',
+        '<h3>Resolved outcome</h3>',
+        'Public model. Not an implementation diagram.',
+        'No public A/SYNC benchmark, deployment record, case study or client outcome is currently claimed.',
+        'Separate Final Prime evidence, not A/SYNC validation:',
+        '<p class="section-kicker">Qualified discussion / Context first</p>',
+        '<h2 id="access-title">Bring the coordination problem, not protected material.</h2>',
+        'href="/contact/"><span>Open a project enquiry</span>',
+        'href="/systems/">Back to Systems</a>',
+        'A/SYNC is a prototype concept. No public release or performance result is claimed.',
+    ),
+    "assets/async-dossier.css": (
+        ".async-hero-grid {",
+        ".async-hero-grid > * { min-width: 0; }",
+        ".async-nav {",
+        "position: sticky;",
+        ".async-model {",
+        "grid-template-columns: repeat(4, minmax(0, 1fr));",
+        ".systems-index .catalog-boundary {",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        ".systems-index .catalog-hero { padding-top: 34px; padding-bottom: 44px; }",
+        "@media (max-width: 420px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+ASYNC_DOSSIER_CSS_BUDGET = 24000
+
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
     'class="field-index">02 / Field</p>',
@@ -610,6 +687,7 @@ HOMEPAGE_CLOSING_CONTRACT = {
 THEORY_LABEL_PAGES = (
     "index.html",
     "systems/index.html",
+    "systems/async/index.html",
     "works/index.html",
     "works/realops-01/index.html",
     "thought/index.html",
@@ -645,6 +723,7 @@ THEORY_TAXONOMY_CONTRACT = {
 FOOTER_PAGES = (
     "index.html",
     "systems/index.html",
+    "systems/async/index.html",
     "works/index.html",
     "works/realops-01/index.html",
     "thought/index.html",
@@ -656,7 +735,7 @@ FOOTER_PAGES = (
 )
 
 FOOTER_REQUIRED_TOKENS = (
-    '<link rel="stylesheet" href="/assets/surface-polish.css?v=20260719-5">',
+    '<link rel="stylesheet" href="/assets/surface-polish.css?v=20260719-6">',
     '<div class="shell footer-shell">',
     '<div class="footer-primary">',
     'Independent software, research and public evidence with explicit claims, states and limits.',
@@ -1036,6 +1115,22 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: homepage fields contract is missing {missing}")
+    for relative, tokens in ASYNC_DOSSIER_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: A/SYNC dossier contract is missing {missing}")
+    async_css_size = len(
+        (ROOT / "assets/async-dossier.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if async_css_size > ASYNC_DOSSIER_CSS_BUDGET:
+        errors.append(
+            "assets/async-dossier.css: "
+            f"{async_css_size} bytes exceeds the {ASYNC_DOSSIER_CSS_BUDGET}-byte budget"
+        )
+    async_page = (ROOT / "systems/async/index.html").read_text(encoding="utf-8")
+    if re.search(r"\b\d+(?:\.\d+)?%", async_page):
+        errors.append("systems/async/index.html: unverified percentage claim is forbidden")
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:
         content = (ROOT / relative).read_text(encoding="utf-8")
