@@ -143,8 +143,14 @@ ROUTE_REFLOW_CONTRACTS = {
         ".hero-orientation-panel {",
     ),
     "assets/legal.css": (
+        ".legal-index .catalog-hero h1 {",
         ".legal-card h2 {",
-        "overflow-wrap: anywhere;",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 900px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
     ),
     "assets/async-dossier.css": (
         ".async-hero h1 {",
@@ -740,6 +746,35 @@ CONTACT_INDEX_CONTRACT = {
 }
 
 CONTACT_INDEX_CSS_BUDGET = 16000
+
+LEGAL_INDEX_CONTRACT = {
+    "legal/index.html": (
+        '<body class="legal-index">',
+        '<link rel="stylesheet" href="/assets/legal.css?v=20260719-1">',
+        '<div><dt>Last updated</dt><dd>2026-07-19</dd></div>',
+        'Until that transfer is executed, Final Prime remains an initiative and brand, not the legal owner named in these notices.',
+    ),
+    "assets/legal.css": (
+        ".legal-index .catalog-meta {",
+        ".legal-grid {",
+        "grid-template-columns: 1fr;",
+        ".legal-card {",
+        "grid-template-columns: minmax(160px, 0.42fr) minmax(0, 1.58fr);",
+        ".legal-mark-list {",
+        "grid-template-columns: repeat(4, minmax(0, 1fr));",
+        ".legal-index .catalog-boundary {",
+        ".legal-index .boundary-list {",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 900px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+LEGAL_INDEX_CSS_BUDGET = 16000
 
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
@@ -1348,6 +1383,26 @@ def main() -> int:
         errors.append(
             "assets/contact-index.css: "
             f"{contact_css_size} bytes exceeds the {CONTACT_INDEX_CSS_BUDGET}-byte budget"
+        )
+    for relative, tokens in LEGAL_INDEX_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: Legal Index contract is missing {missing}")
+    legal_page = (ROOT / "legal/index.html").read_text(encoding="utf-8")
+    legal_card_count = legal_page.count('class="legal-card"')
+    if legal_card_count != 6:
+        errors.append(
+            "legal/index.html: expected exactly 6 rights ledger chapters, "
+            f"found {legal_card_count}"
+        )
+    legal_css_size = len(
+        (ROOT / "assets/legal.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if legal_css_size > LEGAL_INDEX_CSS_BUDGET:
+        errors.append(
+            "assets/legal.css: "
+            f"{legal_css_size} bytes exceeds the {LEGAL_INDEX_CSS_BUDGET}-byte budget"
         )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:
