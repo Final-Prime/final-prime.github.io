@@ -162,6 +162,17 @@ ROUTE_REFLOW_CONTRACTS = {
         "@media (max-width: 760px)",
         "@media (max-width: 420px)",
     ),
+    "assets/realops-dossier.css": (
+        ".realops-hero h1 {",
+        ".realops-section .section-head h2 {",
+        ".role-card h3 {",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 1120px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 470px)",
+        "@media (max-width: 380px)",
+    ),
     "assets/async-dossier.css": (
         ".async-hero h1 {",
         ".async-section-head h2 {",
@@ -814,6 +825,32 @@ REVIEWS_INDEX_CONTRACT = {
 
 REVIEWS_INDEX_CSS_BUDGET = 16000
 
+REALOPS_POLISH_CONTRACT = {
+    "works/realops-01/index.html": (
+        '<link rel="stylesheet" href="/assets/realops-dossier.css?v=20260719-2">',
+        'class="realops-scope"',
+        'class="roster-grid"',
+        'class="routing-rail"',
+    ),
+    "assets/realops-dossier.css": (
+        ".realops-hero::after {",
+        ".realops-scope {",
+        "grid-template-columns: repeat(2, minmax(0, 1fr));",
+        ".role-card article {",
+        "background: transparent;",
+        ".role-stats > div::before {",
+        ".routing-rail > div::before {",
+        "@media (max-width: 1120px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 470px)",
+        "@media (max-width: 380px)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+REALOPS_DOSSIER_CSS_BUDGET = 26000
+
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
     'class="field-index">02 / Field</p>',
@@ -1461,6 +1498,19 @@ def main() -> int:
         errors.append(
             "assets/reviews.css: "
             f"{reviews_css_size} bytes exceeds the {REVIEWS_INDEX_CSS_BUDGET}-byte budget"
+        )
+    for relative, tokens in REALOPS_POLISH_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: REALOPS polish contract is missing {missing}")
+    realops_css_size = len(
+        (ROOT / "assets/realops-dossier.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if realops_css_size > REALOPS_DOSSIER_CSS_BUDGET:
+        errors.append(
+            "assets/realops-dossier.css: "
+            f"{realops_css_size} bytes exceeds the {REALOPS_DOSSIER_CSS_BUDGET}-byte budget"
         )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:

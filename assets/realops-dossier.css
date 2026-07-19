@@ -9,8 +9,8 @@
 .realops-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(64px, 8vw, 108px) 0 clamp(62px, 8vw, 96px);
-  border-bottom: 1px solid var(--line);
+  padding: clamp(54px, 7vw, 88px) 0 clamp(62px, 8vw, 96px);
+  border-bottom: 0;
 }
 
 .realops-hero::before {
@@ -26,12 +26,23 @@
   mask-image: linear-gradient(to bottom, #000, transparent 95%);
 }
 
+.realops-hero::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: clamp(160px, 24vw, 320px);
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--cyan), rgba(242, 244, 245, 0.72), var(--fuchsia), transparent);
+  transform: translateX(-50%);
+}
+
 .realops-hero-grid {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(350px, 0.8fr);
   gap: clamp(44px, 7vw, 92px);
-  align-items: end;
+  align-items: center;
 }
 
 .realops-hero-grid > *,
@@ -41,12 +52,13 @@
   max-width: 940px;
   margin: 17px 0 0;
   font-family: var(--display);
-  font-size: clamp(3.8rem, 8.5vw, 8.2rem);
+  font-size: clamp(3.6rem, 6vw, 6.4rem);
   font-weight: 780;
   line-height: 0.9;
   letter-spacing: -0.068em;
   overflow-wrap: normal;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .realops-hero h1 span { display: block; color: var(--cyan); }
@@ -59,47 +71,70 @@
 }
 
 .realops-scope {
-  border: 1px solid var(--line);
-  background: rgba(15, 19, 22, 0.86);
-  box-shadow: inset 2px 0 0 var(--cyan);
+  position: relative;
+  padding-top: 20px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.realops-scope::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(46px, 7vw, 94px);
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, var(--cyan), transparent);
 }
 
 .realops-scope-head {
-  display: flex;
-  min-height: 52px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 0 15px;
-  border-bottom: 1px solid var(--line);
+  display: block;
+  min-height: 0;
+  padding: 0;
+  border: 0;
   color: var(--muted);
   font: 800 0.72rem/1.3 var(--mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.realops-scope-head strong { color: var(--cyan); }
-.realops-scope dl { margin: 0; }
-.realops-scope dl > div {
+.realops-scope-head strong { display: block; margin-top: 9px; color: var(--cyan); }
+.realops-scope dl {
   display: grid;
-  grid-template-columns: 145px minmax(0, 1fr);
-  gap: 14px;
-  min-height: 58px;
-  align-items: center;
-  padding: 0 15px;
-  border-bottom: 1px solid var(--line-soft);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 34px;
+  margin: 32px 0 0;
+}
+.realops-scope dl > div {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  padding: 13px 0 0;
+  border: 0;
   font: 800 0.72rem/1.4 var(--mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
+.realops-scope dl > div::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 1px;
+  content: "";
+  background: var(--muted-dark);
+}
+
 .realops-scope dt { color: var(--muted-dark); }
-.realops-scope dd { min-width: 0; margin: 0; color: var(--text); text-align: right; overflow-wrap: anywhere; }
-.realops-scope > p { margin: 0; padding: 15px; color: var(--muted-dark); font-size: 0.72rem; line-height: 1.55; }
+.realops-scope dd { min-width: 0; margin: 7px 0 0; color: var(--text); text-align: left; overflow-wrap: anywhere; }
+.realops-scope > p { max-width: 520px; margin: 30px 0 0; padding: 0; color: var(--muted-dark); font-size: 0.72rem; line-height: 1.6; }
 
 .realops-section { padding: clamp(72px, 9vw, 118px) 0; border-bottom: 1px solid var(--line); }
-.realops-section .section-head { grid-template-columns: minmax(0, 1fr) minmax(260px, 450px); }
-.realops-section .section-head h2 { font-size: clamp(2.3rem, 4.5vw, 4.6rem); font-weight: 740; line-height: 0.98; }
+.realops-section .section-head { grid-template-columns: minmax(0, 1fr) minmax(260px, 450px); padding-bottom: 0; border-bottom: 0; }
+.realops-section .section-head h2 { font-size: clamp(2.3rem, 4.5vw, 4.6rem); font-weight: 740; line-height: 0.98; overflow-wrap: normal; text-wrap: balance; }
 .panel-code {
   margin: 0;
   color: var(--fuchsia-text);
@@ -111,8 +146,9 @@
 .roster-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin: 26px 0 0;
+  gap: clamp(58px, 8vw, 112px) clamp(48px, 7vw, 96px);
+  align-items: start;
+  margin: clamp(54px, 7vw, 84px) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -121,36 +157,37 @@
 .role-card article {
   position: relative;
   display: flex;
-  min-height: 490px;
+  min-height: 0;
   flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: rgba(15, 19, 22, 0.67);
+  overflow: visible;
+  padding-top: 20px;
+  border: 0;
+  background: transparent;
 }
 
 .role-card article::before {
   position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 34%;
-  height: 2px;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 1px;
   content: "";
   background: var(--line-strong);
 }
 
-.role-card.recommended article { border-color: rgba(10, 232, 247, 0.4); box-shadow: inset 2px 0 0 var(--cyan); }
-.role-card.recommended article::before { width: 58%; background: var(--cyan); }
-.role-card.critical article { border-color: rgba(245, 5, 77, 0.38); box-shadow: inset -2px 0 0 var(--fuchsia); }
-.role-card.critical article::before { right: -1px; left: auto; width: 42%; background: var(--fuchsia); }
+.role-card.recommended article { border: 0; box-shadow: none; }
+.role-card.recommended article::before { width: clamp(72px, 10vw, 130px); background: linear-gradient(90deg, var(--cyan), transparent); }
+.role-card.critical article { border: 0; box-shadow: none; }
+.role-card.critical article::before { right: auto; left: 0; width: clamp(72px, 10vw, 130px); background: linear-gradient(90deg, var(--fuchsia), transparent); }
 
 .role-head {
   display: flex;
-  min-height: 52px;
+  min-height: 0;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 0 16px;
-  border-bottom: 1px solid var(--line);
+  padding: 0;
+  border: 0;
   color: var(--muted-dark);
   font: 800 0.72rem/1.3 var(--mono);
   letter-spacing: 0.08em;
@@ -160,7 +197,7 @@
 .role-head strong { color: var(--muted); }
 .recommended .role-head strong { color: var(--cyan); }
 .critical .role-head strong { color: var(--fuchsia-text); }
-.role-body { flex: 1; padding: clamp(24px, 4vw, 42px); }
+.role-body { flex: 0 1 auto; padding: clamp(32px, 4vw, 46px) 0 0; }
 .role-model { margin: 0 0 18px; color: var(--muted-dark); font: 800 0.76rem/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
 .role-card h3 {
   margin: 0;
@@ -171,38 +208,40 @@
   letter-spacing: -0.067em;
   overflow-wrap: normal;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .role-card h3 span { display: block; color: var(--muted); }
 .recommended h3 span { color: var(--cyan); }
 .critical h3 span { color: var(--fuchsia-text); }
 .role-body > p:not(.role-model) { max-width: 620px; margin: 24px 0 0; color: var(--muted); font-size: 0.86rem; line-height: 1.68; }
-.role-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 28px 0 0; border: 1px solid var(--line); }
-.role-stats > div { min-width: 0; padding: 12px; border-right: 1px solid var(--line); }
-.role-stats > div:last-child { border-right: 0; }
+.role-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 3vw, 34px); margin: 30px 0 0; }
+.role-stats > div { position: relative; min-width: 0; padding: 13px 0 0; }
+.role-stats > div::before { position: absolute; top: 0; left: 0; width: 22px; height: 1px; content: ""; background: var(--muted-dark); }
 .role-stats dt { color: var(--muted-dark); font: 800 0.65rem/1.35 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; }
 .role-stats dd { margin: 8px 0 0; color: var(--text); font: 800 0.9rem/1.2 var(--mono); }
 .role-stats .danger dd { color: var(--fuchsia-text); }
 .role-stats .safe dd { color: var(--cyan); }
-.role-card footer { display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 16px; align-items: center; min-height: 62px; padding: 10px 16px; border-top: 1px solid var(--line); font: 800 0.68rem/1.4 var(--mono); letter-spacing: 0.055em; text-transform: uppercase; }
+.role-card footer { display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 16px; align-items: center; min-height: 0; margin-top: 30px; padding: 18px 0 0; border: 0; background: linear-gradient(90deg, var(--line), transparent) 0 0 / 100% 1px no-repeat; font: 800 0.68rem/1.4 var(--mono); letter-spacing: 0.055em; text-transform: uppercase; }
 .role-card footer span { color: var(--muted-dark); }
 .role-card footer strong { color: var(--text); text-align: right; }
 
-.routing-rail { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 18px; border: 1px solid var(--line); }
-.routing-rail > div { position: relative; min-width: 0; padding: 18px; border-right: 1px solid var(--line); }
-.routing-rail > div:last-child { border-right: 0; }
-.routing-rail > div::after { position: absolute; z-index: 2; top: 28px; right: -5px; width: 8px; height: 8px; content: ""; border-top: 1px solid var(--muted-dark); border-right: 1px solid var(--muted-dark); background: var(--bg); transform: rotate(45deg); }
-.routing-rail > div:last-child::after { display: none; }
+.routing-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(22px, 4vw, 52px); margin-top: clamp(72px, 9vw, 112px); border: 0; background: linear-gradient(90deg, var(--line-strong), var(--line), transparent) 0 8px / 100% 1px no-repeat; }
+.routing-rail > div { position: relative; min-width: 0; padding: 40px 0 0; border: 0; }
+.routing-rail > div::before { position: absolute; top: 4px; left: 0; width: 9px; height: 9px; content: ""; border: 2px solid var(--bg); border-radius: 50%; background: var(--muted-dark); box-shadow: 0 0 0 1px var(--muted-dark); }
+.routing-rail > div::after { display: none; }
 .routing-rail span,
 .routing-rail strong,
 .routing-rail small { display: block; }
 .routing-rail span { color: var(--muted-dark); font: 800 0.68rem/1 var(--mono); }
 .routing-rail strong { margin-top: 12px; font: 800 0.78rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
 .routing-rail small { margin-top: 6px; color: var(--muted); font-size: 0.72rem; }
-.routing-rail .active { box-shadow: inset 0 -2px 0 var(--cyan); }
+.routing-rail .active { box-shadow: none; }
 .routing-rail .active strong { color: var(--cyan); }
-.routing-rail .critical { box-shadow: inset 0 -2px 0 var(--fuchsia); }
+.routing-rail .active::before { background: var(--cyan); box-shadow: 0 0 0 1px var(--cyan); }
+.routing-rail .critical { box-shadow: none; }
 .routing-rail .critical strong { color: var(--fuchsia-text); }
+.routing-rail .critical::before { background: var(--fuchsia); box-shadow: 0 0 0 1px var(--fuchsia); }
 
 .realops-evidence { background: rgba(15, 19, 22, 0.24); }
 .outcome-panel,
@@ -339,16 +378,15 @@
 }
 
 @media (max-width: 760px) {
-  .realops-hero { padding-top: 52px; }
-  .realops-hero h1 { font-size: min(14vw, 5.6rem); }
+  .realops-hero { padding-top: 44px; padding-bottom: 58px; }
+  .realops-hero h1 { font-size: clamp(3.1rem, 12.5vw, 4.8rem); }
   .realops-section .section-head { grid-template-columns: 1fr; }
   .roster-grid { grid-template-columns: 1fr; }
   .role-card article { min-height: 0; }
   .role-card h3 { font-size: min(15vw, 5rem); }
-  .routing-rail { grid-template-columns: 1fr 1fr; }
-  .routing-rail > div:nth-child(2) { border-right: 0; }
-  .routing-rail > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-  .routing-rail > div:nth-child(2)::after { display: none; }
+  .routing-rail { grid-template-columns: 1fr; gap: 0; background: linear-gradient(var(--line-strong), var(--line), transparent) 8px 0 / 1px 100% no-repeat; }
+  .routing-rail > div { padding: 0 0 28px 38px; }
+  .routing-rail > div::before { top: 0; left: 4px; }
   .outcome-row { grid-template-columns: 1fr auto; gap: 12px 18px; padding: 17px 0; }
   .mission-strip { grid-column: 1 / -1; grid-row: 2; }
   .outcome-total { grid-column: 2; grid-row: 1; }
@@ -365,22 +403,16 @@
 }
 
 @media (max-width: 470px) {
-  .realops-scope dl > div { grid-template-columns: 1fr; gap: 5px; padding-block: 11px; }
+  .realops-scope dl { gap: 22px 24px; }
   .realops-scope dd { text-align: left; }
-  .role-stats { grid-template-columns: 1fr; }
-  .role-stats > div { border-right: 0; border-bottom: 1px solid var(--line); }
-  .role-stats > div:last-child { border-bottom: 0; }
-  .routing-rail { grid-template-columns: 1fr; }
-  .routing-rail > div,
-  .routing-rail > div:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--line); }
-  .routing-rail > div::after { display: none; }
+  .role-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .token-row { grid-template-columns: 1fr auto; gap: 10px 14px; padding: 16px 0; }
   .token-meter { grid-column: 1 / -1; grid-row: 2; }
   .token-total { grid-column: 2; grid-row: 1; }
 }
 
 @media (max-width: 380px) {
-  .role-body { padding: 22px 18px; }
+  .role-body { padding-top: 28px; }
   .outcome-rows,
   .token-rows { padding-inline: 12px; }
   .mission-strip { gap: 3px; }
@@ -398,6 +430,13 @@
   .mission-strip i.valid,
   .mission-strip i.catastrophic,
   .token-meter i { forced-color-adjust: none; }
+  .realops-hero::after,
+  .realops-scope::before,
+  .realops-scope dl > div::before,
+  .role-card article::before,
+  .role-stats > div::before,
+  .routing-rail,
+  .routing-rail > div::before { background: CanvasText; }
 }
 
 @media print {

@@ -36,6 +36,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Rebuilt Contact as one open direct-email path with a compact first viewport, explicit protected-material boundary and routing guidance without card-wall styling or simulated workflow.
 - Rebuilt Legal and IP as a six-chapter open rights ledger with a non-cellular mark register and explicit personal-ownership transfer boundary.
 - Rebuilt Game Reviews as one open published-record surface, folded the duplicate one-item archive into the Metro evidence receipt and consolidated its split stylesheets.
+- Reduced the REALOPS entry surface from an oversized dashboard hero to a compact open scope ledger and whitespace-led four-role routing roster while retaining grouped evidence figures.
 - Published the controlled Objective, Constraints, Signals and Resolved Outcome model while explicitly withholding implementation, deployment and performance claims.
 - Aligned homepage registry labels with the actual published states and routes.
 - Raised compact interface typography to a readable floor while retaining the dense system language.
