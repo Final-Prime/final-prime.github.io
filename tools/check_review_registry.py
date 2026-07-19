@@ -16,7 +16,7 @@ REVIEW_PAGE = ROOT / "reviews" / "metro-2033-redux" / "index.html"
 OG_ASSET = ROOT / "assets" / "reviews" / "metro-2033-redux-og.png"
 DOSSIER_CSS = ROOT / "assets" / "review-dossier.css"
 DOSSIER_JS = ROOT / "assets" / "review-dossier.js"
-RELEASE_CSS = ROOT / "assets" / "review-release.css"
+INDEX_CSS = ROOT / "assets" / "reviews.css"
 PROVENANCE = ROOT / "docs" / "metro-2033-redux-import-audit.md"
 
 REGISTRY_FILES = {
@@ -65,7 +65,7 @@ def main() -> int:
         errors.append(f"Missing required review file: {OG_ASSET.relative_to(ROOT)}")
     dossier_css = read(DOSSIER_CSS, errors)
     dossier_js = read(DOSSIER_JS, errors)
-    read(RELEASE_CSS, errors)
+    read(INDEX_CSS, errors)
     provenance = read(PROVENANCE, errors)
 
     for label, path in REGISTRY_FILES.items():
