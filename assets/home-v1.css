@@ -253,12 +253,26 @@ html {
 .field-feature-review h3 .field-title-accent,
 .field-feature-review h3 .field-title-mark { color: var(--fuchsia-text); }
 
-.field-feature > p {
+.field-feature-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: clamp(24px, 3vw, 44px);
+  margin-top: auto;
+  padding-top: 34px;
+}
+
+.field-feature-intro p {
   max-width: 64ch;
-  margin: 22px 0 0;
+  margin: 0;
   color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.68;
+}
+
+.field-feature-intro .button {
+  justify-self: end;
+  white-space: nowrap;
 }
 
 .field-record-meta {
@@ -270,7 +284,6 @@ html {
   border-top: 1px solid var(--line);
 }
 
-.field-feature-theory .field-record-meta { margin-top: auto; }
 .field-record-meta dt {
   color: var(--muted-dark);
   font: 800 0.64rem/1.35 var(--mono);
@@ -286,7 +299,6 @@ html {
   overflow-wrap: anywhere;
 }
 
-.field-actions { margin-top: auto; padding-top: 34px; }
 .field-score {
   display: flex;
   align-items: baseline;
@@ -364,6 +376,8 @@ html {
   .field-feature { min-height: 430px; }
   .field-feature h3 { margin-top: 48px; font-size: min(11.5vw, 3.75rem); }
   .field-record-meta { grid-template-columns: 1fr; gap: 14px; }
+  .field-feature-intro { grid-template-columns: 1fr; gap: 24px; }
+  .field-feature-intro .button { justify-self: start; }
   .field-score { flex-wrap: wrap; }
   .footer-nav { grid-template-columns: 1fr 1fr; }
 }
