@@ -57,6 +57,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Merged the duplicated Metro 900 px responsive rules into one canonical reflow block with the complete section, fit, protocol and friction contract.
 - Merged the duplicated Metro 760 px responsive rules into one canonical mobile block and removed pre-shell declarations that were already dead in the cascade.
 - Merged the duplicated Metro 420 px responsive rules into one canonical small-screen block and removed shadowed hero, score-layout and section-heading declarations.
+- Merged the duplicated Metro reduced-motion rules into one accessibility block covering nav scrolling and all dossier transitions.
 - Migrated Game Reviews from Thought to Works/Evidence without changing canonical routes.
 - Capped Metro's wide-screen display typography, prohibited mid-word heading breaks and balanced the section-title columns.
 - Removed fixed-height score copy, aligned axis meters and modifier footers, and stopped the Reader Tags panel from stretching into false empty space.

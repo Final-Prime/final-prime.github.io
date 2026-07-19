@@ -729,10 +729,6 @@
   text-wrap: balance;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .dossier-nav { scroll-behavior: auto; }
-}
-
 @media (forced-colors: active) {
   .dossier-score,
   .fit-gates,
@@ -1254,6 +1250,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .dossier-nav { scroll-behavior: auto; }
   .dossier-actions .button span,
   .dossier-nav::before,
   .dossier-nav::after,

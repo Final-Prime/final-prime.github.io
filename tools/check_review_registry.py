@@ -84,7 +84,7 @@ def main() -> int:
         require(review, f'<link rel="canonical" href="{CANONICAL}">', "review page", errors)
         require(review, 'data-review-id="FP-REV-0001"', "review page", errors)
         require(review, "/assets/reviews/metro-2033-redux-og.png", "review page", errors)
-        require(review, '<link rel="stylesheet" href="/assets/review-dossier.css?v=20260719-17">', "review page", errors)
+        require(review, '<link rel="stylesheet" href="/assets/review-dossier.css?v=20260719-18">', "review page", errors)
         require(review, "/assets/review-dossier.js", "review page", errors)
         require(review, "/legal/", "review page", errors)
         require(review, "Metro 2033 Redux and related", "review page", errors)
@@ -189,6 +189,8 @@ def main() -> int:
             errors.append("Consolidated review dossier CSS must contain exactly one 760px breakpoint")
         if dossier_css.count("@media (max-width: 420px)") != 1:
             errors.append("Consolidated review dossier CSS must contain exactly one 420px breakpoint")
+        if dossier_css.count("@media (prefers-reduced-motion: reduce)") != 1:
+            errors.append("Consolidated review dossier CSS must contain exactly one reduced-motion block")
         for obsolete_mobile_rule in (
             ".dossier-hero { padding-top: 46px; }",
             ".dossier-hero-copy h1 { font-size: min(18vw, 6.2rem); }",
