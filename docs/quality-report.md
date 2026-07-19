@@ -29,6 +29,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Reduced the visual authority of the unpublished Theory preview and replaced placeholder language with an explicit publication threshold.
 - Unified the visible `Theory` taxonomy across primary navigation, footers, the Theory Index, Public Index and installable-site shortcut without changing the stable `/thought/` route.
 - Split the A/SYNC prototype into a dedicated canonical dossier and reduced the Systems Index to one scalable record plus an explicit disclosure rail.
+- Replaced the boxed Systems/A/SYNC dashboard grammar with open editorial fields, short accent rules, connected process signals and whitespace-led grouping while preserving the functional sticky path.
 - Published the controlled Objective, Constraints, Signals and Resolved Outcome model while explicitly withholding implementation, deployment and performance claims.
 - Aligned homepage registry labels with the actual published states and routes.
 - Raised compact interface typography to a readable floor while retaining the dense system language.

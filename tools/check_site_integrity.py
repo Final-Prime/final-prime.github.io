@@ -536,7 +536,7 @@ HOMEPAGE_FIELDS_CONTRACT = {
 ASYNC_DOSSIER_CONTRACT = {
     "systems/index.html": (
         '<body class="systems-index">',
-        '<link rel="stylesheet" href="/assets/async-dossier.css?v=20260719-3">',
+        '<link rel="stylesheet" href="/assets/async-dossier.css?v=20260719-4">',
         'id="async"',
         'III / V &middot; Prototype',
         '<dt>Type</dt><dd>Coordination system</dd>',
@@ -551,7 +551,7 @@ ASYNC_DOSSIER_CONTRACT = {
     ),
     "systems/async/index.html": (
         '<link rel="canonical" href="https://final-prime.github.io/systems/async/">',
-        '<link rel="stylesheet" href="/assets/async-dossier.css?v=20260719-3">',
+        '<link rel="stylesheet" href="/assets/async-dossier.css?v=20260719-4">',
         '<main class="async-main" id="main-content" tabindex="-1" data-system-id="FP-SYS-0003">',
         '<span>FP:// SYS-0003 / Coordination system</span><strong>III / V &middot; Prototype</strong>',
         '<h1 id="async-page-title"><span>A/SYNC <i>/</i></span><span>Coordination</span><span>System</span></h1>',
