@@ -84,7 +84,7 @@ def main() -> int:
         require(review, f'<link rel="canonical" href="{CANONICAL}">', "review page", errors)
         require(review, 'data-review-id="FP-REV-0001"', "review page", errors)
         require(review, "/assets/reviews/metro-2033-redux-og.png", "review page", errors)
-        require(review, '<link rel="stylesheet" href="/assets/review-dossier.css?v=20260719-11">', "review page", errors)
+        require(review, '<link rel="stylesheet" href="/assets/review-dossier.css?v=20260719-12">', "review page", errors)
         require(review, "/assets/review-dossier.js", "review page", errors)
         require(review, "/legal/", "review page", errors)
         require(review, "Metro 2033 Redux and related", "review page", errors)
@@ -186,7 +186,12 @@ def main() -> int:
             errors.append("Consolidated review dossier CSS is missing the open-ledger boundary")
         else:
             late_open_block = dossier_css.split(open_ledger_marker, 1)[1].split(".dossier-thesis", 1)[0]
-            for selector in (".fit-gates", ".fit-gate", ".taste-grid", ".taste-card", ".dossier-axis-grid", ".dossier-axis"):
+            for selector in (
+                ".fit-gates", ".fit-gate", ".taste-grid", ".taste-card",
+                ".dossier-axis-grid", ".dossier-axis", ".field-note-grid",
+                ".field-note", ".fit-tags", ".insight-grid", ".insight-card",
+                ".audit-grid", ".audit-card", ".protocol-grid",
+            ):
                 if selector in late_open_block:
                     errors.append(f"Consolidated review dossier CSS restored late {selector} overrides")
 
