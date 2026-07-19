@@ -152,6 +152,15 @@ ROUTE_REFLOW_CONTRACTS = {
         ".async-ledger dd {",
         "overflow-wrap: anywhere;",
     ),
+    "assets/works-index.css": (
+        ".works-index .release-lane h2 {",
+        ".works-index .work-record h2 {",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+    ),
 }
 NO_JS_CONTRACT_TOKENS = (
     "html .review-dossier-page .evidence-toolbar-actions",
@@ -591,6 +600,37 @@ ASYNC_DOSSIER_CONTRACT = {
 }
 
 ASYNC_DOSSIER_CSS_BUDGET = 24000
+
+WORKS_INDEX_CONTRACT = {
+    "works/index.html": (
+        '<body class="works-index">',
+        '<link rel="stylesheet" href="/assets/works-index.css?v=20260719-1">',
+        'class="release-lane"',
+        'class="release-lane surface-current"',
+        'class="catalog-empty surface-current work-record record-realops"',
+        'class="catalog-empty surface-current work-record record-metro"',
+        'href="/works/realops-01/">Open REALOPS-01</a>',
+        'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
+    ),
+    "assets/works-index.css": (
+        ".works-index .catalog-meta {",
+        ".works-index .catalog-grid {",
+        ".works-index .release-lane {",
+        "grid-template-columns: minmax(150px, 0.55fr) minmax(0, 1.45fr) minmax(210px, 0.72fr);",
+        ".works-index .release-protocol {",
+        ".works-index .protocol-step {",
+        ".works-index .work-record {",
+        ".works-index .record-metro .registry-cell.state dd { color: var(--works-amber); }",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+WORKS_INDEX_CSS_BUDGET = 18000
 
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
@@ -1131,6 +1171,19 @@ def main() -> int:
     async_page = (ROOT / "systems/async/index.html").read_text(encoding="utf-8")
     if re.search(r"\b\d+(?:\.\d+)?%", async_page):
         errors.append("systems/async/index.html: unverified percentage claim is forbidden")
+    for relative, tokens in WORKS_INDEX_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: Works Index contract is missing {missing}")
+    works_css_size = len(
+        (ROOT / "assets/works-index.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if works_css_size > WORKS_INDEX_CSS_BUDGET:
+        errors.append(
+            "assets/works-index.css: "
+            f"{works_css_size} bytes exceeds the {WORKS_INDEX_CSS_BUDGET}-byte budget"
+        )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:
         content = (ROOT / relative).read_text(encoding="utf-8")
