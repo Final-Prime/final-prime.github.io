@@ -34,6 +34,10 @@ The review covers ten indexable routes plus the non-indexable 404 document. It d
 - Registered REALOPS-01 in Works, the Public Index, sitemap and machine-readable agent map without replacing the homepage feature.
 - Rebuilt Metro as a five-layer, open-ledger dossier; consolidated its styles and preserved all score, audit, caveat and evidence contracts.
 - Migrated Game Reviews from Thought to Works/Evidence without changing canonical routes.
+- Capped Metro's wide-screen display typography, prohibited mid-word heading breaks and balanced the section-title columns.
+- Removed fixed-height score copy, aligned axis meters and modifier footers, and stopped the Reader Tags panel from stretching into false empty space.
+- Added an explicit plus/minus state cue to the ALERTED disclosure and compressed the dossier to `1950` words without removing evidence, caveats or falsifiers.
+- Folded the dossier's late override layer into a single canonical stylesheet below the `42000` byte Git-blob ceiling.
 
 ## Truthfulness and disclosure boundary
 
@@ -53,6 +57,7 @@ The review covers ten indexable routes plus the non-indexable 404 document. It d
 - Core navigation and content remain usable without JavaScript.
 - Action targets meet the repository touch-target contract.
 - Focus indicators, reduced motion, forced colors, print output and narrow-screen reflow are covered by repository checks.
+- Display headings retain whole words from 320 px reflow through 1920 px wide-screen rendering.
 - Status meaning is expressed in text rather than color alone.
 
 ## Verification result

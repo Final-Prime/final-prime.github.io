@@ -25,6 +25,17 @@ The review surface follows the existing Final Prime system language:
 - explicit score anatomy, friction, audit and evidence structures; and
 - no fake cover, placeholder title, invented publication date or decorative score.
 
+## Wide-screen typography and editorial audit
+
+- The regression appeared above the 1360 px shell cap because several display sizes continued to grow with the viewport.
+- Section headings now stop at `5rem`; fit-gate, axis and insight headings use smaller component-specific caps.
+- Display headings use balanced wrapping and normal word boundaries, preventing the observed `ATMOSPHER / E`, `ENGAGEMEN / T` and `UNDERSTAN / DING` splits.
+- The five-axis matrix remains `5 -> 2 -> 1`; flex columns align meters naturally without fixed paragraph heights.
+- Modifier footers share a true bottom edge, while the Reader Tags panel no longer stretches to the Field Note height.
+- The ALERTED disclosure exposes a 28 px plus/minus state cue with distinct hover, focus and open feedback.
+- Editorial copy is `1950` words by the registry method. Observations, proof, caveats, the falsifier and all score claims remain present.
+- The previous late override layer was folded into the canonical component rules; the normalized stylesheet Git blob is below the `42000` byte contract.
+
 ## Current public state
 
 - `FP-REV-0001` is published at `/reviews/metro-2033-redux/`.
@@ -67,7 +78,8 @@ The review surface follows the existing Final Prime system language:
 ## Adversarial findings retained
 
 1. Large review headings use viewport-capped mobile sizing and shrinkable containers.
-2. Review cards and metadata explicitly permit min-content shrinkage.
-3. Conversion links route to Works, public methodology, the dossier or Contact rather than soliciting unpublished material.
-4. Empty publication lanes explain their state instead of presenting placeholders as work.
-5. Score math, correction layers and caveats remain inspectable rather than being compressed into a single promotional rating.
+2. Wide display headings stop growing with the shell and cannot break inside a word.
+3. Review cards and metadata explicitly permit min-content shrinkage.
+4. Conversion links route to Works, public methodology, the dossier or Contact rather than soliciting unpublished material.
+5. Empty publication lanes explain their state instead of presenting placeholders as work.
+6. Score math, correction layers and caveats remain inspectable rather than being compressed into a single promotional rating.
