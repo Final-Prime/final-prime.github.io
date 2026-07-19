@@ -729,31 +729,6 @@
   text-wrap: balance;
 }
 
-@media (forced-colors: active) {
-  .dossier-score,
-  .fit-gates,
-  .fit-gate,
-  .dossier-thesis,
-  .taste-grid,
-  .taste-card,
-  .method-disclosure,
-  .dossier-axis-grid,
-  .dossier-axis,
-  .score-equation,
-  .modifier-card,
-  .friction-ledger,
-  .field-note,
-  .fit-tags,
-  .insight-card,
-  .audit-card,
-  .evidence-arc,
-  .protocol-grid article { border-color: CanvasText; box-shadow: none; }
-  .dossier-meter span,
-  .fit-gate::before,
-  .dossier-score::before,
-  .dossier-score::after { forced-color-adjust: none; }
-}
-
 /* Canonical dossier shell: open ledgers, five-layer navigation, restrained Metro signal. */
 .dossier-main {
   min-height: calc(100svh - var(--header-height));
@@ -1268,6 +1243,28 @@
 }
 
 @media (forced-colors: active) {
+  .dossier-score,
+  .fit-gates,
+  .fit-gate,
+  .dossier-thesis,
+  .taste-grid,
+  .taste-card,
+  .method-disclosure,
+  .dossier-axis-grid,
+  .dossier-axis,
+  .score-equation,
+  .modifier-card,
+  .friction-ledger,
+  .field-note,
+  .fit-tags,
+  .insight-card,
+  .audit-card,
+  .evidence-arc,
+  .protocol-grid article { border-color: CanvasText; box-shadow: none; }
+  .dossier-meter span,
+  .fit-gate::before,
+  .dossier-score::before,
+  .dossier-score::after { forced-color-adjust: none; }
   .dossier-hero::before,
   .dossier-hero::after { display: none; }
   .dossier-nav::before { display: none; }
