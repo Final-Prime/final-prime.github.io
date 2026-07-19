@@ -202,9 +202,11 @@
   margin: 22px 0 0;
   padding: clamp(24px, 4vw, 46px);
   border: 1px solid var(--review-line);
-  background: rgba(255, 159, 47, 0.035);
+  border-width: 0 0 0 2px;
+  background: transparent;
 }
 .dossier-thesis::before {
+  display: none;
   position: absolute;
   top: -1px;
   left: -1px;
@@ -450,7 +452,8 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--review-line);
-  background: rgba(15, 19, 22, 0.56);
+  border-width: 1px 0;
+  background: transparent;
 }
 .modifier-card > header {
   display: flex;
@@ -485,7 +488,8 @@
 .friction-ledger {
   margin-top: 18px;
   border: 1px solid var(--line);
-  background: rgba(9, 11, 13, 0.62);
+  border-width: 1px 0;
+  background: transparent;
 }
 .friction-ledger > header {
   display: flex;
@@ -1161,12 +1165,6 @@
 }
 .dossier-subsection-head h2 span { color: var(--review-amber); }
 .dossier-subsection-head > p { margin: 0; color: var(--muted); font-size: 0.84rem; line-height: 1.65; }
-
-/* Open ledgers: separators carry hierarchy; borders remain only where disclosure is functional. */
-.dossier-thesis { border-width: 0 0 0 2px; background: transparent; }
-.dossier-thesis::before { display: none; }
-.modifier-card { border-width: 1px 0; background: transparent; }
-.friction-ledger { border-width: 1px 0; background: transparent; }
 
 .evidence-toolbar {
   display: grid;
