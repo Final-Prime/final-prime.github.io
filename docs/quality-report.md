@@ -97,11 +97,11 @@ Current measured surface:
 - 12 HTML documents;
 - 11 indexable canonical routes;
 - 438 local references;
-- 326 reachable CSS classes;
+- 331 reachable CSS classes;
 - 5 budgeted scripts; and
 - 14 validated web-manifest targets.
 
-All twelve documents pass the repository semantic and ARIA parser, local-reference graph, print and reflow contracts. The ten-document surface that preceded REALOPS-01 also returned zero structural errors from the W3C Nu HTML checker on 2026-07-14; the newer REALOPS-01 and A/SYNC routes are protected by the same local semantic contracts pending the next external Nu validation sweep.
+All twelve documents pass the repository semantic and ARIA parser, local-reference graph, print and reflow contracts. On 2026-07-19, the W3C Nu HTML checker returned zero HTML errors for all twelve current documents. The newer A/SYNC and REALOPS-01 production URLs were also checked directly and returned zero errors or notices.
 
 ## Privacy and dependency review
 
