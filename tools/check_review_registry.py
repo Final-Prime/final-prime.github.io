@@ -84,7 +84,7 @@ def main() -> int:
         require(review, f'<link rel="canonical" href="{CANONICAL}">', "review page", errors)
         require(review, 'data-review-id="FP-REV-0001"', "review page", errors)
         require(review, "/assets/reviews/metro-2033-redux-og.png", "review page", errors)
-        require(review, "/assets/review-dossier.css", "review page", errors)
+        require(review, '<link rel="stylesheet" href="/assets/review-dossier.css?v=20260719-11">', "review page", errors)
         require(review, "/assets/review-dossier.js", "review page", errors)
         require(review, "/legal/", "review page", errors)
         require(review, "Metro 2033 Redux and related", "review page", errors)
@@ -181,6 +181,14 @@ def main() -> int:
             errors.append(f"Consolidated review dossier CSS is {dossier_css_bytes} bytes, expected at most 42000")
         if ".dossier-axis p { min-height: 160px;" in dossier_css:
             errors.append("Consolidated review dossier CSS restored the obsolete fixed axis paragraph height")
+        open_ledger_marker = "/* Open ledgers: separators carry hierarchy; borders remain only where disclosure is functional. */"
+        if open_ledger_marker not in dossier_css:
+            errors.append("Consolidated review dossier CSS is missing the open-ledger boundary")
+        else:
+            late_open_block = dossier_css.split(open_ledger_marker, 1)[1].split(".dossier-thesis", 1)[0]
+            for selector in (".fit-gates", ".fit-gate", ".taste-grid", ".taste-card", ".dossier-axis-grid", ".dossier-axis"):
+                if selector in late_open_block:
+                    errors.append(f"Consolidated review dossier CSS restored late {selector} overrides")
 
     if dossier_js:
         for token in (

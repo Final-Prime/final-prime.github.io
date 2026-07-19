@@ -50,6 +50,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Added a restrained four-role roster, routing ladder, mission outcomes, Pareto view, token-use panel, exact table, method, limitations and selection audit.
 - Registered REALOPS-01 in Works, the Public Index, sitemap and machine-readable agent map without replacing the homepage feature.
 - Rebuilt Metro as a five-layer, open-ledger dossier; consolidated its styles and preserved all score, audit, caveat and evidence contracts.
+- Folded the Metro fit, taste and score-axis open-ledger rules into their primary component definitions with byte-identical computed geometry and no late override dependency.
 - Migrated Game Reviews from Thought to Works/Evidence without changing canonical routes.
 - Capped Metro's wide-screen display typography, prohibited mid-word heading breaks and balanced the section-title columns.
 - Removed fixed-height score copy, aligned axis meters and modifier footers, and stopped the Reader Tags panel from stretching into false empty space.
