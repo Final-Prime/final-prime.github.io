@@ -138,7 +138,13 @@ def main() -> int:
         if spoiler_counts != {"light": 6, "medium": 2, "heavy": 1}:
             errors.append(f"Unexpected spoiler distribution: {spoiler_counts}")
 
-        plain_review = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>|<[^>]+>", " ", review)
+        main_match = re.search(r"<main\b[\s\S]*?</main>", review, flags=re.IGNORECASE)
+        if not main_match:
+            errors.append("Review page is missing its editorial main landmark")
+            main_review = ""
+        else:
+            main_review = main_match.group(0)
+        plain_review = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>|<[^>]+>", " ", main_review)
         review_word_count = len(re.findall(r"\b[\w'’/.-]+\b", html.unescape(plain_review), flags=re.UNICODE))
         if not 1850 <= review_word_count <= 1950:
             errors.append(f"Review editorial word count is {review_word_count}, expected 1850-1950")

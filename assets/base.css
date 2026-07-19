@@ -181,4 +181,3 @@ h1, h2, h3, p, dl, dd, ul { margin-top: 0; }
     -webkit-backdrop-filter: none;
   }
 }
-.footer-nav a[href="/legal/"] { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }

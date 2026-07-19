@@ -351,7 +351,7 @@ HOMEPAGE_CTA_CONTRACT = {
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
         '<link rel="stylesheet" href="/assets/hero.css?v=20260718-9">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-26">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-27">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -555,7 +555,6 @@ HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     '<b>no longer arises</b>.',
     'href="#fields"',
     '<span>Explore the fields</span>',
-    'href="/contact/">Discuss a project</a>',
     'class="hero-orientation-panel"',
     'class="field-region" id="fields"',
     'data-field-layer="theory"',
@@ -570,6 +569,79 @@ HOMEPAGE_IDENTITY_FORBIDDEN_TOKENS = (
     'final prime is founder-led.',
     'our company',
     'our team',
+)
+
+HOMEPAGE_CLOSING_CONTRACT = {
+    "index.html": (
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-27">',
+        '<p class="section-kicker">Selected projects / Direct line</p>',
+        '<h2 id="closing-title">Bring the problem. Fit comes before commitment.</h2>',
+        'Each enquiry is reviewed for fit before any commitment. Begin with the objective, current constraint and available evidence. Keep protected material out of the first message.',
+        '<a class="button button-primary closing-primary" href="/contact/">',
+        '<span>Open a project enquiry</span>',
+        '<a class="closing-secondary" href="/index/">',
+        '<span>Inspect public index</span>',
+    ),
+    "assets/home-v1.css": (
+        ".closing-section {",
+        ".closing-section::before {",
+        ".closing-route {",
+        "grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);",
+        ".closing-actions .closing-primary {",
+        "17px 0 28px -10px rgba(245, 5, 77, 0.24)",
+        ".closing-secondary {",
+        "transform: translateX(2px);",
+        "@media (prefers-reduced-motion: reduce)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+    ),
+}
+
+FOOTER_PAGES = (
+    "index.html",
+    "systems/index.html",
+    "works/index.html",
+    "works/realops-01/index.html",
+    "thought/index.html",
+    "reviews/index.html",
+    "reviews/metro-2033-redux/index.html",
+    "index/index.html",
+    "contact/index.html",
+    "legal/index.html",
+)
+
+FOOTER_REQUIRED_TOKENS = (
+    '<link rel="stylesheet" href="/assets/surface-polish.css?v=20260719-5">',
+    '<div class="shell footer-shell">',
+    '<div class="footer-primary">',
+    'Independent software, research and public evidence with explicit claims, states and limits.',
+    '<nav class="footer-nav" aria-label="Footer navigation">',
+    '<p class="footer-nav-label" id="footer-explore-label">Explore</p>',
+    '<p class="footer-nav-label" id="footer-records-label">Records</p>',
+    '<p class="footer-nav-label" id="footer-direct-label">Direct</p>',
+    '<p class="footer-trust"><span>No analytics</span><span>No cookies</span><span>No behavioral tracking</span></p>',
+    '<p class="footer-email"><a href="mailto:finalprime.official@gmail.com">finalprime.official@gmail.com</a></p>',
+    'Final Prime™',
+    'All rights reserved.',
+)
+
+FOOTER_FORBIDDEN_TOKENS = ('class="shell footer-grid"', 'class="footer-meta"')
+
+FOOTER_STYLE_CONTRACT = (
+    ".footer-primary {",
+    "grid-template-columns: minmax(250px, 1.35fr) minmax(0, 2.65fr);",
+    ".footer-nav {",
+    "grid-template-columns: repeat(3, minmax(0, 1fr));",
+    ".footer-nav-group {",
+    ".footer-nav a[aria-current]::after {",
+    ".footer-rail {",
+    ".footer-trust {",
+    ".footer-email a {",
+    ".footer-legal {",
+    'grid-template-areas: "explore records" "explore direct";',
+    "@media (max-width: 360px)",
+    "@media (prefers-reduced-transparency: reduce)",
+    "@media (forced-colors: active)",
 )
 
 
@@ -909,11 +981,30 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: homepage CTA contract is missing {missing}")
+    for relative, tokens in HOMEPAGE_CLOSING_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: homepage closing contract is missing {missing}")
     for relative, tokens in HOMEPAGE_FIELDS_CONTRACT.items():
         content = (ROOT / relative).read_text(encoding="utf-8")
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: homepage fields contract is missing {missing}")
+    for relative in FOOTER_PAGES:
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in FOOTER_REQUIRED_TOKENS if token not in content]
+        restored = [token for token in FOOTER_FORBIDDEN_TOKENS if token in content]
+        if missing:
+            errors.append(f"{relative}: global footer contract is missing {missing}")
+        if restored:
+            errors.append(f"{relative}: retired footer token(s) restored {restored}")
+        if content.count('class="footer-nav-group"') != 3:
+            errors.append(f"{relative}: footer must contain exactly three navigation groups")
+    footer_styles = (ROOT / "assets/surface-polish.css").read_text(encoding="utf-8")
+    missing_footer_styles = [token for token in FOOTER_STYLE_CONTRACT if token not in footer_styles]
+    if missing_footer_styles:
+        errors.append(f"assets/surface-polish.css: global footer style contract is missing {missing_footer_styles}")
     homepage = (ROOT / "index.html").read_text(encoding="utf-8")
     retired_fields = [token for token in RETIRED_HOMEPAGE_FIELD_TOKENS if token in homepage]
     if retired_fields:
