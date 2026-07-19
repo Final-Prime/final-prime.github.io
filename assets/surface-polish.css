@@ -221,6 +221,136 @@ body.menu-open .scroll-readout { display: none; }
 .footer-email a:hover,
 .footer-email a:focus-visible { color: var(--cyan); }
 
+.email-copy-suite {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  align-items: center;
+}
+
+.footer-email.email-copy-suite {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 5px;
+  justify-items: start;
+}
+
+.email-copy-button {
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  grid-template-columns: 14px auto;
+  gap: 9px;
+  min-width: 94px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  overflow: hidden;
+  border: 1px solid rgba(10, 232, 247, 0.28);
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.025), transparent 44%),
+    rgba(10, 232, 247, 0.025);
+  color: var(--cyan);
+  cursor: pointer;
+  font: 800 0.64rem/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 120ms ease;
+}
+
+.email-copy-button::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(100deg, transparent 12%, rgba(10, 232, 247, 0.26) 50%, transparent 88%);
+  opacity: 0;
+  transform: translateX(-125%);
+  pointer-events: none;
+}
+
+.email-copy-button:hover,
+.email-copy-button:focus-visible {
+  border-color: rgba(10, 232, 247, 0.62);
+  background-color: rgba(10, 232, 247, 0.055);
+  box-shadow: 16px 0 28px -18px rgba(10, 232, 247, 0.72);
+}
+
+.email-copy-button:active { transform: translateY(1px); }
+.email-copy-button[aria-busy="true"] { cursor: wait; }
+
+.email-copy-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.email-copy-icon::before,
+.email-copy-icon::after {
+  position: absolute;
+  width: 8px;
+  height: 9px;
+  border: 1px solid currentColor;
+  content: "";
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.email-copy-icon::before { top: 1px; left: 4px; }
+.email-copy-icon::after { top: 4px; left: 1px; background: var(--bg); }
+
+.email-copy-button.is-copied {
+  border-color: rgba(10, 232, 247, 0.9);
+  background-color: rgba(10, 232, 247, 0.12);
+  box-shadow: 0 0 26px -12px rgba(10, 232, 247, 0.95);
+  animation: email-copy-flash 620ms ease-out 1;
+}
+
+.email-copy-button.is-copied::after {
+  opacity: 1;
+  animation: email-copy-sweep 560ms ease-out 1;
+}
+
+.email-copy-button.is-copied .email-copy-icon::before {
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 6px;
+  border: 0;
+  border-bottom: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.email-copy-button.is-copied .email-copy-icon::after { opacity: 0; }
+
+.email-copy-button.is-copy-fallback {
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+.email-copy-status {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+}
+
+@keyframes email-copy-flash {
+  0% { color: var(--text); filter: brightness(1.55); }
+  38% { color: var(--cyan); filter: brightness(1.2); }
+  100% { color: var(--cyan); filter: none; }
+}
+
+@keyframes email-copy-sweep {
+  from { transform: translateX(-125%); }
+  to { transform: translateX(125%); }
+}
+
 .footer-legal {
   display: grid;
   gap: 6px;
@@ -280,6 +410,16 @@ body.menu-open .scroll-readout { display: none; }
   .footer-rail,
   .surface-current { border-color: CanvasText; box-shadow: none; }
   .footer-nav a::after { background: CanvasText; box-shadow: none; }
+  .email-copy-button { border-color: ButtonText; color: ButtonText; background: ButtonFace; box-shadow: none; }
+  .email-copy-button::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email-copy-button,
+  .email-copy-icon::before,
+  .email-copy-icon::after { transition: none; }
+  .email-copy-button.is-copied,
+  .email-copy-button.is-copied::after { animation: none; }
 }
 
 @media (prefers-reduced-transparency: reduce) {

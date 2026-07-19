@@ -393,7 +393,10 @@ def validate_target_sizes(content: str) -> list[str]:
         "  display: inline-flex;\n"
         "  align-items: flex-start;",
     )
-    return [f"assets/surface-polish.css: target-size contract is missing {token}" for token in required if token not in content]
+    errors = [f"assets/surface-polish.css: target-size contract is missing {token}" for token in required if token not in content]
+    if not re.search(r"\.email-copy-button\s*\{[^}]*min-height:\s*44px", content, re.S):
+        errors.append("assets/surface-polish.css: email copy button must preserve a 44px target")
+    return errors
 
 
 def main() -> int:

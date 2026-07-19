@@ -21,6 +21,7 @@ CSS_REFERENCE = re.compile(r"(?:@import\s+url\(|@import\s+|url\()\s*['\"]?([^'\"
 CSS_CLASS_SELECTOR = re.compile(r"(?<![\w-])\.([A-Za-z_-][\w-]*)")
 SCRIPT_BUDGETS = {
     "assets/app.js": 7100,
+    "assets/copy-email.js": 3400,
     "assets/home.js": 11500,
     "assets/motto-glitch.js": 1300,
     "assets/review-dossier.js": 7600,
@@ -238,6 +239,35 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     "reviews/metro-2033-redux/index.html": ('class="evidence-toolbar-actions" hidden',),
     "assets/review-dossier.js": ('.removeAttribute("hidden")',),
     "assets/base.css": ("[hidden] { display: none !important; }",),
+}
+
+EMAIL_COPY_CONTRACT = {
+    "assets/copy-email.js": (
+        'document.querySelectorAll(".footer-email")',
+        'document.querySelectorAll(".contact-link")',
+        'navigator.clipboard?.writeText',
+        'document.execCommand("copy")',
+        'button.setAttribute("aria-label", `Copy ${email} to clipboard`)',
+        'status.setAttribute("aria-live", "polite")',
+        '"is-copied"',
+        '"is-copy-fallback"',
+        '}, 2200);',
+    ),
+    "assets/surface-polish.css": (
+        ".email-copy-suite {",
+        ".email-copy-button {",
+        "min-height: 44px;",
+        ".email-copy-button.is-copied {",
+        "@keyframes email-copy-flash",
+        "@keyframes email-copy-sweep",
+        "@media (prefers-reduced-motion: reduce)",
+        "@media (forced-colors: active)",
+    ),
+    "assets/contact-index.css": (
+        ".contact-email-suite {",
+        ".contact-email-suite .email-copy-button {",
+        "min-height: 50px;",
+    ),
 }
 
 NAVIGATION_POLISH_CONTRACT = (
@@ -754,7 +784,7 @@ PUBLIC_INDEX_CSS_BUDGET = 16000
 CONTACT_INDEX_CONTRACT = {
     "contact/index.html": (
         '<body class="contact-index">',
-        '<link rel="stylesheet" href="/assets/contact-index.css?v=20260719-1">',
+        '<link rel="stylesheet" href="/assets/contact-index.css?v=20260719-2">',
         'href="mailto:finalprime.official@gmail.com?subject=Final%20Prime%20enquiry">Start by email</a>',
         'Do not send credentials, client data, private source, unpublished research or other protected material in the first message.',
         'No form. No analytics. No required phone call.',
@@ -1035,7 +1065,8 @@ FOOTER_PAGES = (
 )
 
 FOOTER_REQUIRED_TOKENS = (
-    '<link rel="stylesheet" href="/assets/surface-polish.css?v=20260719-6">',
+    '<link rel="stylesheet" href="/assets/surface-polish.css?v=20260719-7">',
+    '<script src="/assets/copy-email.js?v=20260719-1"></script>',
     '<div class="shell footer-shell">',
     '<div class="footer-primary">',
     'Independent software, research and public evidence with explicit claims, states and limits.',
@@ -1361,6 +1392,11 @@ def main() -> int:
         missing = [token for token in tokens if token not in content]
         if missing:
             errors.append(f"{relative}: progressive-enhancement contract is missing {missing}")
+    for relative, tokens in EMAIL_COPY_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: email-copy contract is missing {missing}")
     base_content = (ROOT / "assets" / "base.css").read_text(encoding="utf-8")
     missing_navigation_polish = [
         token for token in NAVIGATION_POLISH_CONTRACT if token not in base_content
