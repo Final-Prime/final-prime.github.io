@@ -31,6 +31,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Split the A/SYNC prototype into a dedicated canonical dossier and reduced the Systems Index to one scalable record plus an explicit disclosure rail.
 - Replaced the boxed Systems/A/SYNC dashboard grammar with open editorial fields, short accent rules, connected process signals and whitespace-led grouping while preserving the functional sticky path.
 - Rebuilt the Works Index card wall as an open release ledger, connected publication protocol and two distinct published-object chapters without changing the release lanes or evidence claims.
+- Recast the empty Theory Index as a three-field editorial triptych with an open reviews orientation path, connected publication protocol and explicit policy close.
 - Published the controlled Objective, Constraints, Signals and Resolved Outcome model while explicitly withholding implementation, deployment and performance claims.
 - Aligned homepage registry labels with the actual published states and routes.
 - Raised compact interface typography to a readable floor while retaining the dense system language.
@@ -88,8 +89,8 @@ Current measured surface:
 
 - 12 HTML documents;
 - 11 indexable canonical routes;
-- 439 local references;
-- 322 reachable CSS classes;
+- 440 local references;
+- 325 reachable CSS classes;
 - 5 budgeted scripts; and
 - 14 validated web-manifest targets.
 

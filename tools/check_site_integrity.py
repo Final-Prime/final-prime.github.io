@@ -161,6 +161,16 @@ ROUTE_REFLOW_CONTRACTS = {
         "@media (max-width: 760px)",
         "@media (max-width: 420px)",
     ),
+    "assets/theory-index.css": (
+        ".theory-index .release-lane h2 {",
+        ".theory-index .theory-orientation h2 {",
+        ".theory-index .theory-policy h2 {",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+    ),
 }
 NO_JS_CONTRACT_TOKENS = (
     "html .review-dossier-page .evidence-toolbar-actions",
@@ -631,6 +641,36 @@ WORKS_INDEX_CONTRACT = {
 }
 
 WORKS_INDEX_CSS_BUDGET = 18000
+
+THEORY_INDEX_CONTRACT = {
+    "thought/index.html": (
+        '<body class="theory-index">',
+        '<link rel="stylesheet" href="/assets/theory-index.css?v=20260719-1">',
+        '<h2 id="thought-lanes-title">Three declared lanes. No published record.</h2>',
+        'class="catalog-empty theory-orientation"',
+        'class="catalog-empty theory-policy"',
+        'href="/reviews/">Open Game Reviews</a>',
+        'href="/works/">Open Works Index</a>',
+    ),
+    "assets/theory-index.css": (
+        ".theory-index .catalog-meta {",
+        ".theory-index .catalog-grid {",
+        "grid-template-columns: repeat(3, minmax(0, 1fr));",
+        ".theory-index .release-lane {",
+        ".theory-index .theory-orientation {",
+        ".theory-index .release-protocol {",
+        ".theory-index .protocol-step {",
+        ".theory-index .theory-policy {",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+THEORY_INDEX_CSS_BUDGET = 18000
 
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
@@ -1183,6 +1223,26 @@ def main() -> int:
         errors.append(
             "assets/works-index.css: "
             f"{works_css_size} bytes exceeds the {WORKS_INDEX_CSS_BUDGET}-byte budget"
+        )
+    for relative, tokens in THEORY_INDEX_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: Theory Index contract is missing {missing}")
+    theory_page = (ROOT / "thought/index.html").read_text(encoding="utf-8")
+    theory_lane_count = theory_page.count('class="release-lane"')
+    if theory_lane_count != 3:
+        errors.append(
+            "thought/index.html: expected exactly 3 declared Theory lanes, "
+            f"found {theory_lane_count}"
+        )
+    theory_css_size = len(
+        (ROOT / "assets/theory-index.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if theory_css_size > THEORY_INDEX_CSS_BUDGET:
+        errors.append(
+            "assets/theory-index.css: "
+            f"{theory_css_size} bytes exceeds the {THEORY_INDEX_CSS_BUDGET}-byte budget"
         )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:
