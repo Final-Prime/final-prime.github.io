@@ -135,7 +135,15 @@ def main() -> int:
                     errors.append(f"Unexpected remote dependency in review page: {tag[:140]}")
 
     if dossier_css:
-        for token in ("scroll-margin-top", ".evidence-toolbar", 'a[aria-current="location"]', "--dossier-progress"):
+        for token in (
+            "scroll-margin-top",
+            ".evidence-toolbar",
+            'a[aria-current="location"]',
+            "--dossier-progress",
+            "scrollbar-width: none;",
+            ".dossier-nav.has-overflow.at-start:not(.at-end)::before",
+            ".dossier-actions .button-primary:hover span",
+        ):
             require(dossier_css, token, "consolidated review dossier CSS", errors)
 
     if dossier_js:
