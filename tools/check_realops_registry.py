@@ -113,7 +113,7 @@ def main() -> int:
     for token in (
         'href="/works/realops-01/"',
         'FP-WRK-0001 / Published evidence dossier',
-        'Public objects</dt><dd>01</dd>',
+        'Public objects</dt><dd>02</dd>',
     ):
         require(works, token, "Works Index", errors)
 

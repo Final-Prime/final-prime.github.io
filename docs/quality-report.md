@@ -10,10 +10,10 @@ The review covers ten indexable routes plus the non-indexable 404 document. It d
 
 - The homepage positions Final Prime as an independent, founder-led studio and routes visitors to disclosed work.
 - `/systems/` presents one public A/SYNC concept record without implementation internals.
-- `/works/` declares four release lanes and presents the published `FP-WRK-0001` REALOPS-01 operational research dossier.
+- `/works/` declares five release lanes and presents two public objects: the `FP-WRK-0001` REALOPS-01 operational research dossier and `FP-REV-0001` Metro review.
 - `/works/realops-01/` publishes the evidence-bound single-agent routing pilot as aggregate public evidence while keeping fixtures, prompts, transcripts, repositories and grader internals private.
-- `/thought/` separates the published game-review track from three explicitly empty lanes.
-- `/reviews/` and `/reviews/metro-2033-redux/` expose the published `FP-REV-0001` dossier.
+- `/thought/` declares three empty theoretical/editorial lanes and directs review readers to Works.
+- `/reviews/` and `/reviews/metro-2033-redux/` expose the published `FP-REV-0001` Works/Evidence dossier at unchanged URLs.
 - `/index/` lists nine disclosed public records without enumerating private inventory.
 - `/contact/` provides a direct email path and an explicit protected-material boundary.
 - `/legal/` states the current ownership, rights and disclosure position.
@@ -32,13 +32,15 @@ The review covers ten indexable routes plus the non-indexable 404 document. It d
 - Integrated the REALOPS-01 handoff into the shared Final Prime header, footer, navigation, responsive and accessibility systems instead of shipping its standalone shell.
 - Added a restrained four-role roster, routing ladder, mission outcomes, Pareto view, token-use panel, exact table, method, limitations and selection audit.
 - Registered REALOPS-01 in Works, the Public Index, sitemap and machine-readable agent map without replacing the homepage feature.
+- Rebuilt Metro as a five-layer, open-ledger dossier; consolidated its styles and preserved all score, audit, caveat and evidence contracts.
+- Migrated Game Reviews from Thought to Works/Evidence without changing canonical routes.
 
 ## Truthfulness and disclosure boundary
 
 - Final Prime remains an independent initiative owned by Daniel Kenessy in an individual capacity; no registered-company claim is introduced.
 - A/SYNC remains a concept/prototype surface; no implementation architecture or performance result is claimed.
 - No clients, partners, revenue, funding, savings or product-result claims are introduced.
-- Empty Thought lanes remain visibly empty instead of using decorative placeholders or invented dates.
+- All three Thought lanes remain visibly empty instead of using decorative placeholders or invented dates.
 - REALOPS-01 is explicitly scoped as a 40-mission pilot, not a universal model-intelligence ranking or broad statistical claim.
 - The contact route warns visitors not to send credentials, client data, private source or unpublished research in the first message.
 - No account system, private workspace, analytics, form or request tracker is represented as live.
@@ -72,8 +74,8 @@ Current measured surface:
 
 - 11 HTML documents;
 - 10 indexable canonical routes;
-- 397 local references;
-- 271 reachable CSS classes;
+- 395 local references;
+- 282 reachable CSS classes;
 - 5 budgeted scripts; and
 - 14 validated web-manifest targets.
 
