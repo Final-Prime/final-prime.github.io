@@ -1105,20 +1105,37 @@
   transform-origin: left center;
   transition: transform 90ms linear;
 }
-.review-dossier-page .dossier-nav .shell { position: relative; transition: box-shadow 150ms ease; }
+.review-dossier-page .dossier-nav .shell {
+  position: relative;
+  align-items: center;
+  gap: clamp(7px, 1.2vw, 15px);
+  transition: box-shadow 150ms ease;
+}
 .review-dossier-page .dossier-nav.has-overflow:not(.at-start):not(.at-end) .shell { box-shadow: inset 18px 0 18px -20px #000, inset -18px 0 18px -20px #000; }
 .review-dossier-page .dossier-nav.has-overflow:not(.at-start).at-end .shell { box-shadow: inset 18px 0 18px -20px #000; }
 .review-dossier-page .dossier-nav.has-overflow.at-start:not(.at-end) .shell { box-shadow: inset -18px 0 18px -20px #000; }
-.review-dossier-page .dossier-nav a { position: relative; font-size: 0.72rem; transition: color 140ms ease, background 140ms ease; }
-.review-dossier-page .dossier-nav a[aria-current="location"] { color: var(--text); background: rgba(255, 159, 47, 0.045); }
-.review-dossier-page .dossier-nav a[aria-current="location"]::before {
-  position: absolute;
-  top: 0;
-  right: 12px;
-  left: 12px;
-  height: 2px;
-  content: "";
-  background: var(--review-amber);
+.review-dossier-page .dossier-nav a {
+  position: relative;
+  padding-inline: 3px;
+  border: 0;
+  font-size: 0.72rem;
+  transition: color 140ms ease;
+}
+.review-dossier-page .dossier-nav a:first-child { border-left: 0; }
+.review-dossier-page .dossier-nav a:hover,
+.review-dossier-page .dossier-nav a:focus-visible {
+  color: var(--cyan);
+  background: transparent;
+}
+.review-dossier-page .dossier-nav a[aria-current="location"] {
+  color: var(--review-amber);
+  background: transparent;
+}
+.review-dossier-page .dossier-nav a[aria-current="location"]::before { display: none; }
+.review-dossier-page .dossier-nav-separator {
+  flex: 0 0 auto;
+  color: var(--fuchsia-text);
+  font: 800 0.75rem/1 var(--mono);
 }
 
 .review-dossier-page .dossier-section {
@@ -1284,6 +1301,8 @@
   .review-dossier-page .dossier-protocol { font-size: 0.62rem; }
   .review-dossier-page .dossier-hero-grid { margin-top: 6px; gap: 8px; }
   .review-dossier-page .dossier-hero-copy h1 { font-size: min(14vw, 4rem); }
+  .review-dossier-page .dossier-nav .shell { gap: 7px; }
+  .review-dossier-page .dossier-nav a { padding-inline: 2px; }
   .review-dossier-page .dossier-identity { font-size: 0.88rem; line-height: 1.52; }
   .review-dossier-page .dossier-byline { margin-top: 12px; }
   .review-dossier-page .dossier-actions { margin-top: 14px; }
