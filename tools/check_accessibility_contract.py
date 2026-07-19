@@ -382,10 +382,15 @@ def validate_target_sizes(content: str) -> list[str]:
         "  display: inline-flex;\n"
         "  min-height: 24px;\n"
         "  align-items: center;",
-        ".footer-meta a {\n"
-        "  min-height: 24px;\n"
+        ".footer-nav a {\n"
+        "  position: relative;\n"
+        "  min-height: 44px;\n"
         "  display: inline-flex;\n"
         "  align-items: center;",
+        ".footer-email a {\n"
+        "  min-height: 44px;\n"
+        "  display: inline-flex;\n"
+        "  align-items: flex-start;",
     )
     return [f"assets/surface-polish.css: target-size contract is missing {token}" for token in required if token not in content]
 

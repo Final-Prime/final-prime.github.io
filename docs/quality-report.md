@@ -23,10 +23,11 @@ The review covers ten indexable routes plus the non-indexable 404 document. It d
 - Clarified the homepage description, calls to action and public/private positioning.
 - Removed simulated request tracking, proposal states and fabricated request identifiers.
 - Moved contact and private-work guidance from the homepage to `/contact/`.
-- Added a compact homepage closing path to Contact and the Public Index.
+- Rebuilt the homepage closing path as a selective project-enquiry surface with fit stated before commitment and the Public Index retained as a quieter proof route.
 - Aligned homepage registry labels with the actual published states and routes.
 - Raised compact interface typography to a readable floor while retaining the dense system language.
-- Completed the footer navigation grid with Contact and matched keyboard focus feedback to pointer hover feedback.
+- Replaced the inconsistent homepage and subpage footer grids with one open three-group ledger across all ten public routes.
+- Added a verified no-analytics, no-cookies and no-behavioral-tracking trust rail without introducing telemetry or runtime dependencies.
 - Updated canonical route maps, sitemap dates, machine-readable navigation and installable-site shortcuts.
 - Preserved the existing brand-first hero, Prime Matrix, system object and published review feature.
 - Integrated the REALOPS-01 handoff into the shared Final Prime header, footer, navigation, responsive and accessibility systems instead of shipping its standalone shell.

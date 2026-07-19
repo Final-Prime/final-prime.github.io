@@ -197,8 +197,15 @@ def validate_security_policy() -> list[str]:
         if phrase not in contact:
             errors.append(f"contact/index.html: missing safe security routing {phrase!r}")
     homepage = (ROOT / "index.html").read_text(encoding="utf-8")
-    if "scoped business work" not in homepage or "business workspaces" in homepage:
-        errors.append("index.html: private layer must describe scoped work, not live workspaces")
+    required_home_boundary = (
+        "Each enquiry is reviewed for fit before any commitment.",
+        "Keep protected material out of the first message.",
+    )
+    missing_home_boundary = [phrase for phrase in required_home_boundary if phrase not in homepage]
+    if missing_home_boundary or "business workspaces" in homepage:
+        errors.append(
+            "index.html: selective project access must preserve the fit and protected-material boundary"
+        )
     home_runtime = (ROOT / "assets" / "home.js").read_text(encoding="utf-8")
     if "04 NODES" not in home_runtime or "MAPPED" not in home_runtime or "TRACKED" in home_runtime:
         errors.append("assets/home.js: concept map must not imply live tracking")
