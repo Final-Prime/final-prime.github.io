@@ -171,6 +171,15 @@ ROUTE_REFLOW_CONTRACTS = {
         "@media (max-width: 760px)",
         "@media (max-width: 420px)",
     ),
+    "assets/public-index.css": (
+        ".public-index .registry-body h2 {",
+        ".public-index .boundary-copy h2 {",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+    ),
 }
 NO_JS_CONTRACT_TOKENS = (
     "html .review-dossier-page .evidence-toolbar-actions",
@@ -671,6 +680,35 @@ THEORY_INDEX_CONTRACT = {
 }
 
 THEORY_INDEX_CSS_BUDGET = 18000
+
+PUBLIC_INDEX_CONTRACT = {
+    "index/index.html": (
+        '<body class="public-index">',
+        '<link rel="stylesheet" href="/assets/public-index.css?v=20260719-1">',
+        '<article class="registry-card surface-current record-realops">',
+        '<article class="registry-card surface-current record-metro">',
+        '<h2 id="boundary-title">The public index is not the private inventory.</h2>',
+        '<dt>Public</dt><dd>Identity / state / route / declared boundary</dd>',
+        '<dt>Private</dt><dd>Source / implementation / research / client records</dd>',
+    ),
+    "assets/public-index.css": (
+        ".public-index .catalog-meta {",
+        ".public-index .registry-list {",
+        ".public-index .registry-card {",
+        "grid-template-columns: minmax(138px, 0.42fr) minmax(0, 1.58fr);",
+        ".public-index .registry-data {",
+        ".public-index .record-metro .registry-cell.state dd { color: var(--index-amber); }",
+        ".public-index .catalog-boundary {",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+PUBLIC_INDEX_CSS_BUDGET = 16000
 
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
@@ -1243,6 +1281,26 @@ def main() -> int:
         errors.append(
             "assets/theory-index.css: "
             f"{theory_css_size} bytes exceeds the {THEORY_INDEX_CSS_BUDGET}-byte budget"
+        )
+    for relative, tokens in PUBLIC_INDEX_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: Public Index contract is missing {missing}")
+    public_index_page = (ROOT / "index/index.html").read_text(encoding="utf-8")
+    public_record_count = public_index_page.count('class="registry-card')
+    if public_record_count != 9:
+        errors.append(
+            "index/index.html: expected exactly 9 disclosed registry records, "
+            f"found {public_record_count}"
+        )
+    public_index_css_size = len(
+        (ROOT / "assets/public-index.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if public_index_css_size > PUBLIC_INDEX_CSS_BUDGET:
+        errors.append(
+            "assets/public-index.css: "
+            f"{public_index_css_size} bytes exceeds the {PUBLIC_INDEX_CSS_BUDGET}-byte budget"
         )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:
