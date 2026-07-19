@@ -1032,6 +1032,15 @@
 }
 
 .review-dossier-page .dossier-actions { margin-top: 20px; }
+.review-dossier-page .dossier-actions .button span {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 150ms ease;
+}
+.review-dossier-page .dossier-actions .button-primary:hover span,
+.review-dossier-page .dossier-actions .button-primary:focus-visible span { transform: translateY(2px); }
+.review-dossier-page .dossier-actions .button-secondary:hover span,
+.review-dossier-page .dossier-actions .button-secondary:focus-visible span { transform: translateX(2px); }
 .review-dossier-page .dossier-actions .button-primary {
   border-color: var(--review-amber);
   color: #090b0d;
@@ -1092,8 +1101,32 @@
   --dossier-progress: 0;
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
 }
+.review-dossier-page .dossier-nav::before {
+  position: absolute;
+  z-index: 2;
+  inset: 0 0 2px;
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+.review-dossier-page .dossier-nav.has-overflow.at-start:not(.at-end)::before {
+  opacity: 1;
+  background: linear-gradient(270deg, rgba(9, 11, 13, 0.98), transparent) right / 28px 100% no-repeat;
+}
+.review-dossier-page .dossier-nav.has-overflow:not(.at-start):not(.at-end)::before {
+  opacity: 1;
+  background:
+    linear-gradient(90deg, rgba(9, 11, 13, 0.98), transparent) left / 28px 100% no-repeat,
+    linear-gradient(270deg, rgba(9, 11, 13, 0.98), transparent) right / 28px 100% no-repeat;
+}
+.review-dossier-page .dossier-nav.has-overflow:not(.at-start).at-end::before {
+  opacity: 1;
+  background: linear-gradient(90deg, rgba(9, 11, 13, 0.98), transparent) left / 28px 100% no-repeat;
+}
 .review-dossier-page .dossier-nav::after {
   position: absolute;
+  z-index: 3;
   right: 0;
   bottom: -1px;
   left: 0;
@@ -1109,11 +1142,10 @@
   position: relative;
   align-items: center;
   gap: clamp(7px, 1.2vw, 15px);
-  transition: box-shadow 150ms ease;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.review-dossier-page .dossier-nav.has-overflow:not(.at-start):not(.at-end) .shell { box-shadow: inset 18px 0 18px -20px #000, inset -18px 0 18px -20px #000; }
-.review-dossier-page .dossier-nav.has-overflow:not(.at-start).at-end .shell { box-shadow: inset 18px 0 18px -20px #000; }
-.review-dossier-page .dossier-nav.has-overflow.at-start:not(.at-end) .shell { box-shadow: inset -18px 0 18px -20px #000; }
+.review-dossier-page .dossier-nav .shell::-webkit-scrollbar { display: none; }
 .review-dossier-page .dossier-nav a {
   position: relative;
   padding-inline: 3px;
@@ -1341,8 +1373,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .review-dossier-page .dossier-actions .button span,
+  .review-dossier-page .dossier-nav::before,
   .review-dossier-page .dossier-nav::after,
-  .review-dossier-page .dossier-nav .shell,
   .review-dossier-page .dossier-nav a,
   .review-dossier-page .evidence-arc summary { transition: none; }
 }
@@ -1359,6 +1392,7 @@
 @media (forced-colors: active) {
   .review-dossier-page .dossier-hero::before,
   .review-dossier-page .dossier-hero::after { display: none; }
+  .review-dossier-page .dossier-nav::before { display: none; }
   .review-dossier-page .dossier-nav,
   .review-dossier-page .evidence-toolbar,
   .review-dossier-page .evidence-toolbar button,
