@@ -152,14 +152,17 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 24px;
-  border: 1px solid var(--line);
+  border: 0;
+  border-top: 1px solid var(--line);
 }
 .fit-gate {
   position: relative;
-  min-height: 240px;
+  min-height: 208px;
   padding: clamp(22px, 3.4vw, 38px);
-  border-right: 1px solid var(--line);
-  background: rgba(15, 19, 22, 0.54);
+  border: 0;
+  border-right: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: transparent;
 }
 .fit-gate:last-child { border-right: 0; }
 .fit-gate::before {
@@ -230,14 +233,17 @@
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   margin-top: 24px;
-  border: 1px solid var(--line);
+  border: 0;
+  border-top: 1px solid var(--line);
 }
 .taste-card {
   min-width: 0;
-  min-height: 220px;
+  min-height: 190px;
   padding: 16px;
-  border-right: 1px solid var(--line);
-  background: rgba(15, 19, 22, 0.56);
+  border: 0;
+  border-right: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: transparent;
 }
 .taste-card:last-child { border-right: 0; }
 .taste-card header { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
@@ -327,14 +333,17 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   margin-top: 24px;
-  border: 1px solid var(--line);
+  border: 0;
+  border-top: 1px solid var(--line);
 }
 .dossier-axis {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  border-right: 1px solid var(--line);
-  background: rgba(15, 19, 22, 0.56);
+  border: 0;
+  border-right: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: transparent;
 }
 .dossier-axis:last-child { border-right: 0; }
 .dossier-axis > header {
@@ -1141,9 +1150,6 @@
 .dossier-subsection-head > p { margin: 0; color: var(--muted); font-size: 0.84rem; line-height: 1.65; }
 
 /* Open ledgers: separators carry hierarchy; borders remain only where disclosure is functional. */
-.fit-gates,
-.taste-grid,
-.dossier-axis-grid,
 .field-note-grid,
 .insight-grid,
 .audit-grid,
@@ -1152,9 +1158,6 @@
   border-top: 1px solid var(--line);
   gap: 0;
 }
-.fit-gate,
-.taste-card,
-.dossier-axis,
 .insight-card,
 .audit-card,
 .protocol-grid article {
@@ -1163,11 +1166,6 @@
   border-bottom: 1px solid var(--line-soft);
   background: transparent;
 }
-.fit-gate:last-child,
-.taste-card:last-child,
-.dossier-axis:last-child { border-right: 0; }
-.fit-gate { min-height: 208px; }
-.taste-card { min-height: 190px; }
 .dossier-thesis { border-width: 0 0 0 2px; background: transparent; }
 .dossier-thesis::before { display: none; }
 .modifier-card { border-width: 1px 0; background: transparent; }
