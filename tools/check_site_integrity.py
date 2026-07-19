@@ -152,6 +152,16 @@ ROUTE_REFLOW_CONTRACTS = {
         "@media (max-width: 760px)",
         "@media (max-width: 420px)",
     ),
+    "assets/reviews.css": (
+        ".review-index-hero h1 {",
+        ".review-card-body h2 {",
+        ".review-principles h2 {",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+    ),
     "assets/async-dossier.css": (
         ".async-hero h1 {",
         ".async-section-head h2 {",
@@ -775,6 +785,34 @@ LEGAL_INDEX_CONTRACT = {
 }
 
 LEGAL_INDEX_CSS_BUDGET = 16000
+
+REVIEWS_INDEX_CONTRACT = {
+    "reviews/index.html": (
+        '<body class="reviews-index">',
+        '<link rel="stylesheet" href="/assets/reviews.css?v=20260719-1">',
+        '<span>FP-REV-0001 / Metro 2033 Redux</span>',
+        '<dt>Evidence</dt><dd>9 arcs / 8 audit checks</dd>',
+        '<small>12 Jul 2026</small>',
+        'href="/reviews/metro-2033-redux/">Open full dossier</a>',
+    ),
+    "assets/reviews.css": (
+        ".review-index-meta {",
+        ".review-index-grid {",
+        "grid-template-columns: minmax(0, 1.32fr) minmax(300px, 0.68fr);",
+        ".review-card,",
+        ".review-score-receipt {",
+        ".review-pipeline {",
+        ".review-principles {",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+REVIEWS_INDEX_CSS_BUDGET = 16000
 
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
@@ -1403,6 +1441,26 @@ def main() -> int:
         errors.append(
             "assets/legal.css: "
             f"{legal_css_size} bytes exceeds the {LEGAL_INDEX_CSS_BUDGET}-byte budget"
+        )
+    for relative, tokens in REVIEWS_INDEX_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: Reviews Index contract is missing {missing}")
+    reviews_index_page = (ROOT / "reviews/index.html").read_text(encoding="utf-8")
+    if reviews_index_page.count('class="review-card"') != 1:
+        errors.append("reviews/index.html: expected exactly one published review record")
+    if "review-archive" in reviews_index_page:
+        errors.append("reviews/index.html: duplicate single-record archive restored")
+    if (ROOT / "assets/review-release.css").exists():
+        errors.append("assets/review-release.css: retired split stylesheet restored")
+    reviews_css_size = len(
+        (ROOT / "assets/reviews.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if reviews_css_size > REVIEWS_INDEX_CSS_BUDGET:
+        errors.append(
+            "assets/reviews.css: "
+            f"{reviews_css_size} bytes exceeds the {REVIEWS_INDEX_CSS_BUDGET}-byte budget"
         )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:
