@@ -134,6 +134,14 @@ ROUTE_REFLOW_CONTRACTS = {
         "@media (max-width: 760px)",
         "@media (max-width: 420px)",
     ),
+    "assets/error.css": (
+        ".error-panel h1 {",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 900px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+    ),
     "assets/hero.css": (
         ".eyebrow-copy {",
         ".eyebrow-term { white-space: nowrap; }",
@@ -856,6 +864,34 @@ REALOPS_POLISH_CONTRACT = {
 
 REALOPS_DOSSIER_CSS_BUDGET = 26000
 
+ERROR_PAGE_CONTRACT = {
+    "404.html": (
+        '<link rel="stylesheet" href="/assets/error.css?v=20260719-1">',
+        'class="error-signal" aria-hidden="true"',
+        'class="error-recovery"',
+        'aria-label="Recovery options"',
+        'href="/">Return to origin',
+        'href="/index/">Inspect public index',
+        'href="/contact/">Use direct contact',
+    ),
+    "assets/error.css": (
+        ".error-layout {",
+        ".error-signal {",
+        ".error-panel::before {",
+        ".error-recovery {",
+        ".error-links {",
+        "background: transparent;",
+        "@media (max-width: 900px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+        "@media (forced-colors: active)",
+        "@media (prefers-reduced-motion: reduce)",
+        "@media print",
+    ),
+}
+
+ERROR_PAGE_CSS_BUDGET = 8000
+
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
     'class="field-index">02 / Field</p>',
@@ -1516,6 +1552,19 @@ def main() -> int:
         errors.append(
             "assets/realops-dossier.css: "
             f"{realops_css_size} bytes exceeds the {REALOPS_DOSSIER_CSS_BUDGET}-byte budget"
+        )
+    for relative, tokens in ERROR_PAGE_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: 404 recovery contract is missing {missing}")
+    error_css_size = len(
+        (ROOT / "assets/error.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if error_css_size > ERROR_PAGE_CSS_BUDGET:
+        errors.append(
+            "assets/error.css: "
+            f"{error_css_size} bytes exceeds the {ERROR_PAGE_CSS_BUDGET}-byte budget"
         )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:

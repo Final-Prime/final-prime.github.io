@@ -38,6 +38,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Rebuilt Game Reviews as one open published-record surface, folded the duplicate one-item archive into the Metro evidence receipt and consolidated its split stylesheets.
 - Reduced the REALOPS entry surface from an oversized dashboard hero to a compact open scope ledger and whitespace-led four-role routing roster while retaining grouped evidence figures.
 - Recast the REALOPS method, interpretation boundary and selection audit as an open timeline and disclosure ledger without weakening limitations or aggregate-evidence boundaries.
+- Rebuilt the script-free 404 as an open recovery surface with one primary return path, two quiet alternatives and an explicit noindex boundary.
 - Published the controlled Objective, Constraints, Signals and Resolved Outcome model while explicitly withholding implementation, deployment and performance claims.
 - Aligned homepage registry labels with the actual published states and routes.
 - Raised compact interface typography to a readable floor while retaining the dense system language.
