@@ -729,16 +729,6 @@
   text-wrap: balance;
 }
 
-@media (max-width: 420px) {
-  .dossier-hero-copy h1 { font-size: min(21vw, 5rem); }
-  .dossier-score-main { grid-template-columns: auto auto; }
-  .dossier-score-main em { grid-column: 1 / -1; justify-self: start; margin-top: 18px; }
-  .dossier-thesis p { font-size: min(7.5vw, 2rem); }
-  .dossier-section-head h2 { font-size: min(15vw, 3.8rem); }
-  .fit-gate h3,
-  .field-note h3 { font-size: min(12vw, 3.4rem); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .dossier-nav { scroll-behavior: auto; }
 }
@@ -1258,6 +1248,9 @@
   .dossier-hero-copy h1 { font-size: min(14vw, 3.45rem); }
   .dossier-score-main b { font-size: min(25vw, 6.4rem); }
   .dossier-score-main em { font-size: min(15vw, 3.8rem); }
+  .dossier-thesis p { font-size: min(7.5vw, 2rem); }
+  .fit-gate h3,
+  .field-note h3 { font-size: min(12vw, 3.4rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
