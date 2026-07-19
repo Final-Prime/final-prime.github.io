@@ -79,6 +79,7 @@ def main() -> int:
         'data-work-id="FP-WRK-0001"',
         '<meta name="robots" content="index,follow,max-image-preview:large">',
         '<link rel="canonical" href="https://final-prime.github.io/works/realops-01/">',
+        '<link rel="stylesheet" href="/assets/realops-dossier.css?v=20260719-2">',
         '<meta property="article:published_time" content="2026-07-19">',
         '<meta property="article:modified_time" content="2026-07-19">',
         'Evidence frozen</dt><dd><time datetime="2026-07-18">18 Jul 2026</time>',
