@@ -33,6 +33,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Rebuilt the Works Index card wall as an open release ledger, connected publication protocol and two distinct published-object chapters without changing the release lanes or evidence claims.
 - Recast the empty Theory Index as a three-field editorial triptych with an open reviews orientation path, connected publication protocol and explicit policy close.
 - Rebuilt the nine-record Public Index as a compact open canonical ledger with distinct published-object states and a whitespace-led disclosure boundary.
+- Rebuilt Contact as one open direct-email path with a compact first viewport, explicit protected-material boundary and routing guidance without card-wall styling or simulated workflow.
 - Published the controlled Objective, Constraints, Signals and Resolved Outcome model while explicitly withholding implementation, deployment and performance claims.
 - Aligned homepage registry labels with the actual published states and routes.
 - Raised compact interface typography to a readable floor while retaining the dense system language.
@@ -90,8 +91,8 @@ Current measured surface:
 
 - 12 HTML documents;
 - 11 indexable canonical routes;
-- 441 local references;
-- 326 reachable CSS classes;
+- 440 local references;
+- 328 reachable CSS classes;
 - 5 budgeted scripts; and
 - 14 validated web-manifest targets.
 

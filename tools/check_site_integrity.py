@@ -62,7 +62,6 @@ FORBIDDEN_ROUTE_STYLESHEETS = {
 RESPONSIVE_PRECEDENCE_STYLES = {
     "/assets/hero.css",
     "/assets/content-a.css",
-    "/assets/content-b.css",
 }
 REQUIRED_ICON_LINKS = {
     ("icon", "/assets/favicon.svg", "image/svg+xml", ""),
@@ -126,9 +125,14 @@ ROUTE_REFLOW_CONTRACTS = {
         ".catalog-empty h2 {",
         "overflow-wrap: anywhere;",
     ),
-    "assets/content-b.css": (
+    "assets/contact-index.css": (
+        ".contact-index .catalog-hero h1 {",
         ".contact-layout h2 {",
-        "overflow-wrap: anywhere;",
+        "overflow-wrap: normal;",
+        "text-wrap: balance;",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
     ),
     "assets/hero.css": (
         ".eyebrow-copy {",
@@ -709,6 +713,33 @@ PUBLIC_INDEX_CONTRACT = {
 }
 
 PUBLIC_INDEX_CSS_BUDGET = 16000
+
+CONTACT_INDEX_CONTRACT = {
+    "contact/index.html": (
+        '<body class="contact-index">',
+        '<link rel="stylesheet" href="/assets/contact-index.css?v=20260719-1">',
+        'href="mailto:finalprime.official@gmail.com?subject=Final%20Prime%20enquiry">Start by email</a>',
+        'Do not send credentials, client data, private source, unpublished research or other protected material in the first message.',
+        'No form. No analytics. No required phone call.',
+    ),
+    "assets/contact-index.css": (
+        ".contact-index .catalog-meta {",
+        ".access-layout {",
+        "grid-template-columns: minmax(0, 1.22fr) minmax(330px, 0.78fr);",
+        ".access-benefits span + span::before {",
+        ".private-boundary-card dl {",
+        ".contact-section::before {",
+        ".contact-routing {",
+        "@media (max-width: 1080px)",
+        "@media (max-width: 760px)",
+        "@media (max-width: 420px)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (forced-colors: active)",
+        "@media print",
+    ),
+}
+
+CONTACT_INDEX_CSS_BUDGET = 16000
 
 RETIRED_HOMEPAGE_FIELD_TOKENS = (
     'class="field-index">01 / Field</p>',
@@ -1301,6 +1332,22 @@ def main() -> int:
         errors.append(
             "assets/public-index.css: "
             f"{public_index_css_size} bytes exceeds the {PUBLIC_INDEX_CSS_BUDGET}-byte budget"
+        )
+    for relative, tokens in CONTACT_INDEX_CONTRACT.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        missing = [token for token in tokens if token not in content]
+        if missing:
+            errors.append(f"{relative}: Contact Index contract is missing {missing}")
+    contact_page = (ROOT / "contact/index.html").read_text(encoding="utf-8")
+    if "<form" in contact_page.lower():
+        errors.append("contact/index.html: forms are forbidden on the direct email surface")
+    contact_css_size = len(
+        (ROOT / "assets/contact-index.css").read_text(encoding="utf-8").encode("utf-8")
+    )
+    if contact_css_size > CONTACT_INDEX_CSS_BUDGET:
+        errors.append(
+            "assets/contact-index.css: "
+            f"{contact_css_size} bytes exceeds the {CONTACT_INDEX_CSS_BUDGET}-byte budget"
         )
     theory_link_pattern = re.compile(r'href="/thought/"[^>]*>Theory</a>')
     for relative in THEORY_LABEL_PAGES:
