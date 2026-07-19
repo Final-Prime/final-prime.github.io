@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import html
 import re
 from pathlib import Path
 
@@ -31,6 +32,11 @@ OBSOLETE_PHRASES = (
     "First game review in preparation.",
     "No published review yet.",
     "Research / experience",
+    "01 / Decision surface",
+    "You accept tight authorship",
+    "Open ALERTED axis definitions",
+    "Sight Is Not Understanding",
+    "Trust footer.",
 )
 
 
@@ -93,6 +99,14 @@ def main() -> int:
         require(review, "Published 12 Jul 2026", "review page", errors)
         require(review, "Updated 19 Jul 2026", "review page", errors)
         require(review, '<a href="/works/" aria-current="location">Works</a>', "review page", errors)
+        require(review, "01 / Audience verdict", "review editorial contract", errors)
+        require(review, "You accept a guided path", "review editorial contract", errors)
+        require(review, "Treat 86 as a fit signal, not a universal verdict.", "review editorial contract", errors)
+        require(review, "ALERTED axis definitions", "review editorial contract", errors)
+        require(review, "03 / Human verdict", "review editorial contract", errors)
+        require(review, "What this review promises", "review editorial contract", errors)
+        require(review, "Seeing Is Not Knowing", "review editorial contract", errors)
+        require(review, "Trust <span>the record.</span>", "review editorial contract", errors)
         require(review, '<a href="#verdict">Verdict</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#score">Score</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#note">Field note</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#evidence">Evidence</a><span class="dossier-nav-separator" aria-hidden="true">/</span><a href="#protocol">Protocol</a>', "review page", errors)
 
         raw = attribute(review, "data-review-raw")
@@ -124,6 +138,11 @@ def main() -> int:
         if spoiler_counts != {"light": 6, "medium": 2, "heavy": 1}:
             errors.append(f"Unexpected spoiler distribution: {spoiler_counts}")
 
+        plain_review = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>|<[^>]+>", " ", review)
+        review_word_count = len(re.findall(r"\b[\w'’/.-]+\b", html.unescape(plain_review), flags=re.UNICODE))
+        if not 1850 <= review_word_count <= 1950:
+            errors.append(f"Review editorial word count is {review_word_count}, expected 1850-1950")
+
         if re.search(r'<(?:img|script|link)[^>]+(?:src|href)="https?://', review, re.IGNORECASE):
             allowed = (
                 'href="https://github.com/Kenessy/Kenessy/blob/',
@@ -143,8 +162,19 @@ def main() -> int:
             "scrollbar-width: none;",
             ".dossier-nav.has-overflow.at-start:not(.at-end)::before",
             ".dossier-actions .button-primary:hover span",
+            ".method-disclosure summary::after",
+            ".method-disclosure[open] summary::after",
+            "text-wrap: balance;",
+            ".dossier-axis-body {",
+            "margin-top: auto;",
+            "align-items: start;",
         ):
             require(dossier_css, token, "consolidated review dossier CSS", errors)
+        dossier_css_bytes = len(dossier_css.encode("utf-8"))
+        if dossier_css_bytes > 42_000:
+            errors.append(f"Consolidated review dossier CSS is {dossier_css_bytes} bytes, expected at most 42000")
+        if ".dossier-axis p { min-height: 160px;" in dossier_css:
+            errors.append("Consolidated review dossier CSS restored the obsolete fixed axis paragraph height")
 
     if dossier_js:
         for token in (
