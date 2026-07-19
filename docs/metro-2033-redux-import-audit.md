@@ -7,6 +7,8 @@
 - Review state: `Published / final`
 - Public score: `86 / A`
 - Publication date in the Final Prime registry: `2026-07-12`
+- Current dossier revision: `2026-07-19`
+- Public classification: `Works / Evidence / Game Reviews`
 
 ## Source provenance
 
@@ -71,6 +73,7 @@ Rebuilt:
 - responsive layout;
 - score presentation;
 - section hierarchy;
+- consolidated dossier stylesheet;
 - social artwork;
 - legal footer;
 - public registry integration;
@@ -97,13 +100,14 @@ No third-party artwork or game screenshot was copied into the Final Prime reposi
 The import updates these public surfaces:
 
 - homepage review feature;
-- `/thought/`;
+- `/works/`;
+- `/thought/` orientation link;
 - `/reviews/`;
 - `/reviews/metro-2033-redux/`;
 - `/index/`;
 - `sitemap.xml`.
 
-The number of disclosed public records remains `08` because `FP-REV-0001` already existed as a reserved record. Its lifecycle state changes from research to published.
+The public index lists `09` disclosed records after the later REALOPS-01 publication. `FP-REV-0001` remains the stable Metro identity and its canonical route is unchanged.
 
 ## Verification requirements
 
@@ -119,7 +123,7 @@ The review registry check verifies:
 - eight audit cards;
 - four friction rows;
 - legal and third-party notices;
-- references from homepage, Thought, Reviews, Public Index, and sitemap;
+- Works classification plus references from homepage, Works, Reviews, Public Index, Thought orientation and sitemap;
 - removal of obsolete first-review research language;
 - source provenance record.
 

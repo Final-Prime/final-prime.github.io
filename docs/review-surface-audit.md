@@ -2,9 +2,10 @@
 
 ## Scope
 
-This audit covers the current public game-review surface reviewed on 2026-07-14:
+This audit covers the current public game-review surface reviewed on 2026-07-19:
 
-- the homepage `Thought / Game reviews` feature;
+- the homepage `Work & Evidence` feature;
+- the `Works / Analysis + Reviews` lane;
 - the dedicated `/reviews/` index;
 - the published `FP-REV-0001` Metro 2033 Redux dossier;
 - the review pipeline and declared methodology; and
@@ -14,9 +15,10 @@ This audit covers the current public game-review surface reviewed on 2026-07-14:
 
 The review surface follows the existing Final Prime system language:
 
-- orthogonal panels and explicit borders;
-- fuchsia for primary editorial signal;
+- open ledgers, whitespace and functional disclosure borders;
+- disciplined amber for Metro identity and score;
 - cyan for verified/current state;
+- magenta for deductions, danger and heavy spoilers;
 - one published review object and one method inspector;
 - a visible four-stage pipeline: `Experience / Model / Verify / Publish`;
 - explicit score anatomy, friction, audit and evidence structures; and
@@ -28,6 +30,7 @@ The review surface follows the existing Final Prime system language:
 - The final score is `86 / A`, derived from a 90-point core subtotal and a -4 fit-and-risk correction.
 - The dossier exposes four friction rows, eight adversarial checks and nine route-level evidence arcs.
 - The archive contains one published dossier.
+- Game Reviews are classified under `Works / Evidence`; the canonical review URLs are unchanged.
 - Later review formats may differ, but each public dossier must expose its thesis, evidence path, caveats, spoiler boundary and lifecycle state.
 
 ## Truthfulness boundary
@@ -41,7 +44,7 @@ The review surface follows the existing Final Prime system language:
 ## Accessibility and resilience
 
 - one H1 on each review document;
-- semantic article, aside, list, definition-list, header, main and footer structures;
+- semantic article, section, list, definition-list, header, main and footer structures;
 - keyboard-operable links, disclosure controls and mobile navigation;
 - minimum action-target and visible-focus contracts;
 - no-JavaScript review content and navigation remain visible;
@@ -64,6 +67,6 @@ The review surface follows the existing Final Prime system language:
 
 1. Large review headings use viewport-capped mobile sizing and shrinkable containers.
 2. Review cards and metadata explicitly permit min-content shrinkage.
-3. Conversion links route to public methodology, the dossier or Contact rather than soliciting unpublished material.
+3. Conversion links route to Works, public methodology, the dossier or Contact rather than soliciting unpublished material.
 4. Empty publication lanes explain their state instead of presenting placeholders as work.
 5. Score math, correction layers and caveats remain inspectable rather than being compressed into a single promotional rating.

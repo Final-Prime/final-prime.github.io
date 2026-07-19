@@ -14,14 +14,13 @@ SOURCE_COMMIT = "e8e77e9d628027106bfe741563df2fc9aadf65d2"
 REVIEW_PAGE = ROOT / "reviews" / "metro-2033-redux" / "index.html"
 OG_ASSET = ROOT / "assets" / "reviews" / "metro-2033-redux-og.png"
 DOSSIER_CSS = ROOT / "assets" / "review-dossier.css"
-POLISH_CSS = ROOT / "assets" / "review-dossier-polish.css"
 DOSSIER_JS = ROOT / "assets" / "review-dossier.js"
 RELEASE_CSS = ROOT / "assets" / "review-release.css"
 PROVENANCE = ROOT / "docs" / "metro-2033-redux-import-audit.md"
 
 REGISTRY_FILES = {
     "homepage": ROOT / "index.html",
-    "thought": ROOT / "thought" / "index.html",
+    "works": ROOT / "works" / "index.html",
     "reviews": ROOT / "reviews" / "index.html",
     "public index": ROOT / "index" / "index.html",
     "sitemap": ROOT / "sitemap.xml",
@@ -58,8 +57,7 @@ def main() -> int:
     review = read(REVIEW_PAGE, errors)
     if not OG_ASSET.is_file():
         errors.append(f"Missing required review file: {OG_ASSET.relative_to(ROOT)}")
-    read(DOSSIER_CSS, errors)
-    polish_css = read(POLISH_CSS, errors)
+    dossier_css = read(DOSSIER_CSS, errors)
     dossier_js = read(DOSSIER_JS, errors)
     read(RELEASE_CSS, errors)
     provenance = read(PROVENANCE, errors)
@@ -71,12 +69,16 @@ def main() -> int:
             if phrase in text:
                 errors.append(f"{label} still contains obsolete review state: {phrase}")
 
+    thought = read(ROOT / "thought" / "index.html", errors)
+    require(thought, "/reviews/", "thought orientation", errors)
+    require(thought, "/works/", "thought orientation", errors)
+    require(thought, "No published record", "thought orientation", errors)
+
     if review:
         require(review, f'<link rel="canonical" href="{CANONICAL}">', "review page", errors)
         require(review, 'data-review-id="FP-REV-0001"', "review page", errors)
         require(review, "/assets/reviews/metro-2033-redux-og.png", "review page", errors)
         require(review, "/assets/review-dossier.css", "review page", errors)
-        require(review, "/assets/review-dossier-polish.css", "review page", errors)
         require(review, "/assets/review-dossier.js", "review page", errors)
         require(review, "/legal/", "review page", errors)
         require(review, "Metro 2033 Redux and related", "review page", errors)
@@ -89,6 +91,9 @@ def main() -> int:
         require(review, 'twitter:image:alt', "review page", errors)
         require(review, 'article:modified_time', "review page", errors)
         require(review, "Published 12 Jul 2026", "review page", errors)
+        require(review, "Updated 19 Jul 2026", "review page", errors)
+        require(review, '<a href="/works/" aria-current="location">Works</a>', "review page", errors)
+        require(review, '<a href="#verdict">Verdict</a><a href="#score">Score</a><a href="#note">Field note</a><a href="#evidence">Evidence</a><a href="#protocol">Protocol</a>', "review page", errors)
 
         raw = attribute(review, "data-review-raw")
         correction = attribute(review, "data-review-correction")
@@ -129,9 +134,9 @@ def main() -> int:
                 if not any(prefix in tag for prefix in allowed):
                     errors.append(f"Unexpected remote dependency in review page: {tag[:140]}")
 
-    if polish_css:
+    if dossier_css:
         for token in ("scroll-margin-top", ".evidence-toolbar", 'a[aria-current="location"]', "--dossier-progress"):
-            require(polish_css, token, "review polish CSS", errors)
+            require(dossier_css, token, "consolidated review dossier CSS", errors)
 
     if dossier_js:
         for token in (

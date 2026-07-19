@@ -917,3 +917,433 @@
   .dossier-score::before,
   .dossier-score::after { forced-color-adjust: none; }
 }
+
+/* 2026-07-19 dossier consolidation: open ledgers, five-layer navigation, restrained Metro signal. */
+.review-dossier-page .dossier-main {
+  background:
+    radial-gradient(ellipse at 50% -8%, rgba(255, 159, 47, 0.065), transparent 33rem),
+    linear-gradient(90deg, transparent 49.94%, rgba(255, 255, 255, 0.018) 50%, transparent 50.06%),
+    var(--bg);
+}
+
+.review-dossier-page .dossier-hero {
+  isolation: isolate;
+  padding: clamp(34px, 4.5vw, 66px) 0 clamp(44px, 5vw, 70px);
+  border-bottom: 0;
+}
+
+.review-dossier-page .dossier-hero::before {
+  inset: -12% -8% 0;
+  opacity: 0.72;
+  background:
+    radial-gradient(ellipse at 50% 116%, transparent 0 23%, rgba(255, 159, 47, 0.07) 23.2% 23.7%, transparent 24% 32%, rgba(255, 255, 255, 0.026) 32.2% 32.45%, transparent 32.8%),
+    linear-gradient(112deg, transparent 0 49.8%, rgba(255, 159, 47, 0.055) 50%, transparent 50.2% 100%);
+  mask-image: linear-gradient(to bottom, #000 0 70%, transparent 100%);
+}
+
+.review-dossier-page .dossier-hero::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 82% 30%, rgba(255, 159, 47, 0.075), transparent 26rem),
+    radial-gradient(circle at 18% 72%, rgba(10, 232, 247, 0.025), transparent 24rem);
+}
+
+.review-dossier-page .dossier-hero > .shell { z-index: 1; }
+
+.review-dossier-page .page-context {
+  margin-bottom: 18px;
+  color: var(--muted-dark);
+}
+
+.review-dossier-page .dossier-protocol {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 9px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font: 800 0.69rem/1.35 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.review-dossier-page .dossier-protocol b { color: var(--review-amber); }
+.review-dossier-page .dossier-protocol strong { color: var(--cyan); }
+
+.review-dossier-page .dossier-hero-grid {
+  grid-template-columns: minmax(0, 1.22fr) minmax(330px, 0.78fr);
+  grid-template-areas: "title score" "summary score";
+  gap: clamp(22px, 3vw, 42px) clamp(34px, 5vw, 72px);
+  align-items: start;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.review-dossier-page .dossier-hero-copy { grid-area: title; }
+.review-dossier-page .dossier-score { grid-area: score; }
+.review-dossier-page .dossier-hero-summary { grid-area: summary; }
+
+.review-dossier-page .dossier-hero-copy h1 {
+  margin: 0;
+  max-width: none;
+  font-size: clamp(3.9rem, 7.8vw, 8.4rem);
+  line-height: 0.83;
+  letter-spacing: -0.068em;
+}
+
+.review-dossier-page .dossier-hero-copy h1 span { color: var(--review-ink); }
+.review-dossier-page .dossier-hero-copy h1 span:last-child { color: var(--review-amber); }
+.review-dossier-page .dossier-hero-copy h1 i {
+  color: var(--review-amber);
+  font-style: normal;
+}
+
+.review-dossier-page .dossier-identity {
+  margin-top: 0;
+  padding: 0;
+  border-left: 0;
+  max-width: 720px;
+  font-size: clamp(0.94rem, 1.25vw, 1.08rem);
+  line-height: 1.7;
+}
+
+.review-dossier-page .dossier-byline {
+  margin: 18px 0 0;
+  color: var(--muted-dark);
+  font: 750 0.7rem/1.55 var(--mono);
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.review-dossier-page .dossier-byline [itemprop="name"] { color: var(--text); }
+
+.review-dossier-page .dossier-tags { margin-top: 18px; }
+.review-dossier-page .dossier-tags span {
+  min-height: 28px;
+  padding-inline: 8px;
+  border-color: var(--line-soft);
+  background: transparent;
+}
+
+.review-dossier-page .dossier-actions { margin-top: 20px; }
+.review-dossier-page .dossier-actions .button-primary {
+  border-color: var(--review-amber);
+  color: #090b0d;
+  background: var(--review-amber);
+}
+.review-dossier-page .dossier-actions .button-primary:hover,
+.review-dossier-page .dossier-actions .button-primary:focus-visible {
+  border-color: var(--review-amber-soft);
+  background: var(--review-amber-soft);
+}
+
+.review-dossier-page .dossier-score {
+  width: 100%;
+  max-width: 500px;
+  justify-self: end;
+  border: 0;
+  border-top: 1px solid var(--review-amber);
+  border-bottom: 1px solid var(--review-line);
+  background:
+    linear-gradient(145deg, rgba(255, 159, 47, 0.085), transparent 48%),
+    rgba(9, 11, 13, 0.4);
+  box-shadow: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.review-dossier-page .dossier-score::before,
+.review-dossier-page .dossier-score::after { display: none; }
+.review-dossier-page .dossier-score > header { padding-inline: 0; border-bottom-color: var(--line); }
+.review-dossier-page .dossier-score-main {
+  grid-template-columns: auto auto auto;
+  padding: 26px 0 18px;
+}
+.review-dossier-page .dossier-score-main b { font-size: clamp(6rem, 10vw, 8.8rem); }
+.review-dossier-page .dossier-score-main em { justify-self: end; }
+.review-dossier-page .dossier-score-main p {
+  grid-column: 1 / -1;
+  margin: 15px 0 0;
+  color: var(--review-bone);
+  font: 800 0.7rem/1.3 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.review-dossier-page .dossier-score > p { display: none; }
+.review-dossier-page .dossier-score dl { border-top-color: var(--line); }
+.review-dossier-page .dossier-score dl > div {
+  min-height: 46px;
+  padding-inline: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.012), transparent 68%);
+}
+
+.review-dossier-page .dossier-section,
+.review-dossier-page .dossier-subsection {
+  scroll-margin-top: calc(var(--header-height) - 23px);
+}
+.review-dossier-page #dossier-title { scroll-margin-top: calc(var(--header-height) + 20px); }
+
+.review-dossier-page .dossier-nav {
+  --dossier-progress: 0;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
+}
+.review-dossier-page .dossier-nav::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--review-amber) 0 72%, var(--cyan));
+  transform: scaleX(var(--dossier-progress));
+  transform-origin: left center;
+  transition: transform 90ms linear;
+}
+.review-dossier-page .dossier-nav .shell { position: relative; transition: box-shadow 150ms ease; }
+.review-dossier-page .dossier-nav.has-overflow:not(.at-start):not(.at-end) .shell { box-shadow: inset 18px 0 18px -20px #000, inset -18px 0 18px -20px #000; }
+.review-dossier-page .dossier-nav.has-overflow:not(.at-start).at-end .shell { box-shadow: inset 18px 0 18px -20px #000; }
+.review-dossier-page .dossier-nav.has-overflow.at-start:not(.at-end) .shell { box-shadow: inset -18px 0 18px -20px #000; }
+.review-dossier-page .dossier-nav a { position: relative; font-size: 0.72rem; transition: color 140ms ease, background 140ms ease; }
+.review-dossier-page .dossier-nav a[aria-current="location"] { color: var(--text); background: rgba(255, 159, 47, 0.045); }
+.review-dossier-page .dossier-nav a[aria-current="location"]::before {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  left: 12px;
+  height: 2px;
+  content: "";
+  background: var(--review-amber);
+}
+
+.review-dossier-page .dossier-section {
+  padding: clamp(60px, 6.5vw, 88px) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 0;
+}
+.review-dossier-page .dossier-section-muted { background: linear-gradient(180deg, rgba(255, 159, 47, 0.014), transparent 34%); }
+.review-dossier-page .dossier-section-head { padding-bottom: 18px; border-bottom: 0; }
+.review-dossier-page .dossier-section-head h2 { font-size: clamp(2.7rem, 5.4vw, 5.5rem); }
+.review-dossier-page .dossier-section .section-kicker,
+.review-dossier-page .review-label,
+.review-dossier-page .audit-card header span { color: var(--muted-dark); }
+.review-dossier-page .friction-ledger .section-kicker { color: var(--fuchsia-text); }
+
+.review-dossier-page .dossier-subsection {
+  margin-top: clamp(48px, 6vw, 76px);
+  padding-top: clamp(30px, 4vw, 46px);
+  border-top: 1px solid var(--line);
+}
+.review-dossier-page .dossier-subsection-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+  gap: 28px;
+  align-items: end;
+}
+.review-dossier-page .dossier-subsection-head h2 {
+  margin: 10px 0 0;
+  color: var(--review-ink);
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+.review-dossier-page .dossier-subsection-head h2 span { color: var(--review-amber); }
+.review-dossier-page .dossier-subsection-head > p { margin: 0; color: var(--muted); font-size: 0.84rem; line-height: 1.65; }
+
+/* Open ledgers: separators carry hierarchy; borders remain only where disclosure is functional. */
+.review-dossier-page .fit-gates,
+.review-dossier-page .taste-grid,
+.review-dossier-page .dossier-axis-grid,
+.review-dossier-page .field-note-grid,
+.review-dossier-page .insight-grid,
+.review-dossier-page .audit-grid,
+.review-dossier-page .protocol-grid {
+  border: 0;
+  border-top: 1px solid var(--line);
+  gap: 0;
+}
+.review-dossier-page .fit-gate,
+.review-dossier-page .taste-card,
+.review-dossier-page .dossier-axis,
+.review-dossier-page .insight-card,
+.review-dossier-page .audit-card,
+.review-dossier-page .protocol-grid article {
+  border: 0;
+  border-right: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: transparent;
+}
+.review-dossier-page .fit-gate:last-child,
+.review-dossier-page .taste-card:last-child,
+.review-dossier-page .dossier-axis:last-child { border-right: 0; }
+.review-dossier-page .fit-gate { min-height: 208px; }
+.review-dossier-page .taste-card { min-height: 190px; }
+.review-dossier-page .dossier-thesis { border-width: 0 0 0 2px; background: transparent; }
+.review-dossier-page .dossier-thesis::before { display: none; }
+.review-dossier-page .dossier-axis p { min-height: 160px; }
+.review-dossier-page .modifier-card { border-width: 1px 0; background: transparent; }
+.review-dossier-page .friction-ledger { border-width: 1px 0; background: transparent; }
+.review-dossier-page .field-note,
+.review-dossier-page .fit-tags { border: 0; border-bottom: 1px solid var(--line-soft); background: transparent; }
+.review-dossier-page .field-note { box-shadow: inset 2px 0 0 var(--review-amber); }
+.review-dossier-page .insight-card { min-height: 220px; }
+.review-dossier-page .audit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.review-dossier-page .audit-card { min-height: 0; padding: 22px 22px 24px; }
+.review-dossier-page .audit-card:nth-child(2n) { border-right: 0; }
+.review-dossier-page .protocol-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.review-dossier-page .protocol-grid article { min-height: 0; }
+.review-dossier-page .protocol-grid article:nth-child(2n) { border-right: 0; }
+
+.review-dossier-page .evidence-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 16px 0 16px 18px;
+  border: 0;
+  border-top: 1px solid var(--review-line);
+  border-bottom: 1px solid var(--review-line);
+  background: linear-gradient(90deg, rgba(255, 159, 47, 0.045), transparent 58%);
+  box-shadow: inset 2px 0 0 var(--review-amber);
+}
+.review-dossier-page .evidence-toolbar-copy > strong { display: block; margin-top: 8px; color: var(--text); font: 800 0.75rem/1.45 var(--mono); text-transform: uppercase; }
+.review-dossier-page .evidence-toolbar-copy > small { display: block; margin-top: 6px; color: var(--muted-dark); font: 800 0.7rem/1.35 var(--mono); text-transform: uppercase; }
+.review-dossier-page .evidence-toolbar-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.no-js .review-dossier-page .evidence-toolbar-actions { display: none; }
+.review-dossier-page .evidence-toolbar button {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  background: rgba(15, 19, 22, 0.72);
+  font: 800 0.7rem/1.3 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.review-dossier-page .evidence-toolbar button:first-child { color: var(--review-amber); border-color: var(--review-line); }
+.review-dossier-page .evidence-toolbar button:hover,
+.review-dossier-page .evidence-toolbar button:focus-visible { color: var(--text); border-color: var(--review-amber); }
+.review-dossier-page .evidence-toolbar button:disabled { opacity: 0.55; cursor: default; }
+.review-dossier-page .evidence-list { margin-top: 10px; }
+.review-dossier-page .evidence-arc summary { grid-template-columns: 42px minmax(0, 1fr) auto 34px; }
+.review-dossier-page .evidence-arc summary::after {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  justify-self: end;
+  border: 1px solid var(--line);
+  color: var(--review-amber);
+  content: "+";
+  font: 800 1rem/1 var(--mono);
+}
+.review-dossier-page .evidence-arc[open] summary::after { content: "-"; }
+.review-dossier-page .evidence-arc summary:hover,
+.review-dossier-page .evidence-arc summary:focus-visible { background: rgba(255, 159, 47, 0.03); }
+.review-dossier-page .evidence-arc:focus-within { border-color: var(--review-amber); }
+.review-dossier-page .evidence-arc[data-spoiler="medium"] summary { background: linear-gradient(90deg, rgba(255, 159, 47, 0.022), transparent 58%); }
+.review-dossier-page .evidence-arc[data-spoiler="heavy"] summary { background: linear-gradient(90deg, rgba(245, 5, 77, 0.035), transparent 58%); }
+.review-dossier-page .evidence-arc[data-spoiler="heavy"] summary::after { color: var(--fuchsia-text); border-color: rgba(245, 5, 77, 0.3); }
+.review-dossier-page .protocol-actions a:last-child { margin-left: auto; }
+
+.review-dossier-page .dossier-axis h3 {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1180px) {
+  .review-dossier-page .dossier-hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "title" "score" "summary";
+  }
+  .review-dossier-page .dossier-score { max-width: 720px; justify-self: stretch; }
+}
+
+@media (max-width: 900px) {
+  .review-dossier-page .dossier-subsection-head { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .review-dossier-page .dossier-hero { padding-top: 24px; }
+  .review-dossier-page .page-context {
+    overflow-x: auto;
+    margin-bottom: 12px;
+    font-size: 0.64rem;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+  .review-dossier-page .dossier-protocol { font-size: 0.62rem; }
+  .review-dossier-page .dossier-hero-grid { margin-top: 6px; gap: 8px; }
+  .review-dossier-page .dossier-hero-copy h1 { font-size: min(14vw, 4rem); }
+  .review-dossier-page .dossier-identity { font-size: 0.88rem; line-height: 1.52; }
+  .review-dossier-page .dossier-byline { margin-top: 12px; }
+  .review-dossier-page .dossier-actions { margin-top: 14px; }
+  .review-dossier-page .dossier-tags { margin-top: 12px; }
+  .review-dossier-page .dossier-score-main { grid-template-columns: auto auto auto; padding-block: 20px 14px; }
+  .review-dossier-page .dossier-score-main em { grid-column: auto; justify-self: end; margin-top: 0; }
+  .review-dossier-page .dossier-score dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .review-dossier-page .dossier-score dl > div { display: block; min-height: 0; padding: 10px 8px 10px 0; }
+  .review-dossier-page .dossier-score dd { margin-top: 4px; }
+  .review-dossier-page .dossier-section { padding-block: 54px; }
+  .review-dossier-page .dossier-subsection { margin-top: 42px; padding-top: 30px; }
+  .review-dossier-page .dossier-section-head h2 { font-size: min(13vw, 3.7rem); }
+  .review-dossier-page .dossier-subsection-head h2 { font-size: min(10vw, 3rem); }
+  .review-dossier-page .audit-grid,
+  .review-dossier-page .protocol-grid { grid-template-columns: 1fr; }
+  .review-dossier-page .fit-gate,
+  .review-dossier-page .taste-card,
+  .review-dossier-page .dossier-axis,
+  .review-dossier-page .insight-card,
+  .review-dossier-page .audit-card,
+  .review-dossier-page .protocol-grid article { border-right: 0; }
+  .review-dossier-page .dossier-axis p { min-height: 0; }
+  .review-dossier-page .evidence-toolbar { grid-template-columns: 1fr; padding-right: 0; }
+  .review-dossier-page .evidence-toolbar-actions { display: grid; justify-content: stretch; }
+  .review-dossier-page .evidence-toolbar button { width: 100%; }
+  .review-dossier-page .evidence-arc summary { grid-template-columns: 34px minmax(0, 1fr) 34px; }
+  .review-dossier-page .evidence-arc summary > small { grid-column: 2; }
+  .review-dossier-page .evidence-arc summary::after { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
+  .review-dossier-page .protocol-actions a:last-child { margin-left: 0; }
+}
+
+@media (max-width: 420px) {
+  .review-dossier-page .dossier-hero-copy h1 { font-size: min(14vw, 3.45rem); }
+  .review-dossier-page .dossier-score-main b { font-size: min(25vw, 6.4rem); }
+  .review-dossier-page .dossier-score-main em { font-size: min(15vw, 3.8rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-dossier-page .dossier-nav::after,
+  .review-dossier-page .dossier-nav .shell,
+  .review-dossier-page .dossier-nav a,
+  .review-dossier-page .evidence-arc summary { transition: none; }
+}
+
+@media print {
+  .review-dossier-page .dossier-hero::before,
+  .review-dossier-page .dossier-hero::after,
+  .review-dossier-page .dossier-nav,
+  .review-dossier-page .evidence-toolbar-actions { display: none !important; }
+  .review-dossier-page .dossier-section { break-inside: avoid; }
+  .review-dossier-page .evidence-arc { break-inside: avoid; }
+}
+
+@media (forced-colors: active) {
+  .review-dossier-page .dossier-hero::before,
+  .review-dossier-page .dossier-hero::after { display: none; }
+  .review-dossier-page .dossier-nav,
+  .review-dossier-page .evidence-toolbar,
+  .review-dossier-page .evidence-toolbar button,
+  .review-dossier-page .evidence-arc summary::after { border-color: CanvasText; box-shadow: none; }
+  .review-dossier-page .dossier-nav::after,
+  .review-dossier-page .dossier-nav a[aria-current="location"]::before { background: Highlight; }
+}

@@ -98,7 +98,7 @@ REFLOW_CONTRACT_TOKENS = (
     ".dossier-axis > header,",
     ".score-equation > div {",
 )
-DOSSIER_POLISH_REFLOW_TOKEN = (
+DOSSIER_REFLOW_TOKEN = (
     ".review-dossier-page .dossier-axis h3 {\n"
     "  overflow-wrap: anywhere;"
 )
@@ -848,9 +848,9 @@ def main() -> int:
     )
     if missing_reflow_tokens:
         errors.append(f"text-spacing reflow contract is missing {missing_reflow_tokens}")
-    dossier_polish = (ROOT / "assets" / "review-dossier-polish.css").read_text(encoding="utf-8")
-    if DOSSIER_POLISH_REFLOW_TOKEN not in dossier_polish:
-        errors.append("dossier polish must preserve narrow-screen axis heading wrapping")
+    dossier_css = (ROOT / "assets" / "review-dossier.css").read_text(encoding="utf-8")
+    if DOSSIER_REFLOW_TOKEN not in dossier_css:
+        errors.append("consolidated dossier CSS must preserve narrow-screen axis heading wrapping")
     for relative, tokens in ROUTE_REFLOW_CONTRACTS.items():
         content = (ROOT / relative).read_text(encoding="utf-8")
         missing = [token for token in tokens if token not in content]
