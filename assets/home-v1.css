@@ -14,6 +14,13 @@ html {
   scroll-margin-top: var(--header-height);
 }
 
+.field-region:focus { outline: none; }
+.field-region:focus > [data-field-layer]:first-child::before {
+  filter:
+    drop-shadow(-5px 0 5px rgba(10, 232, 247, 0.22))
+    drop-shadow(5px 0 5px rgba(245, 5, 77, 0.22));
+}
+
 [data-field-layer] {
   position: relative;
   padding: clamp(118px, 10vw, 154px) 0;
@@ -251,6 +258,11 @@ html {
 .field-feature h3 .field-title-primary { color: var(--text); }
 .field-feature h3 .field-title-accent,
 .field-feature h3 .field-title-mark { color: var(--cyan); }
+.field-feature-theory h3 {
+  max-width: 16ch;
+  font-size: clamp(2.65rem, 4.15vw, 4.5rem);
+  letter-spacing: -0.065em;
+}
 .field-feature-review h3 .field-title-accent,
 .field-feature-review h3 .field-title-mark { color: var(--fuchsia-text); }
 
@@ -469,6 +481,7 @@ html {
   .field-feature-list { margin-top: 42px; padding-top: 36px; }
   .field-feature { min-height: 430px; }
   .field-feature h3 { margin-top: 48px; font-size: min(11.5vw, 3.75rem); }
+  .field-feature-theory h3 { margin-top: 42px; font-size: min(10.5vw, 3.3rem); }
   .field-record-meta { grid-template-columns: 1fr; gap: 14px; }
   .field-feature-intro { grid-template-columns: 1fr; gap: 24px; }
   .field-feature-intro .button { justify-self: start; }
@@ -507,6 +520,10 @@ html {
     background: CanvasText;
     filter: none;
     transform: translateX(-50%);
+  }
+  .field-region:focus > [data-field-layer]:first-child::before {
+    outline: 2px solid CanvasText;
+    outline-offset: 5px;
   }
   .field-feature-list,
   .field-feature-list > li + li,

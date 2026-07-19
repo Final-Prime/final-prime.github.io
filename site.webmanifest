@@ -46,7 +46,7 @@
   "shortcuts": [
     {"name": "Systems Index", "short_name": "Systems", "url": "/systems/"},
     {"name": "Works Index", "short_name": "Works", "url": "/works/"},
-    {"name": "Thought Index", "short_name": "Thought", "url": "/thought/"},
+    {"name": "Theory Index", "short_name": "Theory", "url": "/thought/"},
     {"name": "Game Reviews", "short_name": "Reviews", "url": "/reviews/"},
     {"name": "Public Index", "short_name": "Index", "url": "/index/"},
     {"name": "Contact Final Prime", "short_name": "Contact", "url": "/contact/"},
