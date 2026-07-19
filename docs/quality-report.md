@@ -4,12 +4,12 @@
 
 This report covers the current Final Prime GitHub Pages public surface as reviewed on 2026-07-19. The website is the primary deliverable. Repository documentation and automated checks support developer handoff and guard the public/private boundary.
 
-The review covers ten indexable routes plus the non-indexable 404 document. It does not evaluate or enumerate private code, research, client material or unpublished work.
+The review covers eleven indexable routes plus the non-indexable 404 document. It does not evaluate or enumerate private code, research, client material or unpublished work.
 
 ## Current public surface
 
 - The homepage positions Final Prime as an independent, founder-led studio and routes visitors to disclosed work.
-- `/systems/` presents one public A/SYNC concept record without implementation internals.
+- `/systems/` is a compact systems registry; `/systems/async/` presents the dedicated FP-SYS-0003 prototype record without implementation internals or performance claims.
 - `/works/` declares five release lanes and presents two public objects: the `FP-WRK-0001` REALOPS-01 operational research dossier and `FP-REV-0001` Metro review.
 - `/works/realops-01/` publishes the evidence-bound single-agent routing pilot as aggregate public evidence while keeping fixtures, prompts, transcripts, repositories and grader internals private.
 - `/thought/` is presented consistently as the Theory Index, declares three empty theoretical/editorial lanes and directs review readers to Works.
@@ -28,6 +28,8 @@ The review covers ten indexable routes plus the non-indexable 404 document. It d
 - Tightened the 390 px hero rhythm so both primary actions clear the common 844 px viewport, and introduced a readable single-column hero between 761 and 900 px.
 - Reduced the visual authority of the unpublished Theory preview and replaced placeholder language with an explicit publication threshold.
 - Unified the visible `Theory` taxonomy across primary navigation, footers, the Theory Index, Public Index and installable-site shortcut without changing the stable `/thought/` route.
+- Split the A/SYNC prototype into a dedicated canonical dossier and reduced the Systems Index to one scalable record plus an explicit disclosure rail.
+- Published the controlled Objective, Constraints, Signals and Resolved Outcome model while explicitly withholding implementation, deployment and performance claims.
 - Aligned homepage registry labels with the actual published states and routes.
 - Raised compact interface typography to a readable floor while retaining the dense system language.
 - Replaced the inconsistent homepage and subpage footer grids with one open three-group ledger across all ten public routes.
@@ -47,7 +49,7 @@ The review covers ten indexable routes plus the non-indexable 404 document. It d
 ## Truthfulness and disclosure boundary
 
 - Final Prime remains an independent initiative owned by Daniel Kenessy in an individual capacity; no registered-company claim is introduced.
-- A/SYNC remains a concept/prototype surface; no implementation architecture or performance result is claimed.
+- A/SYNC remains a `III / V` concept/prototype surface; no implementation architecture, deployment, benchmark, case study, client outcome or performance result is claimed.
 - No clients, partners, revenue, funding, savings or product-result claims are introduced.
 - All three Theory lanes remain visibly empty instead of using decorative placeholders or invented dates.
 - REALOPS-01 is explicitly scoped as a 40-mission pilot, not a universal model-intelligence ranking or broad statistical claim.
@@ -82,14 +84,14 @@ The current branch passes all repository quality gates:
 
 Current measured surface:
 
-- 11 HTML documents;
-- 10 indexable canonical routes;
-- 395 local references;
-- 293 reachable CSS classes;
+- 12 HTML documents;
+- 11 indexable canonical routes;
+- 438 local references;
+- 318 reachable CSS classes;
 - 5 budgeted scripts; and
 - 14 validated web-manifest targets.
 
-All eleven documents pass the repository semantic and ARIA parser, local-reference graph, print and reflow contracts. The ten-document surface that preceded REALOPS-01 also returned zero structural errors from the W3C Nu HTML checker on 2026-07-14; the new route is protected by the same local semantic contracts pending the next external Nu validation sweep.
+All twelve documents pass the repository semantic and ARIA parser, local-reference graph, print and reflow contracts. The ten-document surface that preceded REALOPS-01 also returned zero structural errors from the W3C Nu HTML checker on 2026-07-14; the newer REALOPS-01 and A/SYNC routes are protected by the same local semantic contracts pending the next external Nu validation sweep.
 
 ## Privacy and dependency review
 

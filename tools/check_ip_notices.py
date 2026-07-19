@@ -22,7 +22,9 @@ REQUIRED_FILES = [
 PUBLIC_HTML = [
     ROOT / "index.html",
     ROOT / "systems" / "index.html",
+    ROOT / "systems" / "async" / "index.html",
     ROOT / "works" / "index.html",
+    ROOT / "works" / "realops-01" / "index.html",
     ROOT / "thought" / "index.html",
     ROOT / "reviews" / "index.html",
     ROOT / "reviews" / "metro-2033-redux" / "index.html",

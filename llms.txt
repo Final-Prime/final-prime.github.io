@@ -6,9 +6,10 @@
 
 - [Final Prime](https://final-prime.github.io/): Public overview and current release state.
 - [Systems](https://final-prime.github.io/systems/): Public systems index and disclosure boundaries.
+- [A/SYNC](https://final-prime.github.io/systems/async/): FP-SYS-0003, a prototype coordination-system concept with a controlled public model and explicit evidence limits.
 - [Works](https://final-prime.github.io/works/): Public works, operational research, reviews, evidence dossiers, and release-lane index.
 - [REALOPS-01 Agent Roster](https://final-prime.github.io/works/realops-01/): FP-WRK-0001, a frozen operational routing pilot across four single-agent profiles and 40 matched missions.
-- [Thought](https://final-prime.github.io/thought/): Declared philosophy, essay, and video-analysis lanes; currently no published object.
+- [Theory](https://final-prime.github.io/thought/): Declared philosophy, essay, and video-analysis lanes; currently no published object.
 - [Game reviews](https://final-prime.github.io/reviews/): Works-classified review methodology, registry, and published dossiers.
 - [Metro 2033 Redux review](https://final-prime.github.io/reviews/metro-2033-redux/): FP-REV-0001, a scored long-form review dossier.
 - [Public index](https://final-prime.github.io/index/): Route-level public object inventory.

@@ -70,14 +70,6 @@ body.menu-open .scroll-readout { display: none; }
 .surface-current::before { background: var(--cyan); }
 .surface-current header strong { color: var(--cyan); }
 
-.surface-private {
-  border-color: rgba(245, 5, 77, 0.3);
-  box-shadow: inset 2px 0 0 var(--fuchsia);
-}
-
-.surface-private::before { background: var(--fuchsia); }
-.surface-private header strong { color: var(--fuchsia-text); }
-
 .surface-actions {
   display: flex;
   flex-wrap: wrap;
@@ -286,8 +278,7 @@ body.menu-open .scroll-readout { display: none; }
   .site-footer { background: Canvas; }
   .footer-nav-group,
   .footer-rail,
-  .surface-current,
-  .surface-private { border-color: CanvasText; box-shadow: none; }
+  .surface-current { border-color: CanvasText; box-shadow: none; }
   .footer-nav a::after { background: CanvasText; box-shadow: none; }
 }
 
