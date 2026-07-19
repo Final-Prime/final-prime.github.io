@@ -166,6 +166,8 @@ ROUTE_REFLOW_CONTRACTS = {
         ".realops-hero h1 {",
         ".realops-section .section-head h2 {",
         ".role-card h3 {",
+        ".method-copy h2 {",
+        ".limits-card h3 {",
         "overflow-wrap: normal;",
         "text-wrap: balance;",
         "@media (max-width: 1120px)",
@@ -827,7 +829,7 @@ REVIEWS_INDEX_CSS_BUDGET = 16000
 
 REALOPS_POLISH_CONTRACT = {
     "works/realops-01/index.html": (
-        '<link rel="stylesheet" href="/assets/realops-dossier.css?v=20260719-2">',
+        '<link rel="stylesheet" href="/assets/realops-dossier.css?v=20260719-3">',
         'class="realops-scope"',
         'class="roster-grid"',
         'class="routing-rail"',
@@ -840,6 +842,9 @@ REALOPS_POLISH_CONTRACT = {
         "background: transparent;",
         ".role-stats > div::before {",
         ".routing-rail > div::before {",
+        ".method-steps::before {",
+        ".limits-card::before {",
+        ".ablation-grid article::before {",
         "@media (max-width: 1120px)",
         "@media (max-width: 760px)",
         "@media (max-width: 470px)",
