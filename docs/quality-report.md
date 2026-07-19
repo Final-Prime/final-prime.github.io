@@ -52,6 +52,7 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Rebuilt Metro as a five-layer, open-ledger dossier; consolidated its styles and preserved all score, audit, caveat and evidence contracts.
 - Folded the Metro fit, taste and score-axis open-ledger rules into their primary component definitions with byte-identical computed geometry and no late override dependency.
 - Folded the Metro field note, reader tags, insight, audit and protocol ledgers into their primary component definitions with the same computed layout contract.
+- Folded the Metro thesis, modifier and friction ledgers into their primary component definitions and corrected the registry guard that prevents late open-ledger overrides from returning.
 - Migrated Game Reviews from Thought to Works/Evidence without changing canonical routes.
 - Capped Metro's wide-screen display typography, prohibited mid-word heading breaks and balanced the section-title columns.
 - Removed fixed-height score copy, aligned axis meters and modifier footers, and stopped the Reader Tags panel from stretching into false empty space.
