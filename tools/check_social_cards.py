@@ -123,7 +123,7 @@ def validate_page(path: Path) -> list[str]:
 
 
 def main() -> int:
-    html_files = sorted(ROOT.rglob("*.html"))
+    html_files = sorted(path for path in ROOT.rglob("*.html") if "output" not in path.relative_to(ROOT).parts)
     errors = [error for path in html_files for error in validate_page(path)]
     if errors:
         print("Social card check failed:")

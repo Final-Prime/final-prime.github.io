@@ -1,0 +1,77 @@
+.realops03-page .realops-hero { min-height: min(900px, calc(100vh - 74px)); }
+.realops03-page .realops-hero-copy h1 { max-width: 950px; }
+.realops03-decision { border-top: 1px solid var(--line); }
+.realops03-verdict { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(340px, .65fr); border: 1px solid var(--line-strong); background: linear-gradient(120deg, rgba(239,77,121,.09), transparent 58%), var(--surface); }
+.verdict-lead { padding: clamp(30px, 5vw, 70px); border-right: 1px solid var(--line); }
+.verdict-lead > span, .route-card > span, .realops03-scenario-grid article > span { color: var(--signal-pink); font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.verdict-lead > strong { display: block; margin: 12px 0; font-family: var(--font-display); font-size: clamp(2.8rem, 7vw, 6.5rem); line-height: .9; }
+.verdict-lead p { max-width: 720px; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.25rem); }
+.verdict-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+.verdict-metrics div { display: grid; align-content: center; gap: 8px; min-height: 150px; padding: 24px; border: solid var(--line); border-width: 0 0 1px 1px; }
+.verdict-metrics dt { color: var(--muted); font-size: .72rem; letter-spacing: .11em; text-transform: uppercase; }
+.verdict-metrics dd { margin: 0; font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 3rem); }
+.realops03-route-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: 28px; background: var(--line); border: 1px solid var(--line); }
+.route-card { display: flex; flex-direction: column; min-height: 390px; padding: clamp(24px, 3.5vw, 42px); background: var(--surface); }
+.route-card h3 { margin: 10px 0 14px; font-family: var(--font-display); font-size: clamp(1.9rem, 3.2vw, 3.2rem); }
+.route-card p { color: var(--muted); }
+.route-card dl { display: grid; gap: 12px; margin: 28px 0; }
+.route-card dl div { display: flex; justify-content: space-between; gap: 20px; padding-top: 12px; border-top: 1px solid var(--line); }
+.route-card dt { color: var(--muted); }
+.route-card dd { margin: 0; font-weight: 750; }
+.route-card > strong { margin-top: auto; color: var(--text); font-size: .82rem; line-height: 1.5; }
+.route-low { box-shadow: inset 0 3px 0 #0fcad8; }
+.route-value { box-shadow: inset 0 3px 0 #d7a84a; }
+.route-default { box-shadow: inset 0 3px 0 #ef4d79; background: linear-gradient(160deg, rgba(239,77,121,.09), transparent 42%), var(--surface); }
+.realops03-figures { background: var(--surface-deep); }
+.realops03-figure-stack { display: grid; gap: 36px; }
+.realops03-figure-stack figure { margin: 0; overflow: hidden; border: 1px solid var(--line); background: #090b0d; }
+.realops03-figure-stack a { display: block; }
+.realops03-figure-stack img { display: block; width: 100%; height: auto; }
+.realops03-figure-stack figcaption { padding: 18px 22px; border-top: 1px solid var(--line); color: var(--muted); line-height: 1.65; }
+.realops03-figure-stack figcaption strong { color: var(--text); }
+.realops03-page .table-wrap { margin-top: 42px; }
+.realops03-page tbody .featured { background: rgba(239,77,121,.08); }
+.realops03-scenario-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.realops03-scenario-grid article { min-height: 280px; padding: clamp(26px, 4vw, 48px); background: var(--surface); }
+.realops03-scenario-grid h3 { margin: 12px 0; font-family: var(--font-display); font-size: clamp(1.6rem, 2.8vw, 2.7rem); }
+.realops03-scenario-grid p { color: var(--muted); }
+.realops03-scenario-grid strong { display: block; margin-top: 28px; color: var(--signal-cyan); font-size: .8rem; letter-spacing: .07em; text-transform: uppercase; }
+.realops03-protocol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: 34px; border: 1px solid var(--line); }
+.realops03-protocol div { display: grid; gap: 5px; padding: 20px; border-right: 1px solid var(--line); }
+.realops03-protocol div:last-child { border-right: 0; }
+.realops03-protocol span { color: var(--signal-cyan); font-size: .72rem; font-weight: 800; }
+.realops03-protocol small { color: var(--muted); line-height: 1.4; }
+.realops03-anatomy { background: linear-gradient(180deg, rgba(15,202,216,.025), transparent 30%); }
+.realops03-anatomy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.realops03-anatomy-grid article { padding: clamp(25px, 4vw, 44px); border: 1px solid var(--line); background: var(--surface); }
+.realops03-anatomy-grid h3 { margin: 0 0 14px; font-family: var(--font-display); font-size: clamp(1.5rem, 2.6vw, 2.5rem); }
+.realops03-anatomy-grid p, .realops03-audit-note > p { color: var(--muted); }
+.realops03-audit-note { display: grid; grid-template-columns: minmax(260px, .65fr) minmax(0, 1.35fr); gap: 40px; align-items: center; margin-top: 18px; padding: clamp(28px, 5vw, 58px); border: 1px solid var(--line-strong); background: var(--surface); }
+.realops03-audit-note h3 { margin: 8px 0 0; font-family: var(--font-display); font-size: clamp(1.8rem, 3.6vw, 3.5rem); }
+.realops03-limits { background: var(--surface-deep); }
+.realops03-page .limits-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr); gap: clamp(40px, 8vw, 120px); }
+.realops03-page .limits-grid h2, .realops03-next h2 { font-family: var(--font-display); font-size: clamp(2.3rem, 5vw, 5rem); line-height: .98; }
+.realops03-page .limits-grid p, .realops03-next p { color: var(--muted); font-size: 1.08rem; }
+.realops03-page .limits-grid ul { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.realops03-page .limits-grid li { padding: 17px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+.realops03-next .shell { max-width: 1050px; text-align: center; }
+.realops03-next .hero-actions { justify-content: center; }
+@media (max-width: 980px) {
+  .realops03-verdict, .realops03-audit-note, .realops03-page .limits-grid { grid-template-columns: 1fr; }
+  .verdict-lead { border-right: 0; border-bottom: 1px solid var(--line); }
+  .verdict-metrics div:nth-last-child(-n+2) { border-bottom: 0; }
+  .realops03-route-grid { grid-template-columns: 1fr; }
+  .route-card { min-height: 0; }
+  .realops03-protocol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .realops03-protocol div { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 680px) {
+  .verdict-metrics, .realops03-scenario-grid, .realops03-anatomy-grid { grid-template-columns: 1fr; }
+  .verdict-metrics div { min-height: 112px; border-left: 0; }
+  .realops03-protocol { grid-template-columns: 1fr; }
+  .realops03-protocol div { border-right: 0; }
+  .realops03-figure-stack { gap: 24px; }
+  .realops03-figure-stack figure { overflow-x: auto; }
+  .realops03-figure-stack img { min-width: 760px; }
+}
+@media (prefers-reduced-motion: reduce) { .realops03-page * { scroll-behavior: auto !important; } }

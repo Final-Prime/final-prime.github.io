@@ -14,7 +14,8 @@ Any future transfer to a company requires a separate signed assignment. GitHub o
 /
 ├── systems/
 ├── works/
-│   └── realops-01/
+│   ├── realops-01/
+│   └── realops-03/
 ├── thought/
 ├── reviews/
 │   └── metro-2033-redux/
@@ -32,6 +33,8 @@ Platform raster icons are derived from `assets/mark.svg`. Normal and maskable ic
 The first published review record is `FP-REV-0001`, available at `/reviews/metro-2033-redux/`.
 
 The first published Works record is `FP-WRK-0001`, the REALOPS-01 single-agent routing pilot at `/works/realops-01/`.
+
+The current Works research record is `FP-WRK-0002`, the REALOPS-03 fresh-state evidence pilot at `/works/realops-03/`.
 
 `/llms.txt` is a machine-readable map of the same ten indexable public routes. It is a navigation aid only and does not grant access, reuse, training, or other rights.
 

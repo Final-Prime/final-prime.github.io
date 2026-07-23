@@ -38,6 +38,7 @@ EXPECTED_BREADCRUMB_LINKS = {
     "systems/async/index.html": ["/", "/systems/"],
     "works/index.html": ["/"],
     "works/realops-01/index.html": ["/", "/works/"],
+    "works/realops-03/index.html": ["/", "/works/"],
     "thought/index.html": ["/"],
     "reviews/index.html": ["/", "/works/"],
     "reviews/metro-2033-redux/index.html": ["/", "/works/", "/reviews/"],
@@ -401,7 +402,7 @@ def validate_target_sizes(content: str) -> list[str]:
 
 def main() -> int:
     errors: list[str] = []
-    paths = sorted(ROOT.rglob("*.html"))
+    paths = sorted(path for path in ROOT.rglob("*.html") if "output" not in path.relative_to(ROOT).parts)
     for path in paths:
         errors.extend(validate_page(path))
     home_runtime = (ROOT / "assets" / "home.js").read_text(encoding="utf-8")

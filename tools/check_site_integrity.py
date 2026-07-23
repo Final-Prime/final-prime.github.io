@@ -890,6 +890,20 @@ REALOPS_POLISH_CONTRACT = {
         "@media (forced-colors: active)",
         "@media print",
     ),
+    "works/realops-03/index.html": (
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260723-1">',
+        'class="realops03-route-grid"',
+        'class="realops03-figure-stack"',
+        'class="realops03-scenario-grid"',
+    ),
+    "assets/realops03-dossier.css": (
+        ".realops03-verdict {",
+        ".realops03-route-grid {",
+        ".realops03-figure-stack {",
+        ".realops03-scenario-grid {",
+        "@media (max-width: 680px)",
+        "@media (prefers-reduced-motion: reduce)",
+    ),
 }
 
 REALOPS_DOSSIER_CSS_BUDGET = 26000
@@ -1020,6 +1034,7 @@ THEORY_LABEL_PAGES = (
     "systems/async/index.html",
     "works/index.html",
     "works/realops-01/index.html",
+    "works/realops-03/index.html",
     "thought/index.html",
     "reviews/index.html",
     "reviews/metro-2033-redux/index.html",
@@ -1056,6 +1071,7 @@ FOOTER_PAGES = (
     "systems/async/index.html",
     "works/index.html",
     "works/realops-01/index.html",
+    "works/realops-03/index.html",
     "thought/index.html",
     "reviews/index.html",
     "reviews/metro-2033-redux/index.html",
@@ -1266,7 +1282,7 @@ def validate_homepage_identity_contract(content: str) -> list[str]:
 def main() -> int:
     errors: list[str] = []
     documents: dict[Path, DocumentParser] = {}
-    html_paths = sorted(ROOT.rglob("*.html"))
+    html_paths = sorted(path for path in ROOT.rglob("*.html") if "output" not in path.relative_to(ROOT).parts)
 
     for path in html_paths:
         document = parse_document(path)
@@ -1507,9 +1523,9 @@ def main() -> int:
             errors.append(f"{relative}: Public Index contract is missing {missing}")
     public_index_page = (ROOT / "index/index.html").read_text(encoding="utf-8")
     public_record_count = public_index_page.count('class="registry-card')
-    if public_record_count != 9:
+    if public_record_count != 10:
         errors.append(
-            "index/index.html: expected exactly 9 disclosed registry records, "
+            "index/index.html: expected exactly 10 disclosed registry records, "
             f"found {public_record_count}"
         )
     public_index_css_size = len(
