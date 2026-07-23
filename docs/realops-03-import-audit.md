@@ -2,7 +2,7 @@
 
 ## Decision
 
-REALOPS-03 is published as `FP-WRK-0002` at `/works/realops-03/`. It is a 500-mission operational-research pilot, not a product guarantee or a universal model-intelligence ranking. REALOPS-01 remains available as a historical pilot; REALOPS-03 supersedes its current routing recommendation.
+REALOPS-03 is published as **The Reliability Frontier**, object `FP-WRK-0002`, at `/works/realops-03/`. It is a 500-mission operational-research pilot, not a product guarantee or a universal model-intelligence ranking. REALOPS-01 remains available as a historical pilot; REALOPS-03 supersedes its current routing recommendation.
 
 The practical default is Sol/high: 100/100 deterministic valid missions, zero catastrophic model failures, approximately 38% lower estimated list-price cost per valid mission and 44% lower provider-active time than Sol/max. Sol/max retains only a 0.07-point score-tiebreak edge in this task mix.
 

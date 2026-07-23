@@ -119,8 +119,10 @@ def main() -> int:
     for token in (
         'data-work-id="FP-WRK-0002"',
         '<link rel="canonical" href="https://final-prime.github.io/works/realops-03/">',
-        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260723-1">',
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-1">',
         '<meta property="article:published_time" content="2026-07-23">',
+        '<h1 id="realops-title" itemprop="headline">The <span>Reliability Frontier</span></h1>',
+        '<p class="frontier-subtitle">A 500-mission field test for AI agents</p>',
         'Agent missions</dt><dd>500 / 500 complete</dd>',
         'Blind Codex audit</dt><dd>500 + 140</dd>',
         'Use Sol / high by default.',
@@ -136,11 +138,14 @@ def main() -> int:
         require(page03, token, "REALOPS-03 page", errors)
 
     for token in (
+        ".frontier-status-rail",
         ".realops03-route-grid",
         ".realops03-figure-stack",
         ".realops03-scenario-grid",
+        ".evidence-disclosure",
         "@media (max-width: 680px)",
         "@media (prefers-reduced-motion: reduce)",
+        "@media print",
     ):
         require(css03, token, "REALOPS-03 CSS", errors)
 
@@ -149,7 +154,7 @@ def main() -> int:
         "assets/works/realops-03/realops03-final-intelligence-cost.svg",
         "assets/works/realops-03/realops03-final-speed-intelligence-cost.png",
         "assets/works/realops-03/realops03-final-speed-intelligence-cost.svg",
-        "assets/works/realops-03/og.png",
+        "assets/works/realops-03/og-reliability-frontier.png",
     ):
         if not (ROOT / relative).is_file():
             errors.append(f"REALOPS-03 assets: missing {relative!r}")
@@ -159,7 +164,7 @@ def main() -> int:
         'FP-WRK-0001 / Historical evidence dossier',
         'Public objects</dt><dd>03</dd>',
         'href="/works/realops-03/"',
-        'FP-WRK-0002 / Published evidence dossier',
+        'FP-WRK-0002 / REALOPS-03 / Published evidence dossier',
     ):
         require(works, token, "Works Index", errors)
 
@@ -168,8 +173,8 @@ def main() -> int:
         '<h2>REALOPS-01 Agent Roster</h2>',
         '<dd>/works/realops-01/</dd>',
         'Disclosed records</dt><dd>10</dd>',
-        '<span>FP-WRK-0002</span><strong>Published</strong>',
-        '<h2>REALOPS-03 Fresh-State Evidence Suite</h2>',
+        '<span>FP-WRK-0002 / REALOPS-03</span><strong>Published</strong>',
+        '<h2>The Reliability Frontier</h2>',
         '<dd>/works/realops-03/</dd>',
     ):
         require(registry, token, "Public Index", errors)
