@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PAGE_PATH = ROOT / "works" / "realops-01" / "index.html"
 CSS_PATH = ROOT / "assets" / "realops-dossier.css"
+PAGE03_PATH = ROOT / "works" / "realops-03" / "index.html"
+CSS03_PATH = ROOT / "assets" / "realops03-dossier.css"
 
 PROFILES = (
     {
@@ -71,9 +73,12 @@ def main() -> int:
     errors: list[str] = []
     page = PAGE_PATH.read_text(encoding="utf-8")
     css = CSS_PATH.read_text(encoding="utf-8")
+    page03 = PAGE03_PATH.read_text(encoding="utf-8")
+    css03 = CSS03_PATH.read_text(encoding="utf-8")
     works = (ROOT / "works" / "index.html").read_text(encoding="utf-8")
     registry = (ROOT / "index" / "index.html").read_text(encoding="utf-8")
     audit = (ROOT / "docs" / "realops-01-import-audit.md").read_text(encoding="utf-8")
+    audit03 = (ROOT / "docs" / "realops-03-import-audit.md").read_text(encoding="utf-8")
 
     for token in (
         'data-work-id="FP-WRK-0001"',
@@ -81,7 +86,7 @@ def main() -> int:
         '<link rel="canonical" href="https://final-prime.github.io/works/realops-01/">',
         '<link rel="stylesheet" href="/assets/realops-dossier.css?v=20260719-3">',
         '<meta property="article:published_time" content="2026-07-19">',
-        '<meta property="article:modified_time" content="2026-07-19">',
+        '<meta property="article:modified_time" content="2026-07-23">',
         'Evidence frozen</dt><dd><time datetime="2026-07-18">18 Jul 2026</time>',
         'Standard missions</dt><dd>40</dd>',
         'Profiles</dt><dd>04</dd>',
@@ -112,9 +117,49 @@ def main() -> int:
         require(css, profile["meter"], f'{profile["role"]} token meter', errors)
 
     for token in (
+        'data-work-id="FP-WRK-0002"',
+        '<link rel="canonical" href="https://final-prime.github.io/works/realops-03/">',
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260723-1">',
+        '<meta property="article:published_time" content="2026-07-23">',
+        'Agent missions</dt><dd>500 / 500 complete</dd>',
+        'Blind Codex audit</dt><dd>500 + 140</dd>',
+        'Use Sol / high by default.',
+        '100 / 100',
+        '$0.752',
+        '17 DAT disagreements',
+        '27 OPS disagreements',
+        'A routing result, not a universal leaderboard.',
+        'no subagents, network, live repositories, credentials, or private raw evidence were exposed.',
+        '/assets/works/realops-03/realops03-final-intelligence-cost.png',
+        '/assets/works/realops-03/realops03-final-speed-intelligence-cost.png',
+    ):
+        require(page03, token, "REALOPS-03 page", errors)
+
+    for token in (
+        ".realops03-route-grid",
+        ".realops03-figure-stack",
+        ".realops03-scenario-grid",
+        "@media (max-width: 680px)",
+        "@media (prefers-reduced-motion: reduce)",
+    ):
+        require(css03, token, "REALOPS-03 CSS", errors)
+
+    for relative in (
+        "assets/works/realops-03/realops03-final-intelligence-cost.png",
+        "assets/works/realops-03/realops03-final-intelligence-cost.svg",
+        "assets/works/realops-03/realops03-final-speed-intelligence-cost.png",
+        "assets/works/realops-03/realops03-final-speed-intelligence-cost.svg",
+        "assets/works/realops-03/og.png",
+    ):
+        if not (ROOT / relative).is_file():
+            errors.append(f"REALOPS-03 assets: missing {relative!r}")
+
+    for token in (
         'href="/works/realops-01/"',
-        'FP-WRK-0001 / Published evidence dossier',
-        'Public objects</dt><dd>02</dd>',
+        'FP-WRK-0001 / Historical evidence dossier',
+        'Public objects</dt><dd>03</dd>',
+        'href="/works/realops-03/"',
+        'FP-WRK-0002 / Published evidence dossier',
     ):
         require(works, token, "Works Index", errors)
 
@@ -122,7 +167,10 @@ def main() -> int:
         '<span>FP-WRK-0001</span><strong>Published</strong>',
         '<h2>REALOPS-01 Agent Roster</h2>',
         '<dd>/works/realops-01/</dd>',
-        'Disclosed records</dt><dd>09</dd>',
+        'Disclosed records</dt><dd>10</dd>',
+        '<span>FP-WRK-0002</span><strong>Published</strong>',
+        '<h2>REALOPS-03 Fresh-State Evidence Suite</h2>',
+        '<dd>/works/realops-03/</dd>',
     ):
         require(registry, token, "Public Index", errors)
 
@@ -134,7 +182,16 @@ def main() -> int:
     ):
         require(audit, token, "REALOPS import audit", errors)
 
-    public_route_surfaces = "\n".join((page, works, registry))
+    for token in (
+        "095e074f3298ba1f3e5aba4193dd187dbb1c9fdf",
+        "8da570e070021601ed458dcf3040470ed68620f5a05f14b0bbcffdafeda50888",
+        "500 deterministic grades",
+        "47 machine/audit disagreements",
+        "Raw workspaces and the blind identity map remain private.",
+    ):
+        require(audit03, token, "REALOPS-03 import audit", errors)
+
+    public_route_surfaces = "\n".join((page, page03, works, registry))
     for forbidden in (
         "systems-lab-bh-symmetry-research",
         "projects/agent-eval-suite",
@@ -151,8 +208,8 @@ def main() -> int:
         return 1
 
     print("REALOPS registry check passed.")
-    print("Object: FP-WRK-0001 / REALOPS-01")
-    print("Scope: 4 profiles / 40 matched missions / evidence frozen 2026-07-18")
+    print("Objects: FP-WRK-0001 / REALOPS-01; FP-WRK-0002 / REALOPS-03")
+    print("Current scope: 5 profiles / 500 missions / evidence frozen 2026-07-23")
     print("Privacy: aggregate claims only; protected source locations absent")
     return 0
 
