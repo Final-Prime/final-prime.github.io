@@ -891,18 +891,21 @@ REALOPS_POLISH_CONTRACT = {
         "@media print",
     ),
     "works/realops-03/index.html": (
-        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260723-1">',
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-1">',
         'class="realops03-route-grid"',
         'class="realops03-figure-stack"',
         'class="realops03-scenario-grid"',
+        'class="evidence-disclosure"',
     ),
     "assets/realops03-dossier.css": (
         ".realops03-verdict {",
         ".realops03-route-grid {",
         ".realops03-figure-stack {",
-        ".realops03-scenario-grid {",
+        ".realops03-scenario-grid,",
+        ".evidence-disclosure summary {",
         "@media (max-width: 680px)",
         "@media (prefers-reduced-motion: reduce)",
+        "@media print",
     ),
 }
 
