@@ -1,0 +1,36 @@
+name: Diagnose Moonlight mount
+
+on:
+  push:
+    branches:
+      - agent/mount-moonlight-navigation
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: agent/mount-moonlight-navigation
+          fetch-depth: 0
+      - name: Capture exact failures
+        shell: bash
+        run: |
+          rm .github/workflows/moonlight-mount-debug.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          {
+            echo '# Moonlight mount debug'
+            echo
+            echo '```text'
+            python3 tools/check_site_integrity.py || true
+            python3 tools/check_public_surface.py --history || true
+            echo '```'
+          } > docs/moonlight-mount-debug.md
+          git add -A
+          git commit -m "Capture Moonlight navigation checker output"
+          git push origin HEAD:agent/mount-moonlight-navigation
