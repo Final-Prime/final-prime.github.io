@@ -120,7 +120,8 @@ def main() -> int:
     for token in (
         'data-work-id="FP-WRK-0002"',
         '<link rel="canonical" href="https://final-prime.github.io/works/realops-03/">',
-        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-3">',
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-4">',
+        '<script src="/assets/realops03-frontier.js?v=20260724-1" defer></script>',
         '<meta property="article:published_time" content="2026-07-23">',
         '<h1 id="realops-title" itemprop="headline">The <span>Reliability Frontier</span></h1>',
         '<p class="frontier-subtitle">A 500-mission field test for AI agents</p>',
@@ -129,6 +130,17 @@ def main() -> int:
         'Use Sol / high by default.',
         'id="frontier-data"',
         'id="visual-evidence"',
+        'data-frontier-tabs',
+        'id="pareto-cost-tab" role="tab"',
+        'id="pareto-speed-tab" role="tab"',
+        'id="pareto-cost-panel" role="tabpanel"',
+        'id="pareto-speed-panel" role="tabpanel"',
+        'Cost / value',
+        'Speed / reliability',
+        'Reliability vs cost',
+        'Reliability vs active time',
+        'Useful frontier',
+        'Dominated control',
         'class="frontier-profile-matrix"',
         'Mission outcome',
         'Worst → median',
@@ -165,6 +177,20 @@ def main() -> int:
         require(page03, token, "REALOPS-03 page", errors)
 
     for token in (
+        ".pareto-switcher",
+        ".pareto-tabs",
+        ".pareto-chart",
+        ".pareto-edge",
+        ".pareto-point",
+        ".pareto-tooltip",
+        ".edge-cost-a",
+        ".edge-speed-a",
+        ".plot-cost-luna-medium { top: 77%; left: 17.61%; }",
+        ".plot-cost-sol-high { top: 5%; left: 60.48%; }",
+        ".plot-cost-sol-max { top: 5%; left: 95%; }",
+        ".plot-speed-luna-medium { top: 77%; left: 38.85%; }",
+        ".plot-speed-sol-high { top: 5%; left: 54.65%; }",
+        ".plot-speed-sol-max { top: 5%; left: 93.31%; }",
         ".frontier-profile-matrix",
         ".profile-row",
         ".profile-metric",
@@ -228,6 +254,7 @@ def main() -> int:
             errors.append(f"REALOPS-03 outcomes: row does not sum to 100: {outcome!r}")
 
     for relative in (
+        "assets/realops03-frontier.js",
         "assets/works/realops-03/realops03-final-intelligence-cost.png",
         "assets/works/realops-03/realops03-final-intelligence-cost.svg",
         "assets/works/realops-03/realops03-final-speed-intelligence-cost.png",
