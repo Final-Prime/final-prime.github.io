@@ -35,6 +35,7 @@ The first published review record is `FP-REV-0001`, available at `/reviews/metro
 The second disclosed review record is `FP-REV-0002`, a score-locked living review scaffold at `/reviews/moonlight-peaks/`.
 It is visibly mounted from the homepage Work and Evidence field, the Works Index, and the Game Reviews index.
 Current public navigation exposes both review records without treating the living review as a finished verdict.
+The homepage preserves one selected Work card while linking the active Moonlight record inside that surface.
 
 The first published Works record is `FP-WRK-0001`, the REALOPS-01 single-agent routing pilot at `/works/realops-01/`.
 
