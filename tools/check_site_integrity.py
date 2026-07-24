@@ -196,8 +196,10 @@ ROUTE_REFLOW_CONTRACTS = {
         "overflow-wrap: anywhere;",
     ),
     "assets/works-index.css": (
-        ".works-index .release-lane h2 {",
-        ".works-index .work-record h2 {",
+        ".works-index .works-hero h1 {",
+        ".works-index .work-record h3 {",
+        "font-size: clamp(3.5rem, 6.5vw, 6rem);",
+        "font-size: clamp(2rem, 3.4vw, 3.8rem);",
         "overflow-wrap: normal;",
         "text-wrap: balance;",
         "@media (max-width: 1080px)",
@@ -724,23 +726,28 @@ ASYNC_DOSSIER_CSS_BUDGET = 24000
 WORKS_INDEX_CONTRACT = {
     "works/index.html": (
         '<body class="works-index">',
-        '<link rel="stylesheet" href="/assets/works-index.css?v=20260719-1">',
-        'class="release-lane"',
-        'class="release-lane surface-current"',
-        'class="catalog-empty surface-current work-record record-realops"',
-        'class="catalog-empty surface-current work-record record-metro"',
-        'href="/works/realops-01/">Open REALOPS-01</a>',
-        'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
+        '<link rel="stylesheet" href="/assets/works-index.css?v=20260724-2">',
+        'FP:// WORKS / PUBLIC RELEASE INDEX',
+        'FP:// PUBLIC RECORDS / 04',
+        'class="works-ledger"',
+        'class="coverage-ledger"',
+        'FP:// RELEASE COVERAGE / 05 LANES',
+        'FP:// PUBLICATION PROTOCOL / 04',
+        'href="/works/realops-03/"><span class="command-prompt" aria-hidden="true">&gt;</span> Open the frontier</a>',
+        'href="/works/realops-01/"><span class="command-prompt" aria-hidden="true">&gt;</span> Open REALOPS-01</a>',
+        'href="/reviews/metro-2033-redux/"><span class="command-prompt" aria-hidden="true">&gt;</span> Open Metro dossier</a>',
+        'href="/reviews/moonlight-peaks/"><span class="command-prompt" aria-hidden="true">&gt;</span> Open Moonlight dossier</a>',
+        'href="/index/"><span class="command-prompt" aria-hidden="true">&gt;</span> Inspect canonical registry</a>',
     ),
     "assets/works-index.css": (
-        ".works-index .catalog-meta {",
-        ".works-index .catalog-grid {",
-        ".works-index .release-lane {",
-        "grid-template-columns: minmax(150px, 0.55fr) minmax(0, 1.45fr) minmax(210px, 0.72fr);",
-        ".works-index .release-protocol {",
-        ".works-index .protocol-step {",
+        ".works-index .works-hero-grid {",
+        ".works-index .works-ledger {",
         ".works-index .work-record {",
-        ".works-index .record-metro .registry-cell.state dd { color: var(--works-amber); }",
+        "grid-template-columns: minmax(172px, 0.34fr) minmax(0, 1.66fr);",
+        ".works-index .coverage-ledger li {",
+        ".works-index .protocol-rail {",
+        ".works-index .record-metro .record-state { color: var(--works-amber); }",
+        ".works-index .record-active .record-state { color: var(--fuchsia-text); }",
         "@media (max-width: 1080px)",
         "@media (max-width: 760px)",
         "@media (max-width: 420px)",
@@ -750,7 +757,7 @@ WORKS_INDEX_CONTRACT = {
     ),
 }
 
-WORKS_INDEX_CSS_BUDGET = 18000
+WORKS_INDEX_CSS_BUDGET = 14000
 
 THEORY_INDEX_CONTRACT = {
     "thought/index.html": (
@@ -785,9 +792,12 @@ THEORY_INDEX_CSS_BUDGET = 18000
 PUBLIC_INDEX_CONTRACT = {
     "index/index.html": (
         '<body class="public-index">',
-        '<link rel="stylesheet" href="/assets/public-index.css?v=20260719-1">',
+        '<link rel="stylesheet" href="/assets/public-index.css?v=20260724-1">',
         '<article class="registry-card surface-current record-realops">',
         '<article class="registry-card surface-current record-metro">',
+        '<article class="registry-card surface-current record-moonlight">',
+        'Disclosed records</dt><dd>11</dd>',
+        '3 published / 1 active capture',
         '<h2 id="boundary-title">The public index is not the private inventory.</h2>',
         '<dt>Public</dt><dd>Identity / state / route / declared boundary</dd>',
         '<dt>Private</dt><dd>Source / implementation / research / client records</dd>',
@@ -799,6 +809,7 @@ PUBLIC_INDEX_CONTRACT = {
         "grid-template-columns: minmax(138px, 0.42fr) minmax(0, 1.58fr);",
         ".public-index .registry-data {",
         ".public-index .record-metro .registry-cell.state dd { color: var(--index-amber); }",
+        ".public-index .record-moonlight .registry-cell.state dd { color: var(--fuchsia-text); }",
         ".public-index .catalog-boundary {",
         "@media (max-width: 1080px)",
         "@media (max-width: 760px)",
@@ -1557,6 +1568,32 @@ def main() -> int:
             "assets/works-index.css: "
             f"{works_css_size} bytes exceeds the {WORKS_INDEX_CSS_BUDGET}-byte budget"
         )
+    works_page = (ROOT / "works/index.html").read_text(encoding="utf-8")
+    record_markers = (
+        "FP-WRK-0002 / REALOPS-03",
+        "FP-WRK-0001 / REALOPS-01",
+        "FP-REV-0001 / GAME REVIEW",
+        "FP-REV-0002 / LIVING REVIEW",
+    )
+    record_positions = [works_page.find(marker) for marker in record_markers]
+    if -1 in record_positions or record_positions != sorted(record_positions):
+        errors.append("works/index.html: public-record order must be REALOPS-03, REALOPS-01, Metro, Moonlight")
+    if works_page.count('class="work-record ') != 4:
+        errors.append("works/index.html: expected exactly 4 public work records")
+    if works_page.count('class="record-link"') != 4:
+        errors.append("works/index.html: each public record must expose exactly one primary CTA")
+    lane_markers = (
+        "FP-WRK / ART",
+        "FP-WRK / GAMES",
+        "FP-WRK / FILM",
+        "FP-WRK / EXPERIMENTS",
+        "FP-WRK / ANALYSIS + REVIEWS",
+    )
+    lane_positions = [works_page.find(marker) for marker in lane_markers]
+    if -1 in lane_positions or lane_positions != sorted(lane_positions):
+        errors.append("works/index.html: release-lane order must be Art, Games, Film, Experiments, Analysis + Reviews")
+    if works_page.count("FP-WRK / ") != 5:
+        errors.append("works/index.html: expected exactly 5 release-coverage lanes")
     for relative, tokens in THEORY_INDEX_CONTRACT.items():
         content = (ROOT / relative).read_text(encoding="utf-8")
         missing = [token for token in tokens if token not in content]
@@ -1584,9 +1621,9 @@ def main() -> int:
             errors.append(f"{relative}: Public Index contract is missing {missing}")
     public_index_page = (ROOT / "index/index.html").read_text(encoding="utf-8")
     public_record_count = public_index_page.count('class="registry-card')
-    if public_record_count != 10:
+    if public_record_count != 11:
         errors.append(
-            "index/index.html: expected exactly 10 disclosed registry records, "
+            "index/index.html: expected exactly 11 disclosed registry records, "
             f"found {public_record_count}"
         )
     public_index_css_size = len(

@@ -2,19 +2,19 @@
 
 ## Scope
 
-This report covers the current Final Prime GitHub Pages public surface as reviewed on 2026-07-19. The website is the primary deliverable. Repository documentation and automated checks support developer handoff and guard the public/private boundary.
+This report covers the current Final Prime GitHub Pages public surface as reviewed on 2026-07-24. The website is the primary deliverable. Repository documentation and automated checks support developer handoff and guard the public/private boundary.
 
-The review covers eleven indexable routes plus the non-indexable 404 document. It does not evaluate or enumerate private code, research, client material or unpublished work.
+The review covers thirteen indexable routes plus the non-indexable 404 document. It does not evaluate or enumerate private code, research, client material or unpublished work.
 
 ## Current public surface
 
 - The homepage positions Final Prime as an independent, founder-led studio and routes visitors to disclosed work.
 - `/systems/` is a compact systems registry; `/systems/async/` presents the dedicated FP-SYS-0003 prototype record without implementation internals or performance claims.
-- `/works/` declares five release lanes and presents two public objects: the `FP-WRK-0001` REALOPS-01 operational research dossier and `FP-REV-0001` Metro review.
+- `/works/` leads with four visible records: three published dossiers and the score-locked `FP-REV-0002` Moonlight Peaks capture. Five release lanes remain explicit below the records.
 - `/works/realops-01/` publishes the evidence-bound single-agent routing pilot as aggregate public evidence while keeping fixtures, prompts, transcripts, repositories and grader internals private.
 - `/thought/` is presented consistently as the Theory Index, declares three empty theoretical/editorial lanes and directs review readers to Works.
-- `/reviews/` and `/reviews/metro-2033-redux/` expose the published `FP-REV-0001` Works/Evidence dossier at unchanged URLs.
-- `/index/` lists nine disclosed public records without enumerating private inventory.
+- `/reviews/` exposes the published `FP-REV-0001` dossier and the active, unscored `FP-REV-0002` evidence capture at unchanged URLs.
+- `/index/` lists eleven disclosed public records without enumerating private inventory.
 - `/contact/` provides a direct email path and an explicit protected-material boundary.
 - `/legal/` states the current ownership, rights and disclosure position.
 
@@ -31,6 +31,8 @@ The review covers eleven indexable routes plus the non-indexable 404 document. I
 - Split the A/SYNC prototype into a dedicated canonical dossier and reduced the Systems Index to one scalable record plus an explicit disclosure rail.
 - Replaced the boxed Systems/A/SYNC dashboard grammar with open editorial fields, short accent rules, connected process signals and whitespace-led grouping while preserving the functional sticky path.
 - Rebuilt the Works Index card wall as an open release ledger, connected publication protocol and two distinct published-object chapters without changing the release lanes or evidence claims.
+- Reordered the Works Index around its four real records, reduced poster-scale typography, compressed the five release lanes into a coverage ledger and retained one canonical CTA per record.
+- Added a full-history commit-identity contract that rejects non-noreply author and committer addresses in every commit reachable from `HEAD`.
 - Recast the empty Theory Index as a three-field editorial triptych with an open reviews orientation path, connected publication protocol and explicit policy close.
 - Rebuilt the nine-record Public Index as a compact open canonical ledger with distinct published-object states and a whitespace-led disclosure boundary.
 - Rebuilt Contact as one open direct-email path with a compact first viewport, explicit protected-material boundary and routing guidance without card-wall styling or simulated workflow.
@@ -103,14 +105,14 @@ The current branch passes all repository quality gates:
 
 Current measured surface:
 
-- 12 HTML documents;
-- 11 indexable canonical routes;
-- 438 local references;
-- 331 reachable CSS classes;
-- 5 budgeted scripts; and
+- 14 HTML documents;
+- 13 indexable canonical routes;
+- 556 local references;
+- 542 reachable CSS classes;
+- 7 budgeted scripts; and
 - 14 validated web-manifest targets.
 
-All twelve documents pass the repository semantic and ARIA parser, local-reference graph, print and reflow contracts. On 2026-07-19, the W3C Nu HTML checker returned zero HTML errors for all twelve current documents. The newer A/SYNC and REALOPS-01 production URLs were also checked directly and returned zero errors or notices.
+All fourteen documents pass the repository semantic and ARIA parser, local-reference graph, print and reflow contracts. The last external W3C Nu snapshot, recorded on 2026-07-19, covered the then-current twelve-document surface; the current fourteen-document surface is guarded by the repository validators pending the next external snapshot.
 
 ## Privacy and dependency review
 

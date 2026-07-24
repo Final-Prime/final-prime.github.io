@@ -46,6 +46,8 @@ The first published Works record is `FP-WRK-0001`, the REALOPS-01 single-agent r
 
 The current Works research record is `FP-WRK-0002 / REALOPS-03`, published as The Reliability Frontier at `/works/realops-03/`.
 
+The Works Index is record-first: three published dossiers and the active Moonlight Peaks capture appear before the compact five-lane coverage and publication-protocol ledgers.
+
 `/llms.txt` is a machine-readable map of the indexable public routes. It is a navigation aid only and does not grant access, reuse, training, or other rights.
 
 ## Rights and permissions

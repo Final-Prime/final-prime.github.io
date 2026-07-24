@@ -135,6 +135,8 @@
 .public-index .registry-cell.state::before { background: var(--cyan); }
 .public-index .record-metro .registry-cell.state::before { background: var(--index-amber); }
 .public-index .record-metro .registry-cell.state dd { color: var(--index-amber); }
+.public-index .record-moonlight .registry-cell.state::before { background: var(--fuchsia); }
+.public-index .record-moonlight .registry-cell.state dd { color: var(--fuchsia-text); }
 
 .public-index .registry-actions { margin-top: 20px; }
 
