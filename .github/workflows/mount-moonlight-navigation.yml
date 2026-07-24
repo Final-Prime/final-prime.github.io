@@ -1,0 +1,184 @@
+name: Mount Moonlight Peaks navigation
+
+on:
+  push:
+    branches:
+      - agent/mount-moonlight-navigation
+
+permissions:
+  contents: write
+
+jobs:
+  mount:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: agent/mount-moonlight-navigation
+          fetch-depth: 0
+
+      - name: Mount route and validate exact tree
+        shell: bash
+        run: |
+          rm .github/workflows/mount-moonlight-navigation.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path: str, old: str, new: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding='utf-8')
+              if old not in text:
+                  raise SystemExit(f'{path}: replacement anchor missing: {old[:120]!r}')
+              if text.count(old) != 1:
+                  raise SystemExit(f'{path}: replacement anchor is not unique: {old[:120]!r}')
+              file.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          # Homepage: expose the active living review beside the published Metro record.
+          home_anchor = '''                <div class="field-feature-intro"><p>An atmosphere-first survival FPS examined through explicit score math, audience fit, friction, risk and route-level evidence.</p><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a></div>
+              </article>
+            </li>
+          </ol>'''
+          home_mount = '''                <div class="field-feature-intro"><p>An atmosphere-first survival FPS examined through explicit score math, audience fit, friction, risk and route-level evidence.</p><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a></div>
+              </article>
+            </li>
+            <li>
+              <article class="field-feature field-feature-review" aria-labelledby="moonlight-home-title">
+                <div class="field-feature-topline"><span class="field-feature-identity"><span class="field-feature-protocol">FP://</span><span>REV-0002 / Living Review</span></span><strong><span class="sr-only">Stage 1 of 5: Evidence capture</span><span class="field-feature-state-visual" aria-hidden="true"><span class="field-feature-stage"><b>I</b><span>/ V</span></span><span class="field-feature-state-separator">&middot;</span><span>Evidence capture</span></span></strong></div>
+                <h3 id="moonlight-home-title"><span class="field-title-primary">Moonlight</span> <span class="field-title-primary">Peaks <span class="field-title-mark">/</span></span> <span class="field-title-accent">Living Review</span></h3>
+                <dl class="field-record-meta">
+                  <div><dt>State</dt><dd>Sketch / score locked</dd></div>
+                  <div><dt>Lens</dt><dd>MOONLIT</dd></div>
+                  <div><dt>Next gate</dt><dd>Onboarding and first loop</dd></div>
+                </dl>
+                <div class="field-feature-intro"><p>A completion-focused review in active evidence capture, tracking whether the supernatural fantasy survives routine, progression and cleanup.</p><a class="button button-primary" href="/reviews/moonlight-peaks/">Open Moonlight dossier</a></div>
+              </article>
+            </li>
+          </ol>'''
+          replace_once('index.html', home_anchor, home_mount)
+
+          # Works Index: declare four public objects and add an active review record.
+          replace_once('works/index.html', 'Public objects</dt><dd>03</dd>', 'Public objects</dt><dd>04</dd>')
+          replace_once('works/index.html', 'Five lanes. Three published objects.', 'Five lanes. Three published dossiers and one active capture.')
+          replace_once(
+              'works/index.html',
+              '<article class="release-lane surface-current"><header><span>FP-WRK / ANALYSIS + REVIEWS</span><strong>Published / 1</strong></header><div class="release-lane-body"><h2>Analysis / Reviews</h2><p>Finished analytical records with declared evidence, score logic, caveats, spoiler boundaries and provenance.</p></div><footer><span>Published evidence</span><strong>01 review dossier</strong></footer></article>',
+              '<article class="release-lane surface-current"><header><span>FP-WRK / ANALYSIS + REVIEWS</span><strong>Published / 1 + active / 1</strong></header><div class="release-lane-body"><h2>Analysis / Reviews</h2><p>Finished analytical records and transparent living reviews with declared evidence, score logic, caveats, spoiler boundaries and provenance.</p></div><footer><span>Public evidence</span><strong>01 published / 01 active</strong></footer></article>',
+          )
+          works_anchor = '<section class="catalog-empty surface-current work-record record-metro" aria-labelledby="metro-record-title"><p class="catalog-code">FP-REV-0001 / Published review dossier</p><h2 id="metro-record-title">Metro 2033 Redux</h2><p>An 86/A atmosphere-first survival FPS dossier with explicit audience fit, score anatomy, friction ledger, adversarial audit and nine spoiler-managed evidence arcs.</p><dl class="registry-data"><div class="registry-cell"><dt>Type</dt><dd>Game review</dd></div><div class="registry-cell state"><dt>State</dt><dd>Published / final</dd></div><div class="registry-cell"><dt>Score</dt><dd>86 / A</dd></div><div class="registry-cell"><dt>Evidence</dt><dd>9 route arcs</dd></div></dl><div class="surface-actions"><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a><a class="button button-secondary" href="/reviews/">Open review index</a></div></section>'
+          works_mount = works_anchor + '<section class="catalog-empty surface-current work-record record-metro record-moonlight" aria-labelledby="moonlight-record-title"><p class="catalog-code">FP-REV-0002 / Active living review</p><h2 id="moonlight-record-title">Moonlight Peaks</h2><p>A score-locked completion dossier in active evidence capture, tracking fantasy, routine, relationships, technical trust and the cleanup tail across the full run.</p><dl class="registry-data"><div class="registry-cell"><dt>Type</dt><dd>Game review</dd></div><div class="registry-cell state"><dt>State</dt><dd>Sketch / score locked</dd></div><div class="registry-cell"><dt>Score</dt><dd>Withheld</dd></div><div class="registry-cell"><dt>Evidence</dt><dd>Gate 1 / onboarding</dd></div></dl><div class="surface-actions"><a class="button button-primary" href="/reviews/moonlight-peaks/">Open Moonlight dossier</a><a class="button button-secondary" href="/reviews/">Open review index</a></div></section>'
+          replace_once('works/index.html', works_anchor, works_mount)
+
+          # Public Index: register the public living dossier as the eleventh disclosed record.
+          replace_once('index/index.html', 'Disclosed records</dt><dd>10</dd>', 'Disclosed records</dt><dd>11</dd>')
+          replace_once(
+              'index/index.html',
+              'Two operational-research pilots and one published review are inspectable.',
+              'Two operational-research pilots, one published review and one active living review are inspectable.',
+          )
+          replace_once('index/index.html', 'Active / 3 objects</dd>', 'Active / 4 objects</dd>')
+          registry_anchor = '<article class="registry-card surface-current record-metro"><header class="registry-head"><span>FP-REV-0001</span><strong>Published</strong></header><div class="registry-body"><h2>Metro 2033 Redux review</h2><p>A complete 86/A atmosphere-first survival FPS dossier with explicit audience fit, score anatomy, friction ledger, adversarial audit, spoiler boundaries, and nine evidence arcs.</p><dl class="registry-data"><div class="registry-cell"><dt>Type</dt><dd>Review dossier</dd></div><div class="registry-cell state"><dt>State</dt><dd>Published / final</dd></div><div class="registry-cell"><dt>Access</dt><dd>Public dossier</dd></div><div class="registry-cell"><dt>Route</dt><dd>/reviews/metro-2033-redux/</dd></div></dl><div class="registry-actions"><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a><a class="button button-secondary" href="/reviews/">Open review index</a></div></div></article>'
+          registry_mount = registry_anchor + '<article class="registry-card surface-current record-metro record-moonlight"><header class="registry-head"><span>FP-REV-0002</span><strong>In production</strong></header><div class="registry-body"><h2>Moonlight Peaks living review</h2><p>A public, score-locked completion record that accumulates session evidence, screenshots, patch retests and long-tail completion findings without pretending an early verdict is final.</p><dl class="registry-data"><div class="registry-cell"><dt>Type</dt><dd>Living review dossier</dd></div><div class="registry-cell state"><dt>State</dt><dd>Sketch / score locked</dd></div><div class="registry-cell"><dt>Access</dt><dd>Public living dossier</dd></div><div class="registry-cell"><dt>Route</dt><dd>/reviews/moonlight-peaks/</dd></div></dl><div class="registry-actions"><a class="button button-primary" href="/reviews/moonlight-peaks/">Open Moonlight dossier</a><a class="button button-secondary" href="/reviews/">Open review index</a></div></div></article>'
+          replace_once('index/index.html', registry_anchor, registry_mount)
+
+          # Keep frozen registry contracts aligned with the now-visible public object.
+          replace_once('tools/check_realops_registry.py', "'Public objects</dt><dd>03</dd>',", "'Public objects</dt><dd>04</dd>',")
+          replace_once('tools/check_realops_registry.py', "'Disclosed records</dt><dd>10</dd>',", "'Disclosed records</dt><dd>11</dd>',")
+          replace_once('tools/check_site_integrity.py', 'if public_record_count != 10:', 'if public_record_count != 11:')
+          replace_once('tools/check_site_integrity.py', 'expected exactly 10 disclosed registry records', 'expected exactly 11 disclosed registry records')
+
+          # Turn the mount into an enforced repository contract.
+          replace_once(
+              'tools/check_site_integrity.py',
+              "        'href=\"/reviews/metro-2033-redux/\">Open Metro dossier</a>',\n    ),",
+              "        'href=\"/reviews/metro-2033-redux/\">Open Metro dossier</a>',\n        'class=\"catalog-empty surface-current work-record record-metro record-moonlight\"',\n        'href=\"/reviews/moonlight-peaks/\">Open Moonlight dossier</a>',\n    ),",
+          )
+          replace_once(
+              'tools/check_site_integrity.py',
+              "        '<article class=\"registry-card surface-current record-metro\">',\n        '<h2 id=\"boundary-title\">The public index is not the private inventory.</h2>',",
+              "        '<article class=\"registry-card surface-current record-metro\">',\n        '<article class=\"registry-card surface-current record-metro record-moonlight\">',\n        '<h2 id=\"boundary-title\">The public index is not the private inventory.</h2>',",
+          )
+          replace_once(
+              'tools/check_site_integrity.py',
+              "        'href=\"/reviews/metro-2033-redux/\">Open Metro dossier</a>',\n    ),\n    \"assets/hero.css\":",
+              "        'href=\"/reviews/metro-2033-redux/\">Open Metro dossier</a>',\n        '<span>REV-0002 / Living Review</span>',\n        'href=\"/reviews/moonlight-peaks/\">Open Moonlight dossier</a>',\n    ),\n    \"assets/hero.css\":",
+          )
+
+          scaffold = Path('tools/check_moonlight_peaks_scaffold.py')
+          text = scaffold.read_text(encoding='utf-8')
+          old = '''    registry_checks = {
+        ROOT / "reviews" / "index.html": (
+            "FP-REV-0002",
+            ROUTE,
+            "Published dossiers</dt><dd>01",
+        ),
+        ROOT / "sitemap.xml": (f"<loc>{CANONICAL}</loc>",),
+        ROOT / "llms.txt": (CANONICAL, "score-locked evidence dossier"),
+    }'''
+          new = '''    registry_checks = {
+        ROOT / "index.html": (
+            "REV-0002 / Living Review",
+            'href="/reviews/moonlight-peaks/">Open Moonlight dossier</a>',
+        ),
+        ROOT / "works" / "index.html": (
+            "FP-REV-0002 / Active living review",
+            ROUTE,
+        ),
+        ROOT / "index" / "index.html": (
+            "FP-REV-0002",
+            ROUTE,
+            "Disclosed records</dt><dd>11",
+        ),
+        ROOT / "reviews" / "index.html": (
+            "FP-REV-0002",
+            ROUTE,
+            "Published dossiers</dt><dd>01",
+        ),
+        ROOT / "sitemap.xml": (f"<loc>{CANONICAL}</loc>",),
+        ROOT / "llms.txt": (CANONICAL, "score-locked evidence dossier"),
+    }'''
+          if old not in text:
+              raise SystemExit('tools/check_moonlight_peaks_scaffold.py: registry contract anchor missing')
+          scaffold.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
+          python3 tools/check_editorial_style.py
+          python3 tools/check_ip_notices.py
+          python3 tools/check_review_registry.py
+          python3 tools/check_social_cards.py
+          python3 tools/check_search_contract.py
+          python3 tools/check_site_integrity.py
+          python3 tools/check_security_contract.py
+          python3 tools/check_accessibility_contract.py
+          python3 tools/check_public_surface.py --history
+          python3 tools/check_realops_registry.py
+          python3 tools/check_moonlight_peaks_scaffold.py
+          git diff --check
+
+          cat > docs/moonlight-peaks-navigation-validation.md <<'EOF'
+          # Moonlight Peaks Navigation Mount Validation
+
+          Record: `FP-REV-0002`  
+          Validated: `2026-07-24`
+
+          The living dossier is now visibly mounted from:
+
+          - the homepage `Work & Evidence` field;
+          - the Works Index;
+          - the Public Index;
+          - the Game Reviews index;
+          - `sitemap.xml` and `llms.txt`.
+
+          The repository contracts now require all three new visible mounts. The exact final tree passed editorial, IP, review registry, social card, search, site integrity, security, accessibility, public-surface history, REALOPS, Moonlight score-lock and Git whitespace validation.
+          EOF
+
+          python3 tools/check_editorial_style.py
+          python3 tools/check_public_surface.py --history
+          git diff --check
+
+          git add -A
+          git commit -m "Mount Moonlight Peaks across public navigation"
+          git push origin HEAD:agent/mount-moonlight-navigation
