@@ -37,6 +37,11 @@ It is visibly mounted from the homepage Work and Evidence field, the Works Index
 Current public navigation exposes both review records without treating the living review as a finished verdict.
 The homepage preserves one selected Work card while linking the active Moonlight record inside that surface.
 
+
+## Persistent Steam Completions workflow
+
+`docs/steam-completions-asset-retention-policy.md` is the canonical cross-chat rule for gameplay assets. Every relevant supplied item must be committed as an asset, preserved as structured evidence, or explicitly recorded as pending or blocked. New chats must read that policy and the active game's review protocol before processing new material.
+
 The first published Works record is `FP-WRK-0001`, the REALOPS-01 single-agent routing pilot at `/works/realops-01/`.
 
 The current Works research record is `FP-WRK-0002 / REALOPS-03`, published as The Reliability Frontier at `/works/realops-03/`.

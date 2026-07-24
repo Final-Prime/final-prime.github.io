@@ -268,3 +268,12 @@ Do not publish a numeric score while:
 - the review cannot state what evidence would overturn its verdict.
 
 Confidence measures verdict stability, not enjoyment.
+
+## 14. Asset retention and cross-chat continuity
+
+The canonical retention rule is `docs/steam-completions-asset-retention-policy.md`.
+
+Every relevant Moonlight Peaks item supplied during play is retained by default. It must become a committed asset, structured evidence, or an explicit pending or blocked manifest entry. Raw and derived assets remain separate, earlier versions are not overwritten, and a public-gallery decision never deletes the archival source.
+
+New chats must load this protocol and the canonical asset-retention policy before processing additional gameplay material. Each GitHub update ends with `main` verification, asset-count reconciliation and branch cleanup.
+
