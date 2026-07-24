@@ -1,0 +1,78 @@
+name: Build clean Moonlight Peaks polish branch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/moonlight-polish-finalizer-safe-trigger.txt
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BASE_SHA: 4f0f0d7b776bdbfda418d59b329446255c206152
+      FINAL_BRANCH: agent/moonlight-peaks-polish-final
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: agent/moonlight-peaks-polish-v2
+          fetch-depth: 0
+
+      - name: Reconstruct and allowlist payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .github/moonlight-polish-payload/chunk-* > /tmp/payload.b64
+          base64 --decode /tmp/payload.b64 > /tmp/payload.tar.gz
+          tar -tzf /tmp/payload.tar.gz | sed 's#^\./##' | sed '/^$/d' | grep -v '/$' | sort -u > /tmp/actual.txt
+          cat > /tmp/expected.txt <<'EOF'
+          assets/moonlight-peaks-dossier.css
+          assets/moonlight-peaks-dossier.js
+          assets/reviews/moonlight-peaks/README.md
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-001__eye-customization__web.png
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-002__hairstyle-grid__web.png
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-003__clothing-selection__web.png
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-004__layered-accessories__web.png
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-005__final-character__web.png
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-006__train-message__web.png
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-007__dialogue-choices__web.png
+          assets/reviews/moonlight-peaks/curated/MP-SHOT-008__arrival-with-dog__web.png
+          assets/reviews/moonlight-peaks/social/moonlight-peaks-first-contact-og.png
+          docs/moonlight-peaks-asset-manifest.md
+          docs/moonlight-peaks-polish-audit.md
+          reviews/moonlight-peaks/index.html
+          tools/check_moonlight_peaks_scaffold.py
+          EOF
+          sort -u /tmp/expected.txt -o /tmp/expected.txt
+          diff -u /tmp/expected.txt /tmp/actual.txt
+          mkdir -p /tmp/patch
+          tar -xzf /tmp/payload.tar.gz -C /tmp/patch
+          sha256sum /tmp/payload.tar.gz
+
+      - name: Build and validate clean commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout -B "$FINAL_BRANCH" "$BASE_SHA"
+          cp -a /tmp/patch/. .
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 tools/check_editorial_style.py
+          python3 tools/check_ip_notices.py
+          python3 tools/check_review_registry.py
+          python3 tools/check_moonlight_peaks_scaffold.py
+          python3 tools/check_social_cards.py
+          python3 tools/check_search_contract.py
+          python3 tools/check_site_integrity.py
+          python3 tools/check_security_contract.py
+          python3 tools/check_accessibility_contract.py
+          python3 tools/check_public_surface.py --history
+          python3 tools/check_realops_registry.py
+          git diff --check
+          git add assets/moonlight-peaks-dossier.css assets/moonlight-peaks-dossier.js assets/reviews/moonlight-peaks docs/moonlight-peaks-asset-manifest.md docs/moonlight-peaks-polish-audit.md reviews/moonlight-peaks/index.html tools/check_moonlight_peaks_scaffold.py
+          git commit -m "Polish Moonlight Peaks living review"
+          git push origin HEAD:"$FINAL_BRANCH"
