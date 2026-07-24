@@ -28,6 +28,7 @@ PUBLIC_HTML = [
     ROOT / "thought" / "index.html",
     ROOT / "reviews" / "index.html",
     ROOT / "reviews" / "metro-2033-redux" / "index.html",
+    ROOT / "reviews" / "moonlight-peaks" / "index.html",
     ROOT / "index" / "index.html",
     ROOT / "contact" / "index.html",
     ROOT / "legal" / "index.html",

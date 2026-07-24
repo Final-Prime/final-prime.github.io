@@ -42,6 +42,7 @@ EXPECTED_BREADCRUMB_LINKS = {
     "thought/index.html": ["/"],
     "reviews/index.html": ["/", "/works/"],
     "reviews/metro-2033-redux/index.html": ["/", "/works/", "/reviews/"],
+    "reviews/moonlight-peaks/index.html": ["/", "/works/", "/reviews/"],
     "index/index.html": ["/"],
     "contact/index.html": ["/"],
     "legal/index.html": ["/"],

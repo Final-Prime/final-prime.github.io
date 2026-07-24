@@ -79,6 +79,7 @@ def validate_page(path: Path) -> list[str]:
         errors.append(f"{relative}: og:image:type must be image/png")
     article_routes = {
         "reviews/metro-2033-redux/index.html",
+        "reviews/moonlight-peaks/index.html",
         "works/realops-01/index.html",
     }
     expected_type = "article" if relative in article_routes else "website"

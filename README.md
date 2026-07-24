@@ -18,7 +18,8 @@ Any future transfer to a company requires a separate signed assignment. GitHub o
 │   └── realops-03/
 ├── thought/
 ├── reviews/
-│   └── metro-2033-redux/
+│   ├── metro-2033-redux/
+│   └── moonlight-peaks/
 ├── index/
 ├── contact/
 ├── legal/
@@ -31,6 +32,7 @@ The website uses a conservative, logic-oriented visual language, orthogonal geom
 Platform raster icons are derived from `assets/mark.svg`. Normal and maskable icons remain separate because maskable assets require a larger safe area; do not combine their manifest `purpose` values.
 
 The first published review record is `FP-REV-0001`, available at `/reviews/metro-2033-redux/`.
+The second disclosed review record is `FP-REV-0002`, a score-locked living review scaffold at `/reviews/moonlight-peaks/`.
 
 The first published Works record is `FP-WRK-0001`, the REALOPS-01 single-agent routing pilot at `/works/realops-01/`.
 
@@ -72,6 +74,7 @@ Run locally:
 python tools/check_editorial_style.py
 python tools/check_ip_notices.py
 python tools/check_review_registry.py
+python tools/check_moonlight_peaks_scaffold.py
 python tools/check_social_cards.py
 python tools/check_search_contract.py
 python tools/check_site_integrity.py
