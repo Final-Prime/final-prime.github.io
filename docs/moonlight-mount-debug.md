@@ -2,6 +2,6 @@
 
 ```text
 Site integrity validation failed:
-- index.html v1 must contain exactly one selected article per field layer
-Public surface OK: 197 tracked files, 1201 history blobs; privacy, secret, and metadata contracts verified.
+- index.html: homepage fields contract is missing ['<div class="field-feature-intro"><p>An atmosphere-first survival FPS examined through explicit score math, audience fit, friction, risk and route-level evidence.</p><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a></div>']
+Public surface OK: 197 tracked files, 1205 history blobs; privacy, secret, and metadata contracts verified.
 ```
