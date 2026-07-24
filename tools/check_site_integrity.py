@@ -24,6 +24,7 @@ SCRIPT_BUDGETS = {
     "assets/copy-email.js": 3400,
     "assets/home.js": 11500,
     "assets/motto-glitch.js": 1300,
+    "assets/realops03-frontier.js": 2600,
     "assets/review-dossier.js": 7600,
     "assets/scroll-readout.js": 1400,
 }
@@ -225,6 +226,7 @@ ROUTE_REFLOW_CONTRACTS = {
 }
 NO_JS_CONTRACT_TOKENS = (
     "html .review-dossier-page .evidence-toolbar-actions",
+    "html.no-js .realops03-page .pareto-panel[hidden]",
     "html .menu-toggle { display: none; }",
     "html .site-nav {",
 )
@@ -238,6 +240,13 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     ),
     "reviews/metro-2033-redux/index.html": ('class="evidence-toolbar-actions" hidden',),
     "assets/review-dossier.js": ('.removeAttribute("hidden")',),
+    "assets/realops03-frontier.js": (
+        'document.querySelectorAll("[data-frontier-tabs]")',
+        'candidate.setAttribute("aria-selected", String(selected))',
+        "panel.hidden = !selected",
+        'event.key === "ArrowRight"',
+        'event.key === "Escape"',
+    ),
     "assets/base.css": ("[hidden] { display: none !important; }",),
 }
 
@@ -891,7 +900,14 @@ REALOPS_POLISH_CONTRACT = {
         "@media print",
     ),
     "works/realops-03/index.html": (
-        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-3">',
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-4">',
+        '<script src="/assets/realops03-frontier.js?v=20260724-1" defer></script>',
+        'class="pareto-switcher"',
+        'class="pareto-tabs" role="tablist"',
+        'role="tabpanel"',
+        'class="pareto-chart cost-pareto"',
+        'class="pareto-chart speed-pareto"',
+        'class="pareto-point',
         'class="frontier-profile-matrix"',
         'class="profile-row is-frontier"',
         'class="profile-row is-recommended"',
@@ -904,6 +920,12 @@ REALOPS_POLISH_CONTRACT = {
         'class="evidence-disclosure"',
     ),
     "assets/realops03-dossier.css": (
+        ".pareto-switcher {",
+        ".pareto-tabs {",
+        ".pareto-chart {",
+        ".pareto-edge {",
+        ".pareto-point {",
+        ".pareto-tooltip {",
         ".frontier-profile-matrix {",
         ".profile-row {",
         ".profile-metrics {",

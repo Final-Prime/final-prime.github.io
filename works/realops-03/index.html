@@ -45,9 +45,10 @@
   <link rel="stylesheet" href="/assets/responsive.css?v=20260717-4">
   <link rel="stylesheet" href="/assets/surface-polish.css?v=20260719-7">
   <link rel="stylesheet" href="/assets/realops-dossier.css?v=20260719-3">
-  <link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-3">
+  <link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-4">
   <script src="/assets/app.js?v=20260718-4" defer></script>
   <script src="/assets/scroll-readout.js?v=20260718-2" defer></script>
+  <script src="/assets/realops03-frontier.js?v=20260724-1" defer></script>
 </head>
 <body class="realops-page realops03-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -88,8 +89,61 @@
     <section class="realops-section realops03-decision" id="decision" aria-labelledby="decision-title">
       <div class="shell">
         <header class="section-head"><div><p class="section-kicker">Decision / Routing frontier</p><h2 id="decision-title">Use Sol / high by default.</h2></div><p class="section-note">It matched the 100/100 validity ceiling while materially reducing cost and active time.</p></header>
+
+        <section class="pareto-switcher" id="visual-evidence" aria-labelledby="pareto-title" data-frontier-tabs>
+          <div class="pareto-intro">
+            <div><p class="panel-code">Native decision map / Five profiles</p><h3 id="pareto-title">See where the frontier bends.</h3></div>
+            <p>Three profiles form the useful operating frontier. Sol/high reaches the reliability ceiling before max effort becomes worthwhile.</p>
+          </div>
+          <p class="pareto-tabs-label" id="pareto-tabs-label">Resource view</p>
+          <div class="pareto-tabs" role="tablist" aria-labelledby="pareto-tabs-label">
+            <button type="button" id="pareto-cost-tab" role="tab" aria-selected="true" aria-controls="pareto-cost-panel" tabindex="0" data-pareto-tab>Cost / value</button>
+            <button type="button" id="pareto-speed-tab" role="tab" aria-selected="false" aria-controls="pareto-speed-panel" tabindex="-1" data-pareto-tab>Speed / reliability</button>
+          </div>
+
+          <div class="pareto-panels">
+            <section class="pareto-panel" id="pareto-cost-panel" role="tabpanel" aria-labelledby="pareto-cost-tab" data-pareto-panel>
+              <header class="pareto-panel-head"><div><span>View 01 / Intelligence budget</span><h4>Reliability vs cost</h4></div><p>Estimated list-price cost per valid mission. 100 paired missions per profile; validity axis focused at 75 to 100.</p></header>
+              <div class="pareto-plot-wrap">
+                <span class="pareto-y-title" aria-hidden="true">Valid missions ↑</span>
+                <div class="pareto-y-scale" aria-hidden="true"><span>100</span><span>90</span><span>80</span><span>75</span></div>
+                <div class="pareto-chart cost-pareto" role="group" aria-label="Five profiles plotted by valid missions and estimated cost per valid mission">
+                  <span class="pareto-zone zone-ideal" aria-hidden="true">Higher reliability<br>Lower cost</span>
+                  <span class="pareto-zone zone-expensive" aria-hidden="true">Lower reliability<br>Higher cost</span>
+                  <span class="pareto-edge edge-cost-a" aria-hidden="true"></span><span class="pareto-edge edge-cost-b" aria-hidden="true"></span>
+                  <a class="pareto-point plot-cost-luna-medium point-frontier" href="#profile-luna-medium" aria-label="Luna / medium" aria-describedby="cost-tip-luna-medium"><i aria-hidden="true"></i><span class="pareto-point-name">Luna / medium</span><span class="pareto-tooltip" id="cost-tip-luna-medium" role="tooltip"><b>Luna / medium</b><span>80 / 100 valid</span><span>$0.171 / valid</span><span>120 s active</span></span></a>
+                  <a class="pareto-point plot-cost-terra-high point-frontier" href="#profile-terra-high" aria-label="Terra / high" aria-describedby="cost-tip-terra-high"><i aria-hidden="true"></i><span class="pareto-point-name">Terra / high</span><span class="pareto-tooltip" id="cost-tip-terra-high" role="tooltip"><b>Terra / high</b><span>91 / 100 valid</span><span>$0.357 / valid</span><span>132 s active</span></span></a>
+                  <a class="pareto-point plot-cost-sol-high point-frontier point-recommended point-label-below" href="#profile-sol-high" aria-label="Sol / high" aria-describedby="cost-tip-sol-high"><i aria-hidden="true"></i><span class="pareto-point-name">Sol / high</span><span class="pareto-tooltip tooltip-below" id="cost-tip-sol-high" role="tooltip"><b>Sol / high · default</b><span>100 / 100 valid</span><span>$0.752 / valid</span><span>176 s active</span></span></a>
+                  <a class="pareto-point plot-cost-luna-max point-dominated" href="#profile-luna-max" aria-label="Luna / max" aria-describedby="cost-tip-luna-max"><i aria-hidden="true"></i><span class="pareto-point-name">Luna / max</span><span class="pareto-tooltip" id="cost-tip-luna-max" role="tooltip"><b>Luna / max · dominated</b><span>85 / 100 valid</span><span>$0.398 / valid</span><span>319 s active</span></span></a>
+                  <a class="pareto-point plot-cost-sol-max point-dominated point-label-left point-label-below" href="#profile-sol-max" aria-label="Sol / max" aria-describedby="cost-tip-sol-max"><i aria-hidden="true"></i><span class="pareto-point-name">Sol / max</span><span class="pareto-tooltip tooltip-left tooltip-below" id="cost-tip-sol-max" role="tooltip"><b>Sol / max · ceiling control</b><span>100 / 100 valid</span><span>$1.220 / valid</span><span>313 s active</span></span></a>
+                </div>
+                <div class="pareto-x-scale" aria-hidden="true"><span>$0</span><strong>Estimated cost / valid mission →</strong><span>$1.220</span></div>
+              </div>
+            </section>
+
+            <section class="pareto-panel" id="pareto-speed-panel" role="tabpanel" aria-labelledby="pareto-speed-tab" data-pareto-panel hidden>
+              <header class="pareto-panel-head"><div><span>View 02 / Speed budget</span><h4>Reliability vs active time</h4></div><p>Scenario-balanced provider-active time. 100 paired missions per profile; validity axis focused at 75 to 100.</p></header>
+              <div class="pareto-plot-wrap">
+                <span class="pareto-y-title" aria-hidden="true">Valid missions ↑</span>
+                <div class="pareto-y-scale" aria-hidden="true"><span>100</span><span>90</span><span>80</span><span>75</span></div>
+                <div class="pareto-chart speed-pareto" role="group" aria-label="Five profiles plotted by valid missions and provider-active time">
+                  <span class="pareto-zone zone-ideal" aria-hidden="true">Higher reliability<br>Faster</span>
+                  <span class="pareto-zone zone-expensive" aria-hidden="true">Lower reliability<br>Slower</span>
+                  <span class="pareto-edge edge-speed-a" aria-hidden="true"></span><span class="pareto-edge edge-speed-b" aria-hidden="true"></span>
+                  <a class="pareto-point plot-speed-luna-medium point-frontier" href="#profile-luna-medium" aria-label="Luna / medium" aria-describedby="speed-tip-luna-medium"><i aria-hidden="true"></i><span class="pareto-point-name">Luna / medium</span><span class="pareto-tooltip" id="speed-tip-luna-medium" role="tooltip"><b>Luna / medium</b><span>80 / 100 valid</span><span>120 s active</span><span>$0.171 / valid</span></span></a>
+                  <a class="pareto-point plot-speed-terra-high point-frontier" href="#profile-terra-high" aria-label="Terra / high" aria-describedby="speed-tip-terra-high"><i aria-hidden="true"></i><span class="pareto-point-name">Terra / high</span><span class="pareto-tooltip" id="speed-tip-terra-high" role="tooltip"><b>Terra / high</b><span>91 / 100 valid</span><span>132 s active</span><span>$0.357 / valid</span></span></a>
+                  <a class="pareto-point plot-speed-sol-high point-frontier point-recommended point-label-below" href="#profile-sol-high" aria-label="Sol / high" aria-describedby="speed-tip-sol-high"><i aria-hidden="true"></i><span class="pareto-point-name">Sol / high</span><span class="pareto-tooltip tooltip-below" id="speed-tip-sol-high" role="tooltip"><b>Sol / high · default</b><span>100 / 100 valid</span><span>176 s active</span><span>$0.752 / valid</span></span></a>
+                  <a class="pareto-point plot-speed-luna-max point-dominated point-label-left" href="#profile-luna-max" aria-label="Luna / max" aria-describedby="speed-tip-luna-max"><i aria-hidden="true"></i><span class="pareto-point-name">Luna / max</span><span class="pareto-tooltip tooltip-left" id="speed-tip-luna-max" role="tooltip"><b>Luna / max · dominated</b><span>85 / 100 valid</span><span>319 s active</span><span>$0.398 / valid</span></span></a>
+                  <a class="pareto-point plot-speed-sol-max point-dominated point-label-left point-label-below" href="#profile-sol-max" aria-label="Sol / max" aria-describedby="speed-tip-sol-max"><i aria-hidden="true"></i><span class="pareto-point-name">Sol / max</span><span class="pareto-tooltip tooltip-left tooltip-below" id="speed-tip-sol-max" role="tooltip"><b>Sol / max · ceiling control</b><span>100 / 100 valid</span><span>313 s active</span><span>$1.220 / valid</span></span></a>
+                </div>
+                <div class="pareto-x-scale" aria-hidden="true"><span>0 s</span><strong>Provider-active time →</strong><span>319 s</span></div>
+              </div>
+            </section>
+          </div>
+          <p class="pareto-key"><span><i class="key-frontier" aria-hidden="true"></i>Useful frontier</span><span><i class="key-recommended" aria-hidden="true"></i>Recommended</span><span><i class="key-dominated" aria-hidden="true"></i>Dominated control</span><strong>Open a point for its exact evidence row.</strong></p>
+        </section>
+
         <div class="frontier-profile-matrix" id="frontier-data">
-          <span class="anchor-target" id="visual-evidence" aria-hidden="true"></span>
           <div class="matrix-key">
             <div><strong>100 missions / row</strong><span class="key-valid">Valid</span><span class="key-invalid">Other invalid</span><span class="key-catastrophic">Catastrophic</span></div>
             <div><span>Score fixed at 70 to 100</span><span>Cost and time start at zero · shorter is better</span></div>

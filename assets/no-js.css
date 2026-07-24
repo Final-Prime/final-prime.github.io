@@ -1,5 +1,6 @@
 /* Mobile navigation fallback loaded only when JavaScript is unavailable. */
 html .review-dossier-page .evidence-toolbar-actions { display: none; }
+html.no-js .realops03-page .pareto-panel[hidden] { display: block !important; }
 
 @media (max-width: 760px) {
   html .menu-toggle { display: none; }
