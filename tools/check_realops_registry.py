@@ -266,10 +266,10 @@ def main() -> int:
 
     for token in (
         'href="/works/realops-01/"',
-        'FP-WRK-0001 / Historical evidence dossier',
-        'Public objects</dt><dd>03</dd>',
+        'FP-WRK-0001 / REALOPS-01',
+        'Visible records</dt><dd>04</dd>',
         'href="/works/realops-03/"',
-        'FP-WRK-0002 / REALOPS-03 / Published evidence dossier',
+        'FP-WRK-0002 / REALOPS-03',
     ):
         require(works, token, "Works Index", errors)
 
@@ -277,7 +277,7 @@ def main() -> int:
         '<span>FP-WRK-0001</span><strong>Published</strong>',
         '<h2>REALOPS-01 Agent Roster</h2>',
         '<dd>/works/realops-01/</dd>',
-        'Disclosed records</dt><dd>10</dd>',
+        'Disclosed records</dt><dd>11</dd>',
         '<span>FP-WRK-0002 / REALOPS-03</span><strong>Published</strong>',
         '<h2>The Reliability Frontier</h2>',
         '<dd>/works/realops-03/</dd>',

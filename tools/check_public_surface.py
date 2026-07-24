@@ -27,6 +27,8 @@ RISKY_SUFFIXES = {
     ".p12", ".pem", ".pfx", ".rar", ".sqlite", ".swp", ".tar", ".tmp", ".zip",
 }
 EXPECTED_EMAIL = "finalprime.official@gmail.com"
+GITHUB_COMMITTER_EMAIL = "noreply" + "@github.com"
+GITHUB_NOREPLY_SUFFIX = "@users.noreply.github.com"
 PNG_ALLOWED_CHUNKS = {b"IHDR", b"IDAT", b"IEND"}
 
 
@@ -194,8 +196,36 @@ def validate_current_tree() -> tuple[list[str], int]:
     return errors, len(paths)
 
 
-def validate_history() -> tuple[list[str], int]:
+def commit_email_is_private(email: str) -> bool:
+    lowered = email.strip().lower()
+    return lowered == GITHUB_COMMITTER_EMAIL or lowered.endswith(GITHUB_NOREPLY_SUFFIX)
+
+
+def validate_history() -> tuple[list[str], int, int]:
     errors: list[str] = []
+    identity_rows = git("log", "--format=%H%x00%ae%x00%ce", "HEAD").splitlines()
+    invalid_authors: list[str] = []
+    invalid_committers: list[str] = []
+    for row in identity_rows:
+        fields = row.decode("utf-8", "replace").split("\0")
+        if len(fields) != 3:
+            errors.append("reachable history: unreadable commit identity row")
+            continue
+        commit_id, author_email, committer_email = fields
+        if not commit_email_is_private(author_email):
+            invalid_authors.append(commit_id[:12])
+        if not commit_email_is_private(committer_email):
+            invalid_committers.append(commit_id[:12])
+    if invalid_authors:
+        errors.append(
+            "reachable history: non-noreply author email "
+            f"count={len(invalid_authors)} commits={','.join(invalid_authors[:5])}"
+        )
+    if invalid_committers:
+        errors.append(
+            "reachable history: non-noreply committer email "
+            f"count={len(invalid_committers)} commits={','.join(invalid_committers[:5])}"
+        )
     object_lines = git("rev-list", "--objects", "HEAD").splitlines()
     object_ids = list(dict.fromkeys(line.split(b" ", 1)[0] for line in object_lines))
     scanned = 0
@@ -231,7 +261,7 @@ def validate_history() -> tuple[list[str], int]:
         path = Path(name)
         if path.name.lower() in RISKY_BASENAMES or path.suffix.lower() in RISKY_SUFFIXES:
             errors.append(f"history path {name}: risky filename")
-    return errors, scanned
+    return errors, scanned, len(identity_rows)
 
 
 def validate_future_commit_identity() -> list[str]:
@@ -253,15 +283,19 @@ def main() -> int:
     errors, files = validate_current_tree()
     errors.extend(validate_future_commit_identity())
     history_blobs = 0
+    history_commits = 0
     if args.history:
-        history_errors, history_blobs = validate_history()
+        history_errors, history_blobs, history_commits = validate_history()
         errors.extend(history_errors)
     if errors:
         print("Public surface validation failed:")
         for error in errors:
             print(f"- {error}")
         return 1
-    history_note = f", {history_blobs} history blobs" if args.history else ""
+    history_note = (
+        f", {history_blobs} history blobs, {history_commits} commit identities"
+        if args.history else ""
+    )
     print(f"Public surface OK: {files} tracked files{history_note}; privacy, secret, and metadata contracts verified.")
     return 0
 
