@@ -23,7 +23,7 @@ html {
 
 [data-field-layer] {
   position: relative;
-  padding: clamp(118px, 10vw, 154px) 0;
+  padding: clamp(92px, 8vw, 120px) 0;
   border-bottom: 0;
 }
 
@@ -98,7 +98,7 @@ html {
   max-width: 9ch;
   margin: clamp(20px, 1.6vw, 24px) 0 0;
   font-family: var(--display);
-  font-size: clamp(3.4rem, 5.4vw, 5.8rem);
+  font-size: clamp(2.5rem, 3.25vw, 3.6rem);
   font-weight: 790;
   line-height: 0.88;
   letter-spacing: -0.075em;
@@ -127,7 +127,7 @@ html {
   align-items: end;
   gap: clamp(18px, 2vw, 26px);
   margin: auto 0 0;
-  padding-top: 42px;
+  padding-top: 30px;
 }
 
 .field-parent-intro p {
@@ -146,8 +146,8 @@ html {
 
 .field-parent-meta {
   display: grid;
-  gap: 14px;
-  margin: 32px 0 0;
+  gap: 10px;
+  margin: 24px 0 0;
   padding-top: 0;
 }
 
@@ -210,7 +210,7 @@ html {
 .field-feature {
   display: flex;
   min-width: 0;
-  min-height: 500px;
+  min-height: 400px;
   flex-direction: column;
 }
 
@@ -243,9 +243,9 @@ html {
 
 .field-feature h3 {
   max-width: 14ch;
-  margin: clamp(58px, 6vw, 86px) 0 0;
+  margin: clamp(38px, 4vw, 54px) 0 0;
   font-family: var(--display);
-  font-size: clamp(2.8rem, 4.8vw, 5.2rem);
+  font-size: clamp(2rem, 2.6vw, 3rem);
   font-weight: 790;
   line-height: 0.88;
   letter-spacing: -0.075em;
@@ -260,8 +260,8 @@ html {
 .field-feature h3 .field-title-mark { color: var(--cyan); }
 .field-feature-theory h3 {
   max-width: 16ch;
-  font-size: clamp(2.65rem, 4.15vw, 4.5rem);
-  letter-spacing: -0.065em;
+  font-size: clamp(2rem, 2.6vw, 3rem);
+  letter-spacing: -0.06em;
 }
 .field-feature-review h3 .field-title-accent,
 .field-feature-review h3 .field-title-mark { color: var(--fuchsia-text); }
@@ -272,7 +272,7 @@ html {
   align-items: end;
   gap: clamp(24px, 3vw, 44px);
   margin-top: auto;
-  padding-top: 34px;
+  padding-top: 26px;
 }
 
 .field-feature-intro p {
@@ -292,7 +292,7 @@ html {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(18px, 3vw, 38px);
-  margin: 34px 0 0;
+  margin: 24px 0 0;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }
@@ -321,7 +321,7 @@ html {
 .field-score strong {
   color: var(--text);
   font-family: var(--display);
-  font-size: clamp(5rem, 8vw, 8rem);
+  font-size: clamp(4rem, 6vw, 6.5rem);
   font-weight: 820;
   line-height: 0.75;
   letter-spacing: -0.08em;
@@ -334,9 +334,45 @@ html {
   text-transform: uppercase;
 }
 
+.command-prompt {
+  display: inline-block;
+  flex: 0 0 auto;
+  opacity: 0.68;
+  font-family: var(--mono);
+  font-weight: 900;
+}
+
+.field-next-record {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: clamp(16px, 2.2vw, 30px);
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--muted-dark);
+  font: 750 0.66rem/1.5 var(--mono);
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.field-next-record-state {
+  color: var(--fuchsia-text);
+  font-weight: 850;
+}
+
+.field-next-record a {
+  color: var(--cyan);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.field-next-record a:hover,
+.field-next-record a:focus-visible { color: var(--text); }
+
 .closing-section {
   position: relative;
-  padding: clamp(122px, 10vw, 154px) 0 clamp(84px, 8vw, 120px);
+  padding: clamp(104px, 8vw, 128px) 0 clamp(76px, 7vw, 104px);
   overflow: hidden;
   border-bottom: 0;
   background:
@@ -357,7 +393,7 @@ html {
   max-width: 17ch;
   margin: 15px 0 0;
   font-family: var(--display);
-  font-size: clamp(2.65rem, 5.65vw, 5.3rem);
+  font-size: clamp(2.3rem, 3.8vw, 3.5rem);
   font-weight: 750;
   line-height: 0.96;
   letter-spacing: -0.064em;
@@ -371,6 +407,11 @@ html {
   color: var(--muted);
   font-size: clamp(0.82rem, 1.2vw, 0.92rem);
   line-height: 1.72;
+}
+
+.closing-copy .section-kicker > span {
+  color: var(--muted-dark);
+  letter-spacing: 0.04em;
 }
 
 .closing-actions {
@@ -451,14 +492,14 @@ html {
 
 @media (max-width: 1080px) {
   .field-layer-grid { grid-template-columns: 1fr; }
-  .field-parent { min-height: 390px; padding-right: 0; }
+  .field-parent { min-height: 320px; padding-right: 0; }
   .field-feature-list {
     margin-top: 56px;
     padding: 46px 0 0;
     border-top: 1px solid var(--line);
     border-left: 0;
   }
-  .field-feature { min-height: 460px; }
+  .field-feature { min-height: 400px; }
 }
 
 @media (min-width: 1081px) and (max-width: 1240px) {
@@ -467,32 +508,41 @@ html {
 }
 
 @media (max-width: 760px) {
-  [data-field-layer] { padding: 106px 0 92px; }
+  [data-field-layer] { padding: 84px 0 76px; }
   [data-field-layer]::before {
     top: 34px;
     width: min(240px, calc(100vw - 48px));
     height: 25px;
     background-size: 56px 25px, 100% 1px;
   }
-  .field-parent { min-height: 340px; }
-  .field-parent h2 { margin-top: 18px; font-size: min(16vw, 4.8rem); }
+  .field-parent { min-height: 290px; }
+  .field-parent h2 { margin-top: 18px; font-size: clamp(2.2rem, 9vw, 2.75rem); }
   .field-parent-intro { grid-template-columns: 1fr; gap: 20px; }
   .field-parent-intro .button { justify-self: start; }
-  .field-feature-list { margin-top: 42px; padding-top: 36px; }
-  .field-feature { min-height: 430px; }
-  .field-feature h3 { margin-top: 48px; font-size: min(11.5vw, 3.75rem); }
-  .field-feature-theory h3 { margin-top: 42px; font-size: min(10.5vw, 3.3rem); }
+  .field-feature-list { margin-top: 34px; padding-top: 30px; }
+  .field-feature { min-height: 360px; }
+  .field-feature h3,
+  .field-feature-theory h3 { margin-top: 32px; font-size: clamp(1.75rem, 7.5vw, 2.15rem); }
   .field-record-meta { grid-template-columns: 1fr; gap: 14px; }
   .field-feature-intro { grid-template-columns: 1fr; gap: 24px; }
   .field-feature-intro .button { justify-self: start; }
   .field-score { flex-wrap: wrap; }
-  .closing-section { padding: 108px 0 82px; }
+  .field-score strong { font-size: min(18vw, 4.5rem); }
+  .field-next-record { grid-template-columns: 1fr; gap: 6px; }
+  .closing-section { padding: 92px 0 72px; }
   .closing-route { grid-template-columns: 1fr; gap: 32px; padding-top: 8px; }
-  .closing-route h2 { max-width: 12ch; font-size: min(13vw, 4rem); }
+  .closing-route h2 { max-width: 12ch; font-size: clamp(2.1rem, 9.5vw, 2.75rem); }
   .closing-actions { width: min(100%, 340px); }
 }
 
-@media (max-width: 420px) {
+@media (min-width: 361px) and (max-width: 760px) {
+  .field-parent-meta div { align-items: baseline; flex-direction: row; gap: 12px; }
+  .field-parent-meta dd { max-width: 68%; text-align: right; }
+  .field-availability { justify-content: flex-end; }
+  .field-record-meta { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+}
+
+@media (max-width: 360px) {
   .field-feature-topline { grid-template-columns: 1fr; gap: 7px; }
   .field-feature-topline > strong { justify-self: start; }
   .field-index-visual { gap: 0.45em; }

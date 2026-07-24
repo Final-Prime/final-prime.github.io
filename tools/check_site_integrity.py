@@ -405,7 +405,7 @@ HERO_WORDMARK_CONTRACT = {
 HOMEPAGE_MOTTO_CONTRACT = {
     "index.html": (
         '<link rel="preload" href="/assets/fonts/inter-v4.1/InterVariable.woff2" as="font" type="font/woff2" crossorigin>',
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260719-10">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260724-1">',
         '<script src="/assets/motto-glitch.js?v=20260718-2" defer></script>',
         '<p class="doctrine hero-motto">',
         '<strong class="doctrine-cyan"><span class="doctrine-effect" aria-hidden="true">is survival.</span><span class="doctrine-core">is survival.</span></strong>',
@@ -416,11 +416,12 @@ HOMEPAGE_MOTTO_CONTRACT = {
         'src: url("fonts/inter-v4.1/InterVariable.woff2") format("woff2");',
         'font-family: "FP Inter", var(--sans);',
         "font-weight: 620;",
-        "font-size: clamp(2.95rem, 5.1vw, 5.25rem);",
+        "font-size: clamp(2.5rem, 3.4vw, 3.4rem);",
         "font-weight: 770;",
         "line-height: 0.94;",
         "letter-spacing: -0.025em;",
-        "overflow-wrap: anywhere;",
+        "overflow-wrap: normal;",
+        "word-break: normal;",
         "text-transform: uppercase;",
         ".doctrine-effect {",
         "color: rgba(var(--motto-echo-rgb), 0.34);",
@@ -429,11 +430,11 @@ HOMEPAGE_MOTTO_CONTRACT = {
         "@keyframes fp-motto-complementary-glitch",
         "color: rgba(var(--motto-glitch-rgb), 0.40);",
         "@media (prefers-reduced-transparency: reduce)",
-        "font-size: clamp(2.25rem, calc(1.7rem + 2.9vw), 2.95rem);",
+        "font-size: clamp(1.9rem, 8.2vw, 2.2rem);",
         "@media (max-width: 360px) and (max-height: 640px)",
-        ".hero-grid { gap: 15px; margin-top: 18px; }",
+        ".hero-grid { gap: 14px; margin-top: 16px; }",
         "@media (max-width: 900px)",
-        ".hero-grid { grid-template-columns: 1fr; gap: 30px; }",
+        ".hero-grid { grid-template-columns: 1fr; gap: 26px; }",
         ".hero-orientation-panel { max-width: 640px; padding-top: 0; }",
     ),
     "assets/motto-glitch.js": (
@@ -451,6 +452,7 @@ HOMEPAGE_CTA_CONTRACT = {
     "index.html": (
         'href="#fields"',
         '<span>Explore the fields</span>',
+        '<span class="command-prompt" aria-hidden="true">&gt;</span>',
         'class="button-icon button-icon-down" aria-hidden="true" focusable="false"',
         '<span>Discuss a project</span>',
         'class="button-icon button-icon-right" aria-hidden="true" focusable="false"',
@@ -472,8 +474,8 @@ HOMEPAGE_CTA_CONTRACT = {
         "transform: translateY(1px);",
         "transition-duration: 80ms;",
         ".hero .button-primary:active { border-color: #08d7e5; background: #08d7e5; }",
-        ".hero-grid { gap: 21px; margin-top: 22px; }",
-        ".hero-actions { margin-top: 16px; }",
+        ".hero-grid { grid-template-columns: 1fr; gap: 22px; margin-top: 22px; }",
+        ".hero-actions { display: grid; margin-top: 22px; }",
         "@media (prefers-reduced-motion: reduce)",
         "@media (forced-colors: active)",
     ),
@@ -481,8 +483,8 @@ HOMEPAGE_CTA_CONTRACT = {
 
 HOMEPAGE_FIELDS_CONTRACT = {
     "index.html": (
-        '<link rel="stylesheet" href="/assets/hero.css?v=20260719-10">',
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-28">',
+        '<link rel="stylesheet" href="/assets/hero.css?v=20260724-1">',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260724-1">',
         '<div class="field-region" id="fields">',
         'data-field-layer="theory"',
         'data-field-layer="systems"',
@@ -493,18 +495,19 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<span class="sr-only">Field 1 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>01</strong><span>/ 03</span></span>',
         '<span class="sr-only">Field 2 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>02</strong><span>/ 03</span></span>',
         '<span class="sr-only">Field 3 of 3</span><span class="field-index-visual" aria-hidden="true"><span class="field-index-protocol">FP://</span><span>Field</span><strong>03</strong><span>/ 03</span></span>',
-        '<div><dt>Selected record</dt><dd>A/SYNC / Theoretical Foundations</dd></div>',
-        '<div><dt>Selected record</dt><dd>A/SYNC / Software System</dd></div>',
-        '<div><dt>Selected record</dt><dd>Metro 2033 Redux / Game Review</dd></div>',
+        '<div><dt>Record</dt><dd>A/SYNC / Theoretical Foundations</dd></div>',
+        '<div><dt>Record</dt><dd>A/SYNC / Software System</dd></div>',
+        '<div><dt>Record</dt><dd>Metro 2033 Redux / Game Review</dd></div>',
+        '<div><dt>Status</dt><dd class="field-availability">',
         '<span class="sr-only">Stage 1 of 5: In development</span>',
         '<span class="sr-only">Stage 3 of 5: Prototype</span>',
         '<span class="sr-only">Stage 5 of 5: Published</span>',
         '<span class="field-availability-stage" aria-hidden="true"><strong>I</strong><span>/ V</span></span>',
         '<span class="field-availability-stage" aria-hidden="true"><strong>III</strong><span>/ V</span></span>',
         '<span class="field-availability-stage" aria-hidden="true"><strong>V</strong><span>/ V</span></span>',
-        '</dl>\n            <div class="field-parent-intro"><p>Public principles and models for tracing complex failures back to the logic that enables them.</p><a class="button button-secondary" href="/thought/">Explore theory</a></div>',
-        '</dl>\n            <div class="field-parent-intro"><p>Software and engineered systems built from those principles, with declared states and limits.</p><a class="button button-secondary" href="/systems/">Explore systems</a></div>',
-        '</dl>\n            <div class="field-parent-intro"><p>Published analysis and completed records supported by explicit evidence and boundaries.</p><a class="button button-secondary" href="/works/">Explore work</a></div>',
+        '</dl>\n            <div class="field-parent-intro"><p>Public principles and models for tracing complex failures back to the logic that enables them.</p><a class="button button-secondary" href="/thought/"><span class="command-prompt" aria-hidden="true">&gt;</span><span>Explore theory</span></a></div>',
+        '</dl>\n            <div class="field-parent-intro"><p>Software and engineered systems built from those principles, with declared states and limits.</p><a class="button button-secondary" href="/systems/"><span class="command-prompt" aria-hidden="true">&gt;</span><span>Explore systems</span></a></div>',
+        '</dl>\n            <div class="field-parent-intro"><p>Published analysis and completed records supported by explicit evidence and boundaries.</p><a class="button button-secondary" href="/works/"><span class="command-prompt" aria-hidden="true">&gt;</span><span>Explore work</span></a></div>',
         '<span class="field-feature-identity"><span class="field-feature-protocol">FP://</span><span>Preview / Theory</span></span><strong><span class="sr-only">Stage 1 of 5: In development</span>',
         '<span class="field-feature-identity"><span class="field-feature-protocol">FP://</span><span>SYS-0003 / System</span></span><strong><span class="sr-only">Stage 3 of 5: Prototype</span>',
         '<span class="field-feature-identity"><span class="field-feature-protocol">FP://</span><span>REV-0001 / Analysis</span></span><strong><span class="sr-only">Stage 5 of 5: Published</span>',
@@ -518,15 +521,16 @@ HOMEPAGE_FIELDS_CONTRACT = {
         '<span class="field-title-accent">System</span></h3>\n                <dl class="field-record-meta">',
         '<span class="field-title-accent">Game Review</span></h3>\n                <div class="field-score"',
         '<div class="field-feature-intro"><p>The theory record remains in development. Publication begins when its thesis, evidence path and public boundary are stable.</p></div>',
-        '<div class="field-feature-intro"><p>A coordination-system concept organized around objectives, constraints, signals and resolved outcomes. The public record exposes the capability model while implementation and research internals remain private.</p><a class="button button-primary" href="/systems/async/">Open A/SYNC dossier</a></div>',
-        '<div class="field-feature-intro"><p>An atmosphere-first survival FPS examined through explicit score math, audience fit, friction, risk and route-level evidence.</p><a class="button button-primary" href="/reviews/metro-2033-redux/">Open Metro dossier</a></div>',
+        '<div class="field-feature-intro"><p>A coordination-system concept organized around objectives, constraints, signals and resolved outcomes. The public record exposes the capability model while implementation and research internals remain private.</p><a class="button button-primary" href="/systems/async/"><span class="command-prompt" aria-hidden="true">&gt;</span><span>Open A/SYNC dossier</span></a></div>',
+        '<div class="field-feature-intro"><p>An atmosphere-first survival FPS examined through explicit score math, audience fit, friction, risk and route-level evidence.</p><a class="button button-primary" href="/reviews/metro-2033-redux/"><span class="command-prompt" aria-hidden="true">&gt;</span><span>Open Metro dossier</span></a></div>',
+        '<div class="field-next-record" role="group" aria-label="Next work record"><span class="field-next-record-state">Next record / In production</span><a href="/reviews/moonlight-peaks/">Moonlight Peaks living review</a><span>Score locked while evidence is captured.</span></div>',
         '<div><dt>Related system</dt><dd>FP-SYS-0003</dd></div>',
         '<div><dt>Publication</dt><dd>Not yet published</dd></div>',
-        'href="/thought/">Explore theory</a>',
-        'href="/systems/">Explore systems</a>',
-        'href="/systems/async/">Open A/SYNC dossier</a>',
-        'href="/works/">Explore work</a>',
-        'href="/reviews/metro-2033-redux/">Open Metro dossier</a>',
+        'href="/thought/"><span class="command-prompt"',
+        'href="/systems/"><span class="command-prompt"',
+        'href="/systems/async/"><span class="command-prompt"',
+        'href="/works/"><span class="command-prompt"',
+        'href="/reviews/metro-2033-redux/"><span class="command-prompt"',
     ),
     "assets/hero.css": (
         "border-bottom: 0;",
@@ -562,7 +566,8 @@ HOMEPAGE_FIELDS_CONTRACT = {
         ".field-parent h2 .field-joiner,",
         ".field-parent h2 .field-secondary { display: block; }",
         ".field-feature-theory h3 {",
-        "font-size: clamp(2.65rem, 4.15vw, 4.5rem);",
+        "font-size: clamp(2.5rem, 3.25vw, 3.6rem);",
+        "font-size: clamp(2rem, 2.6vw, 3rem);",
         "font-size: 1em;",
         "font: 700 0.75rem/1.3 var(--mono);",
         "letter-spacing: 0.11em;",
@@ -578,12 +583,12 @@ HOMEPAGE_FIELDS_CONTRACT = {
         ".field-index-visual strong {",
         ".field-index-visual { gap: 0.45em; }",
         "margin: clamp(20px, 1.6vw, 24px) 0 0;",
-        ".field-parent h2 { margin-top: 18px; font-size: min(16vw, 4.8rem); }",
+        ".field-parent h2 { margin-top: 18px; font-size: clamp(2.2rem, 9vw, 2.75rem); }",
         ".field-parent-intro {",
         "grid-template-columns: minmax(0, 1fr) auto;",
         "gap: clamp(18px, 2vw, 26px);",
         "margin: auto 0 0;",
-        "padding-top: 42px;",
+        "padding-top: 30px;",
         ".field-parent-intro p {",
         "max-width: 30ch;",
         ".field-parent-intro .button {",
@@ -595,7 +600,7 @@ HOMEPAGE_FIELDS_CONTRACT = {
         ".field-availability-stage strong {",
         '[data-field-layer="theory"] .field-availability-stage strong { color: var(--cyan); }',
         '[data-field-layer="work"] .field-availability-stage strong { color: var(--fuchsia-text); }',
-        "margin: 32px 0 0;",
+        "margin: 24px 0 0;",
         "padding-top: 0;",
         "@media (min-width: 1081px) and (max-width: 1240px)",
         ".field-parent-intro .button { justify-self: end; }",
@@ -632,6 +637,22 @@ HOMEPAGE_FIELDS_CONTRACT = {
         "justify-self: end;",
         ".field-feature-intro { grid-template-columns: 1fr; gap: 24px; }",
         ".field-feature-intro .button { justify-self: start; }",
+        "[data-field-layer] { padding: 84px 0 76px; }",
+        ".field-feature { min-height: 360px; }",
+        ".field-feature h3,",
+        ".field-feature-theory h3 { margin-top: 32px; font-size: clamp(1.75rem, 7.5vw, 2.15rem); }",
+        ".field-score strong { font-size: min(18vw, 4.5rem); }",
+        ".command-prompt {",
+        ".field-next-record {",
+        "grid-template-columns: auto minmax(0, 1fr) auto;",
+        ".field-next-record-state {",
+        ".field-next-record a {",
+        ".field-next-record { grid-template-columns: 1fr; gap: 6px; }",
+        "@media (min-width: 361px) and (max-width: 760px)",
+        ".field-parent-meta div { align-items: baseline; flex-direction: row; gap: 12px; }",
+        ".field-parent-meta dd { max-width: 68%; text-align: right; }",
+        ".field-record-meta { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }",
+        "@media (max-width: 360px)",
         "@media (max-width: 1080px)",
         "width: min(240px, calc(100vw - 48px));",
         "background-size: 56px 25px, 100% 1px;",
@@ -999,7 +1020,8 @@ RETIRED_BRAND_LOCKUP = '<span class="brand-name">FINAL <span aria-hidden="true">
 
 HOMEPAGE_IDENTITY_REQUIRED_TOKENS = (
     'class="hero identity-hero"',
-    'class="eyebrow-copy">Independent studio · software &amp; ',
+    'class="eyebrow-protocol" aria-hidden="true">FP://</span>',
+    'class="eyebrow-copy">Independent studio / software + ',
     'class="eyebrow-term">technical research</span>',
     'class="hero-wordmark"',
     'aria-label="Final Prime"',
@@ -1039,20 +1061,24 @@ HOMEPAGE_IDENTITY_FORBIDDEN_TOKENS = (
 
 HOMEPAGE_CLOSING_CONTRACT = {
     "index.html": (
-        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260719-28">',
-        '<p class="section-kicker">Selected projects / Direct line</p>',
+        '<link rel="stylesheet" href="/assets/home-v1.css?v=20260724-1">',
+        '<p class="section-kicker"><span aria-hidden="true">FP://</span> Selected projects / Direct line</p>',
         '<h2 id="closing-title">Bring the problem. Fit comes before commitment.</h2>',
         'Each enquiry is reviewed for fit before any commitment. Begin with the objective, current constraint and available evidence. Keep protected material out of the first message.',
         '<a class="button button-primary closing-primary" href="/contact/">',
         '<span>Open a project enquiry</span>',
         '<a class="closing-secondary" href="/index/">',
         '<span>Inspect public index</span>',
+        '<span class="command-prompt" aria-hidden="true">&gt;</span>',
     ),
     "assets/home-v1.css": (
         ".closing-section {",
         ".closing-section::before {",
         ".closing-route {",
         "grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);",
+        "font-size: clamp(2.3rem, 3.8vw, 3.5rem);",
+        ".closing-copy .section-kicker > span {",
+        ".closing-route h2 { max-width: 12ch; font-size: clamp(2.1rem, 9.5vw, 2.75rem); }",
         ".closing-actions .closing-primary {",
         "17px 0 28px -10px rgba(245, 5, 77, 0.24)",
         ".closing-secondary {",
@@ -1287,7 +1313,7 @@ def validate_homepage_identity_contract(content: str) -> list[str]:
         errors.append("index.html must expose three parseable field sections for record sync")
     for layer, section in field_sections:
         selected_match = re.search(
-            r'<dt>\s*Selected record\s*</dt>\s*<dd[^>]*>(.*?)</dd>',
+            r'<dt>\s*Record\s*</dt>\s*<dd[^>]*>(.*?)</dd>',
             section,
             flags=re.DOTALL,
         )
@@ -1297,7 +1323,7 @@ def validate_homepage_identity_contract(content: str) -> list[str]:
             flags=re.DOTALL,
         )
         if not selected_match or not feature_match:
-            errors.append(f"{layer}: selected-record sync contract is incomplete")
+            errors.append(f"{layer}: record sync contract is incomplete")
             continue
         visible_selected = " ".join(
             unescape(re.sub(r"<[^>]+>", "", selected_match.group(1))).split()
@@ -1307,7 +1333,7 @@ def validate_homepage_identity_contract(content: str) -> list[str]:
         )
         if visible_selected != visible_feature:
             errors.append(
-                f"{layer}: Selected record must match the displayed feature title "
+                f"{layer}: Record must match the displayed feature title "
                 f"({visible_selected!r} != {visible_feature!r})"
             )
 
