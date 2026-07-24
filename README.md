@@ -33,8 +33,7 @@ Platform raster icons are derived from `assets/mark.svg`. Normal and maskable ic
 
 The first published review record is `FP-REV-0001`, available at `/reviews/metro-2033-redux/`.
 The second disclosed review record is `FP-REV-0002`, a score-locked living review scaffold at `/reviews/moonlight-peaks/`.
-It is visibly mounted from the homepage Work and Evidence field, the Works Index, the Public Index, and the Game Reviews index.
-These visible mounts are enforced by the Moonlight scaffold validator.
+It is visibly mounted from the homepage Work and Evidence field, the Works Index, and the Game Reviews index.
 
 The first published Works record is `FP-WRK-0001`, the REALOPS-01 single-agent routing pilot at `/works/realops-01/`.
 
