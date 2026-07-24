@@ -24,6 +24,7 @@ SCRIPT_BUDGETS = {
     "assets/copy-email.js": 3400,
     "assets/home.js": 11500,
     "assets/motto-glitch.js": 1300,
+    "assets/realops03-charts.js": 400,
     "assets/review-dossier.js": 7600,
     "assets/scroll-readout.js": 1400,
 }
@@ -238,6 +239,7 @@ PROGRESSIVE_ENHANCEMENT_CONTRACT = {
     ),
     "reviews/metro-2033-redux/index.html": ('class="evidence-toolbar-actions" hidden',),
     "assets/review-dossier.js": ('.removeAttribute("hidden")',),
+    "assets/realops03-charts.js": ('event.key === "Escape"', 'document.activeElement.blur()'),
     "assets/base.css": ("[hidden] { display: none !important; }",),
 }
 
@@ -891,8 +893,12 @@ REALOPS_POLISH_CONTRACT = {
         "@media print",
     ),
     "works/realops-03/index.html": (
-        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-1">',
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-2">',
+        '<script src="/assets/realops03-charts.js?v=20260724-1" defer></script>',
         'class="realops03-route-grid"',
+        'class="frontier-map-grid"',
+        'class="native-plot plot-cost"',
+        'class="outcome-chart"',
         'class="realops03-figure-stack"',
         'class="realops03-scenario-grid"',
         'class="evidence-disclosure"',
@@ -900,6 +906,9 @@ REALOPS_POLISH_CONTRACT = {
     "assets/realops03-dossier.css": (
         ".realops03-verdict {",
         ".realops03-route-grid {",
+        ".frontier-map-grid {",
+        ".native-plot {",
+        ".outcome-chart {",
         ".realops03-figure-stack {",
         ".realops03-scenario-grid,",
         ".evidence-disclosure summary {",

@@ -223,6 +223,266 @@
 }
 .frontier-proof-grid p { margin: 14px 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.68; }
 
+.realops03-page .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.frontier-visuals {
+  position: relative;
+  overflow: clip;
+  border-top: 1px solid var(--line);
+  background: #0b0d0f;
+}
+.frontier-visuals::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(125deg, rgba(10, 232, 247, 0.025), transparent 28%, transparent 76%, rgba(245, 5, 77, 0.018));
+}
+.frontier-visuals .shell { position: relative; }
+.frontier-map-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(54px, 7vw, 86px);
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+.frontier-map {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(24px, 3.6vw, 46px);
+  background: #090b0d;
+}
+.frontier-map figcaption,
+.outcome-chart figcaption {
+  display: flex;
+  gap: 24px;
+  align-items: start;
+  justify-content: space-between;
+}
+.frontier-map figcaption span,
+.outcome-chart figcaption span {
+  color: var(--cyan);
+  font: 800 0.64rem/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.frontier-map figcaption h3,
+.outcome-chart figcaption h3 {
+  margin: 10px 0 0;
+  font-family: var(--display);
+  font-size: clamp(2rem, 3.8vw, 3.8rem);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+}
+.frontier-map figcaption > strong {
+  color: var(--muted-dark);
+  font: 800 0.62rem/1.35 var(--mono);
+  letter-spacing: 0.05em;
+  text-align: right;
+  text-transform: uppercase;
+}
+.native-plot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  margin: 54px 0 0;
+  border: solid var(--line-strong);
+  border-width: 0 0 1px 1px;
+  background-image:
+    linear-gradient(to right, transparent calc(50% - 0.5px), var(--line) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(to top, transparent calc(50% - 0.5px), var(--line) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(to right, var(--line-soft) 1px, transparent 1px),
+    linear-gradient(to top, var(--line-soft) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 25% 100%, 100% 25%;
+}
+.plot-zone {
+  position: absolute;
+  z-index: 0;
+  color: rgba(217, 223, 227, 0.22);
+  font: 800 0.56rem/1.35 var(--mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.zone-best { top: 10px; left: 12px; }
+.zone-worst { right: 12px; bottom: 10px; text-align: right; }
+.frontier-segment {
+  position: absolute;
+  z-index: 1;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(10, 232, 247, 0.9), rgba(10, 232, 247, 0.22));
+  transform-origin: left center;
+}
+.segment-cost-a { left: 5%; bottom: 5%; width: 34.8%; transform: rotate(-62.7deg); }
+.segment-cost-b { left: 21%; bottom: 54.5%; width: 42.3%; transform: rotate(-36.7deg); }
+.segment-speed-a { left: 5%; bottom: 5%; width: 31.4%; transform: rotate(-80.1deg); }
+.segment-speed-b { left: 10.4%; bottom: 54.5%; width: 32.2%; transform: rotate(-51.8deg); }
+.plot-point {
+  position: absolute;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  color: var(--text);
+  text-decoration: none;
+  transform: translate(-50%, 50%);
+}
+.plot-point > i {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  background: #090b0d;
+  transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+.plot-point.is-frontier > i { color: var(--cyan); box-shadow: 0 0 0 3px #090b0d, 0 0 0 4px rgba(10, 232, 247, 0.65); }
+.plot-point.is-dominated > i { border-style: dashed; color: #777f85; }
+.plot-point.is-recommended > i { background: var(--cyan); box-shadow: 0 0 0 4px #090b0d, 0 0 0 5px var(--cyan), 0 0 20px rgba(10, 232, 247, 0.24); }
+.plot-point:hover > i,
+.plot-point:focus-visible > i { transform: scale(1.35); }
+.plot-point:focus-visible { outline: 2px solid var(--text); outline-offset: 8px; }
+.point-label {
+  position: absolute;
+  left: 27px;
+  bottom: 27px;
+  width: max-content;
+  color: #a9b0b5;
+  font: 800 0.57rem/1.25 var(--mono);
+  letter-spacing: 0.015em;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.is-frontier .point-label { color: var(--text); }
+.is-recommended .point-label { color: var(--cyan); }
+.point-label.label-below { top: 27px; bottom: auto; }
+.point-label.label-left { right: 27px; left: auto; text-align: right; }
+.plot-tooltip {
+  position: absolute;
+  z-index: 8;
+  left: 22px;
+  bottom: 44px;
+  display: grid;
+  gap: 3px;
+  width: 174px;
+  padding: 13px 14px;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  font: 700 0.66rem/1.35 var(--mono);
+  background: rgba(6, 8, 10, 0.97);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(5px);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+.plot-tooltip b { margin-bottom: 3px; color: var(--text); font-size: 0.7rem; }
+.plot-tooltip.tooltip-below { top: 44px; bottom: auto; }
+.plot-tooltip.tooltip-left { right: 22px; left: auto; }
+.plot-point:hover .plot-tooltip,
+.plot-point:focus .plot-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.plot-axis {
+  display: grid;
+  grid-template-columns: 64px 1fr 64px;
+  gap: 12px;
+  align-items: start;
+  margin-top: 13px;
+  color: var(--muted-dark);
+  font: 800 0.56rem/1.35 var(--mono);
+  letter-spacing: 0.03em;
+}
+.plot-axis strong { color: var(--muted); text-align: center; text-transform: uppercase; }
+.plot-axis span:last-child { text-align: right; }
+.plot-y-label {
+  position: absolute;
+  top: 56%;
+  left: 10px;
+  color: var(--muted-dark);
+  font: 800 0.56rem/1 var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left top;
+}
+.plot-cost .point-luna-medium { left: 5%; bottom: 5%; }
+.plot-cost .point-luna-max { left: 24.5%; bottom: 27.5%; }
+.plot-cost .point-terra-high { left: 21%; bottom: 54.5%; }
+.plot-cost .point-sol-high { left: 54.9%; bottom: 95%; }
+.plot-cost .point-sol-max { left: 95%; bottom: 95%; }
+.plot-speed .point-luna-medium { left: 5%; bottom: 5%; }
+.plot-speed .point-luna-max { left: 95%; bottom: 27.5%; }
+.plot-speed .point-terra-high { left: 10.4%; bottom: 54.5%; }
+.plot-speed .point-sol-high { left: 30.3%; bottom: 95%; }
+.plot-speed .point-sol-max { left: 92.3%; bottom: 95%; }
+
+.outcome-chart {
+  margin: 1px 0 0;
+  padding: clamp(30px, 4.5vw, 58px);
+  border: 1px solid var(--line);
+  background: #090b0d;
+}
+.outcome-chart figcaption { align-items: end; }
+.outcome-chart figcaption > p { max-width: 260px; margin: 0; color: var(--muted); text-align: right; }
+.outcome-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: end;
+  margin-top: 42px;
+  color: var(--muted);
+  font: 800 0.59rem/1.3 var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.outcome-legend span { position: relative; padding-left: 17px; }
+.outcome-legend span::before { position: absolute; top: 1px; left: 0; width: 9px; height: 9px; content: ""; border: 1px solid currentColor; }
+.legend-valid::before { background: var(--cyan); }
+.legend-invalid::before { background: repeating-linear-gradient(135deg, #555d63 0 1px, transparent 1px 3px); }
+.legend-catastrophic::before { background: var(--fuchsia-text); }
+.outcome-rows { margin-top: 18px; border-top: 1px solid var(--line); }
+.outcome-chart .outcome-row {
+  display: grid;
+  grid-template-columns: 150px minmax(220px, 1fr) 210px;
+  gap: 22px;
+  align-items: center;
+  min-height: 72px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.outcome-chart .outcome-row > strong { font: 800 0.7rem/1.35 var(--mono); text-transform: uppercase; }
+.outcome-chart .outcome-row > span { color: var(--muted); font: 700 0.64rem/1.35 var(--mono); text-align: right; }
+.outcome-chart .outcome-row.featured > strong,
+.outcome-chart .outcome-row.featured > span { color: var(--cyan); }
+.outcome-track { display: flex; height: 12px; overflow: hidden; border: 1px solid var(--line-strong); background: #13171a; }
+.outcome-track > span { display: block; height: 100%; }
+.outcome-valid { background: var(--cyan); }
+.outcome-invalid { border-left: 1px solid #090b0d; background: repeating-linear-gradient(135deg, #687178 0 1px, transparent 1px 4px); }
+.outcome-catastrophic { border-left: 1px solid #090b0d; background: var(--fuchsia-text); }
+.width-3 { width: 3%; }.width-4 { width: 4%; }.width-6 { width: 6%; }.width-8 { width: 8%; }.width-11 { width: 11%; }.width-12 { width: 12%; }
+.width-80 { width: 80%; }.width-85 { width: 85%; }.width-91 { width: 91%; }.width-100 { width: 100%; }
+.visuals-footnote {
+  display: flex;
+  gap: 13px;
+  max-width: 900px;
+  margin: 24px 0 0;
+  color: var(--muted-dark);
+  font: 700 0.67rem/1.6 var(--mono);
+}
+.visuals-footnote > span { color: var(--cyan); font-size: 1rem; }
+
 .frontier-appendix { background: #080a0c; }
 .appendix-head { padding-bottom: clamp(42px, 6vw, 72px) !important; }
 .frontier-disclosures { border-top: 1px solid var(--line-strong); }
@@ -397,6 +657,7 @@
   .evidence-disclosure summary { grid-template-columns: 48px minmax(0, 1fr) 44px; }
   .disclosure-note { grid-column: 2; }
   .disclosure-icon { grid-column: 3; grid-row: 1 / span 2; }
+  .outcome-chart .outcome-row { grid-template-columns: 128px minmax(180px, 1fr) 180px; gap: 16px; }
   .realops03-page .limits-grid { grid-template-columns: 1fr; }
 }
 
@@ -405,6 +666,11 @@
   .frontier-status-rail { margin-top: 72px; }
   .realops03-page .realops-section .section-head { grid-template-columns: 1fr; }
   .realops03-page .section-note { max-width: 680px; text-align: left; }
+  .frontier-map-grid { grid-template-columns: 1fr; }
+  .outcome-chart figcaption { align-items: start; }
+  .outcome-chart figcaption > p { text-align: left; }
+  .outcome-chart .outcome-row { grid-template-columns: 116px minmax(150px, 1fr); }
+  .outcome-chart .outcome-row > span { grid-column: 2; margin-top: -12px; padding-bottom: 13px; text-align: left; }
   .frontier-mobile-matrix { grid-template-columns: 1fr; }
   .realops03-protocol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .realops03-protocol div { border-bottom: 1px solid var(--line); }
@@ -428,6 +694,18 @@
   .frontier-route > dl { grid-template-columns: 1fr; gap: 12px; }
   .route-copy h3 { font-size: clamp(2.4rem, 13vw, 4rem); }
   .frontier-proof-grid { gap: 42px; }
+  .frontier-map { padding: 24px 20px 26px; }
+  .frontier-map figcaption,
+  .outcome-chart figcaption { display: grid; }
+  .frontier-map figcaption > strong { text-align: left; }
+  .native-plot { margin-top: 46px; }
+  .plot-zone { font-size: 0.49rem; }
+  .point-label { font-size: 0.5rem; }
+  .plot-tooltip { width: 154px; padding: 11px 12px; font-size: 0.6rem; }
+  .outcome-chart { padding: 28px 20px; }
+  .outcome-legend { justify-content: start; margin-top: 30px; }
+  .outcome-chart .outcome-row { grid-template-columns: 1fr; gap: 10px; padding: 16px 0; }
+  .outcome-chart .outcome-row > span { grid-column: 1; margin: 0; padding: 0; }
   .evidence-disclosure summary { grid-template-columns: 34px minmax(0, 1fr) 44px; gap: 14px; min-height: 108px; }
   .disclosure-title { font-size: 1.55rem; }
   .disclosure-note { font-size: 0.62rem; }
@@ -447,6 +725,14 @@
   .realops03-page .realops-hero-copy h1 { overflow-wrap: anywhere; }
   .frontier-subtitle { letter-spacing: 0.1em; }
   .frontier-status-rail { margin-top: 58px; }
+  .frontier-map { padding-inline: 16px; }
+  .native-plot { aspect-ratio: 4 / 3; }
+  .frontier-segment { display: none; }
+  .plot-point > i { top: 15px; left: 15px; }
+  .point-label { max-width: 88px; white-space: normal; }
+  .plot-cost .point-sol-max .point-label { top: 44px; }
+  .plot-axis { grid-template-columns: 48px 1fr 48px; }
+  .plot-y-label { display: none; }
   .evidence-disclosure summary { grid-template-columns: 28px minmax(0, 1fr) 44px; }
   .disclosure-note { grid-column: 1 / span 2; padding-left: 42px; }
   .disclosure-icon { grid-column: 3; grid-row: 1 / span 2; }
@@ -468,10 +754,20 @@
   .frontier-status-rail::before,
   .frontier-proof-grid article::before,
   .route-index i,
+  .frontier-segment,
+  .outcome-valid,
+  .outcome-catastrophic,
   .disclosure-icon::before,
   .disclosure-icon::after { background: CanvasText; box-shadow: none; forced-color-adjust: none; }
   .evidence-disclosure summary,
-  .frontier-route { border-color: CanvasText; }
+  .frontier-route,
+  .frontier-map,
+  .outcome-chart,
+  .outcome-track { border-color: CanvasText; }
+  .plot-point > i { background: Canvas; border-color: CanvasText; box-shadow: none; }
+  .is-recommended .point-label,
+  .outcome-chart .outcome-row.featured > strong,
+  .outcome-chart .outcome-row.featured > span { color: CanvasText; }
 }
 
 @media print {
@@ -479,6 +775,10 @@
   .realops03-page .realops-hero-copy h1 { font-size: 62pt; }
   .frontier-status-rail,
   .frontier-proof-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .frontier-map-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .frontier-map,
+  .outcome-chart { break-inside: avoid; }
+  .plot-tooltip { display: none; }
   .evidence-disclosure:not([open]) > :not(summary) { display: block !important; }
   .evidence-disclosure summary { min-height: 0; break-after: avoid; }
   .disclosure-icon,
