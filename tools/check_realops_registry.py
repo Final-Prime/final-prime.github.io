@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -119,38 +120,79 @@ def main() -> int:
     for token in (
         'data-work-id="FP-WRK-0002"',
         '<link rel="canonical" href="https://final-prime.github.io/works/realops-03/">',
-        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-2">',
-        '<script src="/assets/realops03-charts.js?v=20260724-1" defer></script>',
+        '<link rel="stylesheet" href="/assets/realops03-dossier.css?v=20260724-3">',
         '<meta property="article:published_time" content="2026-07-23">',
         '<h1 id="realops-title" itemprop="headline">The <span>Reliability Frontier</span></h1>',
         '<p class="frontier-subtitle">A 500-mission field test for AI agents</p>',
         'Agent missions</dt><dd>500 / 500 complete</dd>',
         'Blind Codex audit</dt><dd>500 + 140</dd>',
         'Use Sol / high by default.',
+        'id="frontier-data"',
         'id="visual-evidence"',
-        'Reliability × cost',
-        'Reliability × active time',
-        'Mission outcomes by profile',
+        'class="frontier-profile-matrix"',
+        'Mission outcome',
+        'Worst → median',
+        'Cost / valid <em>lower is better</em>',
+        'Active <em>lower is better</em>',
+        'id="profile-luna-medium"',
+        'id="profile-terra-high"',
         'id="profile-sol-high"',
-        '100 / 100',
+        'id="profile-luna-max"',
+        'id="profile-sol-max"',
+        '80 valid · 12 other · 8 catastrophic',
+        '91 valid · 3 other · 6 catastrophic',
+        '100 valid · 0 other · 0 catastrophic',
+        '85 valid · 4 other · 11 catastrophic',
+        '80.00 → 95.00',
+        '79.86 → 95.51',
+        '79.82 → 96.94',
+        '73.77 → 95.05',
+        '80.82 → 97.01',
+        '$0.171',
+        '$0.357',
         '$0.752',
+        '$0.398',
+        '$1.220',
         '17 DAT disagreements',
         '27 OPS disagreements',
+        '1,152 calls',
+        '2,708 calls',
+        '2,529 calls · 11 catastrophic',
+        '140 / 500',
         'A routing result, not a universal leaderboard.',
         'no subagents, network, live repositories, credentials, or private raw evidence were exposed.',
-        '/assets/works/realops-03/realops03-final-intelligence-cost.png',
-        '/assets/works/realops-03/realops03-final-speed-intelligence-cost.png',
     ):
         require(page03, token, "REALOPS-03 page", errors)
 
     for token in (
-        ".frontier-status-rail",
-        ".realops03-route-grid",
-        ".frontier-map-grid",
-        ".native-plot",
-        ".plot-point:hover .plot-tooltip",
-        ".outcome-chart",
-        ".realops03-figure-stack",
+        ".frontier-profile-matrix",
+        ".profile-row",
+        ".profile-metric",
+        ".mission-track",
+        ".score-track",
+        ".metric-track",
+        ".micro-evidence",
+        ".score-luna-medium { left: 33.33%; width: 50%; }",
+        ".score-terra-high { left: 32.87%; width: 52.17%; }",
+        ".score-sol-high { left: 32.73%; width: 57.07%; }",
+        ".score-luna-max { left: 12.57%; width: 70.93%; }",
+        ".score-sol-max { left: 36.07%; width: 53.97%; }",
+        ".cost-luna-medium { width: 14.02%; }",
+        ".cost-terra-high { width: 29.26%; }",
+        ".cost-sol-high { width: 61.64%; }",
+        ".cost-luna-max { width: 32.62%; }",
+        ".cost-sol-max { width: 100%; }",
+        ".time-luna-medium { width: 37.62%; }",
+        ".time-terra-high { width: 41.38%; }",
+        ".time-sol-high { width: 55.17%; }",
+        ".time-luna-max { width: 100%; }",
+        ".time-sol-max { width: 98.12%; }",
+        ".micro-dat { width: 36.17%; }",
+        ".micro-ops { width: 57.45%; }",
+        ".micro-sol-high { width: 42.54%; }",
+        ".micro-sol-max { width: 100%; }",
+        ".micro-luna-max { width: 93.39%; }",
+        ".micro-audit { width: 28%; }",
         ".realops03-scenario-grid",
         ".evidence-disclosure",
         "@media (max-width: 680px)",
@@ -158,6 +200,32 @@ def main() -> int:
         "@media print",
     ):
         require(css03, token, "REALOPS-03 CSS", errors)
+
+    for forbidden in (
+        'class="frontier-status-rail"',
+        'class="realops03-verdict"',
+        'class="realops03-route-grid"',
+        'class="frontier-visuals"',
+        'class="frontier-mobile-matrix"',
+        'class="realops03-figure-stack"',
+        'class="realops03-protocol"',
+        '<table>',
+        'realops03-charts.js',
+        '/assets/works/realops-03/realops03-final-intelligence-cost.png',
+        '/assets/works/realops-03/realops03-final-speed-intelligence-cost.png',
+    ):
+        if forbidden in page03:
+            errors.append(f"REALOPS-03 page: obsolete duplicate remains {forbidden!r}")
+
+    outcome_rows = re.findall(
+        r"<strong>(\d+) valid · (\d+) other · (\d+) catastrophic</strong>", page03
+    )
+    if len(outcome_rows) != 5:
+        errors.append(f"REALOPS-03 outcomes: expected 5 rows, found {len(outcome_rows)}")
+    for raw_outcome in outcome_rows:
+        outcome = tuple(int(value) for value in raw_outcome)
+        if sum(outcome) != 100:
+            errors.append(f"REALOPS-03 outcomes: row does not sum to 100: {outcome!r}")
 
     for relative in (
         "assets/works/realops-03/realops03-final-intelligence-cost.png",
