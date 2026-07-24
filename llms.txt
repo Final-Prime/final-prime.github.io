@@ -11,8 +11,9 @@
 - [REALOPS-01 Agent Roster](https://final-prime.github.io/works/realops-01/): FP-WRK-0001, a frozen operational routing pilot across four single-agent profiles and 40 matched missions.
 - [The Reliability Frontier](https://final-prime.github.io/works/realops-03/): FP-WRK-0002 / REALOPS-03, a 500-mission field test across five AI agent profiles with deterministic grades and a blind secondary audit.
 - [Theory](https://final-prime.github.io/thought/): Declared philosophy, essay, and video-analysis lanes; currently no published object.
-- [Game reviews](https://final-prime.github.io/reviews/): Works-classified review methodology, registry, and published dossiers.
+- [Game reviews](https://final-prime.github.io/reviews/): Works-classified review methodology, published dossiers, and active evidence-capture records.
 - [Metro 2033 Redux review](https://final-prime.github.io/reviews/metro-2033-redux/): FP-REV-0001, a scored long-form review dossier.
+- [Moonlight Peaks living review](https://final-prime.github.io/reviews/moonlight-peaks/): FP-REV-0002, a score-locked evidence dossier in active gameplay capture.
 - [Public index](https://final-prime.github.io/index/): Route-level public object inventory.
 - [Contact](https://final-prime.github.io/contact/): Direct questions, rights and security reports, plus the private-work disclosure boundary.
 - [Legal and IP](https://final-prime.github.io/legal/): Ownership, trademark, copyright, reuse, and permission boundaries.
