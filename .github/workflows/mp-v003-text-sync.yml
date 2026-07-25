@@ -56,61 +56,78 @@ jobs:
       - name: Build one clean commit from current main
         shell: bash
         run: |
-          set -euo pipefail
-          git fetch origin main
-          git fetch origin agent/mp-assets-probe:refs/remotes/origin/agent/mp-assets-probe
-          git checkout -B "$FINAL_BRANCH" origin/main
-          cp -a /tmp/mp-v003-text/. .
-          git checkout origin/agent/mp-assets-probe -- \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-001__eye-customization__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-002__hairstyle-grid__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-003__clothing-selection__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-004__layered-accessories__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-005__final-character__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-006__train-message__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-007__dialogue-choices__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-008__arrival-with-dog__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-009__roof-negotiation__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-010__town-hall-portrait__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-011__synchronised-town-clock__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-012__glowing-ground-mark__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-013__northern-lake__web.png \
-            assets/reviews/moonlight-peaks/curated/MP-SHOT-014__animals-for-sale-letter__web.png \
-            assets/reviews/moonlight-peaks/raw/MP-SHOT-009__roof-negotiation__raw.png \
-            assets/reviews/moonlight-peaks/social/moonlight-peaks-first-contact-og.png
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          set -o pipefail
+          {
+            set -euxo pipefail
+            git fetch origin main
+            git fetch --force origin agent/mp-assets-probe:refs/remotes/origin/agent/mp-assets-probe
+            git checkout -B "$FINAL_BRANCH" origin/main
+            cp -a /tmp/mp-v003-text/. .
+            git checkout origin/agent/mp-assets-probe -- \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-001__eye-customization__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-002__hairstyle-grid__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-003__clothing-selection__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-004__layered-accessories__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-005__final-character__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-006__train-message__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-007__dialogue-choices__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-008__arrival-with-dog__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-009__roof-negotiation__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-010__town-hall-portrait__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-011__synchronised-town-clock__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-012__glowing-ground-mark__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-013__northern-lake__web.png \
+              assets/reviews/moonlight-peaks/curated/MP-SHOT-014__animals-for-sale-letter__web.png \
+              assets/reviews/moonlight-peaks/raw/MP-SHOT-009__roof-negotiation__raw.png \
+              assets/reviews/moonlight-peaks/social/moonlight-peaks-first-contact-og.png
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-          python3 tools/check_editorial_style.py
-          python3 tools/check_ip_notices.py
-          python3 tools/check_review_registry.py
-          python3 tools/check_moonlight_peaks_scaffold.py
-          python3 tools/check_social_cards.py
-          python3 tools/check_search_contract.py
-          python3 tools/check_site_integrity.py
-          python3 tools/check_security_contract.py
-          python3 tools/check_accessibility_contract.py
-          python3 tools/check_public_surface.py --history
-          python3 tools/check_realops_registry.py
-          git diff --check
+            python3 tools/check_editorial_style.py
+            python3 tools/check_ip_notices.py
+            python3 tools/check_review_registry.py
+            python3 tools/check_moonlight_peaks_scaffold.py
+            python3 tools/check_social_cards.py
+            python3 tools/check_search_contract.py
+            python3 tools/check_site_integrity.py
+            python3 tools/check_security_contract.py
+            python3 tools/check_accessibility_contract.py
+            python3 tools/check_public_surface.py --history
+            python3 tools/check_realops_registry.py
+            git diff --check
 
-          git add \
-            assets/moonlight-peaks-dossier.css \
-            assets/moonlight-peaks-dossier.js \
-            assets/reviews/moonlight-peaks \
-            docs/moonlight-peaks-asset-manifest.md \
-            docs/moonlight-peaks-captures \
-            docs/moonlight-peaks-evidence-board.md \
-            docs/moonlight-peaks-polish-audit.md \
-            docs/moonlight-peaks-screenshot-atlas.md \
-            docs/moonlight-peaks-session-log.md \
-            docs/moonlight-peaks-sync-v003.md \
-            reviews/moonlight-peaks/index.html \
-            tools/check_moonlight_peaks_scaffold.py
-          git commit -m 'Sync Moonlight Peaks staging v003'
-          git push --force origin HEAD:"$FINAL_BRANCH"
+            git add \
+              assets/moonlight-peaks-dossier.css \
+              assets/moonlight-peaks-dossier.js \
+              assets/reviews/moonlight-peaks \
+              docs/moonlight-peaks-asset-manifest.md \
+              docs/moonlight-peaks-captures \
+              docs/moonlight-peaks-evidence-board.md \
+              docs/moonlight-peaks-polish-audit.md \
+              docs/moonlight-peaks-screenshot-atlas.md \
+              docs/moonlight-peaks-session-log.md \
+              docs/moonlight-peaks-sync-v003.md \
+              reviews/moonlight-peaks/index.html \
+              tools/check_moonlight_peaks_scaffold.py
+            git commit -m 'Sync Moonlight Peaks staging v003'
+            git push --force origin HEAD:"$FINAL_BRANCH"
+          } 2>&1 | tee /tmp/mp-v003-build.log
+
+      - name: Report builder failure
+        if: failure()
+        shell: bash
+        run: |
+          {
+            echo '## Clean Moonlight v003 builder failure'
+            echo
+            echo '```text'
+            if [ -f /tmp/mp-v003-build.log ]; then tail -220 /tmp/mp-v003-build.log; else echo 'No build log was produced.'; fi
+            echo '```'
+          } > /tmp/report.md
+          gh pr comment 30 --body-file /tmp/report.md
 
       - name: Open clean final pull request
+        if: success()
         shell: bash
         run: |
           set -euo pipefail
