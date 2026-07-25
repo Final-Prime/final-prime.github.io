@@ -1,7 +1,7 @@
 # Moonlight Peaks Evidence Board
 
-Record: `FP-REV-0002`  
-Refresh: `2026-07-24`  
+Record: `FP-REV-0002`
+Refresh: `2026-07-25`
 State: `Sketch / score locked`
 
 This board separates what the supplied play record supports from interpretation and unresolved questions. Confidence applies only to the stated scope.
@@ -9,120 +9,98 @@ This board separates what the supplied play record supports from interpretation 
 ## Active claims
 
 ### MP-CLM-001 - Strong creator presentation
-
-Claim: the character creator presents a polished, coherent and readable first-contact surface.
-
-Evidence:
-
-- direct positive player report;
-- `MP-SHOT-001` through `MP-SHOT-005`;
-- visible category separation, thumbnails, selected-state feedback and model preview.
-
-Confidence: medium for the creator only.  
-Does not establish: full-game UI quality, technical stability or long-term cosmetic variety.
+The creator is polished, coherent and readable. Supported by direct report and `MP-SHOT-001` through `005`. Confidence: medium for the creator only.
 
 ### MP-CLM-002 - Starting customization feels substantial
-
-Claim: colours, hairstyles, clothing and combinable accessories provide enough visible range to create a distinct starting character.
-
-Evidence:
-
-- direct player report;
-- multiple option grids across eyes, hair, clothing and accessories;
-- useful randomizer output;
-- final character visibly differs from earlier random variants.
-
-Confidence: medium-low.  
-Falsifier: later discovery that most categories are shallow duplicates, inaccessible after creation, or produce persistent clipping and readability problems.
+Colours, hairstyles, clothing and combinable accessories produce a distinct starting character. Confidence: medium-low; later edit access and clipping remain untested.
 
 ### MP-CLM-003 - Cozy gothic tone lands immediately
-
-Claim: the creator and opening establish vampire fantasy without pursuing oppressive horror, producing a deliberately lighter cozy-gothic impression.
-
-Evidence:
-
-- direct player reaction;
-- violet night palette, gothic furniture, coffin imagery, fangs and supernatural companion;
-- opening train and forest scenes continue the same colour language.
-
-Confidence: medium for first-contact tone.  
-Boundary: developer intent is not proven. The claim describes the effect of the presented material.
+The creator and opening establish a lighter vampire fantasy that still works for a reviewer who would also welcome darker horror. Confidence: medium for first-contact tone.
 
 ### MP-CLM-004 - The opening has a clear new-start hook
+Leaving family conflict, travelling to Mom's old place and arriving at a neglected property gives the reset a personal motive. Confidence: medium.
 
-Claim: leaving a family conflict, travelling to Mom's old place and arriving at a neglected property gives the life-sim reset an immediate personal motive.
-
-Evidence:
-
-- direct player chronology;
-- `MP-SHOT-006` and `MP-SHOT-007` show Mom's messages and response options;
-- `MP-SHOT-008` shows arrival at the overgrown property.
-
-Confidence: medium.  
-Does not establish: narrative depth, emotional payoff or whether the family conflict remains relevant.
-
-### MP-CLM-005 - The three-eyed companion is a speaking travel character
-
-Claim: the figure seen in character creation is not only decorative; it leaves with the player, remains present and speaks on arrival.
-
-Evidence:
-
-- direct player report;
-- `MP-SHOT-005` shows the companion in creation;
-- `MP-SHOT-008` shows its portrait, displayed name `Dög`, dialogue and physical presence beside the player.
-
-Confidence: strong for narrative presence.  
-Does not establish: pet, familiar, guide or gameplay-helper classification.
+### MP-CLM-005 - Dög is a persistent speaking companion
+Dög travels with Daniel, speaks and later gives a Cat Bed blueprint after complaining about housing. Confidence: strong for narrative presence; broader pet mechanics remain unproven.
 
 ### MP-CLM-006 - Early dialogue supports tonal role-play
+The train conversation visibly offers conciliatory, definitive and comedic tones. Confidence: medium; persistence remains unknown.
 
-Claim: the train conversation offers visibly distinct response tones, including conciliatory, definitive and comedic options.
+### MP-CLM-007 - Daylight imposes a vampire schedule
+Daylight begins a countdown and expiry returns Daniel home. Confidence: medium after two reported 06:00 returns. Inventory, energy, money and save consequences remain unknown.
 
-Evidence:
+### MP-CLM-008 - Early townsfolk sustain curiosity
+The first residents were interesting rather than dull tutorial endpoints. Confidence: medium-low because the sample is still early.
 
-- `MP-SHOT-007`;
-- direct player description of the departure conversation.
+### MP-CLM-009 - Dialogue can alter a material quest requirement
+Objecting to Ridge's 50-wood request produced a 40-wood counteroffer. `MP-SHOT-009` confirms the final target. Confidence: medium for this interaction, not for a general bargaining system.
 
-Confidence: medium.  
-Critical unknown: whether the selection changes later dialogue, relationship state or only immediate wording.
+### MP-CLM-010 - Dög's housing need unlocks a blueprint
+Dög's complaint yielded a Cat Bed blueprint. Confidence: medium; a persistent satisfaction system is not yet established.
+
+### MP-CLM-011 - Ridge is a major homestead progression node
+Ridge handles roof work and exposes barn, well, windmill, axe-upgrade and other property improvements. Confidence: medium.
+
+### MP-CLM-012 - Vampire identity changes world reactions
+Town Hall cannot photograph Daniel and substitutes a hand-drawn portrait. `MP-SHOT-010` supports the scene. Confidence: strong for this event.
+
+### MP-CLM-013 - The faster radial tool flow improves control trust
+Holding `E`, selecting from the radial menu and releasing is substantially more fluid than the previously used sequence. Confidence: medium; tutorial discoverability remains open.
+
+### MP-CLM-014 - The northern region creates strong exploration pull
+The glowing lake and visible locked landmarks make the area attractive to inspect. `MP-SHOT-013` supports visual composition; continuous animation comes from player report. Confidence: medium for first-contact curiosity.
+
+### MP-CLM-015 - Early progression uses multiple gate types
+The run has encountered inactive landmarks, an unreachable island marker, an inactive hut, a hammer-tier tunnel block, a fishing competition and a letter-triggered animal system. Confidence: medium.
+
+### MP-CLM-016 - Animal husbandry is formally introduced through Luna
+`MP-SHOT-014` shows Luna inviting Daniel to her farm because animals need homes. Animal types, costs, housing and value remain unknown. Confidence: strong for introduction only.
 
 ## Suggestions
 
 ### MP-SUG-001 - Random-name generator
+A dice or name-randomization control would complete the otherwise strong creator flow. Minor convenience only.
 
-A dice or random-name control would complete the otherwise strong randomization flow. This remains a minor convenience suggestion and does not affect the current score state.
+## Issues and friction
+
+### MP-ISS-001 - Townsfolk target lacked identity guidance
+`Meet the Townsfolk` showed that one resident was missing but did not name or route to them. The resident was later found, narrowing this from potential bug to discoverability friction.
+
+### MP-ISS-002 - Ridge delivery routing was initially unclear
+The carpenter building signposted its function visually, but Daniel still spent time identifying where to deliver the wood.
+
+### MP-ISS-003 - Several northern gates currently lack explanation
+The mushroom circle, island entrance and abandoned hut are visible but inactive or unreachable. This may be good foreshadowing or later information debt.
 
 ## Resolved or narrowed unknowns
 
-### MP-UNK-001 - Three-eyed figure
-
-Previous state: unknown decorative or pet-like figure.  
-Current state: narrowed. It is a persistent, speaking companion shown with the displayed name `Dög`. Mechanical role remains unknown.
-
-### MP-UNK-002 - Meaning of `jumpiness`
-
-Resolved: positive animation and menu liveliness. It was not a report of stutter or technical instability.
+- `MP-UNK-001`: the three-eyed figure is Dög, a persistent speaking companion with at least one blueprint-granting interaction.
+- `MP-UNK-002`: `jumpiness` meant good animation, not stutter.
+- `MP-UNK-003`: the missing resident was found; exact name spelling remains unverified.
+- `MP-UNK-004`: dawn return recurs, but its full penalty/state behavior remains unknown.
 
 ## Reviewer calibration
 
-Daniel has a strong preference for horror and would personally accept a darker aesthetic. The current lighter tone still works for him. Future criticism must distinguish personal darkness preference from failure of the game's own cozy-gothic design.
+Daniel likes horror and would accept a darker aesthetic. The current cozy-gothic tone still works; later criticism must distinguish preference from failure of the game's own design.
 
 ## Current upward pull
 
-Presentation craft and immediate identity: the creator, companion design, colour language and clean new-start premise form a coherent opening signal.
+Presentation craft, vampire-specific identity, interesting early residents, attractive exploration and a growing network of connected systems.
 
 ## Current downward drag
 
-None established. The missing name generator is too minor to count as a meaningful drag.
+No major drag is established. The clearest current friction is uneven discoverability: missing-resident identity, Ridge routing, hidden radial-control knowledge and unexplained locked landmarks.
 
 ## Biggest unresolved risk
 
-The opening may be highly polished while the actual farming, magic, travel and relationship loop remains conventional or repetitive.
+The opening variety may become routine grind, and visible progression gates may become information debt rather than satisfying anticipation.
 
 ## Next falsification targets
 
-1. Does vampirehood change the first working day?
-2. Does Dög change play or only comment on it?
-3. Do dialogue choices persist?
-4. Does the main gameplay UI retain the creator's clarity?
-5. Does the abandoned-property setup create meaningful choice or only a standard cleanup sequence?
+1. Does the daily farming/gathering loop remain satisfying after repetition?
+2. What does building the Cat Bed change?
+3. Does the repaired roof materially expand the house?
+4. What penalties accompany the 06:00 return?
+5. Are the northern gates later explained and unlocked clearly?
+6. How useful and costly are animals, fishing and Ridge's upgrades?
+7. Do dialogue choices beyond Ridge produce persistent state?
