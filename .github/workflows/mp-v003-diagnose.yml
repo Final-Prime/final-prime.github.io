@@ -1,0 +1,51 @@
+name: Diagnose Moonlight v003 packet
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  diagnose:
+    if: github.head_ref == 'agent/mp-v003-sync'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: agent/mp-v003-sync
+          persist-credentials: false
+      - name: Report packet
+        shell: bash
+        run: |
+          set +e
+          cat .github/mp-v003-payload/chunk-* > /tmp/payload.b64
+          chars=$(wc -c < /tmp/payload.b64 | tr -d ' ')
+          base64 --decode /tmp/payload.b64 > /tmp/payload.tar.gz 2>/tmp/decode.err
+          decode=$?
+          sha=unavailable
+          bytes=0
+          archive=FAIL
+          if [ "$decode" -eq 0 ]; then
+            sha=$(sha256sum /tmp/payload.tar.gz | awk '{print $1}')
+            bytes=$(wc -c < /tmp/payload.tar.gz | tr -d ' ')
+            if tar -tzf /tmp/payload.tar.gz > /tmp/list.txt 2>/tmp/tar.err; then archive=PASS; fi
+          fi
+          {
+            echo '## v003 packet diagnostic'
+            echo
+            echo "- Base64 characters: \`$chars\`"
+            echo "- Decode exit: \`$decode\`"
+            echo "- Decoded bytes: \`$bytes\`"
+            echo "- SHA-256: \`$sha\`"
+            echo "- Tar: \`$archive\`"
+            if [ -s /tmp/decode.err ]; then echo; echo '### Decode error'; echo '```'; cat /tmp/decode.err; echo '```'; fi
+            if [ -s /tmp/tar.err ]; then echo; echo '### Tar error'; echo '```'; cat /tmp/tar.err; echo '```'; fi
+            if [ -s /tmp/list.txt ]; then echo; echo '### Paths'; echo '```'; sed '/\/$/d' /tmp/list.txt; echo '```'; fi
+          } > /tmp/report.md
+          gh pr comment 27 --body-file /tmp/report.md
