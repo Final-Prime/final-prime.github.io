@@ -80,6 +80,16 @@ jobs:
               assets/reviews/moonlight-peaks/curated/MP-SHOT-014__animals-for-sale-letter__web.png \
               assets/reviews/moonlight-peaks/raw/MP-SHOT-009__roof-negotiation__raw.png \
               assets/reviews/moonlight-peaks/social/moonlight-peaks-first-contact-og.png
+            python3 - <<'PY'
+          from pathlib import Path
+          path = Path('tools/check_moonlight_peaks_scaffold.py')
+          text = path.read_text(encoding='utf-8')
+          old = r'r"\b(?:Buy now|Buy on sale|Avoid for now|Skip)\b"'
+          new = r'r"\b(?:Buy now|Buy on sale|Avoid for now)\b"'
+          if old not in text:
+              raise SystemExit('Moonlight buyer-action regex anchor missing')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
