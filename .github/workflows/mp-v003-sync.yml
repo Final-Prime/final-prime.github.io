@@ -1,0 +1,120 @@
+name: Build Moonlight staging v003 compact
+
+on:
+  push:
+    branches:
+      - agent/mp-v003-sync
+    paths:
+      - .github/mp-v003-trigger.txt
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      FINAL_BRANCH: agent/mp-v003-final
+      PAYLOAD_SHA256: 106647c509c11b43fde4c352288082bf09baf5fdfd1c714223aca09fad896af8
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: agent/mp-v003-sync
+          fetch-depth: 0
+
+      - name: Reconstruct and verify packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .github/mp-v003-payload/chunk-* > /tmp/mp-v003.b64
+          base64 --decode /tmp/mp-v003.b64 > /tmp/mp-v003.tar.gz
+          printf '%s  %s\n' "$PAYLOAD_SHA256" /tmp/mp-v003.tar.gz | sha256sum --check --strict
+          tar -tzf /tmp/mp-v003.tar.gz | sed '/\/$/d' | sort -u > /tmp/actual.txt
+          cat > /tmp/expected.txt <<'EOF'
+          assets/moonlight-peaks-dossier.css
+          assets/moonlight-peaks-dossier.js
+          assets/reviews/moonlight-peaks/README.md
+          assets/reviews/moonlight-peaks/curated/moonlight-peaks-evidence-contact-sheet-v003.svg
+          docs/moonlight-peaks-asset-manifest.md
+          docs/moonlight-peaks-captures/MP-S01-CAPTURE-02.md
+          docs/moonlight-peaks-captures/MP-S01-CAPTURE-03-AMENDMENT.md
+          docs/moonlight-peaks-captures/MP-S01-CAPTURE-04.md
+          docs/moonlight-peaks-captures/MP-S01-CAPTURE-05.md
+          docs/moonlight-peaks-evidence-board.md
+          docs/moonlight-peaks-polish-audit.md
+          docs/moonlight-peaks-screenshot-atlas.md
+          docs/moonlight-peaks-session-log.md
+          docs/moonlight-peaks-sync-v003.md
+          reviews/moonlight-peaks/index.html
+          tools/check_moonlight_peaks_scaffold.py
+          EOF
+          sed -i 's/^          //' /tmp/expected.txt
+          diff -u /tmp/expected.txt /tmp/actual.txt
+          mkdir -p /tmp/mp-v003
+          tar -xzf /tmp/mp-v003.tar.gz -C /tmp/mp-v003
+
+      - name: Build one clean commit from current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B "$FINAL_BRANCH" origin/main
+          cp -a /tmp/mp-v003/. .
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python3 tools/check_editorial_style.py
+          python3 tools/check_ip_notices.py
+          python3 tools/check_review_registry.py
+          python3 tools/check_moonlight_peaks_scaffold.py
+          python3 tools/check_social_cards.py
+          python3 tools/check_search_contract.py
+          python3 tools/check_site_integrity.py
+          python3 tools/check_security_contract.py
+          python3 tools/check_accessibility_contract.py
+          python3 tools/check_public_surface.py --history
+          python3 tools/check_realops_registry.py
+          git diff --check
+          git add assets/moonlight-peaks-dossier.css \
+                  assets/moonlight-peaks-dossier.js \
+                  assets/reviews/moonlight-peaks \
+                  docs/moonlight-peaks-asset-manifest.md \
+                  docs/moonlight-peaks-captures \
+                  docs/moonlight-peaks-evidence-board.md \
+                  docs/moonlight-peaks-polish-audit.md \
+                  docs/moonlight-peaks-screenshot-atlas.md \
+                  docs/moonlight-peaks-session-log.md \
+                  docs/moonlight-peaks-sync-v003.md \
+                  reviews/moonlight-peaks/index.html \
+                  tools/check_moonlight_peaks_scaffold.py
+          git commit -m 'Sync Moonlight Peaks staging v003'
+          git push --force origin HEAD:"$FINAL_BRANCH"
+
+      - name: Open clean pull request
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! gh pr view "$FINAL_BRANCH" --json number >/dev/null 2>&1; then
+            gh pr create --base main --head "$FINAL_BRANCH" \
+              --title 'Sync Moonlight Peaks staging v003' \
+              --body-file - <<'EOF'
+          ## Summary
+
+          Drains the Moonlight Peaks v003 staging buffer into the public evidence-led dossier.
+
+          ## Included
+
+          - adversarial design and copy polish;
+          - MP-S01 Capture 02 through Capture 05;
+          - fourteen separately indexed screenshot records and one compact public evidence contact sheet;
+          - updated session log, evidence board, screenshot atlas and asset manifest;
+          - recurring 06:00 vampire return, Ridge negotiation, Dög housing blueprint, Town Hall registration, exploration gates, fishing and animal-system evidence;
+          - strengthened score-lock validation.
+
+          ## Integrity
+
+          The branch is one bot-noreply commit created directly from the then-current `main`. The source archive was accepted only after SHA-256 and exact 16-path verification. Exact screenshot source bytes remain explicit manifest-only blocked records because the active connector write path is text-only. The public score, grade and buyer action remain withheld; `MP-S01` stays open.
+          EOF
+          fi
+          gh pr view "$FINAL_BRANCH" --json number,url,headRefOid
