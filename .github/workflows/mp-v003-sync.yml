@@ -6,6 +6,9 @@ on:
       - agent/mp-v003-sync
     paths:
       - .github/mp-v003-trigger.txt
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
