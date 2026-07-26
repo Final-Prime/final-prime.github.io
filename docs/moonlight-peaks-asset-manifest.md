@@ -273,8 +273,8 @@ Does not establish: animal types, prices, housing or profitability.
 - Original SHA-256: `db112b3dac2f652815a76cebb89abc05f63e44664d1c546d4689bf02e027f444`
 - Raw retention: post-v003 delta v004 archive
 - Public derivative: `assets/reviews/moonlight-peaks/curated/MP-SHOT-015__repaired-roof__web.png`
-- Derivative: `1200x675` / `813088` bytes
-- Derivative SHA-256: `c0f9899be405cbacd7e181b0f27a6333b869a953da888d8c0f2537e92af8c5f7`
+- Derivative: `1200x675` / `494628` bytes
+- Derivative SHA-256: `735420243b1a79507feddf24455f09a15024a9ec79ce758b0e3605d203c91c36`
 
 Source capture: `MP-S01 / Capture 06`
 Spoiler: light
@@ -292,8 +292,8 @@ Does not establish: an interior expansion, weather protection, a new room, exact
 - Original SHA-256: `397484fa92f4ef19f2701aaf8c03227ac7181d2cda2cf53fcffc7401d7bf2c5c`
 - Raw retention: post-v003 delta v004 archive
 - Public derivative: `assets/reviews/moonlight-peaks/curated/MP-SHOT-016__northern-frog-merchant__web.png`
-- Derivative: `1200x675` / `929685` bytes
-- Derivative SHA-256: `cb4903f513214b1576299eecd993f41ff61bbc7852bbbe39f6951f875df87e1b`
+- Derivative: `1200x675` / `646056` bytes
+- Derivative SHA-256: `c66095241e0e2e041f43ba8e3741d5e1cd7741d6cc220a0d6097ab4c04b3afdf`
 
 Source capture: `MP-S01 / Capture 06`
 Spoiler: light
