@@ -1,8 +1,8 @@
 # Moonlight Peaks Screenshot Evidence Atlas
 
 Record: `FP-REV-0002`
-Refresh: `2026-07-25`
-Current records: `14`
+Refresh: `2026-07-26`
+Current records: `17`
 
 Every retained frame has a stable ID and proof boundary. Public derivatives are optimized and metadata-stripped; source hashes and any exact-source retention limits are recorded in the asset manifest.
 
@@ -159,3 +159,36 @@ Alt text: Luna invites Daniel to visit her farm because animals need homes.
 
 Supports: formal animal-system introduction and Luna's role.
 Does not establish: animal types, prices, housing or profitability.
+
+## MP-SHOT-015 - Repaired homestead roof
+
+Source capture: `MP-S01 / Capture 06`
+Spoiler: light
+Publication: public derivative
+
+Alt text: Daniel stands outside the repaired Moonlight Peaks house at night; Dög and the eye-covered auto-sell chest are nearby.
+
+Supports: roof repair completion and visible exterior property progression.
+Does not establish: an interior expansion, a new room, exact construction timing or a mechanical bonus.
+
+## MP-SHOT-016 - Northern frog-like merchant
+
+Source capture: `MP-S01 / Capture 06`
+Spoiler: light
+Publication: public derivative
+
+Alt text: Daniel stands beside a large round frog-like merchant in a glowing pond surrounded by reeds, flowers, rocks and a small decorated boat.
+
+Supports: a northern merchant encounter and a vendor visually integrated into the glowing lake area.
+Does not establish: shop inventory, prices, merchant name, restock cycle or the purchased lamp items.
+
+## MP-SHOT-017 - Ridge furniture refresh
+
+Source capture: `MP-S01 / Capture 07`
+Spoiler: light
+Publication: public derivative
+
+Alt text: Ridge's furniture shop showing a Café Table, dark couch, heart-light arch and pink television with prices.
+
+Supports: the current Ridge furniture listing, displayed prices, Café Table name, `4x2` footprint and current currency.
+Does not establish: exact refresh cadence, whether every category rotates, purchased-slot behavior or duplicate availability.

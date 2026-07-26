@@ -194,3 +194,72 @@ The second 06:00 return raises confidence that dawn return is a recurring vampir
 ### Current state
 
 `MP-S01` remains open. Captures 02 through 05 do not unlock a score, grade or buyer action.
+
+---
+
+## MP-S01 - Capture 06 / Visible homestead payoff and northern merchant
+
+State: open session, capture node 06
+Sources: `PLAYER`, `SCREENSHOT`
+
+### Milestone
+
+The first roof repair produced a visible exterior change, and northern exploration reached a distinct merchant embedded in the luminous pond area.
+
+### Supported chronology
+
+1. The repaired roof is visibly complete on the homestead exterior.
+2. Daniel travelled north and encountered a large frog-like merchant in the luminous pond area.
+3. Daniel reports buying the merchant's entire currently visible stock.
+4. The reported stock included decorative lamp-like items.
+
+### Observation
+
+The roof is the first clear proof that an early resource task changes the property itself rather than only clearing a quest. The northern merchant also converts the lake from a purely visual and gated exploration space into a functional destination. The screenshot confirms the encounter and environmental integration, while the inventory, prices, lamp availability and full-stock purchase remain player report.
+
+### Axis direction
+
+- `Promise Fit +1 provisional`: the first major repair has a visible payoff.
+- `Ownership and Agency +1 provisional`: the merchant adds decoration acquisition and spending choices.
+- `Curiosity / Variety +1`: northern exploration now yields a vendor as well as locked landmarks.
+- `Immersion / Craft +1`: both new states are visually integrated into their locations.
+- `Time Respect +1 provisional`: the roof task reached a clear result without observed long delay.
+- `Information and Trust 0`: interior effects, item placement, prices and restocking remain unknown.
+
+### Current state
+
+`MP-S01` remains open. Capture 06 does not unlock a score, grade or buyer action.
+
+---
+
+## MP-S01 - Capture 07 / Ridge inventory refresh
+
+State: open session, capture node 07
+Sources: `PLAYER`, `SCREENSHOT`
+
+### Milestone
+
+A return visit to Ridge produced the first evidence that his visible furniture stock changes between visits.
+
+### Supported chronology
+
+1. Daniel returned to Ridge after an earlier shop visit.
+2. Daniel reports that Ridge now carries new items.
+3. `MP-SHOT-017` shows Café Table for `160`, a dark couch for `250`, a heart-light arch for `430` and a pink television for `750`.
+4. The selected Café Table displays a `4x2` footprint.
+5. Daniel has `2,077` currency before any documented Capture 07 purchase.
+
+### Observation
+
+Ridge now appears to support a rotating or refreshing furniture surface, giving town revisits a possible economic and decorative purpose. The current screenshot proves the present listing, but the previous Ridge shop state was not retained as a comparison frame. The trigger and cadence therefore remain unknown.
+
+### Axis direction
+
+- `Ongoing Loop +1 provisional`: changing stock may reward repeat visits.
+- `Ownership and Agency +1 provisional`: furniture choice and visible pricing support layout planning.
+- `Information and Trust +1 provisional`: price, footprint and shop categories are legible.
+- `Time Respect 0`: refresh cadence and duplicate behavior remain untested.
+
+### Current state
+
+`MP-S01` remains open. Capture 07 does not unlock a score, grade or buyer action.
