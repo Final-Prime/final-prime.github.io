@@ -1,7 +1,7 @@
 # Moonlight Peaks Evidence Board
 
 Record: `FP-REV-0002`
-Refresh: `2026-07-25`
+Refresh: `2026-07-26`
 State: `Sketch / score locked`
 
 This board separates what the supplied play record supports from interpretation and unresolved questions. Confidence applies only to the stated scope.
@@ -56,6 +56,12 @@ The run has encountered inactive landmarks, an unreachable island marker, an ina
 ### MP-CLM-016 - Animal husbandry is formally introduced through Luna
 `MP-SHOT-014` shows Luna inviting Daniel to her farm because animals need homes. Animal types, costs, housing and value remain unknown. Confidence: strong for introduction only.
 
+### MP-CLM-017 - The first property repair produces a visible world-state change
+`MP-SHOT-015` confirms that the damaged homestead roof became a complete exterior roof. Confidence: strong for the visible exterior change; interior expansion and mechanical benefits remain unknown.
+
+### MP-CLM-018 - Northern exploration yields a distinct merchant encounter
+`MP-SHOT-016` confirms a frog-like merchant integrated into the glowing pond environment. The player reports buying out the visible stock and seeing lamp-like decorations, but the still image does not prove inventory, prices or restocking. Confidence: strong for the encounter and medium-low for the reported shop details.
+
 ## Suggestions
 
 ### MP-SUG-001 - Random-name generator
@@ -85,7 +91,7 @@ Daniel likes horror and would accept a darker aesthetic. The current cozy-gothic
 
 ## Current upward pull
 
-Presentation craft, vampire-specific identity, interesting early residents, attractive exploration and a growing network of connected systems.
+Presentation craft, vampire-specific identity, interesting early residents, visible property progression, attractive exploration and a growing network of connected systems.
 
 ## Current downward drag
 
@@ -104,3 +110,5 @@ The opening variety may become routine grind, and visible progression gates may 
 5. Are the northern gates later explained and unlocked clearly?
 6. How useful and costly are animals, fishing and Ridge's upgrades?
 7. Do dialogue choices beyond Ridge produce persistent state?
+8. What is the northern merchant's exact name and restock cycle?
+9. Are purchased lamps placeable indoors and outdoors, and can they be recovered without loss?

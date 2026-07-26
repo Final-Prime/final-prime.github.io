@@ -1,13 +1,14 @@
 # Moonlight Peaks Asset Manifest
 
 Record: `FP-REV-0002`
-Refresh: `2026-07-25`
+Refresh: `2026-07-26`
 Policy: `docs/steam-completions-asset-retention-policy.md`
 Archive: GitHub release asset `moonlight-peaks-staging-buffer-v003.zip` after the clean sync.
+Post-v003 delta: `MP-S01 / Capture 06`, integrated as public evidence through `MP-SHOT-016`.
 
 ## Retention rule
 
-All fourteen exact source screenshots remain in the archival v003 ZIP. The public tree receives metadata-stripped truecolor PNG derivatives that satisfy the repository 1 MiB and PNG-chunk contracts. `MP-SHOT-009` also fits as a cleaned full-resolution raw PNG in the public tree. No source is silently dropped.
+The first fourteen exact source screenshots remain in the archival v003 ZIP. The two Capture 06 JPG sources remain hash-locked in the post-v003 delta v004 archive because the public surface does not admit JPG files. The public tree now exposes sixteen metadata-stripped truecolor PNG derivatives that satisfy the repository 1 MiB and PNG-chunk contracts. `MP-SHOT-009` also fits as a cleaned full-resolution raw PNG in the public tree. No source is silently dropped.
 
 ## Assets
 
@@ -264,6 +265,44 @@ Alt text: Luna invites Daniel to visit her farm because animals need homes.
 
 Supports: formal animal-system introduction and Luna's role.
 Does not establish: animal types, prices, housing or profitability.
+
+### MP-SHOT-015 - Repaired homestead roof
+
+- Session: `MP-S01 / Capture 06`
+- Original: `Moonlight_Peaks_ZMsIyrxlZ9.jpg` / `2048x1152` / `287028` bytes
+- Original SHA-256: `db112b3dac2f652815a76cebb89abc05f63e44664d1c546d4689bf02e027f444`
+- Raw retention: post-v003 delta v004 archive
+- Public derivative: `assets/reviews/moonlight-peaks/curated/MP-SHOT-015__repaired-roof__web.png`
+- Derivative: `1200x675` / `813088` bytes
+- Derivative SHA-256: `c0f9899be405cbacd7e181b0f27a6333b869a953da888d8c0f2537e92af8c5f7`
+
+Source capture: `MP-S01 / Capture 06`
+Spoiler: light
+Publication: public derivative
+
+Alt text: Daniel stands outside the repaired Moonlight Peaks house at night; Dög and the eye-covered auto-sell chest are nearby.
+
+Supports: roof repair completion, visible exterior property progression, and continued integration of Dög and the auto-sell chest into the homestead space.
+Does not establish: an interior expansion, weather protection, a new room, exact construction timing or any mechanical bonus.
+
+### MP-SHOT-016 - Northern frog-like merchant
+
+- Session: `MP-S01 / Capture 06`
+- Original: `Moonlight_Peaks_pqhotoWNk7.jpg` / `2048x1152` / `342058` bytes
+- Original SHA-256: `397484fa92f4ef19f2701aaf8c03227ac7181d2cda2cf53fcffc7401d7bf2c5c`
+- Raw retention: post-v003 delta v004 archive
+- Public derivative: `assets/reviews/moonlight-peaks/curated/MP-SHOT-016__northern-frog-merchant__web.png`
+- Derivative: `1200x675` / `929685` bytes
+- Derivative SHA-256: `cb4903f513214b1576299eecd993f41ff61bbc7852bbbe39f6951f875df87e1b`
+
+Source capture: `MP-S01 / Capture 06`
+Spoiler: light
+Publication: public derivative
+
+Alt text: Daniel stands beside a large round frog-like merchant in a glowing pond surrounded by reeds, flowers, rocks and a small decorated boat.
+
+Supports: a northern merchant encounter, strong environmental presentation, and a vendor visually integrated into the glowing lake area.
+Does not establish: shop inventory, prices, merchant name, restock cycle or the purchased lamp items.
 
 ## Social card
 

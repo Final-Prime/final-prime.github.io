@@ -194,3 +194,38 @@ The second 06:00 return raises confidence that dawn return is a recurring vampir
 ### Current state
 
 `MP-S01` remains open. Captures 02 through 05 do not unlock a score, grade or buyer action.
+
+---
+
+## MP-S01 - Capture 06 / Visible homestead payoff and northern merchant
+
+State: open session, capture node 06
+Sources: `PLAYER`, `SCREENSHOT`
+
+### Milestone
+
+The first roof repair produced a visible exterior change, and northern exploration reached a distinct merchant embedded in the luminous pond area.
+
+### Supported chronology
+
+1. The repaired roof is visibly complete on the homestead exterior.
+2. Daniel travelled north and encountered a large frog-like merchant in the luminous pond area.
+3. Daniel reports buying the merchant's entire currently visible stock.
+4. The reported stock included decorative lamp-like items.
+
+### Observation
+
+The roof is the first clear proof that an early resource task changes the property itself rather than only clearing a quest. The northern merchant also converts the lake from a purely visual and gated exploration space into a functional destination. The screenshot confirms the encounter and environmental integration, while the inventory, prices, lamp availability and full-stock purchase remain player report.
+
+### Axis direction
+
+- `Promise Fit +1 provisional`: the first major repair has a visible payoff.
+- `Ownership and Agency +1 provisional`: the merchant adds decoration acquisition and spending choices.
+- `Curiosity / Variety +1`: northern exploration now yields a vendor as well as locked landmarks.
+- `Immersion / Craft +1`: both new states are visually integrated into their locations.
+- `Time Respect +1 provisional`: the roof task reached a clear result without observed long delay.
+- `Information and Trust 0`: interior effects, item placement, prices and restocking remain unknown.
+
+### Current state
+
+`MP-S01` remains open. Capture 06 does not unlock a score, grade or buyer action.
