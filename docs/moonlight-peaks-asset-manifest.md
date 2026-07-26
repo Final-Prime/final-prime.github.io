@@ -4,11 +4,11 @@ Record: `FP-REV-0002`
 Refresh: `2026-07-26`
 Policy: `docs/steam-completions-asset-retention-policy.md`
 Archive: GitHub release asset `moonlight-peaks-staging-buffer-v003.zip` after the clean sync.
-Post-v003 delta: `MP-S01 / Capture 06`, integrated as public evidence through `MP-SHOT-016`.
+Post-v003 delta: `MP-S01 / Captures 06-07`, integrated as public evidence through `MP-SHOT-017`.
 
 ## Retention rule
 
-The first fourteen exact source screenshots remain in the archival v003 ZIP. The two Capture 06 JPG sources remain hash-locked in the post-v003 delta v004 archive because the public surface does not admit JPG files. The public tree now exposes sixteen metadata-stripped truecolor PNG derivatives that satisfy the repository 1 MiB and PNG-chunk contracts. `MP-SHOT-009` also fits as a cleaned full-resolution raw PNG in the public tree. No source is silently dropped.
+The first fourteen exact source screenshots remain in the archival v003 ZIP. The two Capture 06 JPG sources remain hash-locked in the post-v003 delta v004 archive because the public surface does not admit JPG files. Capture 07 supplied one clean PNG source and one JPEG alternative of the same shop state; both are hash-recorded below, while the cleaner PNG is the derivative source. The public tree now exposes seventeen metadata-stripped truecolor PNG derivatives that satisfy the repository 1 MiB and PNG-chunk contracts. `MP-SHOT-009` also fits as a cleaned full-resolution raw PNG in the public tree. No source is silently dropped.
 
 ## Assets
 
@@ -303,6 +303,28 @@ Alt text: Daniel stands beside a large round frog-like merchant in a glowing pon
 
 Supports: a northern merchant encounter, strong environmental presentation, and a vendor visually integrated into the glowing lake area.
 Does not establish: shop inventory, prices, merchant name, restock cycle or the purchased lamp items.
+
+### MP-SHOT-017 - Ridge furniture refresh
+
+- Session: `MP-S01 / Capture 07`
+- Preferred original: `image(22).png` / `2048x1150` / `1668506` bytes
+- Preferred original SHA-256: `d298c7f24f7f25ab3ffc2bc36f8830b5fcddc3e1152aa1df56643aee203c3c93`
+- Alternate original: `Moonlight_Peaks_BgtP4e1Eeq.jpg` / `2048x1152` / `265814` bytes
+- Alternate original SHA-256: `7be2fda1d0ff9251dfc76775b107da16990096ceaeb7a7cad8579fb9c0bffef3`
+- Source selection: the PNG is lossless and does not contain the lower-right system overlay visible in the JPEG alternative.
+- Raw retention: supplied sources retained outside the public tree; exact hashes recorded here
+- Public derivative: `assets/reviews/moonlight-peaks/curated/MP-SHOT-017__ridge-restock__web.png`
+- Derivative: `1200x675` / `282470` bytes
+- Derivative SHA-256: `a9709c59c991750b3a36eed15e85e06234f892ec1d5e56cb270694c9a6aee85b`
+
+Source capture: `MP-S01 / Capture 07`
+Spoiler: light
+Publication: public derivative
+
+Alt text: Ridge's furniture shop showing a Café Table, dark couch, heart-light arch and pink television with prices.
+
+Supports: the current Ridge furniture listing, prices, Café Table name, `4x2` footprint and current currency.
+Does not establish: exact refresh cadence, whether every category rotates, purchased-slot behavior or duplicate availability.
 
 ## Social card
 

@@ -229,3 +229,37 @@ The roof is the first clear proof that an early resource task changes the proper
 ### Current state
 
 `MP-S01` remains open. Capture 06 does not unlock a score, grade or buyer action.
+
+---
+
+## MP-S01 - Capture 07 / Ridge inventory refresh
+
+State: open session, capture node 07
+Sources: `PLAYER`, `SCREENSHOT`
+
+### Milestone
+
+A return visit to Ridge produced the first evidence that his visible furniture stock changes between visits.
+
+### Supported chronology
+
+1. Daniel returned to Ridge after an earlier shop visit.
+2. Daniel reports that Ridge now carries new items.
+3. `MP-SHOT-017` shows Café Table for `160`, a dark couch for `250`, a heart-light arch for `430` and a pink television for `750`.
+4. The selected Café Table displays a `4x2` footprint.
+5. Daniel has `2,077` currency before any documented Capture 07 purchase.
+
+### Observation
+
+Ridge now appears to support a rotating or refreshing furniture surface, giving town revisits a possible economic and decorative purpose. The current screenshot proves the present listing, but the previous Ridge shop state was not retained as a comparison frame. The trigger and cadence therefore remain unknown.
+
+### Axis direction
+
+- `Ongoing Loop +1 provisional`: changing stock may reward repeat visits.
+- `Ownership and Agency +1 provisional`: furniture choice and visible pricing support layout planning.
+- `Information and Trust +1 provisional`: price, footprint and shop categories are legible.
+- `Time Respect 0`: refresh cadence and duplicate behavior remain untested.
+
+### Current state
+
+`MP-S01` remains open. Capture 07 does not unlock a score, grade or buyer action.

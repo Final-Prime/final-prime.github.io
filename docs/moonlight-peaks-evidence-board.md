@@ -62,6 +62,9 @@ The run has encountered inactive landmarks, an unreachable island marker, an ina
 ### MP-CLM-018 - Northern exploration yields a distinct merchant encounter
 `MP-SHOT-016` confirms a frog-like merchant integrated into the glowing pond environment. The player reports buying out the visible stock and seeing lamp-like decorations, but the still image does not prove inventory, prices or restocking. Confidence: strong for the encounter and medium-low for the reported shop details.
 
+### MP-CLM-019 - Ridge's visible furniture stock changes between visits
+The player reports that a return visit exposed new Ridge items. `MP-SHOT-017` directly confirms the current four-item furniture listing, prices, Café Table name and `4x2` footprint. Confidence: medium for a between-visit inventory change because the earlier Ridge listing was not retained as a comparison frame. Cadence, rotation rules, purchased-slot behavior and duplicates remain unknown.
+
 ## Suggestions
 
 ### MP-SUG-001 - Random-name generator
@@ -112,3 +115,4 @@ The opening variety may become routine grind, and visible progression gates may 
 7. Do dialogue choices beyond Ridge produce persistent state?
 8. What is the northern merchant's exact name and restock cycle?
 9. Are purchased lamps placeable indoors and outdoors, and can they be recovered without loss?
+10. Does Ridge refresh daily, after purchases, after quests or on another schedule?

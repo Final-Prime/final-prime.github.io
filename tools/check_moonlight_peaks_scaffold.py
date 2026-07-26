@@ -35,6 +35,7 @@ CAPTURES = tuple(
         "MP-S01-CAPTURE-04.md",
         "MP-S01-CAPTURE-05.md",
         "MP-S01-CAPTURE-06.md",
+        "MP-S01-CAPTURE-07.md",
     )
 )
 
@@ -165,10 +166,10 @@ def main() -> int:
     )
     if len(question_clusters) != 3 or sum(cluster.count("<li>") for cluster in question_clusters) != 12:
         errors.append("Moonlight page must expose three question clusters and twelve routed questions")
-    if page.count('class="mp-claim-card"') != 14:
-        errors.append("Moonlight page must expose fourteen bounded evidence claims")
+    if page.count('class="mp-claim-card"') != 15:
+        errors.append("Moonlight page must expose fifteen bounded evidence claims")
 
-    for shot in range(1, 17):
+    for shot in range(1, 18):
         token = f"MP-SHOT-{shot:03d}"
         require(page, token, "Moonlight page", errors)
         require(manifest, token, "Moonlight asset manifest", errors)
@@ -235,8 +236,8 @@ def main() -> int:
             require(text, token, path.relative_to(ROOT).as_posix(), errors)
 
     curated = sorted(CURATED.glob("MP-SHOT-???__*__web.png")) if CURATED.is_dir() else []
-    if len(curated) != 16:
-        errors.append(f"Expected 16 curated Moonlight PNGs, found {len(curated)}")
+    if len(curated) != 17:
+        errors.append(f"Expected 17 curated Moonlight PNGs, found {len(curated)}")
     for shot, path in enumerate(curated, start=1):
         expected_prefix = f"MP-SHOT-{shot:03d}__"
         if not path.name.startswith(expected_prefix):
@@ -252,9 +253,9 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Moonlight Peaks dossier validation passed through Capture 06.")
+    print("Moonlight Peaks dossier validation passed through Capture 07.")
     print("State: FP-REV-0002 / Sketch / New Moon / MP-S01 open")
-    print("Public evidence: MP-SHOT-001..016 / metadata-stripped PNGs")
+    print("Public evidence: MP-SHOT-001..017 / metadata-stripped PNGs")
     print("Public score and buyer action: withheld")
     return 0
 

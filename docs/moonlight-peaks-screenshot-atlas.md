@@ -2,7 +2,7 @@
 
 Record: `FP-REV-0002`
 Refresh: `2026-07-26`
-Current records: `16`
+Current records: `17`
 
 Every retained frame has a stable ID and proof boundary. Public derivatives are optimized and metadata-stripped; source hashes and any exact-source retention limits are recorded in the asset manifest.
 
@@ -181,3 +181,14 @@ Alt text: Daniel stands beside a large round frog-like merchant in a glowing pon
 
 Supports: a northern merchant encounter and a vendor visually integrated into the glowing lake area.
 Does not establish: shop inventory, prices, merchant name, restock cycle or the purchased lamp items.
+
+## MP-SHOT-017 - Ridge furniture refresh
+
+Source capture: `MP-S01 / Capture 07`
+Spoiler: light
+Publication: public derivative
+
+Alt text: Ridge's furniture shop showing a Café Table, dark couch, heart-light arch and pink television with prices.
+
+Supports: the current Ridge furniture listing, displayed prices, Café Table name, `4x2` footprint and current currency.
+Does not establish: exact refresh cadence, whether every category rotates, purchased-slot behavior or duplicate availability.
