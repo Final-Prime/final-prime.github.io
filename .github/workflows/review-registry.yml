@@ -1,34 +1,7 @@
 name: Review registry
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "index.html"
-      - "thought/**"
-      - "reviews/**"
-      - "index/**"
-      - "assets/review-*.css"
-      - "assets/review-*.js"
-      - "assets/reviews/**"
-      - "docs/metro-2033-redux-import-audit.md"
-      - "sitemap.xml"
-      - "tools/check_review_registry.py"
-      - ".github/workflows/review-registry.yml"
-  pull_request:
-    paths:
-      - "index.html"
-      - "thought/**"
-      - "reviews/**"
-      - "index/**"
-      - "assets/review-*.css"
-      - "assets/review-*.js"
-      - "assets/reviews/**"
-      - "docs/metro-2033-redux-import-audit.md"
-      - "sitemap.xml"
-      - "tools/check_review_registry.py"
-      - ".github/workflows/review-registry.yml"
-
+  workflow_dispatch:
 permissions:
   contents: read
 

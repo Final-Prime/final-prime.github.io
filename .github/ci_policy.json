@@ -18,122 +18,142 @@
     {
       "path": ".github/workflows/accessibility-contract.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "validate": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/editorial-style.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "no-long-dashes": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/ip-notices.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "verify-ip-boundary": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/public-surface.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "validate": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/realops-registry.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "verify-published-dossier": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/review-registry.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "verify-published-review": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/search-contract.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "validate": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/security-contract.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "validate": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/site-integrity.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "validate": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     },
     {
       "path": ".github/workflows/social-cards.yml",
       "local_runner_label": null,
-      "automatic": true,
+      "automatic": false,
       "jobs": {
         "validate": {
           "timeout_minutes": null,
           "runs_on": "ubuntu-latest"
         }
       },
-      "changes": []
+      "changes": [
+        "Legacy automatic dispatch retired; complete QA stays local. Free standard hosted execution requires a qualified60second gate or explicit exception."
+      ]
     }
   ]
 }

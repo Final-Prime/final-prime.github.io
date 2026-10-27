@@ -1,28 +1,7 @@
 name: REALOPS registry
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "works/**"
-      - "index/**"
-      - "assets/realops-dossier.css"
-      - "docs/realops-01-import-audit.md"
-      - "sitemap.xml"
-      - "llms.txt"
-      - "tools/check_realops_registry.py"
-      - ".github/workflows/realops-registry.yml"
-  pull_request:
-    paths:
-      - "works/**"
-      - "index/**"
-      - "assets/realops-dossier.css"
-      - "docs/realops-01-import-audit.md"
-      - "sitemap.xml"
-      - "llms.txt"
-      - "tools/check_realops_registry.py"
-      - ".github/workflows/realops-registry.yml"
-
+  workflow_dispatch:
 permissions:
   contents: read
 
