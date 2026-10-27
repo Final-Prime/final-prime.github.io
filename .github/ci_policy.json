@@ -1,0 +1,139 @@
+{
+  "schema": "owner-local-ci-policy/1",
+  "policy_id": "owner-local-ci-20261027-v1",
+  "repository": "Final-Prime/final-prime.github.io",
+  "private": false,
+  "routine_online_max_seconds": 60,
+  "paid_hosted_compute_allowed": false,
+  "full_qa_location": "owner-local-outside-actions",
+  "public_standard_hosted_allowed_only_if_free": true,
+  "native_budget_alerts_required": true,
+  "automatic_budget_increase_allowed": false,
+  "offline_runner_state": "QUEUED_OR_NOT_RUN",
+  "fake_success_allowed": false,
+  "disposable_artifact_retention_days": 1,
+  "unique_evidence_retention": "preserve until classified private archive and fresh byte/hash recovery",
+  "long_legacy_timeout_is_authorization": false,
+  "workflows": [
+    {
+      "path": ".github/workflows/accessibility-contract.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "validate": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/editorial-style.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "no-long-dashes": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/ip-notices.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "verify-ip-boundary": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/public-surface.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "validate": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/realops-registry.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "verify-published-dossier": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/review-registry.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "verify-published-review": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/search-contract.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "validate": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/security-contract.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "validate": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/site-integrity.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "validate": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    },
+    {
+      "path": ".github/workflows/social-cards.yml",
+      "local_runner_label": null,
+      "automatic": true,
+      "jobs": {
+        "validate": {
+          "timeout_minutes": null,
+          "runs_on": "ubuntu-latest"
+        }
+      },
+      "changes": []
+    }
+  ]
+}
